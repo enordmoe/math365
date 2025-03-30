@@ -1,0 +1,198 @@
+---
+title: "Chapter 1: Overview and Descriptive Statistics"
+author: "Math 365 - Spring 2020"
+format: revealjs
+editor: visual
+theme: white
+---
+
+## 1.1 Populations and Samples
+
+### Goals
+- Explain the relationship between statistics and probability.
+- Practice applying statistical reasoning to real-world data sets.
+
+### Terminology
+- **Population**: Entire group of individuals we want to study.
+- **Sample**: Subset of the population under study.
+- **Variable**: Characteristic whose value may vary.
+- **Probability**: Numerical measure of the likelihood of an event.
+
+### Fields
+- **Probability**:
+  - Applied: Construct models for computing probabilities.
+  - Theoretical: Develop theoretical foundations.
+- **Statistics**:
+  - **Descriptive**: Use graphical and numerical methods.
+  - **Inferential**: Use inverse probability to draw conclusions.
+
+---
+
+## 1.2 Pictorial and Tabular Methods
+
+### Goals
+- Use R to construct and interpret:
+  - Stem-and-leaf displays
+  - Dotplots
+  - Histograms
+- Explain the difference between a histogram and a bar chart.
+- Construct and interpret frequency tables.
+
+### Data Types
+- **Categorical**
+  - Nominal
+  - Ordinal
+- **Quantitative**
+  - Discrete
+  - Continuous
+
+---
+
+### Stem-and-Leaf Displays
+- Quick summary for small data sets.
+- Steps:
+  1. Choose leading digits for stems.
+  2. List stems vertically.
+  3. Append leaves beside stems.
+  4. Indicate units.
+- R: `stem()`
+- Comparative: `stem.leaf.backback()` from `aplpack`
+
+### Dotplots
+- Small datasets with limited distinct values.
+- R: `stripchart()`
+
+---
+
+### Histograms
+- Best for large datasets.
+- Show distribution via rectangle area.
+- R: `hist()`
+- Types:
+  - Discrete: Rectangles over each value.
+  - Continuous: Use intervals and density.
+
+### R Notes
+- Class intervals: `breaks = c(...)`
+- Endpoint: left-open/right-open option
+- Rule of thumb: # of classes = \(\sqrt{n}\)
+
+---
+
+### Histogram Shapes
+- **Symmetric**
+- **Skewed Right** (positive skew)
+- **Skewed Left** (negative skew)
+- **Unimodal**, **Bimodal**, **Multimodal**
+
+### Qualitative Data
+- Use bar charts or frequency tables.
+- R: `table()`, `barplot()`
+
+---
+
+## 1.3 Measures of Location
+
+### Goals
+- Use R to find measures of center.
+- Describe mean vs. median with skewness.
+- Recognize usefulness of trimmed means.
+
+### Measures
+- **Sample Mean** \( \bar{x} = \frac{1}{n}\sum x_i \)
+- **Sample Median**:
+  - Odd n: middle value
+  - Even n: average of two middle values
+- R: `mean()`, `median()`
+
+---
+
+### Other Measures
+- **Percentile**: Value below which p% fall
+- **Quantile**: R: `quantile()`
+- **Trimmed Mean**: Remove outer 2α percent
+  - R: `mean(x, trim = α)`
+
+---
+
+## 1.4 Measures of Variability
+
+### Goals
+- Use R to compute variability and boxplots.
+- Understand degrees of freedom.
+- Learn about variance and fourth spread.
+
+### Sample Variance & SD
+- \( s^2 = \frac{1}{n-1} \sum (x_i - \bar{x})^2 \)
+- \( s = \sqrt{s^2} \)
+- R: `var()`, `sd()`
+
+---
+
+### Population Variance
+- \( \sigma^2 = \frac{1}{N} \sum (x_i - \mu)^2 \)
+- Used rarely; focus on sample estimates.
+
+### Scaling Properties
+- Adding a constant: variance unchanged
+- Multiplying by a constant: variance scales by \(c^2\)
+
+---
+
+### Boxplots
+- Visual summary: center, spread, symmetry, outliers
+- Five-number summary: \(\min, Q1, \tilde{x}, Q3, \max\)
+- Fourth Spread: \( fs = Q3 - Q1 \)
+- R: `boxplot()`, `fivenum()`
+
+### Outliers
+- Mild: \( > 1.5fs \) from hinge
+- Extreme: \( > 3fs \) from hinge
+- R: `mad()` (median absolute deviation)
+
+---
+
+## Summary of R Commands
+
+```r
+# Center
+mean(x)
+median(x)
+quantile(x)
+mean(x, trim = 0.1)
+
+# Spread
+range(x)
+var(x)
+sd(x)
+mad(x)
+
+# Plots
+stem(x)
+stripchart(x)
+hist(x)
+boxplot(x)
+barplot(table(x))
+
+# Summary
+fivenum(x)
+```
+
+---
+
+## Practice Questions
+
+1. Identify the population and sample in a recent study.
+2. Describe the differences between bar charts and histograms.
+3. Compute mean, median, variance, and standard deviation in R for a dataset.
+4. Create a boxplot and identify outliers.
+
+---
+
+## Next Steps
+
+- Review R help pages: `?hist`, `?boxplot`, `?quantile`
+- Practice using real datasets.
+- Be prepared for a short quiz covering terminology and R basics.
+
+---

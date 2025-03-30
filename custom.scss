@@ -1,0 +1,46 @@
+/*-- scss:defaults --*/
+
+/* You can define Bootstrap or Reveal.js variable overrides here if needed */
+
+/*-- scss:rules --*/
+
+.tiny {
+  font-size: 60% !important;
+  line-height: 1.2;
+}
+
+
+/* Callout: Note */
+.callout.callout-note {
+  background-color: #fff6e5;
+  border-left: 5px solid #f0ad4e;
+  padding: 1em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Callout: Important */
+.callout.callout-important {
+  background-color: #f9f2e7;
+  border-left: 5px solid #d88a1f;
+  padding: 1em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Callout: Example */
+.callout.callout-example {
+  background-color: #f0f0f0;
+  border-left: 5px solid #999;
+  padding: 1em;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Optional: Clean up bullet spacing inside callouts */
+.callout ul {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.MathJax .mtext {
+  font-family: var(--bs-body-font-family, sans-serif) !important;
+}
+

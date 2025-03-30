@@ -1,0 +1,287 @@
+---
+title: "Section 1.1: Populations, Samples and Processes"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today
+
+::: {.incremental}
+- Power Series
+- Relation to functions
+- Convergence and radius of convergence
+:::
+
+
+## Power Series and Representation of Functions 
+
+As we transition from convergence tests to power series, I want you to see how the tools we've developed can be applied in new contexts.
+
+- Convergence tests (e.g., Ratio Test)
+- Framework for infinite series
+- Foundation for **power series**
+- Power series represent functions, approximate values, analyze behavior
+
+
+
+## MLE for $\text{Exp}(\lambda)$ {.smaller}
+
+::: {.fragment}
+Suppose $X_1, \dots, X_n$ are i.i.d. from $\text{Exp}(\lambda)$ with density:
+$$
+f(x \mid \lambda) = \lambda e^{-\lambda x}, \quad x \geq 0
+$$
+:::
+
+::: {.fragment}
+The likelihood function is:
+$$
+L(\lambda) = \prod_{i=1}^n \lambda e^{-\lambda x_i}
+$$
+:::
+
+::: {.fragment}
+Simplify:
+$$
+L(\lambda) = \lambda^n \exp\left( -\lambda \sum_{i=1}^n x_i \right)
+$$
+:::
+
+::: {.fragment}
+Take the natural log to get the log-likelihood:
+$$
+\ell(\lambda) = n \log \lambda - \lambda \sum x_i
+$$
+:::
+
+## Finding the MLE {.tiny}
+
+::: {.fragment}
+Differentiate the log-likelihood with respect to $\lambda$:
+$$
+\ell'(\lambda) = \frac{n}{\lambda} - \sum x_i
+$$
+:::
+
+::: {.fragment}
+Set the derivative equal to zero:
+$$
+\ell'(\lambda) = 0 \quad \Rightarrow \quad \frac{n}{\lambda} = \sum x_i
+$$
+:::
+
+::: {.fragment}
+Solve for $\lambda$:
+$$
+\hat{\lambda}_{\text{MLE}} = \frac{n}{\sum x_i} = \frac{1}{\bar{x}}
+$$
+:::
+
+::: {.fragment .callout-tip title="Interpretation"}
+The MLE for $\lambda$ is the **reciprocal of the sample mean**.
+:::
+
+
+
+# Power Series  {background-color="#FAD9C7"}
+
+
+
+## Question {.smaller}
+
+::: callout-note
+**How do calculators compute:**
+- $e^3$
+- $\sqrt{2}$
+- $\ln 2$
+- $\sin 2.5$
+:::
+
+::: {.fragment}
+**Geometric Series Review**
+$$
+a + ar + ar^2 + \cdots = \frac{a}{1 - r} \quad |r| < 1
+$$
+:::
+
+::: {.fragment}
+Special case ($a=1$):
+$$
+1 + r + r^2 + \cdots = \frac{1}{1 - r} \quad |r| < 1
+$$
+:::
+
+::: {.fragment}
+Let $x$ be the variable:
+$$
+\frac{1}{1 - x} = 1 + x + x^2 + \cdots \quad |x| < 1
+$$
+Radius of convergence: $R = 1$
+:::
+
+
+
+## Definition: Power Series
+
+::: callout-important
+A **power series** is a series of the form:
+$$
+\sum_{n=0}^{\infty} c_n x^n = c_0 + c_1 x + c_2 x^2 + \cdots
+$$
+where $x$ is a variable and $c_n$ are constants.
+:::
+
+---
+
+## Example: Identify Series
+
+::: callout-example
+Determine if each series is a power series, geometric, both, or neither.
+If a power series, identify the coefficients.
+:::
+
+1. $1 + \frac{x}{2} + \frac{x^2}{4} + \frac{x^3}{8} + \cdots$
+2. $1 + 1.1 + 1.21 + \cdots$
+3. $\left(\frac{1}{3}\right)^2 + \left(\frac{1}{3}\right)^4 + \cdots$
+4. $1 + x + \frac{x^2}{2!} + \cdots$
+5. $1 + \frac{1}{2} + \frac{1}{3} + \cdots$
+6. $\frac{1}{x^2} + \frac{1}{x} + 1 + x + x^2 + \cdots$
+
+---
+
+## General Power Series
+
+::: callout-important
+Centered at $a$ (not just 0):
+$$
+\sum_{n=0}^{\infty} c_n (x - a)^n = c_0 + c_1(x - a) + c_2(x - a)^2 + \cdots
+$$
+:::
+
+---
+
+## Convergence of Power Series
+
+::: callout-important
+**Theorem:** For $\sum c_n(x - a)^n$, exactly one is true:
+
+1. Converges only when $x = a$
+2. Converges for all $x$
+3. There exists $R > 0$ s.t.:
+   - Converges when $|x - a| < R$
+   - Diverges when $|x - a| > R$
+:::
+
+---
+
+## Example: Radius & Interval
+
+Find radius and interval of convergence:
+
+1. $\sum \frac{x^n}{\sqrt{n}}$
+2. $\sum \frac{(-1)^{n-1} x^n}{n^3}$
+3. $\sum \frac{(x - 2)^n}{n^2 + 1}$
+4. $\sum n!(2x - 1)^n$
+5. $\sum \frac{x^n}{n!}$
+
+---
+
+## Steps for Interval of Convergence
+
+::: callout-note
+1. Apply Ratio Test:
+$$
+\lim_{n \to \infty} \left| \frac{a_{n+1}}{a_n} \right| < 1
+$$
+2. Solve for $x$
+3. Check endpoints
+:::
+
+---
+
+## Term-by-Term Differentiation and Integration {.tiny}
+
+::: callout-important
+If $\sum c_n(x - a)^n$ has radius $R$, then:
+
+**Function:**
+$$
+f(x) = \sum c_n(x - a)^n
+$$
+
+**Derivative:**
+$$
+f'(x) = \sum n c_n(x - a)^{n - 1}
+$$
+
+**Integral:**
+$$
+\int f(x) dx = C + \sum c_n \frac{(x - a)^{n + 1}}{n + 1}
+$$
+
+Same radius $R$ (endpoint behavior may differ)
+:::
+---
+
+## Example: arctangent series
+
+Use:
+$$
+\frac{1}{1 + x^2} = 1 - x^2 + x^4 - x^6 + \cdots
+$$
+
+Integrate term-by-term:
+$$
+\arctan x = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots
+$$
+
+---
+
+## Example: log series
+
+Use:
+$$
+\frac{1}{1 + x} = 1 - x + x^2 - x^3 + \cdots
+$$
+
+Integrate term-by-term:
+$$
+\ln(1 + x) = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots
+$$
+
+---
+
+## Summary
+
+- A **power series** has the form:
+  $$
+  \sum c_n(x - a)^n
+  $$
+- The **radius of convergence** $R$ defines where it converges:
+  $$
+  |x - a| < R
+  $$
+- **Check endpoints** separately
+- You can differentiate & integrate term-by-term inside $(a - R, a + R)$

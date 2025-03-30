@@ -1,0 +1,238 @@
+---
+title: "Section 1.1: Populations, Samples and Processes"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today
+
+::: {.incremental}
+- Foundational ideas and terminology
+- Probability review
+:::
+
+
+## Research Questions
+
+::: {.incremental}
+1. What is the average height of K basketball players?
+1. What proportion of 2024 K graduates studied abroad?
+1. What proportion of Michigan drivers hold their cell phones while driving?
+1. What proportion of Amazon deliveries go to wrong address?
+:::
+
+::: {.notes}
+* Population of interest?
+* Is this feasible?
+* Is this a statistical question? Is it an inferential question
+* Is this a real or conceptual population? (Devore)
+:::
+
+
+## Statistics and Probability: A Diagram
+
+
+::: {.notes}
+* Diagram of population and sample
+* Introduce ideas of a population and a sample
+* Emphasize descriptive and inferential statistics
+:::
+
+
+## More Research Questions
+
+::: {.callout .callout-note title="🧠 Alzheimer's Disease"}
+Does long-term treatment with **gantenerumab** delay the onset of Alzheimer’s symptoms  
+in people who are genetically at high risk but not yet showing signs of the disease?
+:::
+
+## More Research Questions
+
+::: {.callout .callout-note title="🪥 Quality Control "}
+You work for a startup that manufactures **smart toothbrushes** with pressure sensors.Sensors should register a force between **2.0 and 2.5 Newtons** during calibration testing.  
+How do you know if your **production process is working properly**?
+:::
+
+## More Research Questions
+
+::: {.callout .callout-note title="🏥👧 Anorexia"}
+A team of psychologists is conducting a study of adolescents diagnosed with **anorexia nervosa**. They wish to know whether **Family-Based Therapy (FT)** or **Cognitive Behavioral Therapy (CBT)** is more effective.
+:::
+
+## Key Terms
+
+## Some Common Terminology {.smaller}
+- A **population** is the entire group of individuals. In statistics, it is the group about which we wish to make inference.
+- A **sample** is the subset of the population under study.
+- A **variable** is any characteristic of an individual whose value may change from individual to individual.
+
+::: {.fragment}
+- **Statistics** is the art of the collection, description, organization, and analysis of data.
+  - **Descriptive statistics** uses graphical and numerical methods to summarize and describe important features of data.
+  - **Inferential statistics** uses "inverse" probability to draw conclusions about a population from a sample.
+:::
+
+## Some Less Common Terminology
+
+:::{.incremental}
+
+- In **enumerative studies**,  interest is focused on a finite, identifiable, unchanging collection of individuals or objects that make up a population.	
+
+-  **Analytic studies** are often carried out with the objective of improving a future product by taking action on a process of some sort.
+:::
+
+:::{.notes}
+After World War II, W. Edwards Deming, a statistician trained in quality control methods, tried to promote statistical process control in the U.S. manufacturing sector. But American industry, focused on mass production and short-term output, largely ignored his ideas.
+
+Meanwhile, postwar Japan was rebuilding and open to innovation. Japanese engineers and executives embraced Deming’s emphasis on reducing variation, monitoring processes statistically, and fostering continuous improvement. His influence helped shape the Toyota Production System and the global reputation of Japanese manufacturing for quality and efficiency.
+:::
+
+
+
+## Key Ideas: Data Collection and Sampling
+:::{.incremental}
+- Statistics involves both **data analysis** and **methods for collecting data**
+- Poor methods of data collection can lead to **unreliable conclusions**
+- In biased methods, the target population differs from the sampled population
+:::
+
+## Sampling Methods
+:::{.incremental}
+- **Simple Random Sample** (SRS): Every group of a given size is equally likely to be selected
+- **Stratified Sampling**: Divide population into homoegeous groups (e.g., sophs, juniors, etc.) and sample from each
+- **Convenience Sampling**: Easy but potentially biased method (e.g., survey in front of Hicks)
+:::
+
+:::{.fragment}
+$\Longrightarrow$ We will typically assume a simple random sample 
+:::
+
+---
+
+### Designed Experiments
+
+- Common in science and engineering
+- Assign treatments to experimental units (e.g., coatings, fertilizers)
+- Systematically vary factors (e.g., pressure) to observe responses (e.g., yield)
+
+::: notes
+Use this slide to introduce real-world concerns in data collection.
+Emphasize that how data is collected affects what inferences are valid.
+Ask students: Have you ever encountered biased sampling in a study or article?
+:::
+
+
+# Group Exercise: Exploring Kidney Cancer Data {background-color="#E8F5E9"}
+
+
+# Probability Review  {background-color="#FAD9C7"}
+
+## Random Variables & Probability Models
+
+- A **random variable** assigns a number to each outcome in a sample space.
+- **Discrete**: e.g., Binomial, Geometric, Poisson  
+- **Continuous**: e.g., Normal, Exponential, Uniform
+- Key functions:
+  - PMF/PDF: $P(X = x)$ or $f(x)$
+  - CDF: $F(x) = P(X \leq x)$
+
+
+
+## Expected Value, Variance, and Functions of RVs 
+
+
+
+- **Expected value (mean):**  
+  - Discrete: $E(X) = \sum x \, P(X = x)$  
+  - Continuous: $E(X) = \int x \, f(x) \, dx$
+
+- **Variance:**  
+  $V(X) = E[(X - \mu)^2] = E(X^2) - [E(X)]^2$
+
+- **Linear combinations:**  
+  - $E(aX + b) = aE(X) + b$  
+  - $V(aX + b) = a^2 V(X)$
+
+
+
+
+##  Independence & Central Limit Theorem {.smaller}
+
+
+- **Joint distributions**:  
+  $P(X = x, Y = y)$ or $f(x, y)$  
+  Leads to marginal and conditional distributions
+
+- **Independence**:  
+  $P(A \cap B) = P(A)P(B)$  
+  or $f(x, y) = f_X(x)f_Y(y)$ if $X$ and $Y$ are independent
+
+- **Central Limit Theorem (CLT):**  
+  If $X_1, \dots, X_n$ are i.i.d. with mean $\mu$, variance $\sigma^2$:
+  $$
+  \bar{X} \overset{\cdot}{\sim} N\left(\mu, \frac{\sigma^2}{n}\right) \text{ for large } n
+  $$
+
+
+## Linear Combinations {.smaller}
+
+Let $X$ and $Y$ be random variables, and $a$, $b$ constants.
+
+- **Expected Value:**
+  $$
+  E(aX + bY) = a \, E(X) + b \, E(Y)
+  $$
+
+- **Variance (if independent):**
+  $$
+  V(aX + bY) = a^2 \, V(X) + b^2 \, V(Y)
+  $$
+
+- **Variance (if not independent):**
+  $$
+  V(aX + bY) = a^2 \, V(X) + b^2 \, V(Y) + 2ab \, \text{Cov}(X, Y)
+  $$
+
+- **Covariance Linearity:**
+  $$
+  \text{Cov}(aX + bY, Z) = a \, \text{Cov}(X, Z) + b \, \text{Cov}(Y, Z)
+  $$
+
+
+## Check Your Understanding {data-background-color="#E3F2FD"}
+
+::: {.callout .callout-note title="🧠 Think-Pair-Share"}
+
+Which of the following best describes an *analytic study*?
+
+A. Estimating the average tuition cost for all U.S. colleges in 2023  
+B. Studying whether a new fertilizer increases crop yield for future harvests  
+C. Calculating the proportion of Amazon packages delivered incorrectly last month  
+D. Estimating the median income of households in Kalamazoo County using Census data
+
+:::
+
+
+
