@@ -1,0 +1,34 @@
+---
+title: "Math Stats Slides"
+author: "Eric Nordmoe"
+format: revealjs
+editor: visual
+---
+
+## Welcome
+
+This is a slide deck built with **Quarto** and **Reveal.js**.
+
+
+## Slide with Code
+
+```{r}
+summary(cars)
+```
+
+
+
+## Slide with a Plot
+
+```{r}
+plot(pressure)
+```
+
+
+
+## Thank You!
+
+- Created with [Quarto](https://quarto.org)
+- Hosted on [GitHub Pages](https://pages.github.com)
+
+
