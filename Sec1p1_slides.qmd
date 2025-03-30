@@ -79,7 +79,6 @@ You work for a startup that manufactures **smart toothbrushes** with pressure se
 A team of psychologists is conducting a study of adolescents diagnosed with **anorexia nervosa**. They wish to know whether **Family-Based Therapy (FT)** or **Cognitive Behavioral Therapy (CBT)** is more effective.
 :::
 
-## Key Terms
 
 ## Some Common Terminology {.smaller}
 - A **population** is the entire group of individuals. In statistics, it is the group about which we wish to make inference.
