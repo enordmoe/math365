@@ -64,15 +64,13 @@ editor:
 ## More Research Questions
 
 ::: {.callout .callout-note title="🧠 Alzheimer's Disease"}
-Does long-term treatment with **gantenerumab** delay the onset of Alzheimer’s symptoms  
-in people who are genetically at high risk but not yet showing signs of the disease?
+Does long-term treatment with **gantenerumab** delay the onset of Alzheimer’s symptoms in people who are genetically at high risk but not yet showing signs of the disease?
 :::
 
 ## More Research Questions
 
 ::: {.callout .callout-note title="🪥 Quality Control "}
-You work for a startup that manufactures **smart toothbrushes** with pressure sensors.Sensors should register a force between **2.0 and 2.5 Newtons** during calibration testing.  
-How do you know if your **production process is working properly**?
+You work for a startup that manufactures **smart toothbrushes** with pressure sensors.Sensors should register a force between **2.0 and 2.5 Newtons** during calibration testing. How do you know if your **production process is working properly**?
 :::
 
 ## More Research Questions
