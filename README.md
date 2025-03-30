@@ -1,2 +1,2 @@
 # math365
-Math Stats materials
+Math Stats materials for Spring terms
