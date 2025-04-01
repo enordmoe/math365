@@ -44,6 +44,8 @@ editor:
 -   Compare two or more distributions
 :::
 
+# Categorical Data {background-color="#E8F5E9"}
+
 ## Data Set: General Social Survey 2018
 
 -   Begun in 1972, the **General Social Survey (GSS)** is a long-running
@@ -67,13 +69,14 @@ library(resampledata3)
 names(GSS2018)
 ```
 
-## Summarizing Categorical Data
+## Visualizing Categorical Data
 
-::: incremental
--   A **relative frequency** table displays the values assumed by the
-    variable in a sample of data.
--   A **bar chart** is just a graphical summary of a frequency
-    table
+Most common methods: ::: incremental - A **relative frequency** table
+displays the values assumed by the variable in a sample of data. - A
+**bar chart** is just a graphical summary of a frequency table :::
+
+::: notes
+-   Avoid pie charts- hard to estimate values
 :::
 
 ## Describing the GSS2018 Data
@@ -92,7 +95,7 @@ Note that the default `table()` command does not show NA values but
 `summary()` does.
 :::
 
-## Describing the GSS2018 Data  {.smaller}
+## Describing the GSS2018 Data {.smaller}
 
 ### Relative Frequency Table and Adding Totals
 
@@ -107,11 +110,9 @@ addmargins(prop.table(table(GSS2018$GenderNow)))
 
 ```
 
-
 ## Gender Identity Bar Charts
 
-::: {.panel-tabset}
-
+::: panel-tabset
 ### Frequency Plot
 
 ```{r}
@@ -129,55 +130,193 @@ barplot(prop.table(table(GSS2018$GenderNow)), ylab = "proportion")
 ```{r}
 barplot(100*prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
 ```
-
 :::
 
 ## Extensions
 
-* Colors
-* Titles
-* Axis Labels
-* Dealing with NAs
+-   Colors
+-   Titles
+-   Axis Labels
+-   Dealing with NAs
 
+# Quantitative data {background-color="#E8F5E9"}
 
+## Examples of Quantitative Variables {.smaller}
 
+::: incremental
+-   **Quantitative** variables are inherently numerical:
+    -   **Continuous variables** take values on a continuous scale:
+        -   Height
 
+        -   Cholesterol
 
+        -   Time to complete a marathon
+
+        -   Rates and proportions
+    -   **Discrete** variables are quantitative variables that are **not
+        continuous**
+        -   Number of siblings
+
+        -   Number of defects in a product
+
+        -   Age reported in years
+
+        -   Number of available parking spaces
+
+        -   Number of cigarettes smoked per day
+:::
 
 ## Summarizing Quantitative Data
 
+Visual displays of quantitative data depict
 
-- From notes and Devore
-- Exercise (i) Fandango data (ii) faithful- geyser time
-- Homework: previous exercises and Fandango
+-   Overall pattern
 
-## Visualization of Quantiative Data
+    -   Center
 
-For describing Quantitative Data, we use plots that 
+    -   Spread
 
+    -   Shape: symmetric, skewed, bimodal, multi-modal
 
+-   Outliers
 
-    \bi
-        \item Small samples: dotplot or stem-and-leaf-plot
-        \item Large samples: histogram
-    \ei
-    \pause
-    \item \alert{For comparing locations}
-    \bi
-        \item Boxplot
-        \item Comparative dotplots, stem-and-leaf plots, and
-        histograms
-    \ei
-\ei
-\end{frame}
+# A built-in R dataset
 
-## mtcars data?
+**mtcars** contains Motor Trend published data on 32 automobiles
+(1973-74 models).
 
-Examples: Use data from text Example 1.8
 ```{r}
- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-08.csv")
+mtcars
 ```
 
+# Dotplots
 
-## Exercises
+::: panel-tabset
+## Number of Cylinders
 
+```{r}
+stripchart(mtcars$cyl, method = "stack", xlab = "Number of cylinders")
+
+```
+
+## Mileage
+
+```{r}
+stripchart(mtcars$mpg, method = "stack", xlab = "Mileage")
+```
+:::
+
+# Dotplots Summary
+
+::: incremental
+-   Useful quick summary
+
+-   Good, summary for small datasets with discrete data
+
+-   Continuous data results in overlapping points and/or grouping of
+    observations
+
+-   Many ways to do this in R but none are great
+:::
+
+## Histograms: R default
+
+::: panel-tabset
+## Cylinders
+
+```{r}
+hist(mtcars$cyl, xlab = "Number of cylinders")
+```
+
+## Cylinders v2.0
+
+```{r}
+# Manually set intervals: (3.5, 4.5], (4.5, 5.5],...
+hist(mtcars$cyl, breaks = seq(3.5, 8.5, 1),xlab = "Number of cylinders")
+```
+
+## Mileage
+
+```{r}
+hist(mtcars$mpg, xlab = "Mileage")
+```
+:::
+
+## Histograms Using Density
+
+-   Technically, histograms are carefully designed to represent relative
+    frequency by area plotting density on the vertical scale so that the
+    total area in the rectangles sums to 1.
+-   Define:
+
+$$
+\text{Rectangle Height}=\frac{\text{Relative frequency}}{\text{Class width}}
+$$
+
+-   This avoids misrepresenting the shape of the distribution,
+    especially when using unequal widths.
+
+## Histograms: Density as Height {.smaller}
+
+::: panel-tabset
+## Mileage
+
+R plots density as height when intervals are unequal width
+
+```{r}
+#| fig-height: 3
+hist(mtcars$mpg, xlab = "Mileage", breaks = c(10, 12, 14, 16, 18, 20, 22, 24, 35))
+```
+
+## Mileage: INCORRECT
+
+Plotting frequencies here would be misleading and R warns you about
+this.
+
+```{r}
+#| fig-height: 3
+hist(mtcars$mpg, xlab = "Mileage", breaks = c(10, 12, 14, 16, 18, 20, 22, 24, 35),
+     freq = TRUE)
+```
+:::
+
+## Histogram Shapes
+
+Shapes to look out for when working with distributions of quantitative
+variables:\
+![](images/clipboard-2640103481.png)\
+
+## 
+
+## Practice on your own   {.smaller}
+
+1.  Copy and paste the following code to your R console to read the
+    Example 1.8 data into a data frame called **gradrates**.
+
+```{r}
+ gradrates <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-08.csv")
+```
+
+2.  Use the `View()` function at the console to inspect the data. What
+    is the name of the variable representing the percent of the state's
+    population that have a college degree?
+3.   Use `stripchart()` to obtain a dotplot like the one in Figure 1.6.
+    How is it similar and how is it different?
+4.  Obtain three histograms of college degree percent
+    i.  Equal width intervals and frequency as height
+    ii. Equal width intervals and density as height
+    iii. Unequal width intervals and density as height
+
+## More practice: **faithful**  {.smaller}
+
+1.  Type **?faithful** at the console to learn about the built-in
+    **faithful** datset
+2.  Use the graphs from this section to explore the varibles *eruptions*
+    and *waiting*.
+3.  How would you describe the shapes of the distributions?
+4.  Which graphs are most useful for this data?
+5.  You can get a smoothed version of a histogram called a density plot
+    using the basic command `plot(density(df$var))` where `df`
+    represents the data frame name and `var` is the variable. Try this
+    with either variable. (Try changing `n` and `bw` if you're
+    adventurous.)

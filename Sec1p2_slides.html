@@ -427,6 +427,11 @@ MATH 365
 </ul>
 </div>
 </section>
+<section>
+<section id="categorical-data" class="title-slide slide level1 center" data-background-color="#E8F5E9">
+<h1>Categorical Data</h1>
+
+</section>
 <section id="data-set-general-social-survey-2018" class="slide level2">
 <h2>Data Set: General Social Survey 2018</h2>
 <ul>
@@ -450,14 +455,24 @@ MATH 365
 </div>
 </div>
 </section>
-<section id="summarizing-categorical-data" class="slide level2">
-<h2>Summarizing Categorical Data</h2>
-<div>
+<section id="visualizing-categorical-data" class="slide level2">
+<h2>Visualizing Categorical Data</h2>
+<p>Most common methods: ::: incremental - A <strong>relative frequency</strong> table displays the values assumed by the variable in a sample of data. - A <strong>bar chart</strong> is just a graphical summary of a frequency table :::</p>
+<aside class="notes">
 <ul>
-<li class="fragment">A <strong>relative frequency</strong> table displays the values assumed by the variable in a sample of data.</li>
-<li class="fragment">A <strong>bar chart</strong> is just a graphical summary of a frequency table</li>
+<li>Avoid pie charts- hard to estimate values</li>
 </ul>
-</div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="describing-the-gss2018-data" class="slide level2">
 <h2>Describing the GSS2018 Data</h2>
@@ -577,19 +592,274 @@ A gender not listed here                      Man           Not applicable
 <li>Axis Labels</li>
 <li>Dealing with NAs</li>
 </ul>
+</section></section>
+<section>
+<section id="quantitative-data" class="title-slide slide level1 center" data-background-color="#E8F5E9">
+<h1>Quantitative data</h1>
+
 </section>
-<section id="mtcars-data" class="slide level2">
-<h2>mtcars data?</h2>
+<section id="examples-of-quantitative-variables" class="slide level2 smaller">
+<h2>Examples of Quantitative Variables</h2>
+<div>
+<ul>
+<li class="fragment"><strong>Quantitative</strong> variables are inherently numerical:
+<ul>
+<li class="fragment"><strong>Continuous variables</strong> take values on a continuous scale:
+<ul>
+<li class="fragment"><p>Height</p></li>
+<li class="fragment"><p>Cholesterol</p></li>
+<li class="fragment"><p>Time to complete a marathon</p></li>
+<li class="fragment"><p>Rates and proportions</p></li>
+</ul></li>
+<li class="fragment"><strong>Discrete</strong> variables are quantitative variables that are <strong>not continuous</strong>
+<ul>
+<li class="fragment"><p>Number of siblings</p></li>
+<li class="fragment"><p>Number of defects in a product</p></li>
+<li class="fragment"><p>Age reported in years</p></li>
+<li class="fragment"><p>Number of available parking spaces</p></li>
+<li class="fragment"><p>Number of cigarettes smoked per day</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
 </section>
-<section id="exercises" class="slide level2">
-<h2>Exercises</h2>
-<p>faithful- geyser time</p>
+<section id="summarizing-quantitative-data" class="slide level2">
+<h2>Summarizing Quantitative Data</h2>
+<p>Visual displays of quantitative data depict</p>
+<ul>
+<li><p>Overall pattern</p>
+<ul>
+<li><p>Center</p></li>
+<li><p>Spread</p></li>
+<li><p>Shape: symmetric, skewed, bimodal, multi-modal</p></li>
+</ul></li>
+<li><p>Outliers</p></li>
+</ul>
+</section></section>
+<section id="a-built-in-r-dataset" class="title-slide slide level1 center">
+<h1>A built-in R dataset</h1>
+<p><strong>mtcars</strong> contains Motor Trend published data on 32 automobiles (1973-74 models).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href=""></a>mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4           21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag       21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710          22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive      21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout   18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+Valiant             18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+Duster 360          14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+Merc 240D           24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+Merc 230            22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+Merc 280            19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+Merc 280C           17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+Merc 450SE          16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+Merc 450SL          17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+Merc 450SLC         15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+Cadillac Fleetwood  10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+Lincoln Continental 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+Chrysler Imperial   14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+Fiat 128            32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+Honda Civic         30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+Toyota Corolla      33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+Toyota Corona       21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+Dodge Challenger    15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+AMC Javelin         15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+Camaro Z28          13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+Pontiac Firebird    19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+Fiat X1-9           27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+Porsche 914-2       26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+Lotus Europa        30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+Ford Pantera L      15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+Ferrari Dino        19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+Volvo 142E          21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
+</div>
+</div>
+</section>
+
+<section id="dotplots" class="title-slide slide level1 center">
+<h1>Dotplots</h1>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">Number of Cylinders</a></li><li><a href="#tabset-2-2">Mileage</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href=""></a><span class="fu">stripchart</span>(mtcars<span class="sc">$</span>cyl, <span class="at">method =</span> <span class="st">"stack"</span>, <span class="at">xlab =</span> <span class="st">"Number of cylinders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Sec1p2_slides_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href=""></a><span class="fu">stripchart</span>(mtcars<span class="sc">$</span>mpg, <span class="at">method =</span> <span class="st">"stack"</span>, <span class="at">xlab =</span> <span class="st">"Mileage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Sec1p2_slides_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section>
+<section id="dotplots-summary" class="title-slide slide level1 center">
+<h1>Dotplots Summary</h1>
+<div>
+<ul>
+<li class="fragment"><p>Useful quick summary</p></li>
+<li class="fragment"><p>Good, summary for small datasets with discrete data</p></li>
+<li class="fragment"><p>Continuous data results in overlapping points and/or grouping of observations</p></li>
+<li class="fragment"><p>Many ways to do this in R but none are great</p></li>
+</ul>
+</div>
+</section>
+<section id="histograms-r-default" class="slide level2">
+<h2>Histograms: R default</h2>
+<div class="panel-tabset">
+<ul id="tabset-3" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-3-1">Cylinders</a></li><li><a href="#tabset-3-2">Cylinders v2.0</a></li><li><a href="#tabset-3-3">Mileage</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href=""></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>cyl, <span class="at">xlab =</span> <span class="st">"Number of cylinders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Sec1p2_slides_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href=""></a><span class="co"># Manually set intervals: (3.5, 4.5], (4.5, 5.5],...</span></span>
+<span id="cb21-2"><a href=""></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>cyl, <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="fl">3.5</span>, <span class="fl">8.5</span>, <span class="dv">1</span>),<span class="at">xlab =</span> <span class="st">"Number of cylinders"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Sec1p2_slides_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-3">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href=""></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg, <span class="at">xlab =</span> <span class="st">"Mileage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Sec1p2_slides_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="histograms-using-density" class="slide level2">
+<h2>Histograms Using Density</h2>
+<ul>
+<li>Technically, histograms are carefully designed to represent relative frequency by area plotting density on the vertical scale so that the total area in the rectangles sums to 1.</li>
+<li>Define:</li>
+</ul>
+<p><span class="math display">\[
+\text{Rectangle Height}=\frac{\text{Relative frequency}}{\text{Class width}}
+\]</span></p>
+<ul>
+<li>This avoids misrepresenting the shape of the distribution, especially when using unequal widths.</li>
+</ul>
+</section>
+<section id="histograms-density-as-height" class="slide level2 smaller">
+<h2>Histograms: Density as Height</h2>
+<div class="panel-tabset">
+<ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Mileage</a></li><li><a href="#tabset-4-2">Mileage: INCORRECT</a></li></ul>
+<div class="tab-content">
+<div id="tabset-4-1">
+<p>R plots density as height when intervals are unequal width</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href=""></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg, <span class="at">xlab =</span> <span class="st">"Mileage"</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">24</span>, <span class="dv">35</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Sec1p2_slides_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-4-2">
+<p>Plotting frequencies here would be misleading and R warns you about this.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href=""></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg, <span class="at">xlab =</span> <span class="st">"Mileage"</span>, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">14</span>, <span class="dv">16</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">24</span>, <span class="dv">35</span>),</span>
+<span id="cb24-2"><a href=""></a>     <span class="at">freq =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="Sec1p2_slides_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="histogram-shapes" class="slide level2">
+<h2>Histogram Shapes</h2>
+<p>Shapes to look out for when working with distributions of quantitative variables:<br>
+<img data-src="images/clipboard-2640103481.png"><br>
+</p>
+</section>
+<section id="section" class="slide level2">
+<h2></h2>
+</section>
+<section id="practice-on-your-own" class="slide level2 smaller">
+<h2>Practice on your own</h2>
+<ol type="1">
+<li>Copy and paste the following code to your R console to read the Example 1.8 data into a data frame called <strong>gradrates</strong>.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href=""></a> gradrates <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"http://people.kzoo.edu/enordmoe/math365/data/exp01-08.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li>Use the <code>View()</code> function at the console to inspect the data. What is the name of the variable representing the percent of the state’s population that have a college degree?</li>
+<li>Use <code>stripchart()</code> to obtain a dotplot like the one in Figure 1.6. How is it similar and how is it different?</li>
+<li>Obtain three histograms of college degree percent
+<ol type="i">
+<li>Equal width intervals and frequency as height</li>
+<li>Equal width intervals and density as height</li>
+<li>Unequal width intervals and density as height</li>
+</ol></li>
+</ol>
+</section>
+<section id="more-practice-faithful" class="slide level2 smaller">
+<h2>More practice: <strong>faithful</strong></h2>
+<ol type="1">
+<li>Type <strong>?faithful</strong> at the console to learn about the built-in <strong>faithful</strong> datset</li>
+<li>Use the graphs from this section to explore the varibles <em>eruptions</em> and <em>waiting</em>.</li>
+<li>How would you describe the shapes of the distributions?</li>
+<li>Which graphs are most useful for this data?</li>
+<li>You can get a smoothed version of a histogram called a density plot using the basic command <code>plot(density(df$var))</code> where <code>df</code> represents the data frame name and <code>var</code> is the variable. Try this with either variable. (Try changing <code>n</code> and <code>bw</code> if you’re adventurous.)</li>
+</ol>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
