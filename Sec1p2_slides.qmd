@@ -35,6 +35,8 @@ editor:
 -   Practice exercises
 :::
 
+
+
 ## Summarizing Data
 
 ::: incremental
@@ -44,7 +46,7 @@ editor:
 -   Compare two or more distributions
 :::
 
-# Categorical Data {background-color="#E8F5E9"}
+# Categorical Data {background-color="#FAD9C7"}
 
 ## Data Set: General Social Survey 2018
 
@@ -71,15 +73,20 @@ names(GSS2018)
 
 ## Visualizing Categorical Data
 
-Most common methods: ::: incremental - A **relative frequency** table
-displays the values assumed by the variable in a sample of data. - A
-**bar chart** is just a graphical summary of a frequency table :::
+Most common methods:
+
+::: incremental
+-   A **relative frequency** table displays the values assumed by the
+    variable in a sample of data.
+
+-   A **bar chart** is just a graphical summary of a frequency table
+:::
 
 ::: notes
 -   Avoid pie charts- hard to estimate values
 :::
 
-## Describing the GSS2018 Data
+## Describing the GSS2018 Data {.smaller}
 
 ### Frequency Table
 
@@ -139,7 +146,7 @@ barplot(100*prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
 -   Axis Labels
 -   Dealing with NAs
 
-# Quantitative data {background-color="#E8F5E9"}
+# Quantitative data {background-color="#FAD9C7"}
 
 ## Examples of Quantitative Variables {.smaller}
 
@@ -166,6 +173,11 @@ barplot(100*prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
         -   Number of cigarettes smoked per day
 :::
 
+::: notes
+Note that some of these vary across a wide range and are treated as
+continuous in practice.
+:::
+
 ## Summarizing Quantitative Data
 
 Visual displays of quantitative data depict
@@ -180,7 +192,7 @@ Visual displays of quantitative data depict
 
 -   Outliers
 
-# A built-in R dataset
+## A built-in R dataset
 
 **mtcars** contains Motor Trend published data on 32 automobiles
 (1973-74 models).
@@ -189,7 +201,7 @@ Visual displays of quantitative data depict
 mtcars
 ```
 
-# Dotplots
+## Dotplots
 
 ::: panel-tabset
 ## Number of Cylinders
@@ -206,7 +218,7 @@ stripchart(mtcars$mpg, method = "stack", xlab = "Mileage")
 ```
 :::
 
-# Dotplots Summary
+## Dotplots Summary
 
 ::: incremental
 -   Useful quick summary
@@ -286,9 +298,26 @@ Shapes to look out for when working with distributions of quantitative
 variables:\
 ![](images/clipboard-2640103481.png)\
 
-## 
+## Summary {.smaller}
 
-## Practice on your own   {.smaller}
+-   Categorical data are best summarized using **frequency tables** and
+    **bar charts**; avoid misleading visuals like pie charts.
+-   Quantitative data summaries focus on **shape, center, and spread**,
+    often visualized through **dotplots** and **histograms** (with
+    attention to bin widths and density scaling).
+-   In R, visualizations like `stripchart()` and `hist()` offer quick
+    insights, but careful choices in formatting and scaling are
+    essential for accurate interpretation.
+
+::: aside
+Note: While **stem-and-leaf plots** can show detailed distributional shape,
+they are rarely used in practice and often misunderstood — we'll focus
+on more accessible and widely-used visualizations.
+:::
+
+# Practice Exercises {background-color="#FAD9C7"}
+
+## Practice on your own {.smaller}
 
 1.  Copy and paste the following code to your R console to read the
     Example 1.8 data into a data frame called **gradrates**.
@@ -300,14 +329,14 @@ variables:\
 2.  Use the `View()` function at the console to inspect the data. What
     is the name of the variable representing the percent of the state's
     population that have a college degree?
-3.   Use `stripchart()` to obtain a dotplot like the one in Figure 1.6.
+3.  Use `stripchart()` to obtain a dotplot like the one in Figure 1.6.
     How is it similar and how is it different?
 4.  Obtain three histograms of college degree percent
     i.  Equal width intervals and frequency as height
     ii. Equal width intervals and density as height
     iii. Unequal width intervals and density as height
 
-## More practice: **faithful**  {.smaller}
+## More practice: **faithful** {.smaller}
 
 1.  Type **?faithful** at the console to learn about the built-in
     **faithful** datset
