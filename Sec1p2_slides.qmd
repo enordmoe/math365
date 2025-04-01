@@ -347,5 +347,5 @@ on more accessible and widely-used visualizations.
 5.  You can get a smoothed version of a histogram called a density plot
     using the basic command `plot(density(df$var))` where `df`
     represents the data frame name and `var` is the variable. Try this
-    with either variable. (Try changing `n` and `bw` if you're
+    with either variable. (Try changing `adjust` if you're
     adventurous.)

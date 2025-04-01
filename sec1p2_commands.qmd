@@ -1,0 +1,124 @@
+---
+title: "Sect 1.2 R Command Help Sheet"
+author: "MATH 365"
+format: html
+editor: visual
+---
+
+This FAQ provides short explanations and examples of R commands used in Section 1.2. These are meant to help reinforce your understanding of data summaries and visualizations.
+
+
+
+### `View()`
+Opens a spreadsheet-style viewer for a data frame (RStudio only).
+
+```r
+View(gradrates)
+```
+
+
+
+### `summary()`
+Gives a quick summary of a variable or data frame. For numeric data, it returns min, 1st quartile, median, mean, 3rd quartile, and max. For factors, it gives counts of levels.
+
+```r
+summary(GSS2018$GenderNow)
+```
+
+
+
+### `table()`
+Creates a frequency table of a factor or discrete variable.
+
+```r
+table(GSS2018$GenderNow)
+```
+
+Note: does **not** include `NA` values unless `useNA = "ifany"` is specified.
+
+
+
+### `prop.table()`
+Returns **relative frequencies** (proportions) from a table object.
+
+```r
+prop.table(table(GSS2018$GenderNow))
+```
+
+
+
+### `addmargins()`
+Adds totals (marginal sums) to a table or prop table.
+
+```r
+addmargins(table(GSS2018$GenderNow))
+addmargins(prop.table(table(GSS2018$GenderNow)))
+```
+
+
+
+### `barplot()`
+Creates a bar chart from a table of frequencies or proportions.
+
+```r
+barplot(table(GSS2018$GenderNow))
+barplot(prop.table(table(GSS2018$GenderNow)), ylab = "Proportion")
+barplot(100 * prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
+```
+
+
+
+### `stripchart()`
+A simple dotplot for small datasets. Best for discrete or rounded quantitative variables.
+
+```r
+stripchart(mtcars$cyl, method = "stack", xlab = "Number of cylinders")
+stripchart(mtcars$mpg, method = "stack", xlab = "Mileage")
+```
+
+Use `method = "jitter"` for continuous data to avoid overplotting.
+
+
+
+### `hist()`
+Creates a histogram. `freq = TRUE` (default) shows frequencies. `freq = FALSE` plots **density**, which is useful for comparing distributions.
+
+```r
+hist(mtcars$cyl, xlab = "Number of cylinders")
+hist(mtcars$cyl, breaks = seq(3.5, 8.5, 1))  # Custom bin breaks
+hist(mtcars$mpg, xlab = "Mileage")
+hist(mtcars$mpg, breaks = c(10, 12, 14, 16, 18, 20, 22, 24, 35))  # Unequal widths
+```
+
+
+
+### `density()` and `plot()`
+Creates a smooth estimate of the distribution (kernel density estimate).
+
+```r
+plot(density(mtcars$mpg), main = "Smoothed Density Plot", xlab = "Mileage")
+```
+
+You can adjust the smoothness with `adjust`, e.g. `density(x, adjust = 2)`.
+
+
+
+### `read.csv()`
+Reads a CSV file into a data frame.
+
+```r
+gradrates <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-08.csv")
+```
+
+
+
+### `?faithful`
+Opens the help page for the built-in `faithful` dataset.
+
+
+
+### Tips
+- Use `names()` to list variable names in a data frame.
+- Use `head()` to preview the first few rows.
+
+
