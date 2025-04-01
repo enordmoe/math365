@@ -139,9 +139,45 @@ barplot(100*prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
 * Axis Labels
 * Dealing with NAs
 
-## mtcars data? 
+
+
+
+
+
+## Summarizing Quantitative Data
+
+
+- From notes and Devore
+- Exercise (i) Fandango data (ii) faithful- geyser time
+- Homework: previous exercises and Fandango
+
+## Visualization of Quantiative Data
+
+For describing Quantitative Data, we use plots that 
+
+
+
+    \bi
+        \item Small samples: dotplot or stem-and-leaf-plot
+        \item Large samples: histogram
+    \ei
+    \pause
+    \item \alert{For comparing locations}
+    \bi
+        \item Boxplot
+        \item Comparative dotplots, stem-and-leaf plots, and
+        histograms
+    \ei
+\ei
+\end{frame}
+
+## mtcars data?
+
+Examples: Use data from text Example 1.8
+```{r}
+ read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-08.csv")
+```
 
 
 ## Exercises
 
-faithful- geyser time
