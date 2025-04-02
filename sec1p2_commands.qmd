@@ -87,6 +87,7 @@ Creates a histogram. `freq = TRUE` (default) shows frequencies. `freq = FALSE` p
 hist(mtcars$cyl, xlab = "Number of cylinders")
 hist(mtcars$cyl, breaks = seq(3.5, 8.5, 1))  # Custom bin breaks
 hist(mtcars$mpg, xlab = "Mileage")
+hist(mtcars$mpg, xlab = "Mileage", freq = FALSE) #Plots density on y-axis
 hist(mtcars$mpg, breaks = c(10, 12, 14, 16, 18, 20, 22, 24, 35))  # Unequal widths
 ```
 
