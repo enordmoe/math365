@@ -1,0 +1,196 @@
+---
+title: "Sections 1.3 and 1.4: Measures of Location and Variability"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today
+
+::: incremental
+-   Summarizing Data
+-   Summarizing Categorical Data
+-   Summarizing Quantitative Data
+-   Practice exercises
+:::
+
+---
+
+### Warm-Up: What Value of $c$ Minimizes Squared Deviations?
+
+We will investigate:  
+$$
+S(c) = \sum_{i=1}^3 (x_i - c)^2 \quad \text{for } x_1 = 4,\ x_2 = 7,\ x_3 = 10
+$$
+
+---
+
+### Warm-Up
+
+1. Choose a value for $c$ (e.g., $5,\ 6,\ 7,\ 8$). Compute $S(c) = (x_1 - c)^2 + (x_2 - c)^2 + (x_3 - c)^2$. 
+<span class="fragment">What do you notice?</span>
+
+2. <span class="fragment">Try to guess the value of $c$ that minimizes $S(c)$. Why does that value make sense?</span>
+
+3. <span class="fragment">Optional extension: Expand and simplify $S(c)$ algebraically. Can you take its derivative?</span>
+
+4. <span class="fragment">What do you think this says about the mean as a "best" measure of center?</span>
+
+
+
+
+
+
+## Summarizing Data
+
+::: incremental
+-   Describe the distribution or pattern of variability of a variable
+-   Data cleaning/editing
+-   Uncover patterns and/or anomalies
+-   Compare two or more distributions
+:::
+
+## Data Set: General Social Survey 2018
+
+-   Begun in 1972, the **General Social Survey (GSS)** is a long-running
+    longitudinal survey conducted annually that gathers data on the
+    attitudes, behaviors, and demographics of US adults.
+
+-   The surveys are conducted by NORC at the University of Chicago and
+    track a wide range of topics including politics, religion, work, and
+    social life.
+
+-   The dataset **GSS2018** from the R package **resampledata3**
+    contains a subset of the data from 2018.
+
+## The GSS2018 Dataset
+
+![](images/clipboard-1844474087.png){width="250"}
+
+```{r}
+#install.packages("resampledata3")
+library(resampledata3)
+names(GSS2018)
+```
+
+## Summarizing Categorical Data
+
+::: incremental
+-   A **relative frequency** table displays the values assumed by the
+    variable in a sample of data.
+-   A **bar chart** is just a graphical summary of a frequency
+    table
+:::
+
+## Describing the GSS2018 Data
+
+### Frequency Table
+
+```{r}
+summary(GSS2018$GenderNow) # first few values
+table(GSS2018$GenderNow)  # Frequency table (but not too pretty)
+```
+
+::: callout-note
+## Finding NAs
+
+Note that the default `table()` command does not show NA values but
+`summary()` does.
+:::
+
+## Describing the GSS2018 Data  {.smaller}
+
+### Relative Frequency Table and Adding Totals
+
+```{r}
+prop.table(table(GSS2018$GenderNow))
+
+# Frequency table with totals
+addmargins(table(GSS2018$GenderNow))
+
+# Relative frequency table with totals
+addmargins(prop.table(table(GSS2018$GenderNow)))
+
+```
+
+
+## Gender Identity Bar Charts
+
+::: {.panel-tabset}
+
+### Frequency Plot
+
+```{r}
+barplot(table(GSS2018$GenderNow))
+```
+
+### Relative Frequency Plot
+
+```{r}
+barplot(prop.table(table(GSS2018$GenderNow)), ylab = "proportion")
+```
+
+### Plot Percents
+
+```{r}
+barplot(100*prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
+```
+
+:::
+
+
+
+# Practice Exercises {background-color="#FAD9C7"}
+
+
+## Warm-Up: What Value of $c$ Minimizes Squared Deviations?
+
+We’ll investigate:  
+$$
+S(c) = \sum_{i=1}^3 (x_i - c)^2 \quad \text{for } x_1 = 4,\ x_2 = 7,\ x_3 = 10
+$$
+
+---
+
+### Instructions
+
+1. Choose a few values for $c$ (e.g., $5,\ 6,\ 7,\ 8$).  
+   Compute $S(c) = (x_1 - c)^2 + (x_2 - c)^2 + (x_3 - c)^2$ 
+   
+   :::{.fragment}
+   What do you notice? Which $c$ gives the smallest total?
+   :::
+
+2. ::: {.fragment}
+   Guess the value of $c$ that minimizes $S(c)$. Why does that make sense?
+   :::
+
+3. ::: {.fragment}
+   Optional extension: Expand $S(c)$ algebraically. Can you take its derivative?
+   :::
+
+4. ::: {.fragment}
+   What does this say about the mean as a "best" measure of center?
+   :::
+
