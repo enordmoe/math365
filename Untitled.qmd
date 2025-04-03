@@ -1,0 +1,209 @@
+---
+title: "Untitled"
+format: revealjs
+editor: visual
+---
+
+
+
+
+## Measures of Center {.section-title}
+
+---
+
+## Mean
+
+::: {.callout-note}
+**Our Data**: A sample of $n$ observations $\vec{x}$ of the variable $X$.
+:::
+
+::: {.callout-important}
+**The Mean $\bar{x}$**:  
+The **mean** of the $n$ values $\vec{x}$ is given by:
+$$
+\bar{x} =  \frac{\sum_{i=1}^n x_i}{n}.
+$$
+:::
+
+---
+
+## Properties of the Mean
+
+- `.fragment` The “center of gravity” of the distribution  
+  - `.fragment` A histogram or dotplot would balance at $\bar{x}$
+- `.fragment` Deviations $y_i - \bar{x}$ sum to 0
+- `.fragment` The mean is **very** sensitive to outliers
+
+---
+
+## Median
+
+::: {.callout-important}
+**The Median $M$**:  
+The **median** of the $n$ values $\vec{x}$:
+- `.fragment` the midpoint of the distribution
+- `.fragment` the value that most nearly lies in the middle
+- `.fragment` half the values are smaller, half are larger
+:::
+
+---
+
+## Finding the Median
+
+- `.fragment` Arrange the data in ascending order
+- `.fragment` If $n$ is **odd**, median is the center value
+- `.fragment` If $n$ is **even**, median is the **mean** of the two center values
+
+::: {.callout-note}
+- Show BP data example
+- Use Moore applet to illustrate robustness
+:::
+
+---
+
+## When to Prefer the Median
+
+The **median** is preferred over the mean when a **robust** measure of center is needed.
+
+---
+
+## Measures of Spread {.section-title}
+
+---
+
+## The Range
+
+::: {.callout-important}
+**Range**:  
+The **range** is a single number:  
+$$\text{Range} = \max(x_i) - \min(x_i)$$
+:::
+
+::: {.callout-note}
+Use BP data to compute range.
+:::
+
+---
+
+## Standard Deviation
+
+::: {.callout-important}
+**Standard Deviation (SD)**:  
+For sample $\vec{x}$ of size $n$:
+$$
+s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
+$$
+
+The **sample variance** is $s^2$.
+:::
+
+::: {.callout-note}
+Compare $(1,2,3)$ where $s = 1$ and $(1,2,6)$ where $s = \sqrt{7}$.
+:::
+
+---
+
+## Properties of the SD
+
+- `.fragment` A measure of “typical distance” from the mean
+- `.fragment` Like $\bar{x}$, not resistant to outliers
+- `.fragment` SD is 0 if all values are equal
+- `.fragment` Units match those of the original data
+- `.fragment` Denominator is $n-1$  
+  - `.fragment` This is the **degrees of freedom**
+
+::: {.callout-note}
+Demonstrate degrees of freedom with $(1, 2, 6)$.
+:::
+
+---
+
+## The Empirical Rule
+
+For roughly **bell-shaped** distributions:
+
+- `.fragment` ~68% of observations within $±1$ SD
+- `.fragment` ~95% within $±2$ SD
+- `.fragment` ~99.7% within $±3$ SD
+
+---
+
+## Empirical Rule Use
+
+- `.fragment` Helps **interpret** SD
+- `.fragment` Allows **approximate SD** from histogram:
+$$
+s \approx \frac{\text{Range of nearly all data}}{4}
+$$
+
+
+
+## Hinges and Fourths
+
+- Order the $n$ observations from smallest to largest.
+- Split the data into lower and upper halves.
+- If $n$ is odd, include the median $\tilde{x}$ in **both** halves.
+- The **lower fourth** or **lower hinge** ($h_l$) is the median of the lower half.
+- The **upper fourth** or **upper hinge** ($h_u$) is the median of the upper half.
+
+
+## Fourth Spread
+
+- A robust measure of spread:
+  $$
+  f_s = h_u - h_l
+  $$
+- $f_s$ is the **range of the middle half** of the data.
+
+
+## The Standard Boxplot
+
+- Displays the **five-number summary**:
+  - $x_{\min}$, $h_l$, $\tilde{x}$, $h_u$, $x_{\max}$
+- The box spans $f_s$, with:
+  - Edges at $h_l$ and $h_u$
+  - Vertical line at the median $\tilde{x}$
+  - Whiskers extending to min and max
+
+
+## The Modified Boxplot
+
+- Whiskers extend only to the **most extreme non-outliers**
+- **Outliers** are plotted separately
+- Some software (but not base R) uses different symbols for:
+  - **Mild outliers** (between $1.5f_s$ and $3f_s$ from the nearest hinge)
+  - **Extreme outliers** (more than $3f_s$ away from the nearest hinge)
+
+
+
+
+## Modified Boxplots
+
+::: {.callout-important}
+**Fences for Outlier Detection**:
+
+- `.fragment` Lower inner fence: $Q_1 - 1.5 \times \text{IQR}$
+- `.fragment` Upper inner fence: $Q_3 + 1.5 \times \text{IQR}$
+- `.fragment` Lower outer fence: $Q_1 - 3 \times \text{IQR}$
+- `.fragment` Upper outer fence: $Q_3 + 3 \times \text{IQR}$
+:::
+
+---
+
+## Outlier Rules (SPSS)
+
+- `.fragment` Points between inner and outer fences → **outliers**
+- `.fragment` Points beyond outer fences → **extremes**
+
+---
+
+## Constructing a Modified Boxplot
+
+- `.fragment` Box and whiskers as before
+- `.fragment` Whiskers stop at data **within** inner fences
+- `.fragment` Mark **outliers** with `o`
+- `.fragment` Mark **extremes** with `*`
+
+---
+
+

@@ -26,171 +26,344 @@ editor:
     wrap: 72
 ---
 
-## Topics for Today
-
-::: incremental
--   Summarizing Data
--   Summarizing Categorical Data
--   Summarizing Quantitative Data
--   Practice exercises
-:::
-
----
-
 ### Warm-Up: What Value of $c$ Minimizes Squared Deviations?
 
-We will investigate:  
+We will investigate:\
 $$
 S(c) = \sum_{i=1}^3 (x_i - c)^2 \quad \text{for } x_1 = 4,\ x_2 = 7,\ x_3 = 10
 $$
 
----
+------------------------------------------------------------------------
 
 ### Warm-Up
 
-1. Choose a value for $c$ (e.g., $5,\ 6,\ 7,\ 8$). Compute $S(c) = (x_1 - c)^2 + (x_2 - c)^2 + (x_3 - c)^2$. 
-<span class="fragment">What do you notice?</span>
+1.  Choose a value for $c$ (e.g., $5,\ 6,\ 7,\ 8$). Compute
+    $S(c) = (x_1 - c)^2 + (x_2 - c)^2 + (x_3 - c)^2$. [What do you
+    notice?]{.fragment}
 
-2. <span class="fragment">Try to guess the value of $c$ that minimizes $S(c)$. Why does that value make sense?</span>
+2.  [Try to guess the value of $c$ that minimizes $S(c)$. Why does that
+    value make sense?]{.fragment}
 
-3. <span class="fragment">Optional extension: Expand and simplify $S(c)$ algebraically. Can you take its derivative?</span>
+3.  [Optional extension: Expand and simplify $S(c)$ algebraically. Can
+    you take its derivative?]{.fragment}
 
-4. <span class="fragment">What do you think this says about the mean as a "best" measure of center?</span>
+4.  [What do you think this says about the mean as a "best" measure of
+    center?]{.fragment}
 
+------------------------------------------------------------------------
 
-
-
-
-
-## Summarizing Data
-
-::: incremental
--   Describe the distribution or pattern of variability of a variable
--   Data cleaning/editing
--   Uncover patterns and/or anomalies
--   Compare two or more distributions
-:::
-
-## Data Set: General Social Survey 2018
-
--   Begun in 1972, the **General Social Survey (GSS)** is a long-running
-    longitudinal survey conducted annually that gathers data on the
-    attitudes, behaviors, and demographics of US adults.
-
--   The surveys are conducted by NORC at the University of Chicago and
-    track a wide range of topics including politics, religion, work, and
-    social life.
-
--   The dataset **GSS2018** from the R package **resampledata3**
-    contains a subset of the data from 2018.
-
-## The GSS2018 Dataset
-
-![](images/clipboard-1844474087.png){width="250"}
-
-```{r}
-#install.packages("resampledata3")
-library(resampledata3)
-names(GSS2018)
-```
-
-## Summarizing Categorical Data
+## Topics for Today
 
 ::: incremental
--   A **relative frequency** table displays the values assumed by the
-    variable in a sample of data.
--   A **bar chart** is just a graphical summary of a frequency
-    table
+-   Measures of center and location
+-   Measures of spread
+-   Visualizations for comparing groups
 :::
 
-## Describing the GSS2018 Data
+## Data Set: Chesapeake Total Nitrogen Load Data {.smaller}
 
-### Frequency Table
-
-```{r}
-summary(GSS2018$GenderNow) # first few values
-table(GSS2018$GenderNow)  # Frequency table (but not too pretty)
-```
-
-::: callout-note
-## Finding NAs
-
-Note that the default `table()` command does not show NA values but
-`summary()` does.
+::: incremental
+-   **Environmental Motivation**: The Clean Water Act requires U.S.
+    waters to meet pollution reduction goals to ensure they remain
+    *fishable and swimmable*.
+-   **Measurement Focus**: Daily **Total Nitrogen (TN)** loads (kg
+    N/day) at a site in the **Chesapeake Bay** watershed.
+-   **Purpose**: The study examines how commonly used methods for
+    estimating pollutant loads in watersheds can produce misleading
+    results, emphasizing the need for sound statistical practices.
+-   **Source**: Data are drawn from *“Spurious Correlation in the USEPA
+    Rating Curve Method for Estimating Pollutant Loads”*\
+    (*J. of Environ. Engr.*, 2008: 610–618).
 :::
 
-## Describing the GSS2018 Data  {.smaller}
-
-### Relative Frequency Table and Adding Totals
-
-```{r}
-prop.table(table(GSS2018$GenderNow))
-
-# Frequency table with totals
-addmargins(table(GSS2018$GenderNow))
-
-# Relative frequency table with totals
-addmargins(prop.table(table(GSS2018$GenderNow)))
-
-```
-
-
-## Gender Identity Bar Charts
-
-::: {.panel-tabset}
-
-### Frequency Plot
-
-```{r}
-barplot(table(GSS2018$GenderNow))
-```
-
-### Relative Frequency Plot
-
-```{r}
-barplot(prop.table(table(GSS2018$GenderNow)), ylab = "proportion")
-```
-
-### Plot Percents
-
-```{r}
-barplot(100*prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
-```
-
+:::{.notes}
+We'll use this sample to examine graphical summaries and discuss
+foundational assumptions for inference.
 :::
 
+## Importing the Data
+
+Use R to read the data into a dataset called **eg1p20**.
+
+```{r}
+eg1p20 <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-20.csv")
+```
 
 
-# Practice Exercises {background-color="#FAD9C7"}
+
+## Data Analysis Tasks
+
+1.  Plot and describe the distribution of the data
+2.  Obtain measures of center
+3.  Obtain measures of variability
+4.  Identify and plot potential outliers
+
+::: notes
+Use R to work through these with reference to statistics of interest.  
+* Create a dotplot and histogram 
+* Summary statistics: measures of center
+and spread (including trimmed mean) 
+* Five number summary 
+* Boxplot
+:::
+
+# Measures of Center  {background-color="#FAD9C7"}
 
 
-## Warm-Up: What Value of $c$ Minimizes Squared Deviations?
+## Mean
 
-We’ll investigate:  
+**Our Data**: A sample of $n$ observations $x_1, x_2,\ldots, x_n$ on the random variable $X$.
+
+
+
+::: {.callout-note title="Definition"}
+
+The **mean** $\bar{x}$ of the $n$ values $x_1, x_2, \ldots, x_n$ is given by: 
 $$
-S(c) = \sum_{i=1}^3 (x_i - c)^2 \quad \text{for } x_1 = 4,\ x_2 = 7,\ x_3 = 10
+\bar{x} =  \frac{\sum_{i=1}^n x_i}{n}.
+$$
+:::
+
+
+## Properties of the Mean
+:::{.incremental}
+* The *center of gravity* of the distribution  
+  * A histogram or dotplot would balance at $\bar{x}$
+* Deviations $x_i - \bar{x}$ sum to 0
+* Minimizes the sum of squared deviations around $\bar{x}$
+* But, the mean is **very** sensitive to outliers
+:::
+
+## Median
+
+::: {.callout-note title="Definition"}
+The **median** of the $n$ values  $x_1, x_2,\ldots, x_n$  is  the value that most nearly lies in the
+middle with half the values smaller and half larger.
+:::
+
+
+## Finding the Median
+
+-   Arrange the data in ascending order
+-   If $n$ is **odd**, median is the center value
+-   If $n$ is **even**, median is the **mean** of the two
+    center values
+
+
+
+::: {.callout-tip icon="👉"}
+**Try this:** Investigate the properties of the Mean and Median using [Moore's applet](https://digitalfirst.bfwpub.com/stats_applet/stats_applet_6_meanmed.html)
+:::
+
+The **median** is preferred over the mean when a **robust** measure of
+center is needed.
+
+
+## A Compromise Measure: Trimmed Mean
+
+::: {.callout-note title="Definition"}
+
+The **trimmed mean** removes a fixed proportion of the smallest and largest values from the data, then computes the mean of the remaining values.
+
+- For example, the 10% trimmed mean discards the lowest 10% and highest 10% of observations before averaging.
+:::
+
+In R:
+```r
+mean(x, trim = 0.10)
+```
+
+# Measures of Spread  {background-color="#FAD9C7"}
+
+
+## The Range
+
+
+::: {.callout-note title="Definition"}
+The **range** is a single number:  
+$$\text{Range} = \max(x_i) - \min(x_i)$$
+:::
+
+- Measures the total spread of the data
+- **Highly sensitive** to extreme values (not robust)
+- Not very useful in general but still often used!
+
+
+
+## Standard Deviation
+
+::: {.callout-note title="Definition"}
+
+The **standard deviation** $s$ of the $n$ values $x_1, x_2, \ldots, x_n$ is given by: 
+$$
+s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
 $$
 
----
+The **sample variance** is $s^2$.
 
-### Instructions
+:::
 
-1. Choose a few values for $c$ (e.g., $5,\ 6,\ 7,\ 8$).  
-   Compute $S(c) = (x_1 - c)^2 + (x_2 - c)^2 + (x_3 - c)^2$ 
-   
-   :::{.fragment}
-   What do you notice? Which $c$ gives the smallest total?
-   :::
 
-2. ::: {.fragment}
-   Guess the value of $c$ that minimizes $S(c)$. Why does that make sense?
-   :::
 
-3. ::: {.fragment}
-   Optional extension: Expand $S(c)$ algebraically. Can you take its derivative?
-   :::
+## Properties of the Standard Deviation $s$
 
-4. ::: {.fragment}
-   What does this say about the mean as a "best" measure of center?
-   :::
+-   Measures  *typical distance* from the mean
+-   Like $\bar{x}$, not resistant to outliers
+-   SD is 0 if all values are equal
+-   Units match those of the original data
+-   Denominator is $n-1$ rather than $n$ to obtain a better estimate of the population value $\sigma^2$.
+-   The standard deviation is most useful when working with Normal data.
 
+
+
+## Hinges and Fourths
+
+-   Order the $n$ observations from smallest to largest.
+-   Split the data into lower and upper halves.
+-   If $n$ is odd, include the median $\tilde{x}$ in **both** halves.
+-   The **lower fourth** or **lower hinge** ($h_l$) is the median of the
+    lower half.
+-   The **upper fourth** or **upper hinge** ($h_u$) is the median of the
+    upper half.
+
+## Fourth Spread {.smaller}
+
+::: {.callout-note title="Definition"}
+The fourth spread $f_s$ is John Tukey's robust measure of variability defined:
+$$
+    f_s = h_u - h_l
+$$
+:::
+
+:::{.fragrment}
+The fourth spread $f_s$ is:
+* The **range of the middle half** of the data.
+* Unambiguous and easy to calculate by hand for small datasets
+* Very similar to the Interquartile Range
+:::
+
+## The Standard Boxplot
+
+-   Displays the **five-number summary**:
+    -   $x_{\min}$, $h_l$, $\tilde{x}$, $h_u$, $x_{\max}$
+-   The box spans $f_s$, with:
+    -   Edges at $h_l$ and $h_u$
+    -   Vertical line at the median $\tilde{x}$
+    -   Whiskers extending to min and max
+
+## The Modified Boxplot
+
+-   Whiskers extend only to the **most extreme non-outliers**
+-   **Outliers** are plotted separately
+-   Some software (but not base R) uses different symbols for:
+    -   **Mild outliers** (between $1.5f_s$ and $3f_s$ from the nearest
+        hinge)
+    -   **Extreme outliers** (more than $3f_s$ away from the nearest
+        hinge)
+        
+
+
+# More Options for Subgroup Analysis  {background-color="#FAD9C7"}
+
+## Options for Comparing Statistical Summaries by Subgroup in Base R {.smaller}
+
+#### Summarizing `mpg` by `cyl` in `mtcars`
+
+-   Base R offers several concise tools to compute and compare summary
+    statistics across groups
+
+```{r, eval = FALSE}
+# Means by cylinder group
+tapply(mtcars$mpg, mtcars$cyl, mean)
+
+# Five-number summaries by group
+by(mtcars$mpg, mtcars$cyl, summary)
+
+# Mean and SD per group as a data frame
+aggregate(mpg ~ cyl, mtcars, function(x) c(mean = mean(x), sd = sd(x)))
+```
+
+::: fragment
+-   :white_check_mark: `tapply()` → compact results, one stat at a time,
+    useful in scripting
+-   :white_check_mark: `by()` → readable summaries for each group
+-   :white_check_mark: `aggregate()` → clean tabular format, good for
+    displaying multiple summaries together
+:::
+
+## Side-by-side histograms: MPG by Cylinder {.smaller}
+
+::: panel-tabset
+### Plot
+
+```{r, echo = FALSE}
+# Save original graphical parameters
+op <- par(no.readonly = TRUE)
+
+# Layout: 3 rows, 1 column
+par(mfrow = c(3, 1), mar = c(4, 4, 2, 1))
+
+# Common x-axis limits
+xlims <- range(mtcars$mpg)
+
+# Histograms for each cylinder group
+hist(mtcars$mpg[mtcars$cyl == 4], main = "4 cyl", xlab = "MPG", 
+     xlim = xlims, col = "skyblue")
+hist(mtcars$mpg[mtcars$cyl == 6], main = "6 cyl", xlab = "MPG", 
+     xlim = xlims, col = "forestgreen")
+hist(mtcars$mpg[mtcars$cyl == 8], main = "8 cyl", xlab = "MPG", 
+     xlim = xlims, col = "tomato")
+
+# Restore original settings
+par(op)
+```
+
+### Code
+
+``` r
+# Save original graphical parameters
+op <- par(no.readonly = TRUE)
+
+# Layout: 3 rows, 1 column
+par(mfrow = c(3, 1), mar = c(4, 4, 2, 1))
+
+# Common x-axis limits
+xlims <- range(mtcars$mpg)
+
+# Histograms for each cylinder group
+hist(mtcars$mpg[mtcars$cyl == 4], main = "4 cyl", xlab = "MPG", 
+     xlim = xlims, col = "skyblue")
+hist(mtcars$mpg[mtcars$cyl == 6], main = "6 cyl", xlab = "MPG", 
+     xlim = xlims, col = "forestgreen")
+hist(mtcars$mpg[mtcars$cyl == 8], main = "8 cyl", xlab = "MPG", 
+     xlim = xlims, col = "tomato")
+
+# Restore original settings
+par(op)
+```
+:::
+
+# Practice Exercises {background-color="#E3F2FD"}
+
+Analyze the built-in **iris** data set.
+
+-   Browse help using `?iris`. (Find pictures of irises:)
+
+-   Investigate petal width using methods from class including data
+    display and summary statistics.
+
+-   Explore the relationship between petal width and species.
+
+
+## Summary: Measures of Location and Spread {background-color="#E8F5E9" .smaller}
+
+- The **mean** minimizes squared deviations but is **sensitive to outliers**
+- The **median** is a **robust** alternative, especially for skewed data
+- The **trimmed mean** offers a compromise: reduces outlier impact while retaining more data
+- The **standard deviation** measures typical variability but is not resistant
+- The **fourth spread** is a robust measure of spread, similar to the IQR
+- **Boxplots** provide visual summaries:
+  - Standard: min, hinges, median, max
+  - Modified: highlights mild and extreme outliers
+- Base R tools like `summary()`, `fivenum()`, and `boxplot()` support both numeric and visual analysis
+- For grouped data: use `tapply()`, `by()`, or `aggregate()` to compare summaries across subgroups

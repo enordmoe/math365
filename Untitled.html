@@ -1,22 +1,21 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Sec1p34_slides_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Sec1p34_slides_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Sec1p34_slides_files/libs/quarto-html/popper.min.js"></script>
-<script src="Sec1p34_slides_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Sec1p34_slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Sec1p34_slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec1p34_slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Sec1p34_slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Untitled_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Untitled_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Untitled_files/libs/quarto-html/popper.min.js"></script>
+<script src="Untitled_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Untitled_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Untitled_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Untitled_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Untitled_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
-  <meta name="author" content="MATH 365">
-  <title>Sections 1.3 and 1.4: Measures of Location and Variability</title>
+  <title>Untitled</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Sec1p34_slides_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Sec1p34_slides_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Untitled_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Untitled_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,79 +28,12 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="Sec1p34_slides_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="Sec1p34_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Sec1p34_slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Sec1p34_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Sec1p34_slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Sec1p34_slides_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Sec1p34_slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Untitled_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="Untitled_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Untitled_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Untitled_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Untitled_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -392,156 +324,72 @@
   <div class="reveal">
     <div class="slides">
 
-<section id="title-slide" data-background-color="#EA6820" class="quarto-title-block center">
-  <h1 class="title">Sections 1.3 and 1.4: Measures of Location and Variability</h1>
-  <p class="subtitle">Mathematical Statistics</p>
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Untitled</h1>
 
 <div class="quarto-title-authors">
-<div class="quarto-title-author">
-<div class="quarto-title-author-name">
-MATH 365 
-</div>
-</div>
 </div>
 
 </section>
-<section class="slide level2">
-
-<h3 id="warm-up-what-value-of-c-minimizes-squared-deviations">Warm-Up: What Value of <span class="math inline">\(c\)</span> Minimizes Squared Deviations?</h3>
-<p>We will investigate:<br>
-<span class="math display">\[
-S(c) = \sum_{i=1}^3 (x_i - c)^2 \quad \text{for } x_1 = 4,\ x_2 = 7,\ x_3 = 10
-\]</span></p>
-</section>
-<section class="slide level2">
-
-<h3 id="warm-up">Warm-Up</h3>
-<ol type="1">
-<li><p>Choose a value for <span class="math inline">\(c\)</span> (e.g., <span class="math inline">\(5,\ 6,\ 7,\ 8\)</span>). Compute <span class="math inline">\(S(c) = (x_1 - c)^2 + (x_2 - c)^2 + (x_3 - c)^2\)</span>. <span class="fragment">What do you notice?</span></p></li>
-<li><p><span class="fragment">Try to guess the value of <span class="math inline">\(c\)</span> that minimizes <span class="math inline">\(S(c)\)</span>. Why does that value make sense?</span></p></li>
-<li><p><span class="fragment">Optional extension: Expand and simplify <span class="math inline">\(S(c)\)</span> algebraically. Can you take its derivative?</span></p></li>
-<li><p><span class="fragment">What do you think this says about the mean as a “best” measure of center?</span></p></li>
-</ol>
-</section>
-<section id="topics-for-today" class="slide level2">
-<h2>Topics for Today</h2>
-<div>
-<ul>
-<li class="fragment">Measures of center and location</li>
-<li class="fragment">Measures of spread</li>
-<li class="fragment">Visualizations for comparing groups</li>
-</ul>
-</div>
-</section>
-<section id="data-set-chesapeake-total-nitrogen-load-data" class="slide level2 smaller">
-<h2>Data Set: Chesapeake Total Nitrogen Load Data</h2>
-<div>
-<ul>
-<li class="fragment"><strong>Environmental Motivation</strong>: The Clean Water Act requires U.S. waters to meet pollution reduction goals to ensure they remain <em>fishable and swimmable</em>.</li>
-<li class="fragment"><strong>Measurement Focus</strong>: Daily <strong>Total Nitrogen (TN)</strong> loads (kg N/day) at a site in the <strong>Chesapeake Bay</strong> watershed.</li>
-<li class="fragment"><strong>Purpose</strong>: The study examines how commonly used methods for estimating pollutant loads in watersheds can produce misleading results, emphasizing the need for sound statistical practices.</li>
-<li class="fragment"><strong>Source</strong>: Data are drawn from <em>“Spurious Correlation in the USEPA Rating Curve Method for Estimating Pollutant Loads”</em><br>
-(<em>J. of Environ. Engr.</em>, 2008: 610–618).</li>
-</ul>
-</div>
-<aside class="notes">
-<p>We’ll use this sample to examine graphical summaries and discuss foundational assumptions for inference.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="importing-the-data" class="slide level2">
-<h2>Importing the Data</h2>
-<p>Use R to read the data into a dataset called <strong>eg1p20</strong>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>eg1p20 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"http://people.kzoo.edu/enordmoe/math365/data/exp01-20.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="data-analysis-tasks" class="slide level2">
-<h2>Data Analysis Tasks</h2>
-<ol type="1">
-<li>Plot and describe the distribution of the data</li>
-<li>Obtain measures of center</li>
-<li>Obtain measures of variability</li>
-<li>Identify and plot potential outliers</li>
-</ol>
-<aside class="notes">
-<p>Use R to work through these with reference to statistics of interest.<br>
-* Create a dotplot and histogram * Summary statistics: measures of center and spread (including trimmed mean) * Five number summary * Boxplot</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section>
-<section id="measures-of-center" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1>Measures of Center</h1>
-
+<section id="measures-of-center" class="slide level2 section-title">
+<h2>Measures of Center</h2>
 </section>
 <section id="mean" class="slide level2">
 <h2>Mean</h2>
-<p><strong>Our Data</strong>: A sample of <span class="math inline">\(n\)</span> observations <span class="math inline">\(x_1, x_2,\ldots, x_n\)</span> on the random variable <span class="math inline">\(X\)</span>.</p>
-<div title="Definition">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition</strong></p>
+<p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>mean</strong> <span class="math inline">\(\bar{x}\)</span> of the <span class="math inline">\(n\)</span> values <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> is given by: <span class="math display">\[
+<p><strong>Our Data</strong>: A sample of <span class="math inline">\(n\)</span> observations <span class="math inline">\(\vec{x}\)</span> of the variable <span class="math inline">\(X\)</span>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>The Mean <span class="math inline">\(\bar{x}\)</span></strong>:<br>
+The <strong>mean</strong> of the <span class="math inline">\(n\)</span> values <span class="math inline">\(\vec{x}\)</span> is given by: <span class="math display">\[
 \bar{x} =  \frac{\sum_{i=1}^n x_i}{n}.
 \]</span></p>
-</div>
 </div>
 </div>
 </div>
 </section>
 <section id="properties-of-the-mean" class="slide level2">
 <h2>Properties of the Mean</h2>
-<div>
 <ul>
-<li class="fragment">The <em>center of gravity</em> of the distribution
+<li><code>.fragment</code> The “center of gravity” of the distribution
 <ul>
-<li class="fragment">A histogram or dotplot would balance at <span class="math inline">\(\bar{x}\)</span></li>
+<li><code>.fragment</code> A histogram or dotplot would balance at <span class="math inline">\(\bar{x}\)</span></li>
 </ul></li>
-<li class="fragment">Deviations <span class="math inline">\(x_i - \bar{x}\)</span> sum to 0</li>
-<li class="fragment">Minimizes the sum of squared deviations around <span class="math inline">\(\bar{x}\)</span></li>
-<li class="fragment">But, the mean is <strong>very</strong> sensitive to outliers</li>
+<li><code>.fragment</code> Deviations <span class="math inline">\(y_i - \bar{x}\)</span> sum to 0</li>
+<li><code>.fragment</code> The mean is <strong>very</strong> sensitive to outliers</li>
 </ul>
-</div>
 </section>
 <section id="median" class="slide level2">
 <h2>Median</h2>
-<div title="Definition">
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition</strong></p>
+<p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>median</strong> of the <span class="math inline">\(n\)</span> values <span class="math inline">\(x_1, x_2,\ldots, x_n\)</span> is the value that most nearly lies in the middle with half the values smaller and half larger.</p>
-</div>
+<p><strong>The Median <span class="math inline">\(M\)</span></strong>:<br>
+The <strong>median</strong> of the <span class="math inline">\(n\)</span> values <span class="math inline">\(\vec{x}\)</span>: - <code>.fragment</code> the midpoint of the distribution - <code>.fragment</code> the value that most nearly lies in the middle - <code>.fragment</code> half the values are smaller, half are larger</p>
 </div>
 </div>
 </div>
@@ -549,107 +397,140 @@ S(c) = \sum_{i=1}^3 (x_i - c)^2 \quad \text{for } x_1 = 4,\ x_2 = 7,\ x_3 = 10
 <section id="finding-the-median" class="slide level2">
 <h2>Finding the Median</h2>
 <ul>
-<li>Arrange the data in ascending order</li>
-<li>If <span class="math inline">\(n\)</span> is <strong>odd</strong>, median is the center value</li>
-<li>If <span class="math inline">\(n\)</span> is <strong>even</strong>, median is the <strong>mean</strong> of the two center values</li>
+<li><code>.fragment</code> Arrange the data in ascending order</li>
+<li><code>.fragment</code> If <span class="math inline">\(n\)</span> is <strong>odd</strong>, median is the center value</li>
+<li><code>.fragment</code> If <span class="math inline">\(n\)</span> is <strong>even</strong>, median is the <strong>mean</strong> of the two center values</li>
 </ul>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p><strong>Try this:</strong> Investigate the properties of the Mean and Median using <a href="https://digitalfirst.bfwpub.com/stats_applet/stats_applet_6_meanmed.html">Moore’s applet</a></p>
-</div>
-</div>
-</div>
-<p>The <strong>median</strong> is preferred over the mean when a <strong>robust</strong> measure of center is needed.</p>
-</section>
-<section id="a-compromise-measure-trimmed-mean" class="slide level2">
-<h2>A Compromise Measure: Trimmed Mean</h2>
-<div title="Definition">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition</strong></p>
+<p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>trimmed mean</strong> removes a fixed proportion of the smallest and largest values from the data, then computes the mean of the remaining values.</p>
 <ul>
-<li>For example, the 10% trimmed mean discards the lowest 10% and highest 10% of observations before averaging.</li>
+<li>Show BP data example</li>
+<li>Use Moore applet to illustrate robustness</li>
 </ul>
 </div>
 </div>
 </div>
-</div>
-<p>In R:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">mean</span>(x, <span class="at">trim =</span> <span class="fl">0.10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section></section>
-<section>
-<section id="measures-of-spread" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1>Measures of Spread</h1>
-
+</section>
+<section id="when-to-prefer-the-median" class="slide level2">
+<h2>When to Prefer the Median</h2>
+<p>The <strong>median</strong> is preferred over the mean when a <strong>robust</strong> measure of center is needed.</p>
+</section>
+<section id="measures-of-spread" class="slide level2 section-title">
+<h2>Measures of Spread</h2>
 </section>
 <section id="the-range" class="slide level2">
 <h2>The Range</h2>
-<div title="Definition">
-<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition</strong></p>
+<p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>range</strong> is a single number:<br>
+<p><strong>Range</strong>:<br>
+The <strong>range</strong> is a single number:<br>
 <span class="math display">\[\text{Range} = \max(x_i) - \min(x_i)\]</span></p>
 </div>
 </div>
 </div>
-</div>
-<ul>
-<li>Measures the total spread of the data</li>
-<li><strong>Highly sensitive</strong> to extreme values (not robust)</li>
-<li>Not very useful in general but still often used!</li>
-</ul>
-</section>
-<section id="standard-deviation" class="slide level2">
-<h2>Standard Deviation</h2>
-<div title="Definition">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition</strong></p>
+<p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>standard deviation</strong> <span class="math inline">\(s\)</span> of the <span class="math inline">\(n\)</span> values <span class="math inline">\(x_1, x_2, \ldots, x_n\)</span> is given by: <span class="math display">\[
+<p>Use BP data to compute range.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="standard-deviation" class="slide level2">
+<h2>Standard Deviation</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Standard Deviation (SD)</strong>:<br>
+For sample <span class="math inline">\(\vec{x}\)</span> of size <span class="math inline">\(n\)</span>: <span class="math display">\[
 s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
 \]</span></p>
 <p>The <strong>sample variance</strong> is <span class="math inline">\(s^2\)</span>.</p>
 </div>
 </div>
 </div>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Compare <span class="math inline">\((1,2,3)\)</span> where <span class="math inline">\(s = 1\)</span> and <span class="math inline">\((1,2,6)\)</span> where <span class="math inline">\(s = \sqrt{7}\)</span>.</p>
+</div>
+</div>
 </div>
 </section>
-<section id="properties-of-the-standard-deviation-s" class="slide level2">
-<h2>Properties of the Standard Deviation <span class="math inline">\(s\)</span></h2>
+<section id="properties-of-the-sd" class="slide level2">
+<h2>Properties of the SD</h2>
 <ul>
-<li>Measures <em>typical distance</em> from the mean</li>
-<li>Like <span class="math inline">\(\bar{x}\)</span>, not resistant to outliers</li>
-<li>SD is 0 if all values are equal</li>
-<li>Units match those of the original data</li>
-<li>Denominator is <span class="math inline">\(n-1\)</span> rather than <span class="math inline">\(n\)</span> to obtain a better estimate of the population value <span class="math inline">\(\sigma^2\)</span>.</li>
-<li>The standard deviation is most useful when working with Normal data.</li>
+<li><code>.fragment</code> A measure of “typical distance” from the mean</li>
+<li><code>.fragment</code> Like <span class="math inline">\(\bar{x}\)</span>, not resistant to outliers</li>
+<li><code>.fragment</code> SD is 0 if all values are equal</li>
+<li><code>.fragment</code> Units match those of the original data</li>
+<li><code>.fragment</code> Denominator is <span class="math inline">\(n-1\)</span>
+<ul>
+<li><code>.fragment</code> This is the <strong>degrees of freedom</strong></li>
+</ul></li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Demonstrate degrees of freedom with <span class="math inline">\((1, 2, 6)\)</span>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="the-empirical-rule" class="slide level2">
+<h2>The Empirical Rule</h2>
+<p>For roughly <strong>bell-shaped</strong> distributions:</p>
+<ul>
+<li><code>.fragment</code> ~68% of observations within <span class="math inline">\(±1\)</span> SD</li>
+<li><code>.fragment</code> ~95% within <span class="math inline">\(±2\)</span> SD</li>
+<li><code>.fragment</code> ~99.7% within <span class="math inline">\(±3\)</span> SD</li>
+</ul>
+</section>
+<section id="empirical-rule-use" class="slide level2">
+<h2>Empirical Rule Use</h2>
+<ul>
+<li><code>.fragment</code> Helps <strong>interpret</strong> SD</li>
+<li><code>.fragment</code> Allows <strong>approximate SD</strong> from histogram: <span class="math display">\[
+s \approx \frac{\text{Range of nearly all data}}{4}
+\]</span></li>
 </ul>
 </section>
 <section id="hinges-and-fourths" class="slide level2">
@@ -662,28 +543,14 @@ s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
 <li>The <strong>upper fourth</strong> or <strong>upper hinge</strong> (<span class="math inline">\(h_u\)</span>) is the median of the upper half.</li>
 </ul>
 </section>
-<section id="fourth-spread" class="slide level2 smaller">
+<section id="fourth-spread" class="slide level2">
 <h2>Fourth Spread</h2>
-<div title="Definition">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Definition</strong></p>
-</div>
-<div class="callout-content">
-<p>The fourth spread <span class="math inline">\(f_s\)</span> is John Tukey’s robust measure of variability defined: <span class="math display">\[
-    f_s = h_u - h_l
-\]</span></p>
-</div>
-</div>
-</div>
-</div>
-<div class="fragrment">
-<p>The fourth spread <span class="math inline">\(f_s\)</span> is: * The <strong>range of the middle half</strong> of the data. * Unambiguous and easy to calculate by hand for small datasets * Very similar to the Interquartile Range</p>
-</div>
+<ul>
+<li>A robust measure of spread: <span class="math display">\[
+f_s = h_u - h_l
+\]</span></li>
+<li><span class="math inline">\(f_s\)</span> is the <strong>range of the middle half</strong> of the data.</li>
+</ul>
 </section>
 <section id="the-standard-boxplot" class="slide level2">
 <h2>The Standard Boxplot</h2>
@@ -711,126 +578,70 @@ s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
 <li><strong>Extreme outliers</strong> (more than <span class="math inline">\(3f_s\)</span> away from the nearest hinge)</li>
 </ul></li>
 </ul>
-</section></section>
-<section>
-<section id="more-options-for-subgroup-analysis" class="title-slide slide level1 center" data-background-color="#FAD9C7">
-<h1>More Options for Subgroup Analysis</h1>
+</section>
+<section id="modified-boxplots" class="slide level2">
+<h2>Modified Boxplots</h2>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Fences for Outlier Detection</strong>:</p>
+<ul>
+<li><code>.fragment</code> Lower inner fence: <span class="math inline">\(Q_1 - 1.5 \times \text{IQR}\)</span></li>
+<li><code>.fragment</code> Upper inner fence: <span class="math inline">\(Q_3 + 1.5 \times \text{IQR}\)</span></li>
+<li><code>.fragment</code> Lower outer fence: <span class="math inline">\(Q_1 - 3 \times \text{IQR}\)</span></li>
+<li><code>.fragment</code> Upper outer fence: <span class="math inline">\(Q_3 + 3 \times \text{IQR}\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="outlier-rules-spss" class="slide level2">
+<h2>Outlier Rules (SPSS)</h2>
+<ul>
+<li><code>.fragment</code> Points between inner and outer fences → <strong>outliers</strong></li>
+<li><code>.fragment</code> Points beyond outer fences → <strong>extremes</strong></li>
+</ul>
+</section>
+<section id="constructing-a-modified-boxplot" class="slide level2">
+<h2>Constructing a Modified Boxplot</h2>
+<ul>
+<li><code>.fragment</code> Box and whiskers as before</li>
+<li><code>.fragment</code> Whiskers stop at data <strong>within</strong> inner fences</li>
+<li><code>.fragment</code> Mark <strong>outliers</strong> with <code>o</code></li>
+<li><code>.fragment</code> Mark <strong>extremes</strong> with <code>*</code></li>
+</ul>
+</section>
+<section class="slide level2">
 
-</section>
-<section id="options-for-comparing-statistical-summaries-by-subgroup-in-base-r" class="slide level2 smaller">
-<h2>Options for Comparing Statistical Summaries by Subgroup in Base R</h2>
-<h4 id="summarizing-mpg-by-cyl-in-mtcars">Summarizing <code>mpg</code> by <code>cyl</code> in <code>mtcars</code></h4>
-<ul>
-<li>Base R offers several concise tools to compute and compare summary statistics across groups</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Means by cylinder group</span></span>
-<span id="cb3-2"><a href=""></a><span class="fu">tapply</span>(mtcars<span class="sc">$</span>mpg, mtcars<span class="sc">$</span>cyl, mean)</span>
-<span id="cb3-3"><a href=""></a></span>
-<span id="cb3-4"><a href=""></a><span class="co"># Five-number summaries by group</span></span>
-<span id="cb3-5"><a href=""></a><span class="fu">by</span>(mtcars<span class="sc">$</span>mpg, mtcars<span class="sc">$</span>cyl, summary)</span>
-<span id="cb3-6"><a href=""></a></span>
-<span id="cb3-7"><a href=""></a><span class="co"># Mean and SD per group as a data frame</span></span>
-<span id="cb3-8"><a href=""></a><span class="fu">aggregate</span>(mpg <span class="sc">~</span> cyl, mtcars, <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment">
-<ul>
-<li><span class="emoji" data-emoji="white_check_mark">✅</span> <code>tapply()</code> → compact results, one stat at a time, useful in scripting</li>
-<li><span class="emoji" data-emoji="white_check_mark">✅</span> <code>by()</code> → readable summaries for each group</li>
-<li><span class="emoji" data-emoji="white_check_mark">✅</span> <code>aggregate()</code> → clean tabular format, good for displaying multiple summaries together</li>
-</ul>
-</div>
-</section>
-<section id="side-by-side-histograms-mpg-by-cylinder" class="slide level2 smaller">
-<h2>Side-by-side histograms: MPG by Cylinder</h2>
-<div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Plot</a></li><li><a href="#tabset-1-2">Code</a></li></ul>
-<div class="tab-content">
-<div id="tabset-1-1">
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="Sec1p34_slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-1-2">
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Save original graphical parameters</span></span>
-<span id="cb4-2"><a href=""></a>op <span class="ot">&lt;-</span> <span class="fu">par</span>(<span class="at">no.readonly =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-3"><a href=""></a></span>
-<span id="cb4-4"><a href=""></a><span class="co"># Layout: 3 rows, 1 column</span></span>
-<span id="cb4-5"><a href=""></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>))</span>
-<span id="cb4-6"><a href=""></a></span>
-<span id="cb4-7"><a href=""></a><span class="co"># Common x-axis limits</span></span>
-<span id="cb4-8"><a href=""></a>xlims <span class="ot">&lt;-</span> <span class="fu">range</span>(mtcars<span class="sc">$</span>mpg)</span>
-<span id="cb4-9"><a href=""></a></span>
-<span id="cb4-10"><a href=""></a><span class="co"># Histograms for each cylinder group</span></span>
-<span id="cb4-11"><a href=""></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">4</span>], <span class="at">main =</span> <span class="st">"4 cyl"</span>, <span class="at">xlab =</span> <span class="st">"MPG"</span>, </span>
-<span id="cb4-12"><a href=""></a>     <span class="at">xlim =</span> xlims, <span class="at">col =</span> <span class="st">"skyblue"</span>)</span>
-<span id="cb4-13"><a href=""></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">6</span>], <span class="at">main =</span> <span class="st">"6 cyl"</span>, <span class="at">xlab =</span> <span class="st">"MPG"</span>, </span>
-<span id="cb4-14"><a href=""></a>     <span class="at">xlim =</span> xlims, <span class="at">col =</span> <span class="st">"forestgreen"</span>)</span>
-<span id="cb4-15"><a href=""></a><span class="fu">hist</span>(mtcars<span class="sc">$</span>mpg[mtcars<span class="sc">$</span>cyl <span class="sc">==</span> <span class="dv">8</span>], <span class="at">main =</span> <span class="st">"8 cyl"</span>, <span class="at">xlab =</span> <span class="st">"MPG"</span>, </span>
-<span id="cb4-16"><a href=""></a>     <span class="at">xlim =</span> xlims, <span class="at">col =</span> <span class="st">"tomato"</span>)</span>
-<span id="cb4-17"><a href=""></a></span>
-<span id="cb4-18"><a href=""></a><span class="co"># Restore original settings</span></span>
-<span id="cb4-19"><a href=""></a><span class="fu">par</span>(op)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-</section></section>
-<section>
-<section id="practice-exercises" class="title-slide slide level1 center" data-background-color="#E3F2FD">
-<h1>Practice Exercises</h1>
-<p>Analyze the built-in <strong>iris</strong> data set.</p>
-<ul>
-<li><p>Browse help using <code>?iris</code>. (Find pictures of irises:)</p></li>
-<li><p>Investigate petal width using methods from class including data display and summary statistics.</p></li>
-<li><p>Explore the relationship between petal width and species.</p></li>
-</ul>
-</section>
-<section id="summary-measures-of-location-and-spread" class="slide level2 smaller" data-background-color="#E8F5E9">
-<h2>Summary: Measures of Location and Spread</h2>
-<ul>
-<li>The <strong>mean</strong> minimizes squared deviations but is <strong>sensitive to outliers</strong></li>
-<li>The <strong>median</strong> is a <strong>robust</strong> alternative, especially for skewed data</li>
-<li>The <strong>trimmed mean</strong> offers a compromise: reduces outlier impact while retaining more data</li>
-<li>The <strong>standard deviation</strong> measures typical variability but is not resistant</li>
-<li>The <strong>fourth spread</strong> is a robust measure of spread, similar to the IQR</li>
-<li><strong>Boxplots</strong> provide visual summaries:
-<ul>
-<li>Standard: min, hinges, median, max</li>
-<li>Modified: highlights mild and extreme outliers</li>
-</ul></li>
-<li>Base R tools like <code>summary()</code>, <code>fivenum()</code>, and <code>boxplot()</code> support both numeric and visual analysis</li>
-<li>For grouped data: use <code>tapply()</code>, <code>by()</code>, or <code>aggregate()</code> to compare summaries across subgroups</li>
-</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Sec1p34_slides_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Untitled_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Sec1p34_slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Untitled_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -839,13 +650,12 @@ s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
       // https://revealjs.com/config/
       Reveal.initialize({
 'controlsAuto': true,
-'previewLinksAuto': true,
+'previewLinksAuto': false,
 'pdfSeparateFragments': false,
 'autoAnimateEasing': "ease",
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
-'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
-'chalkboard': {"buttons":true},
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -971,7 +781,7 @@ s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
         previewLinks: false,
 
         // Transition style (none/fade/slide/convex/concave/zoom)
-        transition: 'fade',
+        transition: 'none',
 
         // Transition speed (default/fast/slow)
         transitionSpeed: 'default',
@@ -999,7 +809,7 @@ s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -1016,7 +826,7 @@ s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
 
           RevealMath,
           RevealNotes,
@@ -1025,44 +835,6 @@ s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

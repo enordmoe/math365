@@ -1,0 +1,100 @@
+---
+title: "Sect 1.3 and 1.4 R Commands Help Sheet"
+author: "MATH 365"
+editor: visual
+format:
+  html:
+    toc: true
+    toc_depth: 2
+    number-sections: false
+    number-depth: 2
+    theme: flatly
+    embed-resources: true
+---
+
+## Basic Summary Functions
+
+These base R functions provide quick ways to summarize numeric data. We'll use `mtcars$mpg` (miles per gallon) as our example:
+
+```r
+x <- mtcars$mpg
+```
+
+### `mean()` – Arithmetic Average
+```r
+mean(x)  # Average value
+```
+
+### `sd()` – Standard Deviation
+```r
+sd(x)    # Measure of typical distance from the mean
+```
+
+### `range()` – Minimum and Maximum
+```r
+range(x)           # Returns a vector: c(min, max)
+diff(range(x))     # Computes the range as a single number
+```
+
+### `summary()` – Five-Number Summary + Mean
+```r
+summary(x)  # Min, 1st Qu., Median, Mean, 3rd Qu., Max
+```
+
+### `fivenum()` – Tukey's Five-Number Summary
+```r
+fivenum(x)  # Min, Lower Hinge, Median, Upper Hinge, Max
+```
+
+### `mean(..., trim = ...)` – Trimmed Mean
+```r
+mean(x, trim = 0.1)  # Trimmed mean after removing 10% from each end
+```
+- Useful when you want a **robust average** that’s less affected by outliers
+- Common choices: 5%, 10%, or 20% trimming depending on context
+
+## Visual Summary: `boxplot()`
+
+```r
+boxplot(x, main = "Boxplot of mtcars$mpg")
+```
+
+- The box shows the **hinges** (Tukey's lower and upper fourths) and the **median**.
+- Whiskers extend to min and max (or only to non-outliers, depending on method).
+
+## Computing the Hinges and Fourth Spread
+
+The output from `fivenum()` gives:
+
+```r
+f <- fivenum(x)
+f
+```
+
+This returns:
+- $f_1$ = minimum
+- $f_2$ = lower hinge (approx. 1st quartile)
+- $f_3$ = median
+- $f_4$ = upper hinge (approx. 3rd quartile)
+- $f_5$ = maximum
+
+### Hinges and Fourth Spread
+
+```r
+lower_hinge <- f[2]  # Lower fourth / hinge
+upper_hinge <- f[4]  # Upper fourth / hinge
+
+fourth_spread <- upper_hinge - lower_hinge
+fourth_spread
+```
+
+This value represents the **spread of the middle half** of the data and is robust to outliers.
+
+---
+
+## Try It Yourself 👉
+
+- Replace `x` with another variable like `mtcars$hp`.
+- Compare `fivenum()` vs. `summary()` — how do the hinges differ from quartiles?
+- Try a trimmed mean: `mean(x, trim = 0.1)`.
+- Compute `1.5 * fourth_spread` to identify mild outliers using the **Tukey rule**.
