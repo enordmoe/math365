@@ -1,0 +1,119 @@
+---
+title: "Section 5.3: Statistics and Their Distributions"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today
+
+::: incremental
+-   Sample Statistics
+-   Sampling distributions
+-   Finding sampling distributions
+    -   By enumeration
+    -   Analytically
+    -   Using R Simulation
+:::
+
+------------------------------------------------------------------------
+
+## :bar_chart: Statistics
+
+::: {.callout-note title="Definition: Statistic"}
+A **statistic** is any quantity whose value can be calculated from
+sample data. A statistic is a **random variable**, and will be denoted
+by an *uppercase letter* (e.g., $\bar X$); a *lowercase letter* (e.g.,
+$\bar x$) represents an observed or calculated value of the statistic.
+:::
+
+::: notes
+Generally, statistics are computed to estimate a population parameter
+:::
+
+## :bar_chart: Sampling Distributions
+
+::: {.callout-note title="Definition: Sampling Distribution"}
+The **probability distribution** of a statistic is often called its
+**sampling distribution**, to emphasize that it describes how the
+statistic varies across all possible samples.
+:::
+
+## :school: Estimating Faculty Years of Service
+
+Suppose we're interested in estimating the **average number of years**
+faculty have served in the **Math Department** at Kalamazoo College.
+
+-   Think about how to describe how a **statistic** (like the sample
+    mean) varies across different samples\
+
+------------------------------------------------------------------------
+
+## :coffee: K Coffee Habits {.smaller}
+
+At Kalamazoo College, suppose about **30% of students** buy coffee on
+campus at least once a week. Suppose you **randomly sample 10
+students**.
+
+Let:
+
+-   $X$ = number of students in the sample who buy coffee weekly
+
+-   $\hat{p} = X/10$ = sample proportion
+
+**Questions:**
+
+::: incremental
+-   What kind of random variable is $X$?
+
+-   What values can $\hat{p}$ take?
+
+-   What is the sampling distribution of $\hat{p}$?
+
+-   What is the probability that 20% of the students in our sample buy
+    coffee weekly?
+:::
+
+## 🎲 Simulation and Sampling Distributions
+
+*  When a derivation via probability rules is very difficult or even impossible,  we can use **simulation** to approximate the **sampling distribution** of a statistic.  
+
+* Simulate the sampling distribution of a statistic by drawing from a known population many times and calculating the values of the statistic of interest (e.g., trimmed mean)  
+
+
+# Simulation Investigation: Grubbs' Test for Outliers
+
+
+## 📝 Summary: Statistics and Their Distributions {.smaller}
+
+- A **statistic** is a quantity computed from sample data — it is a random variable  
+- The **sampling distribution** describes how a statistic varies across all possible samples
+
+- We can explore sampling distributions:
+  - 🔢 By enumeration (all possible samples)
+  - 🧮 Analytically (using probability)
+  - 🎲 Through simulation (approximating variability empirically)
+
+
+> Understanding how statistics behave across samples is **fundamental to inference.**
