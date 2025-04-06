@@ -76,7 +76,7 @@ $$
     (*J. of Environ. Engr.*, 2008: 610–618).
 :::
 
-:::{.notes}
+::: notes
 We'll use this sample to examine graphical summaries and discuss
 foundational assumptions for inference.
 :::
@@ -89,8 +89,6 @@ Use R to read the data into a dataset called **eg1p20**.
 eg1p20 <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-20.csv")
 ```
 
-
-
 ## Data Analysis Tasks
 
 1.  Plot and describe the distribution of the data
@@ -99,122 +97,109 @@ eg1p20 <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-20.csv")
 4.  Identify and plot potential outliers
 
 ::: notes
-Use R to work through these with reference to statistics of interest.  
-* Create a dotplot and histogram 
-* Summary statistics: measures of center
-and spread (including trimmed mean) 
-* Five number summary 
-* Boxplot
+Use R to work through these with reference to statistics of interest.\
+\* Create a dotplot and histogram \* Summary statistics: measures of
+center and spread (including trimmed mean) \* Five number summary \*
+Boxplot
 :::
 
-# Measures of Center  {background-color="#FAD9C7"}
-
+# Measures of Center {background-color="#FAD9C7"}
 
 ## Mean
 
-**Our Data**: A sample of $n$ observations $x_1, x_2,\ldots, x_n$ on the random variable $X$.
-
-
+**Our Data**: A sample of $n$ observations $x_1, x_2,\ldots, x_n$ on the
+random variable $X$.
 
 ::: {.callout-note title="Definition"}
-
-The **mean** $\bar{x}$ of the $n$ values $x_1, x_2, \ldots, x_n$ is given by: 
-$$
+The **mean** $\bar{x}$ of the $n$ values $x_1, x_2, \ldots, x_n$ is
+given by: $$
 \bar{x} =  \frac{\sum_{i=1}^n x_i}{n}.
 $$
 :::
 
-
 ## Properties of the Mean
-:::{.incremental}
-* The *center of gravity* of the distribution  
-  * A histogram or dotplot would balance at $\bar{x}$
-* Deviations $x_i - \bar{x}$ sum to 0
-* Minimizes the sum of squared deviations around $\bar{x}$
-* But, the mean is **very** sensitive to outliers
+
+::: incremental
+-   The *center of gravity* of the distribution
+    -   A histogram or dotplot would balance at $\bar{x}$
+-   Deviations $x_i - \bar{x}$ sum to 0
+-   Minimizes the sum of squared deviations around $\bar{x}$
+-   But, the mean is **very** sensitive to outliers
 :::
 
 ## Median
 
 ::: {.callout-note title="Definition"}
-The **median** of the $n$ values  $x_1, x_2,\ldots, x_n$  is  the value that most nearly lies in the
-middle with half the values smaller and half larger.
+The **median** of the $n$ values $x_1, x_2,\ldots, x_n$ is the value
+that most nearly lies in the middle with half the values smaller and
+half larger.
 :::
-
 
 ## Finding the Median
 
 -   Arrange the data in ascending order
 -   If $n$ is **odd**, median is the center value
--   If $n$ is **even**, median is the **mean** of the two
-    center values
-
-
+-   If $n$ is **even**, median is the **mean** of the two center values
 
 ::: {.callout-tip icon="👉"}
-**Try this:** Investigate the properties of the Mean and Median using [Moore's applet](https://digitalfirst.bfwpub.com/stats_applet/stats_applet_6_meanmed.html)
+**Try this:** Investigate the properties of the Mean and Median using
+[Moore's
+applet](https://digitalfirst.bfwpub.com/stats_applet/stats_applet_6_meanmed.html)
 :::
 
 The **median** is preferred over the mean when a **robust** measure of
 center is needed.
 
-
 ## A Compromise Measure: Trimmed Mean
 
 ::: {.callout-note title="Definition"}
+The **trimmed mean** removes a fixed proportion of the smallest and
+largest values from the data, then computes the mean of the remaining
+values.
 
-The **trimmed mean** removes a fixed proportion of the smallest and largest values from the data, then computes the mean of the remaining values.
-
-- For example, the 10% trimmed mean discards the lowest 10% and highest 10% of observations before averaging.
+-   For example, the 10% trimmed mean discards the lowest 10% and
+    highest 10% of observations before averaging.
 :::
 
 In R:
-```r
+
+``` r
 mean(x, trim = 0.10)
 ```
 
-# Measures of Spread  {background-color="#FAD9C7"}
-
+# Measures of Spread {background-color="#FAD9C7"}
 
 ## The Range
 
-
 ::: {.callout-note title="Definition"}
-The **range** is a single number:  
+The **range** is a single number:\
 $$\text{Range} = \max(x_i) - \min(x_i)$$
 :::
 
-- Measures the total spread of the data
-- **Highly sensitive** to extreme values (not robust)
-- Not very useful in general but still often used!
-
-
+-   Measures the total spread of the data
+-   **Highly sensitive** to extreme values (not robust)
+-   Not very useful in general but still often used!
 
 ## Standard Deviation
 
 ::: {.callout-note title="Definition"}
-
-The **standard deviation** $s$ of the $n$ values $x_1, x_2, \ldots, x_n$ is given by: 
-$$
+The **standard deviation** $s$ of the $n$ values $x_1, x_2, \ldots, x_n$
+is given by: $$
 s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
 $$
 
 The **sample variance** is $s^2$.
-
 :::
-
-
 
 ## Properties of the Standard Deviation $s$
 
--   Measures  *typical distance* from the mean
+-   Measures *typical distance* from the mean
 -   Like $\bar{x}$, not resistant to outliers
 -   SD is 0 if all values are equal
 -   Units match those of the original data
--   Denominator is $n-1$ rather than $n$ to obtain a better estimate of the population value $\sigma^2$.
+-   Denominator is $n-1$ rather than $n$ to obtain a better estimate of
+    the population value $\sigma^2$.
 -   The standard deviation is most useful when working with Normal data.
-
-
 
 ## Hinges and Fourths
 
@@ -229,17 +214,20 @@ The **sample variance** is $s^2$.
 ## Fourth Spread {.smaller}
 
 ::: {.callout-note title="Definition"}
-The fourth spread $f_s$ is John Tukey's robust measure of variability defined:
-$$
+The fourth spread $f_s$ is John Tukey's robust measure of variability
+defined: $$
     f_s = h_u - h_l
 $$
 :::
 
-:::{.fragrment}
+::: fragrment
 The fourth spread $f_s$ is:
-* The **range of the middle half** of the data.
-* Unambiguous and easy to calculate by hand for small datasets
-* Very similar to the Interquartile Range
+
+-   The **range of the middle half** of the data.
+
+-   Unambiguous and easy to calculate by hand for small datasets
+
+-   Very similar to the Interquartile Range
 :::
 
 ## The Standard Boxplot
@@ -260,10 +248,8 @@ The fourth spread $f_s$ is:
         hinge)
     -   **Extreme outliers** (more than $3f_s$ away from the nearest
         hinge)
-        
 
-
-# More Options for Subgroup Analysis  {background-color="#FAD9C7"}
+# More Options for Subgroup Analysis {background-color="#FAD9C7"}
 
 ## Options for Comparing Statistical Summaries by Subgroup in Base R {.smaller}
 
@@ -354,16 +340,22 @@ Analyze the built-in **iris** data set.
 
 -   Explore the relationship between petal width and species.
 
+## Summary: Measures of Location and Spread {.smaller background-color="#E8F5E9"}
 
-## Summary: Measures of Location and Spread {background-color="#E8F5E9" .smaller}
-
-- The **mean** minimizes squared deviations but is **sensitive to outliers**
-- The **median** is a **robust** alternative, especially for skewed data
-- The **trimmed mean** offers a compromise: reduces outlier impact while retaining more data
-- The **standard deviation** measures typical variability but is not resistant
-- The **fourth spread** is a robust measure of spread, similar to the IQR
-- **Boxplots** provide visual summaries:
-  - Standard: min, hinges, median, max
-  - Modified: highlights mild and extreme outliers
-- Base R tools like `summary()`, `fivenum()`, and `boxplot()` support both numeric and visual analysis
-- For grouped data: use `tapply()`, `by()`, or `aggregate()` to compare summaries across subgroups
+-   The **mean** minimizes squared deviations but is **sensitive to
+    outliers**
+-   The **median** is a **robust** alternative, especially for skewed
+    data
+-   The **trimmed mean** offers a compromise: reduces outlier impact
+    while retaining more data
+-   The **standard deviation** measures typical variability but is not
+    resistant
+-   The **fourth spread** is a robust measure of spread, similar to the
+    IQR
+-   **Boxplots** provide visual summaries:
+    -   Standard: min, hinges, median, max
+    -   Modified: highlights mild and extreme outliers
+-   Base R tools like `summary()`, `fivenum()`, and `boxplot()` support
+    both numeric and visual analysis
+-   For grouped data: use `tapply()`, `by()`, or `aggregate()` to
+    compare summaries across subgroups
