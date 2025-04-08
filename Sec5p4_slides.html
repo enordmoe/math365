@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Sec5p3_slides_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Sec5p3_slides_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Sec5p3_slides_files/libs/quarto-html/popper.min.js"></script>
-<script src="Sec5p3_slides_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Sec5p3_slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Sec5p3_slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec5p3_slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Sec5p3_slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Sec5p4_slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Sec5p4_slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Sec5p4_slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="Sec5p4_slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Sec5p4_slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Sec5p4_slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Sec5p4_slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Sec5p4_slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="MATH 365">
-  <title>Section 5.3: Statistics and Their Distributions</title>
+  <title>Section 5.4: The Distribution of the Sample Mean</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Sec5p3_slides_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Sec5p3_slides_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Sec5p4_slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Sec5p4_slides_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,13 +30,13 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="Sec5p3_slides_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="Sec5p3_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Sec5p3_slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Sec5p3_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Sec5p3_slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Sec5p3_slides_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Sec5p3_slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Sec5p4_slides_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="Sec5p4_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Sec5p4_slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Sec5p4_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Sec5p4_slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Sec5p4_slides_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Sec5p4_slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -328,7 +328,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#EA6820" class="quarto-title-block center">
-  <h1 class="title">Section 5.3: Statistics and Their Distributions</h1>
+  <h1 class="title">Section 5.4: The Distribution of the Sample Mean</h1>
   <p class="subtitle">Mathematical Statistics</p>
 
 <div class="quarto-title-authors">
@@ -344,36 +344,114 @@ MATH 365
 <h2>Topics for Today</h2>
 <div>
 <ul>
-<li class="fragment">Sample Statistics</li>
-<li class="fragment">Sampling distributions</li>
-<li class="fragment">Finding sampling distributions
-<ul>
-<li class="fragment">By enumeration</li>
-<li class="fragment">Analytically</li>
-<li class="fragment">Using R Simulation</li>
-</ul></li>
+<li class="fragment">Properties of the Sample Mean</li>
+<li class="fragment">Exact distributions when data are normal</li>
+<li class="fragment">Approximate distributions using the CLT</li>
+<li class="fragment">Examples and applications <span class="emoji" data-emoji="pencil2">✏️</span></li>
 </ul>
 </div>
 </section>
-<section id="statistics" class="slide level2">
-<h2><span class="emoji" data-emoji="bar_chart">📊</span> Statistics</h2>
-<div title="Definition: Statistic">
+<section id="patterns-in-randomness" class="slide level2">
+<h2>Patterns in Randomness</h2>
+
+<img data-src="https://i.makeagif.com/media/11-18-2015/suo0rL.gif" width="400" class="r-stretch"></section>
+<section class="slide level2">
+
+<h3 id="from-sampling-distributions-to-the-sample-mean"><span class="emoji" data-emoji="arrows_counterclockwise">🔄</span> From <em>Sampling Distributions</em> to the <em>Sample Mean</em></h3>
+<p>We’ve seen that statistics vary across samples and have their own <strong>sampling distributions</strong>.</p>
+<p>Today, we focus on one statistic in particular: the <strong>sample mean</strong> <span class="math inline">\(\overline{X}\)</span>.</p>
+</section>
+<section id="questions" class="slide level2">
+<h2><span class="emoji" data-emoji="speech_balloon">💬</span> Questions</h2>
+<div>
+<ul>
+<li class="fragment">Why is <span class="math inline">\(\overline{X}\)</span> such an important statistic in practice?</li>
+<li class="fragment">What do we expect the distribution of <span class="math inline">\(\overline{X}\)</span> to look like?</li>
+<li class="fragment">How do shape and sample size affect that distribution?</li>
+</ul>
+</div>
+</section>
+<section id="the-distribution-of-the-sample-mean" class="slide level2 smaller">
+<h2><span class="emoji" data-emoji="bar_chart">📊</span> The Distribution of the Sample Mean</h2>
+<div title="Proposition: Distribution of $\overline{X}$ and $T_0$">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition: Statistic</strong></p>
+<p><strong>Proposition: Distribution of <span class="math inline">\(\overline{X}\)</span> and <span class="math inline">\(T_0\)</span></strong></p>
 </div>
 <div class="callout-content">
-<p>A <strong>statistic</strong> is any quantity whose value can be calculated from sample data. A statistic is a <strong>random variable</strong>, and will be denoted by an <em>uppercase letter</em> (e.g., <span class="math inline">\(\bar X\)</span>); a <em>lowercase letter</em> (e.g., <span class="math inline">\(\bar x\)</span>) represents an observed or calculated value of the statistic.</p>
+<p>Let <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> be a random sample from a population with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma\)</span>. Then:</p>
+<ul>
+<li><span class="math inline">\(E(\overline{X}) = \mu\)</span></li>
+<li><span class="math inline">\(\text{Var}(\overline{X}) = \sigma^2 / n\)</span></li>
+</ul>
+<div class="fragment">
+<p>For the sample total <span class="math inline">\(T_0 = \sum X_i\)</span></p>
+<ul>
+<li><span class="math inline">\(E(T_0) = n\mu\)</span></li>
+<li><span class="math inline">\(\text{Var}(T_0) = n\sigma^2\)</span></li>
+</ul>
 </div>
 </div>
 </div>
+</div>
+</div>
+</section>
+<section id="special-case-normal-population" class="slide level2">
+<h2><span class="emoji" data-emoji="abacus">🧮</span> Special Case: Normal Population</h2>
+<p>Since a linear combination of independent normal random variables is also random, it follows that:</p>
+<div title="Proposition: Exact Distribution when $X_i \sim N(\mu, \sigma)$">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Proposition: Exact Distribution when <span class="math inline">\(X_i \sim N(\mu, \sigma)\)</span></strong></p>
+</div>
+<div class="callout-content">
+<p>If the <span class="math inline">\(X_i\)</span> are i.i.d. from a normal distribution, then for any <span class="math inline">\(n\)</span>:</p>
+<div>
+<ul>
+<li class="fragment"><span class="math inline">\(\overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)\)</span></li>
+<li class="fragment"><span class="math inline">\(T_0 \sim N\left(n\mu, \sqrt{n}\sigma\right)\)</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="why-is-this-useful" class="slide level2">
+<h2>Why is this useful?</h2>
+<ul>
+<li>We can compute <strong>exact</strong> probabilities for <span class="math inline">\(\overline{X}\)</span> or <span class="math inline">\(T_0\)</span></li>
+<li>Even <strong>small samples</strong> have exact normal sampling distributions</li>
+</ul>
+</section>
+<section id="example-hours-spent-outside" class="slide level2">
+<h2><span class="emoji" data-emoji="tulip">🌷</span> Example: Hours Spent Outside</h2>
+<p>Now that it’s spring, suppose the number of hours K students spend outside per day is normally distributed with:</p>
+<ul>
+<li><span class="math inline">\(\mu = 2.5\)</span> hours, <span class="math inline">\(\sigma = 1.2\)</span> hours</li>
+</ul>
+<p>A random sample of <span class="math inline">\(n = 16\)</span> students is selected</p>
+<div>
+<ul>
+<li class="fragment"><p>What is the probability the sample mean exceeds 3 hours?</p></li>
+<li class="fragment"><p>Only 1 percent of samples would produce a mean <span class="math inline">\(\bar X\)</span> exceeding what value?</p></li>
+</ul>
 </div>
 <aside class="notes">
-<p>Generally, statistics are computed to estimate a population parameter</p>
+<ul>
+<li><span class="math inline">\(\overline{X} \sim N\left(2.5, \frac{1.2}{\sqrt{16}}\right) = N(2.5, 0.3)\)</span><br>
+</li>
+<li><span class="math inline">\(P(\overline{X} &gt; 3)=\)</span> <code>1-pnorm(3, 2.5, 1.2/sqrt(16))</code><span class="math inline">\(\approx 0.0478\)</span></li>
+<li><code>qnorm(.99, 2.5, 1.2/sqrt(16))</code> <span class="math inline">\(\approx 3.20\)</span> hours</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -386,78 +464,115 @@ MATH 365
           display:block!important;
       }</style></aside>
 </section>
-<section id="sampling-distributions" class="slide level2">
-<h2><span class="emoji" data-emoji="bar_chart">📊</span> Sampling Distributions</h2>
-<div title="Definition: Sampling Distribution">
+<section>
+<section id="investigation-who-are-you-texting" class="title-slide slide level1 center" data-background-color="#E3F2FD">
+<h1>Investigation: Who are you texting?</h1>
+
+</section>
+<section id="who-are-you-texting" class="slide level2 smaller">
+<h2><span class="emoji" data-emoji="speech_balloon">💬</span> Who Are You Texting?</h2>
+<blockquote>
+<p>A researcher is interested in the number of <strong>different people</strong> students text on a typical day. A previous study found that the <strong>mean</strong> was about <strong>7</strong> and the <strong>standard deviation</strong> was about <strong>6</strong>.</p>
+<p>Consider a class of 30 students. Each student reports how many different people they texted yesterday.</p>
+</blockquote>
+<div>
+<ol type="1">
+<li class="fragment"><p>Without seeing any data, <strong>sketch</strong> what you expect the <strong>distribution</strong> of this variable to look like.</p></li>
+<li class="fragment"><p>Suppose we randomly sampled 30 students and computed the <strong>sample mean</strong> number of people texted, what shape would you expect the <strong>sampling distribution</strong> of the sample mean to have?</p></li>
+</ol>
+</div>
+<aside class="notes">
+<p>Ask students to carry out the simulation now.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level2">
+
+<h3 class="smaller" id="approximation-central-limit-theorem"><span class="emoji" data-emoji="globe_with_meridians">🌐</span> Approximation: Central Limit Theorem</h3>
+<div title="Theorem: Central Limit Theorem (CLT)">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Definition: Sampling Distribution</strong></p>
+<p><strong>Theorem: Central Limit Theorem (CLT)</strong></p>
 </div>
 <div class="callout-content">
-<p>The <strong>probability distribution</strong> of a statistic is often called its <strong>sampling distribution</strong>, to emphasize that it describes how the statistic varies across all possible samples.</p>
+<p>Let <span class="math inline">\(X_1, \dots, X_n\)</span> be i.i.d. from a population with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. Then, as <span class="math inline">\(n \to \infty\)</span>:</p>
+<p><span class="math display">\[
+\frac{\overline{X} - \mu}{\sigma / \sqrt{n}} \to N(0,1)
+\]</span></p>
+<div class="fragment">
+<p>Equivalently:</p>
+<p><span class="math display">\[
+\overline{X} \dot{\sim} N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+\]</span></p>
+</div>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="estimating-faculty-years-of-service" class="slide level2">
-<h2><span class="emoji" data-emoji="school">🏫</span> Estimating Faculty Years of Service</h2>
-<p>Suppose we’re interested in estimating the <strong>average number of years</strong> faculty have served in the <strong>Math Department</strong> at Kalamazoo College.</p>
+<section id="example-people-texted-per-day" class="slide level2">
+<h2><span class="emoji" data-emoji="iphone">📱</span> Example: People Texted Per Day</h2>
+<p>Let <span class="math inline">\(X\)</span> = number of different people a student texts in a day. Assume:</p>
 <ul>
-<li>Think about how to describe how a <strong>statistic</strong> (like the sample mean) varies across different samples<br>
+<li><p><span class="math inline">\(\mu = 7\)</span>, <span class="math inline">\(\sigma = 6\)</span></p></li>
+<li><p><span class="math inline">\(n = 40\)</span> students</p></li>
+</ul>
+<p><strong>Q:</strong> Approximate the probability that mean exceeds 8 people: <span class="math inline">\(P(\overline{X} &gt; 8)\)</span></p>
+<aside class="notes">
+<ul>
+<li><span class="math inline">\(\overline{X} \dot{\sim} N(7, 6/\sqrt{40}) = N(7, 0.95)\)</span><br>
+</li>
+<li><span class="math inline">\(P(\overline{X} &gt; 8) \approx 0.1469\)</span><br>
 </li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="k-coffee-habits" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="coffee">☕</span> K Coffee Habits</h2>
-<p>At Kalamazoo College, suppose about <strong>30% of students</strong> buy coffee on campus at least once a week. Suppose you <strong>randomly sample 10 students</strong>.</p>
-<p>Let:</p>
-<ul>
-<li><p><span class="math inline">\(X\)</span> = number of students in the sample who buy coffee weekly</p></li>
-<li><p><span class="math inline">\(\hat{p} = X/10\)</span> = sample proportion</p></li>
-</ul>
-<p><strong>Questions:</strong></p>
+<section id="notes-on-using-the-clt" class="slide level2">
+<h2><span class="emoji" data-emoji="warning">⚠️</span> Notes on Using the CLT</h2>
 <div>
 <ul>
-<li class="fragment"><p>What kind of random variable is <span class="math inline">\(X\)</span>?</p></li>
-<li class="fragment"><p>What values can <span class="math inline">\(\hat{p}\)</span> take?</p></li>
-<li class="fragment"><p>What is the sampling distribution of <span class="math inline">\(\hat{p}\)</span>?</p></li>
-<li class="fragment"><p>What is the probability that 20% of the students in our sample buy coffee weekly?</p></li>
+<li class="fragment">Works well even when population is not normal</li>
+<li class="fragment">Accuracy improves with <span class="math inline">\(n\)</span></li>
+<li class="fragment">The approximation is usually good if <span class="math inline">\(n &gt; 30\)</span> unless the population is extremely skewed.</li>
+<li class="fragment">Check skewness/heavy tails before applying</li>
 </ul>
 </div>
 </section>
-<section id="simulation-and-sampling-distributions" class="slide level2">
-<h2>🎲 Simulation and Sampling Distributions</h2>
+<section id="summary-sample-mean-distributions" class="slide level2">
+<h2><span class="emoji" data-emoji="memo">📝</span> Summary: Sample Mean Distributions</h2>
 <ul>
-<li><p>When a derivation via probability rules is very difficult or even impossible, we can use <strong>simulation</strong> to approximate the <strong>sampling distribution</strong> of a statistic.</p></li>
-<li><p>Simulate the sampling distribution of a statistic by drawing from a known population many times and calculating the values of the statistic of interest (e.g., trimmed mean)</p></li>
+<li><span class="math inline">\(\overline{X}\)</span> is unbiased for <span class="math inline">\(\mu\)</span>; SD shrinks as <span class="math inline">\(n\)</span> increases<br>
+</li>
+<li>If population is normal, <span class="math inline">\(\overline{X}\)</span> is exactly normal<br>
+</li>
+<li>If population is arbitrary, <span class="math inline">\(\overline{X}\)</span> is <strong>approximately normal</strong> for large <span class="math inline">\(n\)</span></li>
 </ul>
-</section>
-<section>
-<section id="simulation-investigation-grubbs-test-for-outliers" class="title-slide slide level1 center">
-<h1>Simulation Investigation: Grubbs’ Test for Outliers</h1>
-
-</section>
-<section id="summary-statistics-and-their-distributions" class="slide level2 smaller">
-<h2>📝 Summary: Statistics and Their Distributions</h2>
-<ul>
-<li><p>A <strong>statistic</strong> is a quantity computed from sample data — it is a random variable<br>
-</p></li>
-<li><p>The <strong>sampling distribution</strong> describes how a statistic varies across all possible samples</p></li>
-<li><p>We can explore sampling distributions:</p>
-<ul>
-<li>🔢 By enumeration (all possible samples)</li>
-<li>🧮 Analytically (using probability)</li>
-<li>🎲 Through simulation (approximating variability empirically)</li>
-</ul></li>
-</ul>
-<blockquote>
-<p>Understanding how statistics behave across samples is <strong>fundamental to inference.</strong></p>
-</blockquote>
+<div class="fragment">
+<p><span class="emoji" data-emoji="point_right">👉</span> CLT is an amazing result — it helps us use normal-based methods even when data aren’t normal!</p>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -468,20 +583,20 @@ MATH 365
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Sec5p3_slides_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Sec5p3_slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Sec5p4_slides_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

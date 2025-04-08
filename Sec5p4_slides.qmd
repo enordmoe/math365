@@ -1,0 +1,215 @@
+---
+title: "Section 5.4: The Distribution of the Sample Mean"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today
+
+::: incremental
+-   Properties of the Sample Mean
+-   Exact distributions when data are normal
+-   Approximate distributions using the CLT
+-   Examples and applications :pencil2:
+:::
+
+## Patterns in Randomness
+
+![](https://i.makeagif.com/media/11-18-2015/suo0rL.gif){width="400px"}
+
+------------------------------------------------------------------------
+
+### :arrows_counterclockwise: From *Sampling Distributions* to the *Sample Mean*
+
+We’ve seen that statistics vary across samples and have their own
+**sampling distributions**.
+
+Today, we focus on one statistic in particular: the **sample mean**
+$\overline{X}$.
+
+## :speech_balloon: Questions
+
+::: incremental
+-   Why is $\overline{X}$ such an important statistic in practice?
+-   What do we expect the distribution of $\overline{X}$ to look like?
+-   How do shape and sample size affect that distribution?
+:::
+
+------------------------------------------------------------------------
+
+## :bar_chart: The Distribution of the Sample Mean {.smaller}
+
+:::: {.callout-note title="Proposition: Distribution of $\\overline{X}$ and $T_0$"}
+Let $X_1, X_2, \dots, X_n$ be a random sample from a population with
+mean $\mu$ and standard deviation $\sigma$. Then:
+
+-   $E(\overline{X}) = \mu$
+-   $\text{Var}(\overline{X}) = \sigma^2 / n$
+
+::: fragment
+For the sample total $T_0 = \sum X_i$
+
+-   $E(T_0) = n\mu$
+-   $\text{Var}(T_0) = n\sigma^2$
+:::
+::::
+
+## :abacus: Special Case: Normal Population
+
+Since a linear combination of independent normal random variables is
+also random, it follows that:
+
+:::: {.callout-note title="Proposition: Exact Distribution when $X_i \\sim N(\\mu, \\sigma)$"}
+If the $X_i$ are i.i.d. from a normal distribution, then for any $n$:
+
+::: incremental
+-   $\overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)$
+-   $T_0 \sim N\left(n\mu, \sqrt{n}\sigma\right)$
+:::
+::::
+
+## Why is this useful?
+
+-   We can compute **exact** probabilities for $\overline{X}$ or $T_0$
+-   Even **small samples** have exact normal sampling distributions
+
+------------------------------------------------------------------------
+
+## :tulip: Example: Hours Spent Outside
+
+Now that it’s spring, suppose the number of hours K students spend
+outside per day is normally distributed with:
+
+-   $\mu = 2.5$ hours, $\sigma = 1.2$ hours
+
+A random sample of $n = 16$ students is selected
+
+::: incremental
+-   What is the probability the sample mean exceeds 3 hours?
+
+-   Only 1 percent of samples would produce a mean $\bar X$ exceeding
+    what value?
+:::
+
+::: notes
+-   $\overline{X} \sim N\left(2.5, \frac{1.2}{\sqrt{16}}\right) = N(2.5, 0.3)$\
+-   $P(\overline{X} > 3)=$
+    `1-pnorm(3, 2.5, 1.2/sqrt(16))`$\approx 0.0478$
+-   `qnorm(.99, 2.5, 1.2/sqrt(16))` $\approx 3.20$ hours
+:::
+
+# Investigation: Who are you texting? {background-color="#E3F2FD"}
+
+## :speech_balloon: Who Are You Texting? {.smaller}
+
+> A researcher is interested in the number of **different people**
+> students text on a typical day. A previous study found that the
+> **mean** was about **7** and the **standard deviation** was about
+> **6**.
+>
+> Consider a class of 30 students. Each student reports how many
+> different people they texted yesterday.
+
+::: incremental
+1.  Without seeing any data, **sketch** what you expect the
+    **distribution** of this variable to look like.
+
+2.  Suppose we randomly sampled 30 students and computed the **sample
+    mean** number of people texted, what shape would you expect the
+    **sampling distribution** of the sample mean to have?
+:::
+
+::: notes
+Ask students to carry out the simulation now.
+:::
+
+
+------------------------------------------------------------------------
+
+### :globe_with_meridians: Approximation: Central Limit Theorem {.smaller}
+
+:::: {.callout-note title="Theorem: Central Limit Theorem (CLT)"}
+Let $X_1, \dots, X_n$ be i.i.d. from a population with mean $\mu$ and
+variance $\sigma^2$. Then, as $n \to \infty$:
+
+$$
+\frac{\overline{X} - \mu}{\sigma / \sqrt{n}} \to N(0,1)
+$$
+
+::: fragment
+Equivalently:
+
+$$
+\overline{X} \dot{\sim} N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+$$
+:::
+::::
+
+------------------------------------------------------------------------
+
+
+## :iphone: Example: People Texted Per Day
+
+Let $X$ = number of different people a student texts in a day. Assume:
+
+-   $\mu = 7$, $\sigma = 6$
+
+-   $n = 40$ students
+
+**Q:** Approximate the probability that mean exceeds 8 people:
+$P(\overline{X} > 8)$
+
+::: notes
+-   $\overline{X} \dot{\sim} N(7, 6/\sqrt{40}) = N(7, 0.95)$\
+-   $P(\overline{X} > 8) \approx 0.1469$\
+:::
+
+
+------------------------------------------------------------------------
+
+## :warning: Notes on Using the CLT
+
+::: incremental
+-   Works well even when population is not normal
+-   Accuracy improves with $n$
+-   The approximation is usually good if $n > 30$ unless the population
+    is extremely skewed.
+-   Check skewness/heavy tails before applying
+:::
+
+------------------------------------------------------------------------
+
+## :memo: Summary: Sample Mean Distributions
+
+-   $\overline{X}$ is unbiased for $\mu$; SD shrinks as $n$ increases\
+-   If population is normal, $\overline{X}$ is exactly normal\
+-   If population is arbitrary, $\overline{X}$ is **approximately
+    normal** for large $n$
+
+:::{.fragment}
+:point_right: CLT is an amazing result — it helps us use normal-based
+methods even when data aren’t normal!
+:::
+
