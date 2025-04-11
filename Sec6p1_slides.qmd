@@ -1,0 +1,238 @@
+---
+title: "Section 6.1: Some General Concepts of Point Estimation"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today
+
+-   Point estimators and their properties
+-   Mean Squared Error (MSE) :bulb:
+-   Unbiasedness
+-   MVUEs (not :mouse:)
+-   Standard errors and bootstrap standard errors
+
+------------------------------------------------------------------------
+
+## Point Estimators :round_pushpin:
+
+::: callout-important
+**Definition.** A **point estimate** of a parameter $\theta$ is a single
+number considered a sensible value for $\theta$, based on a sample.
+
+The **point estimator** is the rule or function used to generate this
+value. Since it's computed from a random sample, it is itself a **random
+variable**.
+:::
+
+:question: *What’s the difference between a statistic and an estimator?*
+
+------------------------------------------------------------------------
+
+## Hitting the Mark?
+
+![](images/clipboard-2724464104.png)
+
+::: incremental
+-   Which estimator would you use?
+
+-   Which do you prefer between B and C?
+:::
+
+::: aside
+Source:[https://manoa.hawaii.edu/exploringourfluidearth/](https://manoa.hawaii.edu/exploringourfluidearth/physical/world-ocean/map-distortion/practices-science-precision-vs-accuracy#:~:text=Accuracy%20refers%20to%20how%20close,Precision%20is%20independent%20of%20accuracy).
+:::
+
+## Mean Squared Error (MSE) {.smaller}
+
+::: callout-note
+**Definition.** The **Mean Squared Error** of an estimator
+$\hat{\theta}$ is:\
+$$  
+\text{MSE}(\hat{\theta}) = E[(\hat{\theta} - \theta)^2]  
+$$
+:::
+
+::: fragment
+We can decompose the MSE:
+
+$$
+\text{MSE} = \underbrace{\text{Var}(\hat{\theta})}_{\text{spread}} + \underbrace{[\text{Bias}(\hat{\theta})]^2}_{\text{squared error of bias}}
+$$
+:::
+
+::: fragment
+:speech_balloon: *Why does this decomposition matter when comparing
+estimators?*
+:::
+
+
+## Unbiased Estimators 🎯
+
+::: callout-important
+**Definition.**  
+An estimator $\hat{\theta}$ is **unbiased** for $\theta$ if:  
+$$
+E(\hat{\theta}) = \theta
+$$
+
+If not, the bias is: $\text{Bias}(\hat{\theta}) =E(\hat{\theta}-\theta)$
+:::
+
+## 🏆 Hall of Fame of Unbiased Estimators
+
+- Sample mean $\bar{X}$ is an unbiased estimator of $\mu$ from a normal distribution.
+- $\hat{p} = X/n$ is an unbiased estimator of a binomial probability $p$.
+- Sample variance $S^2$ is an unbiased estimator of $\sigma^2$.
+---
+
+## {.smaller}
+### Sample Variance: A Setup for Unbiasedness 🧮 
+
+
+We define the **sample variance** as:
+$$
+S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2
+$$
+
+- This uses **$\bar{X}$** in place of the unknown mean $\mu$.
+- The denominator is $n - 1$ instead of $n$ (Why? we'll find out)
+
+
+::: {.fragment}
+We’ll show that:
+$$
+E(S^2) = \sigma^2
+$$
+So $S^2$ is an **unbiased estimator** of population variance!
+
+
+🧠 Hint: this involves expanding $(X_i - \bar{X})^2$ and working with expectations.
+:::
+
+
+---
+
+## Estimators with Minimum Variance :brain:
+
+::: callout-tip
+**Definition.**  
+An unbiased estimator with the **lowest variance** among all unbiased
+estimators is called the **Minimum Variance Unbiased Estimator (MVUE)**.
+:::
+
+
+## Theorem (:gem: MVUE for the Mean)
+
+Let $X_1, \dots, X_n \sim \text{iid}(\mu, \sigma^2)$.  
+Then $\hat{\theta} = \bar{X}$ is the **MVUE** of $\mu$.
+
+::: fragment
+:eight_spoked_asterisk: *Minimum variance estimators do more with less!*
+:::
+
+
+
+## Standard Error :straight_ruler:{.smaller}
+
+::: callout-note
+**Definition.** The **standard error** of an estimator $\hat{\theta}$
+is:\
+$$
+\sigma_{\hat{\theta}} = \sqrt{\text{Var}(\hat{\theta})}
+$$
+:::
+
+:::{.fragment}
+Often, we replace unknown quantities with estimates → **estimated
+standard error**: 
+
+$$\hat{\sigma}_{\hat{\theta}}$$
+
+:hammer_and_wrench: Used to construct confidence intervals and assess
+estimator precision.
+:::
+------------------------------------------------------------------------
+
+## Parametric Bootstrap :repeat:
+
+Suppose we want to estimate the variability of $\hat{\theta}$, but don’t
+have a closed-form for $\text{Var}(\hat{\theta})$.
+
+:arrow_right: We can **simulate** the sampling distribution!
+
+## Parametric Bootstrap Steps
+:::{.incremental}
+1.  Generate $B$ bootstrap samples from the estimated model.
+2.  For each, compute a bootstrap estimate $\hat{\theta}_b^*$.
+3.  Then compute the **bootstrap estimate of standard error**:
+:::
+:::{.fragment}
+$$
+S_{\hat{\theta}} = \sqrt{ \frac{1}{B-1} \sum_{b=1}^B (\hat{\theta}_b^* - \bar{\theta}^*)^2 }
+$$
+Where $\bar{\theta}^* = \frac{1}{B} \sum \hat{\theta}_b^*$.
+:::
+------------------------------------------------------------------------
+
+## Simulating Bootstrap Standard Error {.smaller}
+
+Find the bootstrap standard error when sampling from a Normal population:
+
+```{r}
+set.seed(365)
+n <- 30
+true_mean <- 10
+true_sd <- 2
+x <- rnorm(n, mean = true_mean, sd = true_sd)
+
+# Bootstrap
+B <- 1000
+boot_means <- numeric(B)
+
+for (b in 1:B) {
+  resample <- sample(x, replace = TRUE)
+  boot_means[b] <- mean(resample)
+}
+
+# Estimate SE
+boot_se <- sd(boot_means)
+
+cat("Bootstrap SE for sample mean:", round(boot_se, 3), "\n")
+```
+
+------------------------------------------------------------------------
+
+## Summary :star2:
+
+-   A **point estimator** is a random variable computed from sample
+    data.
+-   MSE = variance + bias$^2$
+-   **Unbiased** estimators have $E(\hat{\theta}) = \theta$
+-   **MVUE**: most efficient among unbiased estimators
+-   **Standard error** quantifies estimator variability
+-   **Bootstrap** provides a flexible, simulation-based alternative
+
+------------------------------------------------------------------------
