@@ -88,12 +88,11 @@ $$
 estimators?*
 :::
 
-
-## Unbiased Estimators 🎯
+## Unbiased Estimators :dart:
 
 ::: callout-important
-**Definition.**  
-An estimator $\hat{\theta}$ is **unbiased** for $\theta$ if:  
+**Definition.**\
+An estimator $\hat{\theta}$ is **unbiased** for $\theta$ if:\
 $$
 E(\hat{\theta}) = \theta
 $$
@@ -101,61 +100,58 @@ $$
 If not, the bias is: $\text{Bias}(\hat{\theta}) =E(\hat{\theta}-\theta)$
 :::
 
-## 🏆 Hall of Fame of Unbiased Estimators
+## :trophy: Hall of Fame of Unbiased Estimators
 
-- Sample mean $\bar{X}$ is an unbiased estimator of $\mu$ from a normal distribution.
-- $\hat{p} = X/n$ is an unbiased estimator of a binomial probability $p$.
-- Sample variance $S^2$ is an unbiased estimator of $\sigma^2$.
----
+-   Sample mean $\bar{X}$ is an unbiased estimator of $\mu$ from a
+    normal distribution.
 
-## {.smaller}
-### Sample Variance: A Setup for Unbiasedness 🧮 
+-   $\hat{p} = X/n$ is an unbiased estimator of a binomial probability
+    $p$.
 
+-   
 
-We define the **sample variance** as:
-$$
+    ## Sample variance $S^2$ is an unbiased estimator of $\sigma^2$.
+
+##  {.smaller}
+
+### Sample Variance: A Setup for Unbiasedness :abacus:
+
+We define the **sample variance** as: $$
 S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2
 $$
 
-- This uses **$\bar{X}$** in place of the unknown mean $\mu$.
-- The denominator is $n - 1$ instead of $n$ (Why? we'll find out)
+-   This uses $\bar{X}$ in place of the unknown mean $\mu$.
+-   The denominator is $n - 1$ instead of $n$ (Why? we'll find out)
 
-
-::: {.fragment}
-We’ll show that:
-$$
+::: fragment
+We’ll show that: $$
 E(S^2) = \sigma^2
-$$
-So $S^2$ is an **unbiased estimator** of population variance!
+$$ So $S^2$ is an **unbiased estimator** of population variance!
 
-
-🧠 Hint: this involves expanding $(X_i - \bar{X})^2$ and working with expectations.
+:brain: Hint: this involves expanding $(X_i - \bar{X})^2$ and working
+with expectations.
 :::
 
-
----
+------------------------------------------------------------------------
 
 ## Estimators with Minimum Variance :brain:
 
 ::: callout-tip
-**Definition.**  
+**Definition.**\
 An unbiased estimator with the **lowest variance** among all unbiased
 estimators is called the **Minimum Variance Unbiased Estimator (MVUE)**.
 :::
 
-
 ## Theorem (:gem: MVUE for the Mean)
 
-Let $X_1, \dots, X_n \sim \text{iid}(\mu, \sigma^2)$.  
+Let $X_1, \dots, X_n \sim \text{iid}(\mu, \sigma^2)$.\
 Then $\hat{\theta} = \bar{X}$ is the **MVUE** of $\mu$.
 
 ::: fragment
 :eight_spoked_asterisk: *Minimum variance estimators do more with less!*
 :::
 
-
-
-## Standard Error :straight_ruler:{.smaller}
+## Standard Error :straight_ruler: {.smaller}
 
 ::: callout-note
 **Definition.** The **standard error** of an estimator $\hat{\theta}$
@@ -165,65 +161,128 @@ $$
 $$
 :::
 
-:::{.fragment}
+::: fragment
 Often, we replace unknown quantities with estimates → **estimated
-standard error**: 
+standard error**:
 
 $$\hat{\sigma}_{\hat{\theta}}$$
 
 :hammer_and_wrench: Used to construct confidence intervals and assess
 estimator precision.
 :::
+
 ------------------------------------------------------------------------
 
 ## Parametric Bootstrap :repeat:
 
-Suppose we want to estimate the variability of $\hat{\theta}$, but don’t
-have a closed-form for $\text{Var}(\hat{\theta})$.
+:::: callout-note
+**Motivation.**\
+What if we want to estimate the standard error of an estimator, but:
 
-:arrow_right: We can **simulate** the sampling distribution!
+-   There’s no closed-form formula for the variance?
+-   The sampling distribution is too complex to handle analytically?
 
-## Parametric Bootstrap Steps
-:::{.incremental}
-1.  Generate $B$ bootstrap samples from the estimated model.
-2.  For each, compute a bootstrap estimate $\hat{\theta}_b^*$.
-3.  Then compute the **bootstrap estimate of standard error**:
+::: fragment
+:arrow_right: **Enter the Bootstrap!** It uses the **plug-in
+principle**:
+
+-   *Our sample data informs a model for the population, from which we
+    simulate new samples.*
 :::
+::::
+
+------------------------------------------------------------------------
+
+## What is the Parametric Bootstrap? :repeat:
+
+:::: callout-note
+Instead of resampling from the data directly, we:
+
+::: incremental
+1.  Choose a **parametric model** for the data (e.g., Normal).
+2.  **Estimate parameters** from the observed data.
+3.  **Generate simulated samples** from the model using the estimated
+    parameters.
+4.  **Recalculate** the estimator on each sample to approximate the
+    sampling distribution.
+:::
+::::
+
+------------------------------------------------------------------------
+
+## Visualizing the Bootstrap
+
+![](images/bsdiagram.jpg){width="75%"}
+
+::: aside
+This is a **parametric bootstrap** if we simulate from a model\
+(e.g., $\mathcal{N}(\hat{\mu}, \hat{\sigma}^2)$), and a **nonparametric
+bootstrap** if we resample the observed data.
+:::
+
+------------------------------------------------------------------------
+
+## Parametric Bootstrap: Step-by-Step     {.smaller}
+
+Suppose we want to estimate the variability of $\hat{\theta}$,\
+but don’t have a closed-form for $\operatorname{Var}(\hat{\theta})$.
+
+:arrow_right: We simulate its sampling distribution.
+
+:::{.incremental}
+1.  Estimate parameter(s) $\hat{\theta}$ from original data.
+2.  Generate $B$ samples from the estimated distribution.
+3.  Compute a bootstrap estimate $\hat{\theta}_b^*$ for each.
+4.  Use the **spread** of the $\hat{\theta}_b^*$ to approximate the SE:
+$$
+S_{\hat{\theta}} = \sqrt{ \frac{1}{B - 1} \sum_{b=1}^B \left( \hat{\theta}_b^* - \bar{\theta}^* \right)^2 }
+$$
+
 :::{.fragment}
-$$
-S_{\hat{\theta}} = \sqrt{ \frac{1}{B-1} \sum_{b=1}^B (\hat{\theta}_b^* - \bar{\theta}^*)^2 }
-$$
-Where $\bar{\theta}^* = \frac{1}{B} \sum \hat{\theta}_b^*$.
+Where $\bar{\theta}^* = \frac{1}{B} \sum_{b=1}^B \hat{\theta}_b^*$.
+:::
 :::
 ------------------------------------------------------------------------
 
 ## Simulating Bootstrap Standard Error {.smaller}
 
-Find the bootstrap standard error when sampling from a Normal population:
+Estimate the SE of the sample mean using a **parametric bootstrap**:
 
 ```{r}
 set.seed(365)
 n <- 30
-true_mean <- 10
-true_sd <- 2
-x <- rnorm(n, mean = true_mean, sd = true_sd)
+x <- rnorm(n, mean = 10, sd = 2)  # Original sample (population unknown)
 
-# Bootstrap
+# Step 1: Estimate parameters from the data
+mu_hat <- mean(x)
+sigma_hat <- sd(x)
+
+# Step 2: Generate B bootstrap samples from N(mu_hat, sigma_hat)
 B <- 1000
 boot_means <- numeric(B)
 
 for (b in 1:B) {
-  resample <- sample(x, replace = TRUE)
-  boot_means[b] <- mean(resample)
+  x_star <- rnorm(n, mean = mu_hat, sd = sigma_hat)
+  boot_means[b] <- mean(x_star)
 }
 
-# Estimate SE
+# Step 3: Estimate the bootstrap SE
 boot_se <- sd(boot_means)
 
-cat("Bootstrap SE for sample mean:", round(boot_se, 3), "\n")
+cat("Parametric Bootstrap SE for sample mean:", round(boot_se, 3), "\n")
 ```
 
-------------------------------------------------------------------------
+---
+
+## Key Takeaways
+
+- Parametric bootstrap assumes a model for the population.
+- We simulate samples using parameter estimates from data.
+- Bootstrap SE reflects the sampling variability of the estimator under that model.
+- Validity depends on how well the model fits the real data!
+- When in doubt about the model, use the non-parametric bootstrap.
+
+---
 
 ## Summary :star2:
 
@@ -235,4 +294,3 @@ cat("Bootstrap SE for sample mean:", round(boot_se, 3), "\n")
 -   **Standard error** quantifies estimator variability
 -   **Bootstrap** provides a flexible, simulation-based alternative
 
-------------------------------------------------------------------------

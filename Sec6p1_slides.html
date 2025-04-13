@@ -475,7 +475,7 @@ MATH 365
 </div>
 </section>
 <section id="unbiased-estimators" class="slide level2">
-<h2>Unbiased Estimators 🎯</h2>
+<h2>Unbiased Estimators <span class="emoji" data-emoji="dart">🎯</span></h2>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -496,28 +496,28 @@ E(\hat{\theta}) = \theta
 </div>
 </section>
 <section id="hall-of-fame-of-unbiased-estimators" class="slide level2">
-<h2>🏆 Hall of Fame of Unbiased Estimators</h2>
+<h2><span class="emoji" data-emoji="trophy">🏆</span> Hall of Fame of Unbiased Estimators</h2>
 <ul>
-<li>Sample mean <span class="math inline">\(\bar{X}\)</span> is an unbiased estimator of <span class="math inline">\(\mu\)</span> from a normal distribution.</li>
-<li><span class="math inline">\(\hat{p} = X/n\)</span> is an unbiased estimator of a binomial probability <span class="math inline">\(p\)</span>.</li>
-<li>Sample variance <span class="math inline">\(S^2\)</span> is an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>.</li>
+<li><p>Sample mean <span class="math inline">\(\bar{X}\)</span> is an unbiased estimator of <span class="math inline">\(\mu\)</span> from a normal distribution.</p></li>
+<li><p><span class="math inline">\(\hat{p} = X/n\)</span> is an unbiased estimator of a binomial probability <span class="math inline">\(p\)</span>.</p></li>
+<li><h2 id="sample-variance-s2-is-an-unbiased-estimator-of-sigma2.">Sample variance <span class="math inline">\(S^2\)</span> is an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>.</h2></li>
 </ul>
 </section>
 <section id="section" class="slide level2 smaller">
 <h2></h2>
-<h3 id="sample-variance-a-setup-for-unbiasedness">Sample Variance: A Setup for Unbiasedness 🧮</h3>
+<h3 id="sample-variance-a-setup-for-unbiasedness">Sample Variance: A Setup for Unbiasedness <span class="emoji" data-emoji="abacus">🧮</span></h3>
 <p>We define the <strong>sample variance</strong> as: <span class="math display">\[
 S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2
 \]</span></p>
 <ul>
-<li>This uses <strong><span class="math inline">\(\bar{X}\)</span></strong> in place of the unknown mean <span class="math inline">\(\mu\)</span>.</li>
+<li>This uses <span class="math inline">\(\bar{X}\)</span> in place of the unknown mean <span class="math inline">\(\mu\)</span>.</li>
 <li>The denominator is <span class="math inline">\(n - 1\)</span> instead of <span class="math inline">\(n\)</span> (Why? we’ll find out)</li>
 </ul>
 <div class="fragment">
 <p>We’ll show that: <span class="math display">\[
 E(S^2) = \sigma^2
 \]</span> So <span class="math inline">\(S^2\)</span> is an <strong>unbiased estimator</strong> of population variance!</p>
-<p>🧠 Hint: this involves expanding <span class="math inline">\((X_i - \bar{X})^2\)</span> and working with expectations.</p>
+<p><span class="emoji" data-emoji="brain">🧠</span> Hint: this involves expanding <span class="math inline">\((X_i - \bar{X})^2\)</span> and working with expectations.</p>
 </div>
 </section>
 <section id="estimators-with-minimum-variance" class="slide level2">
@@ -571,51 +571,121 @@ Then <span class="math inline">\(\hat{\theta} = \bar{X}\)</span> is the <strong>
 </section>
 <section id="parametric-bootstrap" class="slide level2">
 <h2>Parametric Bootstrap <span class="emoji" data-emoji="repeat">🔁</span></h2>
-<p>Suppose we want to estimate the variability of <span class="math inline">\(\hat{\theta}\)</span>, but don’t have a closed-form for <span class="math inline">\(\text{Var}(\hat{\theta})\)</span>.</p>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> We can <strong>simulate</strong> the sampling distribution!</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Motivation.</strong><br>
+What if we want to estimate the standard error of an estimator, but:</p>
+<ul>
+<li>There’s no closed-form formula for the variance?</li>
+<li>The sampling distribution is too complex to handle analytically?</li>
+</ul>
+<div class="fragment">
+<p><span class="emoji" data-emoji="arrow_right">➡️</span> <strong>Enter the Bootstrap!</strong> It uses the <strong>plug-in principle</strong>:</p>
+<ul>
+<li><em>Our sample data informs a model for the population, from which we simulate new samples.</em></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section id="parametric-bootstrap-steps" class="slide level2">
-<h2>Parametric Bootstrap Steps</h2>
+<section id="what-is-the-parametric-bootstrap" class="slide level2">
+<h2>What is the Parametric Bootstrap? <span class="emoji" data-emoji="repeat">🔁</span></h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Instead of resampling from the data directly, we:</p>
 <div>
 <ol type="1">
-<li class="fragment">Generate <span class="math inline">\(B\)</span> bootstrap samples from the estimated model.</li>
-<li class="fragment">For each, compute a bootstrap estimate <span class="math inline">\(\hat{\theta}_b^*\)</span>.</li>
-<li class="fragment">Then compute the <strong>bootstrap estimate of standard error</strong>:</li>
+<li class="fragment">Choose a <strong>parametric model</strong> for the data (e.g., Normal).</li>
+<li class="fragment"><strong>Estimate parameters</strong> from the observed data.</li>
+<li class="fragment"><strong>Generate simulated samples</strong> from the model using the estimated parameters.</li>
+<li class="fragment"><strong>Recalculate</strong> the estimator on each sample to approximate the sampling distribution.</li>
 </ol>
 </div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-the-bootstrap" class="slide level2">
+<h2>Visualizing the Bootstrap</h2>
+<p><img data-src="images/bsdiagram.jpg" style="width:75.0%"></p>
+
+<aside><div>
+<p>This is a <strong>parametric bootstrap</strong> if we simulate from a model<br>
+(e.g., <span class="math inline">\(\mathcal{N}(\hat{\mu}, \hat{\sigma}^2)\)</span>), and a <strong>nonparametric bootstrap</strong> if we resample the observed data.</p>
+</div></aside></section>
+<section id="parametric-bootstrap-step-by-step" class="slide level2 smaller">
+<h2>Parametric Bootstrap: Step-by-Step</h2>
+<p>Suppose we want to estimate the variability of <span class="math inline">\(\hat{\theta}\)</span>,<br>
+but don’t have a closed-form for <span class="math inline">\(\operatorname{Var}(\hat{\theta})\)</span>.</p>
+<p><span class="emoji" data-emoji="arrow_right">➡️</span> We simulate its sampling distribution.</p>
+<div>
+<ol type="1">
+<li class="fragment">Estimate parameter(s) <span class="math inline">\(\hat{\theta}\)</span> from original data.</li>
+<li class="fragment">Generate <span class="math inline">\(B\)</span> samples from the estimated distribution.</li>
+<li class="fragment">Compute a bootstrap estimate <span class="math inline">\(\hat{\theta}_b^*\)</span> for each.</li>
+<li class="fragment">Use the <strong>spread</strong> of the <span class="math inline">\(\hat{\theta}_b^*\)</span> to approximate the SE: <span class="math display">\[
+S_{\hat{\theta}} = \sqrt{ \frac{1}{B - 1} \sum_{b=1}^B \left( \hat{\theta}_b^* - \bar{\theta}^* \right)^2 }
+\]</span></li>
+</ol>
 <div class="fragment">
-<p><span class="math display">\[
-S_{\hat{\theta}} = \sqrt{ \frac{1}{B-1} \sum_{b=1}^B (\hat{\theta}_b^* - \bar{\theta}^*)^2 }
-\]</span> Where <span class="math inline">\(\bar{\theta}^* = \frac{1}{B} \sum \hat{\theta}_b^*\)</span>.</p>
+<p>Where <span class="math inline">\(\bar{\theta}^* = \frac{1}{B} \sum_{b=1}^B \hat{\theta}_b^*\)</span>.</p>
+</div>
 </div>
 </section>
 <section id="simulating-bootstrap-standard-error" class="slide level2 smaller">
 <h2>Simulating Bootstrap Standard Error</h2>
-<p>Find the bootstrap standard error when sampling from a Normal population:</p>
+<p>Estimate the SE of the sample mean using a <strong>parametric bootstrap</strong>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">365</span>)</span>
 <span id="cb1-2"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb1-3"><a href=""></a>true_mean <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb1-4"><a href=""></a>true_sd <span class="ot">&lt;-</span> <span class="dv">2</span></span>
-<span id="cb1-5"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> true_mean, <span class="at">sd =</span> true_sd)</span>
-<span id="cb1-6"><a href=""></a></span>
-<span id="cb1-7"><a href=""></a><span class="co"># Bootstrap</span></span>
-<span id="cb1-8"><a href=""></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb1-9"><a href=""></a>boot_means <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb1-10"><a href=""></a></span>
-<span id="cb1-11"><a href=""></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb1-12"><a href=""></a>  resample <span class="ot">&lt;-</span> <span class="fu">sample</span>(x, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-13"><a href=""></a>  boot_means[b] <span class="ot">&lt;-</span> <span class="fu">mean</span>(resample)</span>
-<span id="cb1-14"><a href=""></a>}</span>
-<span id="cb1-15"><a href=""></a></span>
-<span id="cb1-16"><a href=""></a><span class="co"># Estimate SE</span></span>
-<span id="cb1-17"><a href=""></a>boot_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_means)</span>
-<span id="cb1-18"><a href=""></a></span>
-<span id="cb1-19"><a href=""></a><span class="fu">cat</span>(<span class="st">"Bootstrap SE for sample mean:"</span>, <span class="fu">round</span>(boot_se, <span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)  <span class="co"># Original sample (population unknown)</span></span>
+<span id="cb1-4"><a href=""></a></span>
+<span id="cb1-5"><a href=""></a><span class="co"># Step 1: Estimate parameters from the data</span></span>
+<span id="cb1-6"><a href=""></a>mu_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
+<span id="cb1-7"><a href=""></a>sigma_hat <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
+<span id="cb1-8"><a href=""></a></span>
+<span id="cb1-9"><a href=""></a><span class="co"># Step 2: Generate B bootstrap samples from N(mu_hat, sigma_hat)</span></span>
+<span id="cb1-10"><a href=""></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
+<span id="cb1-11"><a href=""></a>boot_means <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
+<span id="cb1-12"><a href=""></a></span>
+<span id="cb1-13"><a href=""></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb1-14"><a href=""></a>  x_star <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu_hat, <span class="at">sd =</span> sigma_hat)</span>
+<span id="cb1-15"><a href=""></a>  boot_means[b] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_star)</span>
+<span id="cb1-16"><a href=""></a>}</span>
+<span id="cb1-17"><a href=""></a></span>
+<span id="cb1-18"><a href=""></a><span class="co"># Step 3: Estimate the bootstrap SE</span></span>
+<span id="cb1-19"><a href=""></a>boot_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_means)</span>
+<span id="cb1-20"><a href=""></a></span>
+<span id="cb1-21"><a href=""></a><span class="fu">cat</span>(<span class="st">"Parametric Bootstrap SE for sample mean:"</span>, <span class="fu">round</span>(boot_se, <span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Bootstrap SE for sample mean: 0.368 </code></pre>
+<pre><code>Parametric Bootstrap SE for sample mean: 0.35 </code></pre>
 </div>
 </div>
+</section>
+<section id="key-takeaways" class="slide level2">
+<h2>Key Takeaways</h2>
+<ul>
+<li>Parametric bootstrap assumes a model for the population.</li>
+<li>We simulate samples using parameter estimates from data.</li>
+<li>Bootstrap SE reflects the sampling variability of the estimator under that model.</li>
+<li>Validity depends on how well the model fits the real data!</li>
+<li>When in doubt about the model, use the non-parametric bootstrap.</li>
+</ul>
 </section>
 <section id="summary" class="slide level2">
 <h2>Summary <span class="emoji" data-emoji="star2">🌟</span></h2>
@@ -627,9 +697,6 @@ S_{\hat{\theta}} = \sqrt{ \frac{1}{B-1} \sum_{b=1}^B (\hat{\theta}_b^* - \bar{\t
 <li><strong>Standard error</strong> quantifies estimator variability</li>
 <li><strong>Bootstrap</strong> provides a flexible, simulation-based alternative</li>
 </ul>
-</section>
-<section class="slide level2">
-
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
