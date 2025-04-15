@@ -1,0 +1,280 @@
+---
+title: "Section 6.2: Methods of Point Estimation"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## :dart: Topics for Today
+
+-   Define and apply the **Method of Moments**
+-   Understand and compute **Maximum Likelihood Estimators (MLEs)**
+-   Explore **large-sample properties** of MLEs
+-   Visualize likelihood with **Desmos** and interpret maximization
+
+------------------------------------------------------------------------
+
+## :round_pushpin: Motivation: Estimating Parameters
+
+> A central task in statistics: Use data to estimate unknown parameters
+> of a distribution.
+
+-   Given a sample $X_1,\dots,X_n \sim f(x;\theta_1,\dots,\theta_m)$,
+    how do we estimate the parameters?
+-   Two classic techniques:
+    -   Method of Moments
+    -   Maximum Likelihood Estimation
+
+------------------------------------------------------------------------
+
+## :test_tube: Method of Moments (MoM) {.smaller}
+
+### :book: Definition
+
+Let $X_1,\dots,X_n \sim f(x;\theta_1,\dots,\theta_m)$\
+The *k*-th sample moment is:
+
+$$
+M_k = \frac{1}{n} \sum_{i=1}^n X_i^k
+$$
+
+Match the first $m$ sample moments with the corresponding population
+moments:
+
+$$
+M_k = E(X^k),\quad\text{for } k = 1,\dots,m
+$$
+
+:arrow_right: Solve the resulting system for $\theta_1,\dots,\theta_m$
+
+------------------------------------------------------------------------
+
+## :bulb: Example: MoM for Exponential($\lambda$)
+
+We have $X_1,\dots,X_n \sim \text{Exponential}(\lambda)$, and we know:
+
+-   Population mean: $E(X) = \frac{1}{\lambda}$
+
+Moment equation: $$
+\frac{1}{n} \sum X_i = \frac{1}{\lambda} \quad \Rightarrow \quad \hat{\lambda}_{\text{MoM}} = \frac{1}{\bar{X}}
+$$
+
+------------------------------------------------------------------------
+
+## :abacus: Example: MoM for Uniform(0,$\theta$)
+
+-   Population mean: $E(X) = \frac{\theta}{2}$
+
+Set
+$\bar{X} = \frac{\theta}{2} \Rightarrow \hat{\theta}_{\text{MoM}} = 2\bar{X}$
+
+::: {.callout-tip icon="true"}
+:white_check_mark: Simple, but doesn't always respect sample bounds.
+:::
+
+------------------------------------------------------------------------
+
+## :chart_with_upwards_trend: Maximum Likelihood Estimation (MLE)
+
+### :book: Definition
+
+Given observed data $x_1,\dots,x_n$, define the **likelihood** function:
+
+$$
+L(\theta_1,\dots,\theta_m) = f(x_1,\dots,x_n;\theta_1,\dots,\theta_m)
+$$
+
+MLEs are the parameter values $\hat{\theta}_1,\dots,\hat{\theta}_m$ that
+**maximize** the likelihood.
+
+------------------------------------------------------------------------
+
+## :pencil2: Let's Visualize: Likelihood with Bernoulli {.smaller}
+
+:abacus: Suppose $X_1,\dots,X_n \sim \text{Bernoulli}(p)$
+
+::: incremental
+-   Write the likelihood: $$
+    L(p) = \prod_{i=1}^n p^{x_i}(1 - p)^{1 - x_i}
+    $$
+-   Try this in [Desmos Graphing
+    Calculator](https://www.desmos.com/calculator):
+    -   Fix a sample (e.g., $x = (1, 0, 1, 1, 0)$)
+    -   Graph the likelihood and estimate the value of $p$ that
+        maximizes $L(p)$
+    -   Do the same for $\log[L(p)]$
+:::
+
+::: fragment
+> **Think-Pair-Share**: Why is the log-likelihood easier to work with?
+:::
+
+------------------------------------------------------------------------
+
+## :abacus: Why Use Log-Likelihood?
+
+> Logarithms turn products into sums!
+
+Instead of maximizing $L(\theta)$, we often maximize:
+
+$$
+\ell(\theta) = \ln L(\theta)
+$$
+
+::: fragment
+:white_check_mark: Easier algebra and numeric stability\
+:white_check_mark: Easier to differentiate\
+:white_check_mark: Same location of maximum
+:::
+
+------------------------------------------------------------------------
+
+## :speech_balloon: Try It! MLE for Bernoulli {.smaller}
+
+Let $X_1,\dots,X_n \sim \text{Bernoulli}(p)$
+
+::: fragment
+-   Likelihood:\
+    $$
+    L(p) = p^{\sum X_i} (1 - p)^{n - \sum X_i}
+    $$
+:::
+
+::: fragment
+-   Log-likelihood:\
+    $$
+    \ell(p) = \sum X_i \ln p + (n - \sum X_i) \ln(1 - p)
+    $$
+:::
+
+::: fragment
+> Differentiate and solve for $p$ that maximizes $\ell(p)$.
+
+:arrow_right: $\hat{p} = \bar{X}$
+:::
+
+------------------------------------------------------------------------
+
+## :speech_balloon: Try It! MLE for Uniform(0,$\theta$) {.smaller}
+
+Let $X_1,\dots,X_n \sim \text{Uniform}(0,\theta)$
+
+::: fragment
+-   Likelihood:\
+    $$
+    L(\theta) = \begin{cases} \theta^{-n} & \text{if } \theta \ge \max x_i \\ 0 & \text{otherwise} \end{cases}
+    $$
+:::
+
+::: fragment
+-   MLE:\
+    $$
+    \hat{\theta}_{\text{MLE}} = \max(x_1,\dots,x_n)
+    $$
+:::
+
+::: fragment
+> :warning: Not equal to MoM!Respects bounds.
+:::
+
+::: notes
+What happens if we have a closed interval rather than open?
+:::
+
+------------------------------------------------------------------------
+
+## :blue_book: Properties of MLEs
+
+### The Invariance Principle
+
+> If $\hat{\theta}$ is the MLE of $\theta$,\
+> then $h(\hat{\theta})$ is the MLE of $h(\theta)$
+
+:brain: Examples:\
+
+-   If $\hat{\lambda}$ is the MLE for exponential rate, then
+    $\hat{\mu} = 1 / \hat{\lambda}$ is MLE for mean
+-   If $s^2$ is the MLE for $\sigma^2$ for a Normal sample, then $s$ is
+    the MLE for $\sigma$.
+
+------------------------------------------------------------------------
+
+## :mag: Large Sample Behavior of MLEs {.smaller}
+
+### :book: Proposition
+
+Under general conditions, as $n \to \infty$, the MLE:
+
+-   Is **consistent**:\
+    $$
+    \hat{\theta} \xrightarrow{P} \theta
+    $$
+-   Is **approximately unbiased**:\
+    $$
+    E(\hat\theta)\approx \theta
+    $$
+-   Is exactly or approximately the Minimum Variance Unbiased Estimator
+    (MVUE)
+
+------------------------------------------------------------------------
+
+## :warning: Caution
+
+::: callout-warning
+-   **Not every parameter has an MLE!**
+
+-   Sometimes the likelihood doesn't have a maximum in the interior.
+
+-   Sometimes it doesn't exist!
+
+-   Check the **form** of the likelihood when possible!
+:::
+
+------------------------------------------------------------------------
+
+## :question: Quick Check-in
+
+Which of the following are **true** about MLEs?
+
+::: incremental
+1.  The MLE always equals the sample mean
+
+2.  The MLE maximizes the probability of observing your data
+
+3.  MLEs are always unbiased
+
+4.  The log-likelihood has the same maximum point as the likelihood
+:::
+
+------------------------------------------------------------------------
+
+
+### ✅ Summary: What Did We Learn About Estimation? {.smaller}
+
+- **MoM** gives us a simple, intuitive way to estimate parameters by aligning the sample with theoretical moments—but it doesn't always yield optimal estimates.
+
+- **MLE** takes a probabilistic approach: it finds the parameter values that make the observed data most “plausible.” This method uses the full shape of the distribution and becomes more powerful with larger samples.
+
+- We saw how **MLEs behave in the long run**—becoming more precise, often unbiased, and having useful properties like invariance under transformation.
+
