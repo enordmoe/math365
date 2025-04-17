@@ -340,59 +340,40 @@ MATH 365
 </div>
 
 </section>
-<section id="topics-for-today" class="slide level2">
-<h2><span class="emoji" data-emoji="dart">🎯</span> Topics for Today</h2>
+<section id="topics" class="slide level2">
+<h2>Topics <span class="emoji" data-emoji="pushpin">📌</span></h2>
+<div>
 <ul>
-<li>Define and apply the <strong>Method of Moments</strong></li>
-<li>Understand and compute <strong>Maximum Likelihood Estimators (MLEs)</strong></li>
-<li>Explore <strong>large-sample properties</strong> of MLEs</li>
-<li>Visualize likelihood with <strong>Desmos</strong> and interpret maximization</li>
+<li class="fragment"><span class="emoji" data-emoji="dart">🎯</span> What are confidence intervals?</li>
+<li class="fragment"><span class="emoji" data-emoji="bar_chart">📊</span> When can we use them?</li>
+<li class="fragment"><span class="emoji" data-emoji="abacus">🧮</span> Computing a <span class="math inline">\((1 - \alpha) \cdot 100\%\)</span> confidence interval when <span class="math inline">\(\sigma\)</span> is known</li>
+<li class="fragment"><span class="emoji" data-emoji="control_knobs">🎛️</span> Choosing sample size for desired precision</li>
+<li class="fragment"><span class="emoji" data-emoji="repeat">🔁</span> Pivotal quantities: the idea behind the method</li>
+<li class="fragment"><span class="emoji" data-emoji="link">🔗</span> Interactive simulation with Moore’s applet</li>
+</ul>
+</div>
+</section>
+<section id="basic-conditions-for-this-section" class="slide level2 smaller">
+<h2>Basic Conditions for this Section <span class="emoji" data-emoji="clipboard">📋</span></h2>
+<ul>
+<li>The population distribution is <strong>normal</strong>.</li>
+<li>The <strong>population standard deviation</strong> <span class="math inline">\(\sigma\)</span> is <strong>known</strong>.</li>
+<li>The sampling distribution of <span class="math inline">\(\overline X\sim N(\mu, \sigma^2/n)\)</span></li>
 </ul>
 </section>
-<section id="motivation-estimating-parameters" class="slide level2">
-<h2><span class="emoji" data-emoji="round_pushpin">📍</span> Motivation: Estimating Parameters</h2>
+<section id="video-game-reaction-times" class="slide level2 smaller">
+<h2><strong><span class="emoji" data-emoji="video_game">🎮</span> Video Game Reaction Times</strong></h2>
 <blockquote>
-<p>A central task in statistics: Use data to estimate unknown parameters of a distribution.</p>
+<p><span class="emoji" data-emoji="bulb">💡</span> A video game developer claims the average reaction time to dodge an obstacle is <span class="math inline">\(\mu = 300\)</span> ms with known standard deviation <span class="math inline">\(\sigma = 40\)</span> ms.<br>
+You collect a random sample of <span class="math inline">\(n = 25\)</span> players and find a sample mean of <span class="math inline">\(\bar{x} = 312\)</span> ms.</p>
 </blockquote>
-<ul>
-<li>Given a sample <span class="math inline">\(X_1,\dots,X_n \sim f(x;\theta_1,\dots,\theta_m)\)</span>, how do we estimate the parameters?</li>
-<li>Two classic techniques:
-<ul>
-<li>Method of Moments</li>
-<li>Maximum Likelihood Estimation</li>
-</ul></li>
-</ul>
-</section>
-<section id="method-of-moments-mom" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="test_tube">🧪</span> Method of Moments (MoM)</h2>
-<h3 id="definition"><span class="emoji" data-emoji="book">📖</span> Definition</h3>
-<p>Let <span class="math inline">\(X_1,\dots,X_n \sim f(x;\theta_1,\dots,\theta_m)\)</span><br>
-The <em>k</em>-th sample moment is:</p>
-<p><span class="math display">\[
-M_k = \frac{1}{n} \sum_{i=1}^n X_i^k
+<div class="fragment">
+<p>Assume <span class="math inline">\(\mu\)</span> is unknown to us and we wish to use <span class="math inline">\(\bar{x}\)</span> to estimate it.</p>
+</div>
+<div class="fragment">
+<p>We start with the probability statement: <span class="math display">\[
+P\left(-z_{\alpha/2} &lt; \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} &lt; z_{\alpha/2}\right) = 1 - \alpha
 \]</span></p>
-<p>Match the first <span class="math inline">\(m\)</span> sample moments with the corresponding population moments:</p>
-<p><span class="math display">\[
-M_k = E(X^k),\quad\text{for } k = 1,\dots,m
-\]</span></p>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> Solve the resulting system for <span class="math inline">\(\theta_1,\dots,\theta_m\)</span></p>
-</section>
-<section id="example-mom-for-exponentiallambda" class="slide level2">
-<h2><span class="emoji" data-emoji="bulb">💡</span> Example: MoM for Exponential(<span class="math inline">\(\lambda\)</span>)</h2>
-<p>We have <span class="math inline">\(X_1,\dots,X_n \sim \text{Exponential}(\lambda)\)</span>, and we know:</p>
-<ul>
-<li>Population mean: <span class="math inline">\(E(X) = \frac{1}{\lambda}\)</span></li>
-</ul>
-<p>Moment equation: <span class="math display">\[
-\frac{1}{n} \sum X_i = \frac{1}{\lambda} \quad \Rightarrow \quad \hat{\lambda}_{\text{MoM}} = \frac{1}{\bar{X}}
-\]</span></p>
-</section>
-<section id="example-mom-for-uniform0theta" class="slide level2">
-<h2><span class="emoji" data-emoji="abacus">🧮</span> Example: MoM for Uniform(0,<span class="math inline">\(\theta\)</span>)</h2>
-<ul>
-<li>Population mean: <span class="math inline">\(E(X) = \frac{\theta}{2}\)</span></li>
-</ul>
-<p>Set <span class="math inline">\(\bar{X} = \frac{\theta}{2} \Rightarrow \hat{\theta}_{\text{MoM}} = 2\bar{X}\)</span></p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -402,192 +383,194 @@ M_k = E(X^k),\quad\text{for } k = 1,\dots,m
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p><span class="emoji" data-emoji="white_check_mark">✅</span> Simple, but doesn’t always respect sample bounds.</p>
+<p><span class="math inline">\(z_{\alpha/2}\)</span> is the <strong>critical value</strong> from the standard normal distribution such that the middle <span class="math inline">\(1 - \alpha\)</span> of the distribution lies between <span class="math inline">\(-z_{\alpha/2}\)</span> and <span class="math inline">\(z_{\alpha/2}\)</span>.</p>
+</div>
 </div>
 </div>
 </div>
 </section>
-<section id="maximum-likelihood-estimation-mle" class="slide level2">
-<h2><span class="emoji" data-emoji="chart_with_upwards_trend">📈</span> Maximum Likelihood Estimation (MLE)</h2>
-<h3 id="definition-1"><span class="emoji" data-emoji="book">📖</span> Definition</h3>
-<p>Given observed data <span class="math inline">\(x_1,\dots,x_n\)</span>, define the <strong>likelihood</strong> function:</p>
-<p><span class="math display">\[
-L(\theta_1,\dots,\theta_m) = f(x_1,\dots,x_n;\theta_1,\dots,\theta_m)
-\]</span></p>
-<p>MLEs are the parameter values <span class="math inline">\(\hat{\theta}_1,\dots,\hat{\theta}_m\)</span> that <strong>maximize</strong> the likelihood.</p>
-</section>
-<section id="lets-visualize-likelihood-with-bernoulli" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="pencil2">✏️</span> Let’s Visualize: Likelihood with Bernoulli</h2>
-<p><span class="emoji" data-emoji="abacus">🧮</span> Suppose <span class="math inline">\(X_1,\dots,X_n \sim \text{Bernoulli}(p)\)</span></p>
+<section id="the-95-confidence-interval-idea" class="slide level2">
+<h2>The 95% Confidence Interval Idea <span class="emoji" data-emoji="dart">🎯</span></h2>
 <div>
 <ul>
-<li class="fragment">Write the likelihood: <span class="math display">\[
-L(p) = \prod_{i=1}^n p^{x_i}(1 - p)^{1 - x_i}
-\]</span></li>
-<li class="fragment">Try this in <a href="https://www.desmos.com/calculator">Desmos Graphing Calculator</a>:
-<ul>
-<li class="fragment">Fix a sample (e.g., <span class="math inline">\(x = (1, 0, 1, 1, 0)\)</span>)</li>
-<li class="fragment">Graph the likelihood and estimate the value of <span class="math inline">\(p\)</span> that maximizes <span class="math inline">\(L(p)\)</span></li>
-<li class="fragment">Do the same for <span class="math inline">\(\log[L(p)]\)</span></li>
-</ul></li>
+<li class="fragment">Suppose we observe data <span class="math inline">\(X_1, X_2, \dots, X_n\)</span>.</li>
+<li class="fragment">The <strong>sample mean</strong> <span class="math inline">\(\bar{x}\)</span> is used to estimate the population mean <span class="math inline">\(\mu\)</span>.</li>
+<li class="fragment">We create an <strong>interval</strong> around <span class="math inline">\(\bar{x}\)</span> that is likely to contain <span class="math inline">\(\mu\)</span>.</li>
 </ul>
 </div>
 <div class="fragment">
-<blockquote>
-<p><strong>Think-Pair-Share</strong>: Why is the log-likelihood easier to work with?</p>
-</blockquote>
-</div>
-</section>
-<section id="why-use-log-likelihood" class="slide level2">
-<h2><span class="emoji" data-emoji="abacus">🧮</span> Why Use Log-Likelihood?</h2>
-<blockquote>
-<p>Logarithms turn products into sums!</p>
-</blockquote>
-<p>Instead of maximizing <span class="math inline">\(L(\theta)\)</span>, we often maximize:</p>
 <p><span class="math display">\[
-\ell(\theta) = \ln L(\theta)
+\bar{x} \pm 1.96\frac{\sigma}{\sqrt{n}}
 \]</span></p>
-<div class="fragment">
-<p><span class="emoji" data-emoji="white_check_mark">✅</span> Easier algebra and numeric stability<br>
-<span class="emoji" data-emoji="white_check_mark">✅</span> Easier to differentiate<br>
-<span class="emoji" data-emoji="white_check_mark">✅</span> Same location of maximum</p>
 </div>
 </section>
-<section id="try-it-mle-for-bernoulli" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="speech_balloon">💬</span> Try It! MLE for Bernoulli</h2>
-<p>Let <span class="math inline">\(X_1,\dots,X_n \sim \text{Bernoulli}(p)\)</span></p>
-<div class="fragment">
+<section id="general-1---alpha100-confidence-interval" class="slide level2">
+<h2>General <span class="math inline">\((1 - \alpha)100\%\)</span> Confidence Interval <span class="emoji" data-emoji="bulb">💡</span></h2>
 <ul>
-<li>Likelihood:<br>
-<span class="math display">\[
-L(p) = p^{\sum X_i} (1 - p)^{n - \sum X_i}
-\]</span></li>
+<li>For any confidence level <span class="math inline">\((1 - \alpha) \cdot 100\%\)</span>, the CI is:</li>
 </ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Log-likelihood:<br>
-<span class="math display">\[
-\ell(p) = \sum X_i \ln p + (n - \sum X_i) \ln(1 - p)
-\]</span></li>
-</ul>
-</div>
-<div class="fragment">
-<blockquote>
-<p>Differentiate and solve for <span class="math inline">\(p\)</span> that maximizes <span class="math inline">\(\ell(p)\)</span>.</p>
-</blockquote>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> <span class="math inline">\(\hat{p} = \bar{X}\)</span></p>
-</div>
-</section>
-<section id="try-it-mle-for-uniform0theta" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="speech_balloon">💬</span> Try It! MLE for Uniform(0,<span class="math inline">\(\theta\)</span>)</h2>
-<p>Let <span class="math inline">\(X_1,\dots,X_n \sim \text{Uniform}(0,\theta)\)</span></p>
-<div class="fragment">
-<ul>
-<li>Likelihood:<br>
-<span class="math display">\[
-L(\theta) = \begin{cases} \theta^{-n} &amp; \text{if } \theta \ge \max x_i \\ 0 &amp; \text{otherwise} \end{cases}
-\]</span></li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>MLE:<br>
-<span class="math display">\[
-\hat{\theta}_{\text{MLE}} = \max(x_1,\dots,x_n)
-\]</span></li>
-</ul>
-</div>
-<div class="fragment">
-<blockquote>
-<p><span class="emoji" data-emoji="warning">⚠️</span> Not equal to MoM!Respects bounds.</p>
-</blockquote>
-</div>
-<aside class="notes">
-<p>What happens if we have a closed interval rather than open?</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="properties-of-mles" class="slide level2">
-<h2><span class="emoji" data-emoji="blue_book">📘</span> Properties of MLEs</h2>
-<h3 id="the-invariance-principle">The Invariance Principle</h3>
-<blockquote>
-<p>If <span class="math inline">\(\hat{\theta}\)</span> is the MLE of <span class="math inline">\(\theta\)</span>,<br>
-then <span class="math inline">\(h(\hat{\theta})\)</span> is the MLE of <span class="math inline">\(h(\theta)\)</span></p>
-</blockquote>
-<p><span class="emoji" data-emoji="brain">🧠</span> Examples:<br>
-</p>
-<ul>
-<li>If <span class="math inline">\(\hat{\lambda}\)</span> is the MLE for exponential rate, then <span class="math inline">\(\hat{\mu} = 1 / \hat{\lambda}\)</span> is MLE for mean</li>
-<li>If <span class="math inline">\(s^2\)</span> is the MLE for <span class="math inline">\(\sigma^2\)</span> for a Normal sample, then <span class="math inline">\(s\)</span> is the MLE for <span class="math inline">\(\sigma\)</span>.</li>
-</ul>
-</section>
-<section id="large-sample-behavior-of-mles" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="mag">🔍</span> Large Sample Behavior of MLEs</h2>
-<h3 id="proposition"><span class="emoji" data-emoji="book">📖</span> Proposition</h3>
-<p>Under general conditions, as <span class="math inline">\(n \to \infty\)</span>, the MLE:</p>
-<ul>
-<li>Is <strong>consistent</strong>:<br>
-<span class="math display">\[
-\hat{\theta} \xrightarrow{P} \theta
-\]</span></li>
-<li>Is <strong>approximately unbiased</strong>:<br>
-<span class="math display">\[
-E(\hat\theta)\approx \theta
-\]</span></li>
-<li>Is exactly or approximately the Minimum Variance Unbiased Estimator (MVUE)</li>
-</ul>
-</section>
-<section id="caution" class="slide level2">
-<h2><span class="emoji" data-emoji="warning">⚠️</span> Caution</h2>
-<div class="callout callout-warning callout-titled callout-style-default">
+<p><span class="math display">\[
+\left(\bar{x} - z_{\alpha/2}\frac{\sigma}{\sqrt{n}}, \bar{x} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\right)
+\]</span></p>
+<div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Warning</strong></p>
+<p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<ul>
-<li><p><strong>Not every parameter has an MLE!</strong></p></li>
-<li><p>Sometimes the likelihood doesn’t have a maximum in the interior.</p></li>
-<li><p>Sometimes it doesn’t exist!</p></li>
-<li><p>Check the <strong>form</strong> of the likelihood when possible!</p></li>
-</ul>
+<p>You can also write it as: <span class="math inline">\(\bar{x} \pm z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\)</span></p>
 </div>
 </div>
 </div>
 </section>
-<section id="quick-check-in" class="slide level2">
-<h2><span class="emoji" data-emoji="question">❓</span> Quick Check-in</h2>
-<p>Which of the following are <strong>true</strong> about MLEs?</p>
+<section id="pivotal-quantities" class="slide level2 smaller">
+<h2>Pivotal Quantities <span class="emoji" data-emoji="repeat">🔁</span></h2>
+<p>Let <span class="math inline">\(X_1, X_2, \dots, X_n\)</span> be the sample.</p>
+<p>A <strong>pivotal quantity</strong> is a random variable that:</p>
 <div>
 <ol type="1">
-<li class="fragment"><p>The MLE always equals the sample mean</p></li>
-<li class="fragment"><p>The MLE maximizes the probability of observing your data</p></li>
-<li class="fragment"><p>MLEs are always unbiased</p></li>
-<li class="fragment"><p>The log-likelihood has the same maximum point as the likelihood</p></li>
+<li class="fragment">Depends on the data <em>and</em> the parameter <span class="math inline">\(\theta\)</span>.<br>
+</li>
+<li class="fragment">Has a probability distribution that does <strong>not depend on</strong> the value of <span class="math inline">\(\theta\)</span>.</li>
 </ol>
 </div>
+<div class="fragment">
+<p>We use the known distribution of the pivotal quantity to construct the interval.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>This method of constructing confidence intervals is called the <strong>pivotal quantity method</strong>.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
-<section class="slide level2">
-
-<h3 class="smaller" id="summary-what-did-we-learn-about-estimation">✅ Summary: What Did We Learn About Estimation?</h3>
+<section id="calculating-the-confidence-interval" class="slide level2 smaller">
+<h2>Calculating the Confidence Interval 🎮</h2>
+<div>
 <ul>
-<li><p><strong>MoM</strong> gives us a simple, intuitive way to estimate parameters by aligning the sample with theoretical moments—but it doesn’t always yield optimal estimates.</p></li>
-<li><p><strong>MLE</strong> takes a probabilistic approach: it finds the parameter values that make the observed data most “plausible.” This method uses the full shape of the distribution and becomes more powerful with larger samples.</p></li>
-<li><p>We saw how <strong>MLEs behave in the long run</strong>—becoming more precise, often unbiased, and having useful properties like invariance under transformation.</p></li>
+<li class="fragment">From our video game example:
+<ul>
+<li class="fragment"><span class="math inline">\(\bar{x} = 312\)</span> ms</li>
+<li class="fragment"><span class="math inline">\(\sigma = 40\)</span> ms</li>
+<li class="fragment"><span class="math inline">\(n = 25\)</span></li>
+<li class="fragment"><span class="math inline">\(z_{0.025} = 1.96\)</span> for 95% confidence</li>
+</ul></li>
 </ul>
+</div>
+<div class="fragment">
+<p><span class="math display">\[
+312 \pm 1.96 \cdot \frac{40}{\sqrt{25}} = 312 \pm 15.68
+\]</span></p>
+</div>
+<div class="fragment">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>So our 95% confidence interval for the true average reaction time is: <span class="math display">\[
+(296.32, 327.68) \text{ ms}
+\]</span> so the claim that <span class="math inline">\(\mu=300\)</span> is plausible for our population.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="interactive-app-moores-confidence-interval-simulator" class="slide level2">
+<h2><span class="emoji" data-emoji="link">🔗</span> Interactive App: Moore’s Confidence Interval Simulator</h2>
+<p>Try this app:<br>
+<a href="https://www.rossmanchance.com/applets/2021/confsim/ConfSim.html"><strong>rossmanchance.com/applets/2021/confsim/ConfSim.html</strong></a></p>
+<p><span class="emoji" data-emoji="white_check_mark">✅</span> Select: <strong>Known</strong> <span class="math inline">\(\sigma\)</span> and normal distribution.<br>
+<span class="emoji" data-emoji="chart_with_downwards_trend">📉</span> Run the simulation with many samples (e.g., 500).<br>
+<span class="emoji" data-emoji="mag">🔍</span> Look at how many intervals contain <span class="math inline">\(\mu\)</span> and when they <strong>miss</strong>.<br>
+<span class="emoji" data-emoji="eyes">👀</span> Adjust <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(n\)</span>, and confidence level—what happens?</p>
+</section>
+<section id="margin-of-error-and-sample-size" class="slide level2">
+<h2>Margin of Error and Sample Size <span class="emoji" data-emoji="1234">🔢</span></h2>
+<ul>
+<li>The <strong>margin of error</strong> is: <span class="math inline">\(z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\)</span></li>
+<li>To ensure the <strong>margin of error</strong> is at most <span class="math inline">\(w\)</span>, solve for <span class="math inline">\(n\)</span>:</li>
+</ul>
+<div class="fragment">
+<p><span class="math display">\[
+n = \left(\frac{z_{\alpha/2} \cdot \sigma}{w}\right)^2
+\]</span></p>
+</div>
+</section>
+<section id="designing-for-precision" class="slide level2 smaller">
+<h2>Designing for Precision 🎮📏</h2>
+<ul>
+<li>The game developers want to estimate average reaction time <strong>more precisely</strong>.<br>
+</li>
+<li>They’d like the <strong>margin of error</strong> to be no more than <span class="math inline">\(w = 5\)</span> ms with 95% confidence.<br>
+</li>
+<li>Recall:
+<ul>
+<li><span class="math inline">\(\sigma = 40\)</span> ms</li>
+<li><span class="math inline">\(z_{0.025} = 1.96\)</span></li>
+</ul></li>
+</ul>
+<p>What sample size <span class="math inline">\(n\)</span> is needed?</p>
+<div class="fragment">
+<p>We use the formula from the previous slide to find <span class="math inline">\(n\)</span>:</p>
+<p><span class="math display">\[
+n = \left(\frac{z_{\alpha/2} \cdot \sigma}{w}\right)^2 = \left(\frac{1.96 \cdot 40}{5}\right)^2 = 245.86
+\]</span></p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>✅ So we need <strong>at least 246 players</strong> in the sample to achieve a 95% CI with a margin of error no greater than <strong>5 milliseconds</strong>.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="question-time" class="slide level2">
+<h2>Question Time <span class="emoji" data-emoji="thinking">🤔</span></h2>
+<div>
+<ul>
+<li class="fragment">What makes <span class="math inline">\(\displaystyle \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}\)</span> a <strong>pivotal quantity</strong>?</li>
+<li class="fragment">If <span class="math inline">\(\sigma\)</span> were <strong>unknown</strong>, how might the <strong>shape or variability</strong> of this quantity change?</li>
+</ul>
+</div>
+</section>
+<section id="summary" class="slide level2">
+<h2>Summary <span class="emoji" data-emoji="pushpin">📌</span></h2>
+<div>
+<ul>
+<li class="fragment">Confidence intervals provide a range of plausible values for <span class="math inline">\(\mu\)</span><br>
+</li>
+<li class="fragment">Normality and known <span class="math inline">\(\sigma\)</span> simplify calculations<br>
+</li>
+<li class="fragment">Use <span class="math inline">\(z_{\alpha/2}\)</span> based on desired confidence level<br>
+</li>
+<li class="fragment">The required margin of error helps guide sample size decisions<br>
+</li>
+<li class="fragment">Pivotal quantities are key tools for general CI construction</li>
+</ul>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
