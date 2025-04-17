@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Sec6p2_slides_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Sec6p2_slides_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Sec6p2_slides_files/libs/quarto-html/popper.min.js"></script>
-<script src="Sec6p2_slides_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Sec6p2_slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Sec6p2_slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec6p2_slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Sec6p2_slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Sec7p1_slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Sec7p1_slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Sec7p1_slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="Sec7p1_slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Sec7p1_slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Sec7p1_slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Sec7p1_slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Sec7p1_slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="MATH 365">
-  <title>Section 6.2: Methods of Point Estimation</title>
+  <title>Section 7.1: Basic Properties of Confidence Intervals</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Sec6p2_slides_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Sec6p2_slides_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Sec7p1_slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Sec7p1_slides_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -30,13 +30,13 @@
       vertical-align: middle;
     }
   </style>
-  <link rel="stylesheet" href="Sec6p2_slides_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="Sec6p2_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Sec6p2_slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Sec6p2_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Sec6p2_slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Sec6p2_slides_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Sec6p2_slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Sec7p1_slides_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="Sec7p1_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Sec7p1_slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Sec7p1_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Sec7p1_slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Sec7p1_slides_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Sec7p1_slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -328,7 +328,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#EA6820" class="quarto-title-block center">
-  <h1 class="title">Section 6.2: Methods of Point Estimation</h1>
+  <h1 class="title">Section 7.1: Basic Properties of Confidence Intervals</h1>
   <p class="subtitle">Mathematical Statistics</p>
 
 <div class="quarto-title-authors">
@@ -479,73 +479,6 @@ L(p) = p^{\sum X_i} (1 - p)^{n - \sum X_i}
 <p><span class="emoji" data-emoji="arrow_right">➡️</span> <span class="math inline">\(\hat{p} = \bar{X}\)</span></p>
 </div>
 </section>
-<section id="mle-for-normalmu-theta-setup" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="abacus">🧮</span> MLE for Normal(<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\theta\)</span>) — Setup</h2>
-<p>Let <span class="math inline">\(X_1, \dots, X_n \sim \text{Normal}(\mu, \theta)\)</span>, where <span class="math inline">\(\mu\)</span> is the mean and <span class="math inline">\(\theta\)</span> is the variance.</p>
-<ul>
-<li><p>The density is: <span class="math display">\[
-f(x; \mu, \theta) = \frac{1}{\sqrt{2\pi\theta}} \exp\left(-\frac{(x - \mu)^2}{2\theta}\right)
-\]</span></p></li>
-<li><p>The log-likelihood: <span class="math display">\[
-\ell(\mu, \theta)=\ln\left[\prod_{i=1}^n f(x_i; \mu, \theta) \right]= \sum_{i=1}^n \ln f(x_i; \mu, \theta)
-\]</span></p></li>
-</ul>
-</section>
-<section id="mle-for-normalmu-theta-log-likelihood" class="slide level2">
-<h2><span class="emoji" data-emoji="abacus">🧮</span> MLE for Normal(<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\theta\)</span>) — Log-likelihood</h2>
-<p><span class="math display">\[
-\ell(\mu, \theta) = -\frac{n}{2} \ln(2\pi) - \frac{n}{2} \ln(\theta) - \frac{1}{2\theta} \sum_{i=1}^n (x_i - \mu)^2
-\]</span></p>
-<div class="fragment">
-<p>To find MLEs, differentiate w.r.t. <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\theta\)</span>.</p>
-</div>
-</section>
-<section id="mle-for-mu-first-derivative" class="slide level2">
-<h2><span class="emoji" data-emoji="abacus">🧮</span> MLE for <span class="math inline">\(\mu\)</span> (first derivative)</h2>
-<p>Differentiate <span class="math inline">\(\ell\)</span> w.r.t. <span class="math inline">\(\mu\)</span>: <span class="math display">\[
-\frac{\partial \ell}{\partial \mu} = \frac{1}{\theta} \sum_{i=1}^n (x_i - \mu)
-\]</span></p>
-<div class="fragment">
-<p>Set derivative to zero: <span class="math display">\[
-\sum (x_i - \mu) = 0 \Rightarrow \hat{\mu} = \bar{x}
-\]</span></p>
-</div>
-</section>
-<section id="mle-for-theta-first-derivative" class="slide level2">
-<h2><span class="emoji" data-emoji="abacus">🧮</span> MLE for <span class="math inline">\(\theta\)</span> (first derivative)</h2>
-<p>Differentiate <span class="math inline">\(\ell\)</span> w.r.t. <span class="math inline">\(\theta\)</span>: <span class="math display">\[
-\frac{\partial \ell}{\partial \theta} = -\frac{n}{2\theta} + \frac{1}{2\theta^2} \sum_{i=1}^n (x_i - \mu)^2
-\]</span></p>
-<div class="fragment">
-<p>Set derivative to zero and solve: <span class="math display">\[
-\hat{\theta} = \frac{1}{n} \sum (x_i - \bar{x})^2
-\]</span></p>
-</div>
-</section>
-<section id="mles-for-normalmu-sigma2" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="white_check_mark">✅</span> MLEs for Normal(<span class="math inline">\(\mu\)</span>, <span class="math inline">\(\sigma^2\)</span> )</h2>
-<ul>
-<li><p>MLE for mean: <span class="math display">\[
-\hat{\mu} = \bar{X}
-\]</span></p></li>
-<li><p>MLE for variance: <span class="math display">\[
-\hat{\theta} = \hat\sigma^2= \frac{1}{n} \sum (X_i - \bar{X})^2
-\]</span></p></li>
-</ul>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p>Note: The variance estimator differs from the unbiased sample variance, which uses <span class="math inline">\(n - 1\)</span> in the denominator.</p>
-</div>
-</div>
-</div>
-</section>
 <section id="try-it-mle-for-uniform0theta" class="slide level2 smaller">
 <h2><span class="emoji" data-emoji="speech_balloon">💬</span> Try It! MLE for Uniform(0,<span class="math inline">\(\theta\)</span>)</h2>
 <p>Let <span class="math inline">\(X_1,\dots,X_n \sim \text{Uniform}(0,\theta)\)</span></p>
@@ -649,7 +582,7 @@ E(\hat\theta)\approx \theta
 </section>
 <section class="slide level2">
 
-<h3 class="smaller" id="summary-what-did-we-learn-about-estimation"><span class="emoji" data-emoji="white_check_mark">✅</span> Summary: What Did We Learn About Estimation?</h3>
+<h3 class="smaller" id="summary-what-did-we-learn-about-estimation">✅ Summary: What Did We Learn About Estimation?</h3>
 <ul>
 <li><p><strong>MoM</strong> gives us a simple, intuitive way to estimate parameters by aligning the sample with theoretical moments—but it doesn’t always yield optimal estimates.</p></li>
 <li><p><strong>MLE</strong> takes a probabilistic approach: it finds the parameter values that make the observed data most “plausible.” This method uses the full shape of the distribution and becomes more powerful with larger samples.</p></li>
@@ -665,20 +598,20 @@ E(\hat\theta)\approx \theta
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Sec6p2_slides_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Sec6p2_slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Sec7p1_slides_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>

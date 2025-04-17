@@ -1,5 +1,5 @@
 ---
-title: "Section 6.2: Methods of Point Estimation"
+title: "Section 7.1: Basic Properties of Confidence Intervals"
 subtitle: "Mathematical Statistics"
 author: "MATH 365"
 format:
@@ -176,79 +176,6 @@ Let $X_1,\dots,X_n \sim \text{Bernoulli}(p)$
 
 ------------------------------------------------------------------------
 
-## :abacus: MLE for Normal($\mu$, $\theta$) — Setup {.smaller}
-
-Let $X_1, \dots, X_n \sim \text{Normal}(\mu, \theta)$, where $\mu$ is
-the mean and $\theta$ is the variance.
-
--   The density is: $$
-    f(x; \mu, \theta) = \frac{1}{\sqrt{2\pi\theta}} \exp\left(-\frac{(x - \mu)^2}{2\theta}\right)
-    $$
-
--   The log-likelihood: $$
-    \ell(\mu, \theta)=\ln\left[\prod_{i=1}^n f(x_i; \mu, \theta) \right]= \sum_{i=1}^n \ln f(x_i; \mu, \theta)
-    $$
-
-------------------------------------------------------------------------
-
-## :abacus: MLE for Normal($\mu$, $\theta$) — Log-likelihood
-
-$$
-\ell(\mu, \theta) = -\frac{n}{2} \ln(2\pi) - \frac{n}{2} \ln(\theta) - \frac{1}{2\theta} \sum_{i=1}^n (x_i - \mu)^2
-$$
-
-::: fragment
-To find MLEs, differentiate w.r.t. $\mu$ and $\theta$.
-:::
-
-------------------------------------------------------------------------
-
-## :abacus: MLE for $\mu$ (first derivative)
-
-Differentiate $\ell$ w.r.t. $\mu$: $$
-\frac{\partial \ell}{\partial \mu} = \frac{1}{\theta} \sum_{i=1}^n (x_i - \mu)
-$$
-
-::: fragment
-Set derivative to zero: $$
-\sum (x_i - \mu) = 0 \Rightarrow \hat{\mu} = \bar{x}
-$$
-:::
-
-------------------------------------------------------------------------
-
-## :abacus: MLE for $\theta$ (first derivative)
-
-Differentiate $\ell$ w.r.t. $\theta$: $$
-\frac{\partial \ell}{\partial \theta} = -\frac{n}{2\theta} + \frac{1}{2\theta^2} \sum_{i=1}^n (x_i - \mu)^2
-$$
-
-::: fragment
-Set derivative to zero and solve: $$
-\hat{\theta} = \frac{1}{n} \sum (x_i - \bar{x})^2
-$$
-:::
-
-------------------------------------------------------------------------
-
-## :white_check_mark: MLEs for Normal($\mu$, $\sigma^2$ ) {.smaller}
-
--   MLE for mean: $$
-    \hat{\mu} = \bar{X}
-    $$
-
--   MLE for variance: $$
-    \hat{\theta} = \hat\sigma^2= \frac{1}{n} \sum (X_i - \bar{X})^2
-    $$
-
-::: callout-tip
-Note: The variance estimator differs from the unbiased sample variance,
-which uses $n - 1$ in the denominator.
-:::
-
-
-------------------------------------------------------------------------
-
 ## :speech_balloon: Try It! MLE for Uniform(0,$\theta$) {.smaller}
 
 Let $X_1,\dots,X_n \sim \text{Uniform}(0,\theta)$
@@ -342,17 +269,12 @@ Which of the following are **true** about MLEs?
 
 ------------------------------------------------------------------------
 
-### :white_check_mark: Summary: What Did We Learn About Estimation? {.smaller}
 
--   **MoM** gives us a simple, intuitive way to estimate parameters by
-    aligning the sample with theoretical moments—but it doesn't always
-    yield optimal estimates.
+### ✅ Summary: What Did We Learn About Estimation? {.smaller}
 
--   **MLE** takes a probabilistic approach: it finds the parameter
-    values that make the observed data most “plausible.” This method
-    uses the full shape of the distribution and becomes more powerful
-    with larger samples.
+- **MoM** gives us a simple, intuitive way to estimate parameters by aligning the sample with theoretical moments—but it doesn't always yield optimal estimates.
 
--   We saw how **MLEs behave in the long run**—becoming more precise,
-    often unbiased, and having useful properties like invariance under
-    transformation.
+- **MLE** takes a probabilistic approach: it finds the parameter values that make the observed data most “plausible.” This method uses the full shape of the distribution and becomes more powerful with larger samples.
+
+- We saw how **MLEs behave in the long run**—becoming more precise, often unbiased, and having useful properties like invariance under transformation.
+
