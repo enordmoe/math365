@@ -249,9 +249,9 @@ which uses $n - 1$ in the denominator.
 
 ------------------------------------------------------------------------
 
-## :speech_balloon: Try It! MLE for Uniform(0,$\theta$) {.smaller}
+## :speech_balloon: Try It! MLE for Uniform[0,$\theta$] {.smaller}
 
-Let $X_1,\dots,X_n \sim \text{Uniform}(0,\theta)$
+Let $X_1,\dots,X_n \sim \text{Uniform}[0,\theta]$
 
 ::: fragment
 -   Likelihood:\
@@ -272,7 +272,7 @@ Let $X_1,\dots,X_n \sim \text{Uniform}(0,\theta)$
 :::
 
 ::: notes
-What happens if we have a closed interval rather than open?
+What happens if we have an open interval rather than closed?
 :::
 
 ------------------------------------------------------------------------
