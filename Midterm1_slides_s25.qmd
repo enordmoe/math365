@@ -1,0 +1,1788 @@
+---
+title: "Section 1.1: Populations, Samples and Processes"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    chalkboard: true
+    theme: [default, custom.scss]
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    incremental: false
+    transition: fade
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: true
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today
+
+::: {.incremental}
+- Foundational ideas and terminology
+- Probability review
+:::
+
+
+## Research Questions
+
+::: {.incremental}
+1. What is the average height of K basketball players?
+1. What proportion of 2024 K graduates studied abroad?
+1. What proportion of Michigan drivers hold their cell phones while driving?
+1. What proportion of Amazon deliveries go to wrong address?
+:::
+
+::: {.notes}
+* Population of interest?
+* Is this feasible?
+* Is this a statistical question? Is it an inferential question
+* Is this a real or conceptual population? (Devore)
+:::
+
+
+## Statistics and Probability: A Diagram
+
+
+::: {.notes}
+* Diagram of population and sample
+* Introduce ideas of a population and a sample
+* Emphasize descriptive and inferential statistics
+:::
+
+
+## More Research Questions
+
+::: {.callout .callout-note title="🧠 Alzheimer's Disease"}
+Does long-term treatment with **gantenerumab** delay the onset of Alzheimer’s symptoms in people who are genetically at high risk but not yet showing signs of the disease?
+:::
+
+## More Research Questions
+
+::: {.callout .callout-note title="🪥 Quality Control "}
+You work for a startup that manufactures **smart toothbrushes** with pressure sensors.Sensors should register a force between **2.0 and 2.5 Newtons** during calibration testing. How do you know if your **production process is working properly**?
+:::
+
+## More Research Questions
+
+::: {.callout .callout-note title="🏥👧 Anorexia"}
+A team of psychologists is conducting a study of adolescents diagnosed with **anorexia nervosa**. They wish to know whether **Family-Based Therapy (FT)** or **Cognitive Behavioral Therapy (CBT)** is more effective.
+:::
+
+
+## Some Common Terminology {.smaller}
+- A **population** is the entire group of individuals. In statistics, it is the group about which we wish to make inference.
+- A **sample** is the subset of the population under study.
+- A **variable** is any characteristic of an individual whose value may change from individual to individual.
+
+::: {.fragment}
+- **Statistics** is the art of the collection, description, organization, and analysis of data.
+  - **Descriptive statistics** uses graphical and numerical methods to summarize and describe important features of data.
+  - **Inferential statistics** uses "inverse" probability to draw conclusions about a population from a sample.
+:::
+
+## Some Less Common Terminology
+
+:::{.incremental}
+
+- In **enumerative studies**,  interest is focused on a finite, identifiable, unchanging collection of individuals or objects that make up a population.	
+
+-  **Analytic studies** are often carried out with the objective of improving a future product by taking action on a process of some sort.
+:::
+
+:::{.notes}
+After World War II, W. Edwards Deming, a statistician trained in quality control methods, tried to promote statistical process control in the U.S. manufacturing sector. But American industry, focused on mass production and short-term output, largely ignored his ideas.
+
+Meanwhile, postwar Japan was rebuilding and open to innovation. Japanese engineers and executives embraced Deming’s emphasis on reducing variation, monitoring processes statistically, and fostering continuous improvement. His influence helped shape the Toyota Production System and the global reputation of Japanese manufacturing for quality and efficiency.
+:::
+
+
+
+## Key Ideas: Data Collection and Sampling
+:::{.incremental}
+- Statistics involves both **data analysis** and **methods for collecting data**
+- Poor methods of data collection can lead to **unreliable conclusions**
+- In biased methods, the target population differs from the sampled population
+:::
+
+## Sampling Methods
+:::{.incremental}
+- **Simple Random Sample** (SRS): Every group of a given size is equally likely to be selected
+- **Stratified Sampling**: Divide population into homoegeous groups (e.g., sophs, juniors, etc.) and sample from each
+- **Convenience Sampling**: Easy but potentially biased method (e.g., survey in front of Hicks)
+:::
+
+:::{.fragment}
+$\Longrightarrow$ We will typically assume a simple random sample 
+:::
+
+---
+
+### Designed Experiments
+
+- Common in science and engineering
+- Assign treatments to experimental units (e.g., coatings, fertilizers)
+- Systematically vary factors (e.g., pressure) to observe responses (e.g., yield)
+
+::: notes
+Use this slide to introduce real-world concerns in data collection.
+Emphasize that how data is collected affects what inferences are valid.
+Ask students: Have you ever encountered biased sampling in a study or article?
+:::
+
+
+# Group Exercise: Exploring Kidney Cancer Data {background-color="#E8F5E9"}
+
+
+# Probability Review  {background-color="#FAD9C7"}
+
+## Random Variables & Probability Models
+
+- A **random variable** assigns a number to each outcome in a sample space.
+- **Discrete**: e.g., Binomial, Geometric, Poisson  
+- **Continuous**: e.g., Normal, Exponential, Uniform
+- Key functions:
+  - PMF/PDF: $P(X = x)$ or $f(x)$
+  - CDF: $F(x) = P(X \leq x)$
+
+
+
+## Expected Value, Variance, and Functions of RVs 
+
+
+
+- **Expected value (mean):**  
+  - Discrete: $E(X) = \sum x \, P(X = x)$  
+  - Continuous: $E(X) = \int x \, f(x) \, dx$
+
+- **Variance:**  
+  $V(X) = E[(X - \mu)^2] = E(X^2) - [E(X)]^2$
+
+- **Linear combinations:**  
+  - $E(aX + b) = aE(X) + b$  
+  - $V(aX + b) = a^2 V(X)$
+
+
+
+
+##  Independence & Central Limit Theorem {.smaller}
+
+
+- **Joint distributions**:  
+  $P(X = x, Y = y)$ or $f(x, y)$  
+  Leads to marginal and conditional distributions
+
+- **Independence**:  
+  $P(A \cap B) = P(A)P(B)$  
+  or $f(x, y) = f_X(x)f_Y(y)$ if $X$ and $Y$ are independent
+
+- **Central Limit Theorem (CLT):**  
+  If $X_1, \dots, X_n$ are i.i.d. with mean $\mu$, variance $\sigma^2$:
+  $$
+  \bar{X} \overset{\cdot}{\sim} N\left(\mu, \frac{\sigma^2}{n}\right) \text{ for large } n
+  $$
+
+
+## Linear Combinations {.smaller}
+
+Let $X$ and $Y$ be random variables, and $a$, $b$ constants.
+
+- **Expected Value:**
+  $$
+  E(aX + bY) = a \, E(X) + b \, E(Y)
+  $$
+
+- **Variance (if independent):**
+  $$
+  V(aX + bY) = a^2 \, V(X) + b^2 \, V(Y)
+  $$
+
+- **Variance (if not independent):**
+  $$
+  V(aX + bY) = a^2 \, V(X) + b^2 \, V(Y) + 2ab \, \text{Cov}(X, Y)
+  $$
+
+- **Covariance Linearity:**
+  $$
+  \text{Cov}(aX + bY, Z) = a \, \text{Cov}(X, Z) + b \, \text{Cov}(Y, Z)
+  $$
+
+
+## Check Your Understanding {data-background-color="#E3F2FD"}
+
+::: {.callout .callout-note title="🧠 Think-Pair-Share"}
+
+Which of the following best describes an *analytic study*?
+
+A. Estimating the average tuition cost for all U.S. colleges in 2023  
+B. Studying whether a new fertilizer increases crop yield for future harvests  
+C. Calculating the proportion of Amazon packages delivered incorrectly last month  
+D. Estimating the median income of households in Kalamazoo County using Census data
+
+:::
+
+
+
+# Section 1.2
+
+## Topics for Today
+
+::: incremental
+-   Summarizing Data
+-   Summarizing Categorical Data
+-   Summarizing Quantitative Data
+-   Practice exercises
+:::
+
+
+
+## Summarizing Data
+
+::: incremental
+-   Describe the distribution or pattern of variability of a variable
+-   Data cleaning/editing
+-   Uncover patterns and/or anomalies
+-   Compare two or more distributions
+:::
+
+# Categorical Data {background-color="#FAD9C7"}
+
+## Data Set: General Social Survey 2018
+
+-   Begun in 1972, the **General Social Survey (GSS)** is a long-running
+    longitudinal survey conducted annually that gathers data on the
+    attitudes, behaviors, and demographics of US adults.
+
+-   The surveys are conducted by NORC at the University of Chicago and
+    track a wide range of topics including politics, religion, work, and
+    social life.
+
+-   The dataset **GSS2018** from the R package **resampledata3**
+    contains a subset of the data from 2018.
+
+## The GSS2018 Dataset
+
+![](images/clipboard-1844474087.png){width="250"}
+
+```{r}
+#install.packages("resampledata3")
+library(resampledata3)
+names(GSS2018)
+```
+
+## Visualizing Categorical Data
+
+Most common methods:
+
+::: incremental
+-   A **relative frequency** table displays the values assumed by the
+    variable in a sample of data.
+
+-   A **bar chart** is just a graphical summary of a frequency table
+:::
+
+::: notes
+-   Avoid pie charts- hard to estimate values
+:::
+
+## Describing the GSS2018 Data {.smaller}
+
+### Frequency Table
+
+```{r}
+summary(GSS2018$GenderNow) # first few values
+table(GSS2018$GenderNow)  # Frequency table (but not too pretty)
+```
+
+::: callout-note
+## Finding NAs
+
+Note that the default `table()` command does not show NA values but
+`summary()` does.
+:::
+
+## Describing the GSS2018 Data {.smaller}
+
+### Relative Frequency Table and Adding Totals
+
+```{r}
+prop.table(table(GSS2018$GenderNow))
+
+# Frequency table with totals
+addmargins(table(GSS2018$GenderNow))
+
+# Relative frequency table with totals
+addmargins(prop.table(table(GSS2018$GenderNow)))
+
+```
+
+## Gender Identity Bar Charts
+
+::: panel-tabset
+### Frequency Plot
+
+```{r}
+barplot(table(GSS2018$GenderNow))
+```
+
+### Relative Frequency Plot
+
+```{r}
+barplot(prop.table(table(GSS2018$GenderNow)), ylab = "proportion")
+```
+
+### Plot Percents
+
+```{r}
+barplot(100*prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
+```
+:::
+
+## Extensions
+
+-   Colors
+-   Titles
+-   Axis Labels
+-   Dealing with NAs
+
+# Quantitative data {background-color="#FAD9C7"}
+
+## Examples of Quantitative Variables {.smaller}
+
+::: incremental
+-   **Quantitative** variables are inherently numerical:
+    -   **Continuous variables** take values on a continuous scale:
+        -   Height
+
+        -   Cholesterol
+
+        -   Time to complete a marathon
+
+        -   Rates and proportions
+    -   **Discrete** variables are quantitative variables that are **not
+        continuous**
+        -   Number of siblings
+
+        -   Number of defects in a product
+
+        -   Age reported in years
+
+        -   Number of available parking spaces
+
+        -   Number of cigarettes smoked per day
+:::
+
+::: notes
+Note that some of these vary across a wide range and are treated as
+continuous in practice.
+:::
+
+## Summarizing Quantitative Data
+
+Visual displays of quantitative data depict
+
+-   Overall pattern
+
+    -   Center
+
+    -   Spread
+
+    -   Shape: symmetric, skewed, bimodal, multi-modal
+
+-   Outliers
+
+## A built-in R dataset
+
+**mtcars** contains Motor Trend published data on 32 automobiles
+(1973-74 models).
+
+```{r}
+mtcars
+```
+
+## Dotplots
+
+::: panel-tabset
+## Number of Cylinders
+
+```{r}
+stripchart(mtcars$cyl, method = "stack", xlab = "Number of cylinders")
+
+```
+
+## Mileage
+
+```{r}
+stripchart(mtcars$mpg, method = "stack", xlab = "Mileage")
+```
+:::
+
+## Dotplots Summary
+
+::: incremental
+-   Useful quick summary
+
+-   Good, summary for small datasets with discrete data
+
+-   Continuous data results in overlapping points and/or grouping of
+    observations
+
+-   Many ways to do this in R but none are great
+:::
+
+## Histograms: R default
+
+::: panel-tabset
+## Cylinders
+
+```{r}
+hist(mtcars$cyl, xlab = "Number of cylinders")
+```
+
+## Cylinders v2.0
+
+```{r}
+# Manually set intervals: (3.5, 4.5], (4.5, 5.5],...
+hist(mtcars$cyl, breaks = seq(3.5, 8.5, 1),xlab = "Number of cylinders")
+```
+
+## Mileage
+
+```{r}
+hist(mtcars$mpg, xlab = "Mileage")
+```
+:::
+
+## Histograms Using Density
+
+-   Technically, histograms are carefully designed to represent relative
+    frequency by area plotting density on the vertical scale so that the
+    total area in the rectangles sums to 1.
+-   Define:
+
+$$
+\text{Rectangle Height}=\frac{\text{Relative frequency}}{\text{Class width}}
+$$
+
+-   This avoids misrepresenting the shape of the distribution,
+    especially when using unequal widths.
+
+## Histograms: Density as Height {.smaller}
+
+::: panel-tabset
+## Mileage
+
+R plots density as height when intervals are unequal width
+
+```{r}
+#| fig-height: 3
+hist(mtcars$mpg, xlab = "Mileage", breaks = c(10, 12, 14, 16, 18, 20, 22, 24, 35))
+```
+
+## Mileage: INCORRECT
+
+Plotting frequencies here would be misleading and R warns you about
+this.
+
+```{r}
+#| fig-height: 3
+hist(mtcars$mpg, xlab = "Mileage", breaks = c(10, 12, 14, 16, 18, 20, 22, 24, 35),
+     freq = TRUE)
+```
+:::
+
+## Histogram Shapes
+
+Shapes to look out for when working with distributions of quantitative
+variables:\
+![](images/clipboard-2640103481.png)\
+
+## Summary {.smaller}
+
+-   Categorical data are best summarized using **frequency tables** and
+    **bar charts**; avoid misleading visuals like pie charts.
+-   Quantitative data summaries focus on **shape, center, and spread**,
+    often visualized through **dotplots** and **histograms** (with
+    attention to bin widths and density scaling).
+-   In R, visualizations like `stripchart()` and `hist()` offer quick
+    insights, but careful choices in formatting and scaling are
+    essential for accurate interpretation.
+
+::: aside
+Note: While **stem-and-leaf plots** can show detailed distributional shape,
+they are rarely used in practice and often misunderstood — we'll focus
+on more accessible and widely-used visualizations.
+:::
+
+# Practice Exercises {background-color="#FAD9C7"}
+
+## Practice on your own {.smaller}
+
+1.  Copy and paste the following code to your R console to read the
+    Example 1.8 data into a data frame called **gradrates**.
+
+```{r}
+ gradrates <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-08.csv")
+```
+
+2.  Use the `View()` function at the console to inspect the data. What
+    is the name of the variable representing the percent of the state's
+    population that have a college degree?
+3.  Use `stripchart()` to obtain a dotplot like the one in Figure 1.6.
+    How is it similar and how is it different?
+4.  Obtain three histograms of college degree percent
+    i.  Equal width intervals and frequency as height
+    ii. Equal width intervals and density as height
+    iii. Unequal width intervals and density as height
+
+## More practice: **faithful** {.smaller}
+
+1.  Type **?faithful** at the console to learn about the built-in
+    **faithful** datset
+2.  Use the graphs from this section to explore the varibles *eruptions*
+    and *waiting*.
+3.  How would you describe the shapes of the distributions?
+4.  Which graphs are most useful for this data?
+5.  You can get a smoothed version of a histogram called a density plot
+    using the basic command `plot(density(df$var))` where `df`
+    represents the data frame name and `var` is the variable. Try this
+    with either variable. (Try changing `adjust` if you're
+    adventurous.)
+
+
+# Sections 1.3-1.4
+
+### Warm-Up: What Value of $c$ Minimizes Squared Deviations?
+
+We will investigate:\
+$$
+S(c) = \sum_{i=1}^3 (x_i - c)^2 \quad \text{for } x_1 = 4,\ x_2 = 7,\ x_3 = 10
+$$
+
+------------------------------------------------------------------------
+
+### Warm-Up
+
+1.  Choose a value for $c$ (e.g., $5,\ 6,\ 7,\ 8$). Compute
+    $S(c) = (x_1 - c)^2 + (x_2 - c)^2 + (x_3 - c)^2$. [What do you
+    notice?]{.fragment}
+
+2.  [Try to guess the value of $c$ that minimizes $S(c)$. Why does that
+    value make sense?]{.fragment}
+
+3.  [Optional extension: Expand and simplify $S(c)$ algebraically. Can
+    you take its derivative?]{.fragment}
+
+4.  [What do you think this says about the mean as a "best" measure of
+    center?]{.fragment}
+
+------------------------------------------------------------------------
+
+## Topics for Today
+
+::: incremental
+-   Measures of center and location
+-   Measures of spread
+-   Visualizations for comparing groups
+:::
+
+## Data Set: Chesapeake Total Nitrogen Load Data {.smaller}
+
+::: incremental
+-   **Environmental Motivation**: The Clean Water Act requires U.S.
+    waters to meet pollution reduction goals to ensure they remain
+    *fishable and swimmable*.
+-   **Measurement Focus**: Daily **Total Nitrogen (TN)** loads (kg
+    N/day) at a site in the **Chesapeake Bay** watershed.
+-   **Purpose**: The study examines how commonly used methods for
+    estimating pollutant loads in watersheds can produce misleading
+    results, emphasizing the need for sound statistical practices.
+-   **Source**: Data are drawn from *“Spurious Correlation in the USEPA
+    Rating Curve Method for Estimating Pollutant Loads”*\
+    (*J. of Environ. Engr.*, 2008: 610–618).
+:::
+
+::: notes
+We'll use this sample to examine graphical summaries and discuss
+foundational assumptions for inference.
+:::
+
+## Importing the Data
+
+Use R to read the data into a dataset called **eg1p20**.
+
+```{r}
+eg1p20 <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-20.csv")
+```
+
+## Data Analysis Tasks
+
+1.  Plot and describe the distribution of the data
+2.  Obtain measures of center
+3.  Obtain measures of variability
+4.  Identify and plot potential outliers
+
+::: notes
+Use R to work through these with reference to statistics of interest.\
+\* Create a dotplot and histogram \* Summary statistics: measures of
+center and spread (including trimmed mean) \* Five number summary \*
+Boxplot
+:::
+
+# Measures of Center {background-color="#FAD9C7"}
+
+## Mean
+
+**Our Data**: A sample of $n$ observations $x_1, x_2,\ldots, x_n$ on the
+random variable $X$.
+
+::: {.callout-note title="Definition"}
+The **mean** $\bar{x}$ of the $n$ values $x_1, x_2, \ldots, x_n$ is
+given by: $$
+\bar{x} =  \frac{\sum_{i=1}^n x_i}{n}.
+$$
+:::
+
+## Properties of the Mean
+
+::: incremental
+-   The *center of gravity* of the distribution
+    -   A histogram or dotplot would balance at $\bar{x}$
+-   Deviations $x_i - \bar{x}$ sum to 0
+-   Minimizes the sum of squared deviations around $\bar{x}$
+-   But, the mean is **very** sensitive to outliers
+:::
+
+## Median
+
+::: {.callout-note title="Definition"}
+The **median** of the $n$ values $x_1, x_2,\ldots, x_n$ is the value
+that most nearly lies in the middle with half the values smaller and
+half larger.
+:::
+
+## Finding the Median
+
+-   Arrange the data in ascending order
+-   If $n$ is **odd**, median is the center value
+-   If $n$ is **even**, median is the **mean** of the two center values
+
+::: {.callout-tip icon="👉"}
+**Try this:** Investigate the properties of the Mean and Median using
+[Moore's
+applet](https://digitalfirst.bfwpub.com/stats_applet/stats_applet_6_meanmed.html)
+:::
+
+The **median** is preferred over the mean when a **robust** measure of
+center is needed.
+
+## A Compromise Measure: Trimmed Mean
+
+::: {.callout-note title="Definition"}
+The **trimmed mean** removes a fixed proportion of the smallest and
+largest values from the data, then computes the mean of the remaining
+values.
+
+-   For example, the 10% trimmed mean discards the lowest 10% and
+    highest 10% of observations before averaging.
+:::
+
+In R:
+
+``` r
+mean(x, trim = 0.10)
+```
+
+# Measures of Spread {background-color="#FAD9C7"}
+
+## The Range
+
+::: {.callout-note title="Definition"}
+The **range** is a single number:\
+$$\text{Range} = \max(x_i) - \min(x_i)$$
+:::
+
+-   Measures the total spread of the data
+-   **Highly sensitive** to extreme values (not robust)
+-   Not very useful in general but still often used!
+
+## Standard Deviation
+
+::: {.callout-note title="Definition"}
+The **standard deviation** $s$ of the $n$ values $x_1, x_2, \ldots, x_n$
+is given by: $$
+s = \sqrt{\frac{1}{n - 1} \sum_{i=1}^n (x_i - \bar{x})^2}
+$$
+
+The **sample variance** is $s^2$.
+:::
+
+## Properties of the Standard Deviation $s$
+
+-   Measures *typical distance* from the mean
+-   Like $\bar{x}$, not resistant to outliers
+-   SD is 0 if all values are equal
+-   Units match those of the original data
+-   Denominator is $n-1$ rather than $n$ to obtain a better estimate of
+    the population value $\sigma^2$.
+-   The standard deviation is most useful when working with Normal data.
+
+## Hinges and Fourths
+
+-   Order the $n$ observations from smallest to largest.
+-   Split the data into lower and upper halves.
+-   If $n$ is odd, include the median $\tilde{x}$ in **both** halves.
+-   The **lower fourth** or **lower hinge** ($h_l$) is the median of the
+    lower half.
+-   The **upper fourth** or **upper hinge** ($h_u$) is the median of the
+    upper half.
+
+## Fourth Spread {.smaller}
+
+::: {.callout-note title="Definition"}
+The fourth spread $f_s$ is John Tukey's robust measure of variability
+defined: $$
+    f_s = h_u - h_l
+$$
+:::
+
+::: fragrment
+The fourth spread $f_s$ is:
+
+-   The **range of the middle half** of the data.
+
+-   Unambiguous and easy to calculate by hand for small datasets
+
+-   Very similar to the Interquartile Range
+:::
+
+## The Standard Boxplot
+
+-   Displays the **five-number summary**:
+    -   $x_{\min}$, $h_l$, $\tilde{x}$, $h_u$, $x_{\max}$
+-   The box spans $f_s$, with:
+    -   Edges at $h_l$ and $h_u$
+    -   Vertical line at the median $\tilde{x}$
+    -   Whiskers extending to min and max
+
+## The Modified Boxplot
+
+-   Whiskers extend only to the **most extreme non-outliers**
+-   **Outliers** are plotted separately
+-   Some software (but not base R) uses different symbols for:
+    -   **Mild outliers** (between $1.5f_s$ and $3f_s$ from the nearest
+        hinge)
+    -   **Extreme outliers** (more than $3f_s$ away from the nearest
+        hinge)
+
+# More Options for Subgroup Analysis {background-color="#FAD9C7"}
+
+## Options for Comparing Statistical Summaries by Subgroup in Base R {.smaller}
+
+#### Summarizing `mpg` by `cyl` in `mtcars`
+
+-   Base R offers several concise tools to compute and compare summary
+    statistics across groups
+
+```{r, eval = FALSE}
+# Means by cylinder group
+tapply(mtcars$mpg, mtcars$cyl, mean)
+
+# Five-number summaries by group
+by(mtcars$mpg, mtcars$cyl, summary)
+
+# Mean and SD per group as a data frame
+aggregate(mpg ~ cyl, mtcars, function(x) c(mean = mean(x), sd = sd(x)))
+```
+
+::: fragment
+-   :white_check_mark: `tapply()` → compact results, one stat at a time,
+    useful in scripting
+-   :white_check_mark: `by()` → readable summaries for each group
+-   :white_check_mark: `aggregate()` → clean tabular format, good for
+    displaying multiple summaries together
+:::
+
+## Side-by-side histograms: MPG by Cylinder {.smaller}
+
+::: panel-tabset
+### Plot
+
+```{r, echo = FALSE}
+# Save original graphical parameters
+op <- par(no.readonly = TRUE)
+
+# Layout: 3 rows, 1 column
+par(mfrow = c(3, 1), mar = c(4, 4, 2, 1))
+
+# Common x-axis limits
+xlims <- range(mtcars$mpg)
+
+# Histograms for each cylinder group
+hist(mtcars$mpg[mtcars$cyl == 4], main = "4 cyl", xlab = "MPG", 
+     xlim = xlims, col = "skyblue")
+hist(mtcars$mpg[mtcars$cyl == 6], main = "6 cyl", xlab = "MPG", 
+     xlim = xlims, col = "forestgreen")
+hist(mtcars$mpg[mtcars$cyl == 8], main = "8 cyl", xlab = "MPG", 
+     xlim = xlims, col = "tomato")
+
+# Restore original settings
+par(op)
+```
+
+### Code
+
+``` r
+# Save original graphical parameters
+op <- par(no.readonly = TRUE)
+
+# Layout: 3 rows, 1 column
+par(mfrow = c(3, 1), mar = c(4, 4, 2, 1))
+
+# Common x-axis limits
+xlims <- range(mtcars$mpg)
+
+# Histograms for each cylinder group
+hist(mtcars$mpg[mtcars$cyl == 4], main = "4 cyl", xlab = "MPG", 
+     xlim = xlims, col = "skyblue")
+hist(mtcars$mpg[mtcars$cyl == 6], main = "6 cyl", xlab = "MPG", 
+     xlim = xlims, col = "forestgreen")
+hist(mtcars$mpg[mtcars$cyl == 8], main = "8 cyl", xlab = "MPG", 
+     xlim = xlims, col = "tomato")
+
+# Restore original settings
+par(op)
+```
+:::
+
+# Practice Exercises {background-color="#E3F2FD"}
+
+Analyze the built-in **iris** data set.
+
+-   Browse help using `?iris`. (Find pictures of irises:)
+
+-   Investigate petal width using methods from class including data
+    display and summary statistics.
+
+-   Explore the relationship between petal width and species.
+
+## Summary: Measures of Location and Spread {.smaller background-color="#E8F5E9"}
+
+-   The **mean** minimizes squared deviations but is **sensitive to
+    outliers**
+-   The **median** is a **robust** alternative, especially for skewed
+    data
+-   The **trimmed mean** offers a compromise: reduces outlier impact
+    while retaining more data
+-   The **standard deviation** measures typical variability but is not
+    resistant
+-   The **fourth spread** is a robust measure of spread, similar to the
+    IQR
+-   **Boxplots** provide visual summaries:
+    -   Standard: min, hinges, median, max
+    -   Modified: highlights mild and extreme outliers
+-   Base R tools like `summary()`, `fivenum()`, and `boxplot()` support
+    both numeric and visual analysis
+-   For grouped data: use `tapply()`, `by()`, or `aggregate()` to
+    compare summaries across subgroups
+
+
+# Section 5.3
+
+
+::: incremental
+-   Sample Statistics
+-   Sampling distributions
+-   Finding sampling distributions
+    -   By enumeration
+    -   Analytically
+    -   Using R Simulation
+:::
+
+------------------------------------------------------------------------
+
+## :bar_chart: Statistics
+
+::: {.callout-note title="Definition: Statistic"}
+A **statistic** is any quantity whose value can be calculated from
+sample data. A statistic is a **random variable**, and will be denoted
+by an *uppercase letter* (e.g., $\bar X$); a *lowercase letter* (e.g.,
+$\bar x$) represents an observed or calculated value of the statistic.
+:::
+
+::: notes
+Generally, statistics are computed to estimate a population parameter
+:::
+
+## :bar_chart: Sampling Distributions
+
+::: {.callout-note title="Definition: Sampling Distribution"}
+The **probability distribution** of a statistic is often called its
+**sampling distribution**, to emphasize that it describes how the
+statistic varies across all possible samples.
+:::
+
+## :school: Estimating Faculty Years of Service
+
+Suppose we're interested in estimating the **average number of years**
+faculty have served in the **Math Department** at Kalamazoo College.
+
+-   Think about how to describe how a **statistic** (like the sample
+    mean) varies across different samples\
+
+------------------------------------------------------------------------
+
+## :coffee: K Coffee Habits {.smaller}
+
+At Kalamazoo College, suppose about **30% of students** buy coffee on
+campus at least once a week. Suppose you **randomly sample 10
+students**.
+
+Let:
+
+-   $X$ = number of students in the sample who buy coffee weekly
+
+-   $\hat{p} = X/10$ = sample proportion
+
+**Questions:**
+
+::: incremental
+-   What kind of random variable is $X$?
+
+-   What values can $\hat{p}$ take?
+
+-   What is the sampling distribution of $\hat{p}$?
+
+-   What is the probability that 20% of the students in our sample buy
+    coffee weekly?
+:::
+
+## 🎲 Simulation and Sampling Distributions
+
+*  When a derivation via probability rules is very difficult or even impossible,  we can use **simulation** to approximate the **sampling distribution** of a statistic.  
+
+* Simulate the sampling distribution of a statistic by drawing from a known population many times and calculating the values of the statistic of interest (e.g., trimmed mean)  
+
+
+# Simulation Investigation: Grubbs' Test for Outliers
+
+
+## 📝 Summary: Statistics and Their Distributions {.smaller}
+
+- A **statistic** is a quantity computed from sample data — it is a random variable  
+- The **sampling distribution** describes how a statistic varies across all possible samples
+
+- We can explore sampling distributions:
+  - 🔢 By enumeration (all possible samples)
+  - 🧮 Analytically (using probability)
+  - 🎲 Through simulation (approximating variability empirically)
+
+
+> Understanding how statistics behave across samples is **fundamental to inference.**
+
+
+# Section 5.4
+
+## Topics for Today
+
+::: incremental
+-   Properties of the Sample Mean
+-   Exact distributions when data are normal
+-   Approximate distributions using the CLT
+-   Examples and applications :pencil2:
+:::
+
+## Patterns in Randomness
+
+![](https://i.makeagif.com/media/11-18-2015/suo0rL.gif){width="400px"}
+
+------------------------------------------------------------------------
+
+### :arrows_counterclockwise: From *Sampling Distributions* to the *Sample Mean*
+
+We’ve seen that statistics vary across samples and have their own
+**sampling distributions**.
+
+Today, we focus on one statistic in particular: the **sample mean**
+$\overline{X}$.
+
+## :speech_balloon: Questions
+
+::: incremental
+-   Why is $\overline{X}$ such an important statistic in practice?
+-   What do we expect the distribution of $\overline{X}$ to look like?
+-   How do shape and sample size affect that distribution?
+:::
+
+------------------------------------------------------------------------
+
+## :bar_chart: The Distribution of the Sample Mean {.smaller}
+
+:::: {.callout-note title="Proposition: Distribution of $\\overline{X}$ and $T_0$"}
+Let $X_1, X_2, \dots, X_n$ be a random sample from a population with
+mean $\mu$ and standard deviation $\sigma$. Then:
+
+-   $E(\overline{X}) = \mu$
+-   $\text{Var}(\overline{X}) = \sigma^2 / n$
+
+::: fragment
+For the sample total $T_0 = \sum X_i$
+
+-   $E(T_0) = n\mu$
+-   $\text{Var}(T_0) = n\sigma^2$
+:::
+::::
+
+## :abacus: Special Case: Normal Population
+
+Since a linear combination of independent normal random variables is
+also random, it follows that:
+
+:::: {.callout-note title="Proposition: Exact Distribution when $X_i \\sim N(\\mu, \\sigma)$"}
+If the $X_i$ are i.i.d. from a normal distribution, then for any $n$:
+
+::: incremental
+-   $\overline{X} \sim N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)$
+-   $T_0 \sim N\left(n\mu, \sqrt{n}\sigma\right)$
+:::
+::::
+
+## Why is this useful?
+
+-   We can compute **exact** probabilities for $\overline{X}$ or $T_0$
+-   Even **small samples** have exact normal sampling distributions
+
+------------------------------------------------------------------------
+
+## :tulip: Example: Hours Spent Outside
+
+Now that it’s spring, suppose the number of hours K students spend
+outside per day is normally distributed with:
+
+-   $\mu = 2.5$ hours, $\sigma = 1.2$ hours
+
+A random sample of $n = 16$ students is selected
+
+::: incremental
+-   What is the probability the sample mean exceeds 3 hours?
+
+-   Only 1 percent of samples would produce a mean $\bar X$ exceeding
+    what value?
+:::
+
+::: notes
+-   $\overline{X} \sim N\left(2.5, \frac{1.2}{\sqrt{16}}\right) = N(2.5, 0.3)$\
+-   $P(\overline{X} > 3)=$
+    `1-pnorm(3, 2.5, 1.2/sqrt(16))`$\approx 0.0478$
+-   `qnorm(.99, 2.5, 1.2/sqrt(16))` $\approx 3.20$ hours
+:::
+
+# Investigation: Who are you texting? {background-color="#E3F2FD"}
+
+## :speech_balloon: Who Are You Texting? {.smaller}
+
+> A researcher is interested in the number of **different people**
+> students text on a typical day. A previous study found that the
+> **mean** was about **7** and the **standard deviation** was about
+> **6**.
+>
+> Consider a class of 30 students. Each student reports how many
+> different people they texted yesterday.
+
+::: incremental
+1.  Without seeing any data, **sketch** what you expect the
+    **distribution** of this variable to look like.
+
+2.  Suppose we randomly sampled 30 students and computed the **sample
+    mean** number of people texted, what shape would you expect the
+    **sampling distribution** of the sample mean to have?
+:::
+
+::: notes
+Ask students to carry out the simulation now.
+:::
+
+
+------------------------------------------------------------------------
+
+### :globe_with_meridians: Approximation: Central Limit Theorem {.smaller}
+
+:::: {.callout-note title="Theorem: Central Limit Theorem (CLT)"}
+Let $X_1, \dots, X_n$ be i.i.d. from a population with mean $\mu$ and
+variance $\sigma^2$. Then, as $n \to \infty$:
+
+$$
+\frac{\overline{X} - \mu}{\sigma / \sqrt{n}} \to N(0,1)
+$$
+
+::: fragment
+Equivalently:
+
+$$
+\overline{X} \dot{\sim} N\left(\mu, \frac{\sigma}{\sqrt{n}}\right)
+$$
+:::
+::::
+
+------------------------------------------------------------------------
+
+
+## :iphone: Example: People Texted Per Day
+
+Let $X$ = number of different people a student texts in a day. Assume:
+
+-   $\mu = 7$, $\sigma = 6$
+
+-   $n = 40$ students
+
+**Q:** Approximate the probability that mean exceeds 8 people:
+$P(\overline{X} > 8)$
+
+::: notes
+-   $\overline{X} \dot{\sim} N(7, 6/\sqrt{40}) = N(7, 0.95)$\
+-   $P(\overline{X} > 8) \approx 0.1469$\
+:::
+
+
+------------------------------------------------------------------------
+
+## :warning: Notes on Using the CLT
+
+::: incremental
+-   Works well even when population is not normal
+-   Accuracy improves with $n$
+-   The approximation is usually good if $n > 30$ unless the population
+    is extremely skewed.
+-   Check skewness/heavy tails before applying
+:::
+
+------------------------------------------------------------------------
+
+## :memo: Summary: Sample Mean Distributions
+
+-   $\overline{X}$ is unbiased for $\mu$; SD shrinks as $n$ increases\
+-   If population is normal, $\overline{X}$ is exactly normal\
+-   If population is arbitrary, $\overline{X}$ is **approximately
+    normal** for large $n$
+
+:::{.fragment}
+:point_right: CLT is an amazing result — it helps us use normal-based
+methods even when data aren’t normal!
+:::
+
+
+
+# Section 6.1
+
+## Topics for Today
+
+-   Point estimators and their properties
+-   Mean Squared Error (MSE) :bulb:
+-   Unbiasedness
+-   MVUEs (not :mouse:)
+-   Standard errors and bootstrap standard errors
+
+------------------------------------------------------------------------
+
+## Point Estimators :round_pushpin:
+
+::: callout-important
+**Definition.** A **point estimate** of a parameter $\theta$ is a single
+number considered a sensible value for $\theta$, based on a sample.
+
+The **point estimator** is the rule or function used to generate this
+value. Since it's computed from a random sample, it is itself a **random
+variable**.
+:::
+
+:question: *What’s the difference between a statistic and an estimator?*
+
+------------------------------------------------------------------------
+
+## Hitting the Mark?
+
+![](images/clipboard-2724464104.png)
+
+::: incremental
+-   Which estimator would you use?
+
+-   Which do you prefer between B and C?
+:::
+
+::: aside
+Source:[https://manoa.hawaii.edu/exploringourfluidearth/](https://manoa.hawaii.edu/exploringourfluidearth/physical/world-ocean/map-distortion/practices-science-precision-vs-accuracy#:~:text=Accuracy%20refers%20to%20how%20close,Precision%20is%20independent%20of%20accuracy).
+:::
+
+## Mean Squared Error (MSE) {.smaller}
+
+::: callout-note
+**Definition.** The **Mean Squared Error** of an estimator
+$\hat{\theta}$ is:\
+$$  
+\text{MSE}(\hat{\theta}) = E[(\hat{\theta} - \theta)^2]  
+$$
+:::
+
+::: fragment
+We can decompose the MSE:
+
+$$
+\text{MSE} = \underbrace{\text{Var}(\hat{\theta})}_{\text{spread}} + \underbrace{[\text{Bias}(\hat{\theta})]^2}_{\text{squared error of bias}}
+$$
+:::
+
+::: fragment
+:speech_balloon: *Why does this decomposition matter when comparing
+estimators?*
+:::
+
+## Unbiased Estimators :dart:
+
+::: callout-important
+**Definition.**\
+An estimator $\hat{\theta}$ is **unbiased** for $\theta$ if:\
+$$
+E(\hat{\theta}) = \theta
+$$
+
+If not, the bias is: $\text{Bias}(\hat{\theta}) =E(\hat{\theta}-\theta)$
+:::
+
+## :trophy: Hall of Fame of Unbiased Estimators
+
+-   Sample mean $\bar{X}$ is an unbiased estimator of $\mu$ from a
+    normal distribution.
+
+-   $\hat{p} = X/n$ is an unbiased estimator of a binomial probability
+    $p$.
+
+-   
+
+    ## Sample variance $S^2$ is an unbiased estimator of $\sigma^2$.
+
+##  {.smaller}
+
+### Sample Variance: A Setup for Unbiasedness :abacus:
+
+We define the **sample variance** as: $$
+S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2
+$$
+
+-   This uses $\bar{X}$ in place of the unknown mean $\mu$.
+-   The denominator is $n - 1$ instead of $n$ (Why? we'll find out)
+
+::: fragment
+We’ll show that: $$
+E(S^2) = \sigma^2
+$$ So $S^2$ is an **unbiased estimator** of population variance!
+
+:brain: Hint: this involves expanding $(X_i - \bar{X})^2$ and working
+with expectations.
+:::
+
+------------------------------------------------------------------------
+
+## Estimators with Minimum Variance :brain:
+
+::: callout-tip
+**Definition.**\
+An unbiased estimator with the **lowest variance** among all unbiased
+estimators is called the **Minimum Variance Unbiased Estimator (MVUE)**.
+:::
+
+## Theorem (:gem: MVUE for the Mean)
+
+Let $X_1, \dots, X_n \sim \text{iid}(\mu, \sigma^2)$.\
+Then $\hat{\theta} = \bar{X}$ is the **MVUE** of $\mu$.
+
+::: fragment
+:eight_spoked_asterisk: *Minimum variance estimators do more with less!*
+:::
+
+## Standard Error :straight_ruler: {.smaller}
+
+::: callout-note
+**Definition.** The **standard error** of an estimator $\hat{\theta}$
+is:\
+$$
+\sigma_{\hat{\theta}} = \sqrt{\text{Var}(\hat{\theta})}
+$$
+:::
+
+::: fragment
+Often, we replace unknown quantities with estimates → **estimated
+standard error**:
+
+$$\hat{\sigma}_{\hat{\theta}}$$
+
+:hammer_and_wrench: Used to construct confidence intervals and assess
+estimator precision.
+:::
+
+------------------------------------------------------------------------
+
+## Parametric Bootstrap :repeat:
+
+:::: callout-note
+**Motivation.**\
+What if we want to estimate the standard error of an estimator, but:
+
+-   There’s no closed-form formula for the variance?
+-   The sampling distribution is too complex to handle analytically?
+
+::: fragment
+:arrow_right: **Enter the Bootstrap!** It uses the **plug-in
+principle**:
+
+-   *Our sample data informs a model for the population, from which we
+    simulate new samples.*
+:::
+::::
+
+------------------------------------------------------------------------
+
+## What is the Parametric Bootstrap? :repeat:
+
+:::: callout-note
+Instead of resampling from the data directly, we:
+
+::: incremental
+1.  Choose a **parametric model** for the data (e.g., Normal).
+2.  **Estimate parameters** from the observed data.
+3.  **Generate simulated samples** from the model using the estimated
+    parameters.
+4.  **Recalculate** the estimator on each sample to approximate the
+    sampling distribution.
+:::
+::::
+
+------------------------------------------------------------------------
+
+## Visualizing the Bootstrap
+
+![](images/bsdiagram.jpg){width="75%"}
+
+::: aside
+This is a **parametric bootstrap** if we simulate from a model\
+(e.g., $\mathcal{N}(\hat{\mu}, \hat{\sigma}^2)$), and a **nonparametric
+bootstrap** if we resample the observed data.
+:::
+
+------------------------------------------------------------------------
+
+## Parametric Bootstrap: Step-by-Step     {.smaller}
+
+Suppose we want to estimate the variability of $\hat{\theta}$,\
+but don’t have a closed-form for $\operatorname{Var}(\hat{\theta})$.
+
+:arrow_right: We simulate its sampling distribution.
+
+:::{.incremental}
+1.  Estimate parameter(s) $\hat{\theta}$ from original data.
+2.  Generate $B$ samples from the estimated distribution.
+3.  Compute a bootstrap estimate $\hat{\theta}_b^*$ for each.
+4.  Use the **spread** of the $\hat{\theta}_b^*$ to approximate the SE:
+$$
+S_{\hat{\theta}} = \sqrt{ \frac{1}{B - 1} \sum_{b=1}^B \left( \hat{\theta}_b^* - \bar{\theta}^* \right)^2 }
+$$
+
+:::{.fragment}
+Where $\bar{\theta}^* = \frac{1}{B} \sum_{b=1}^B \hat{\theta}_b^*$.
+:::
+:::
+------------------------------------------------------------------------
+
+## Simulating Bootstrap Standard Error {.smaller}
+
+Estimate the SE of the sample mean using a **parametric bootstrap**:
+
+```{r}
+set.seed(365)
+n <- 30
+x <- rnorm(n, mean = 10, sd = 2)  # Original sample (population unknown)
+
+# Step 1: Estimate parameters from the data
+mu_hat <- mean(x)
+sigma_hat <- sd(x)
+
+# Step 2: Generate B bootstrap samples from N(mu_hat, sigma_hat)
+B <- 1000
+boot_means <- numeric(B)
+
+for (b in 1:B) {
+  x_star <- rnorm(n, mean = mu_hat, sd = sigma_hat)
+  boot_means[b] <- mean(x_star)
+}
+
+# Step 3: Estimate the bootstrap SE
+boot_se <- sd(boot_means)
+
+cat("Parametric Bootstrap SE for sample mean:", round(boot_se, 3), "\n")
+```
+
+---
+
+## Key Takeaways
+
+- Parametric bootstrap assumes a model for the population.
+- We simulate samples using parameter estimates from data.
+- Bootstrap SE reflects the sampling variability of the estimator under that model.
+- Validity depends on how well the model fits the real data!
+- When in doubt about the model, use the non-parametric bootstrap.
+
+---
+
+## Summary :star2:
+
+-   A **point estimator** is a random variable computed from sample
+    data.
+-   MSE = variance + bias$^2$
+-   **Unbiased** estimators have $E(\hat{\theta}) = \theta$
+-   **MVUE**: most efficient among unbiased estimators
+-   **Standard error** quantifies estimator variability
+-   **Bootstrap** provides a flexible, simulation-based alternative
+
+
+
+# Section 6.2
+
+## :dart: Topics for Today
+
+-   Define and apply the **Method of Moments**
+-   Understand and compute **Maximum Likelihood Estimators (MLEs)**
+-   Explore **large-sample properties** of MLEs
+-   Visualize likelihood with **Desmos** and interpret maximization
+
+------------------------------------------------------------------------
+
+## :round_pushpin: Motivation: Estimating Parameters
+
+> A central task in statistics: Use data to estimate unknown parameters
+> of a distribution.
+
+-   Given a sample $X_1,\dots,X_n \sim f(x;\theta_1,\dots,\theta_m)$,
+    how do we estimate the parameters?
+-   Two classic techniques:
+    -   Method of Moments
+    -   Maximum Likelihood Estimation
+
+------------------------------------------------------------------------
+
+## :test_tube: Method of Moments (MoM) {.smaller}
+
+### :book: Definition
+
+Let $X_1,\dots,X_n \sim f(x;\theta_1,\dots,\theta_m)$\
+The *k*-th sample moment is:
+
+$$
+M_k = \frac{1}{n} \sum_{i=1}^n X_i^k
+$$
+
+Match the first $m$ sample moments with the corresponding population
+moments:
+
+$$
+M_k = E(X^k),\quad\text{for } k = 1,\dots,m
+$$
+
+:arrow_right: Solve the resulting system for $\theta_1,\dots,\theta_m$
+
+------------------------------------------------------------------------
+
+## :bulb: Example: MoM for Exponential($\lambda$)
+
+We have $X_1,\dots,X_n \sim \text{Exponential}(\lambda)$, and we know:
+
+-   Population mean: $E(X) = \frac{1}{\lambda}$
+
+Moment equation: $$
+\frac{1}{n} \sum X_i = \frac{1}{\lambda} \quad \Rightarrow \quad \hat{\lambda}_{\text{MoM}} = \frac{1}{\bar{X}}
+$$
+
+------------------------------------------------------------------------
+
+## :abacus: Example: MoM for Uniform(0,$\theta$)
+
+-   Population mean: $E(X) = \frac{\theta}{2}$
+
+Set
+$\bar{X} = \frac{\theta}{2} \Rightarrow \hat{\theta}_{\text{MoM}} = 2\bar{X}$
+
+::: {.callout-tip icon="true"}
+:white_check_mark: Simple, but doesn't always respect sample bounds.
+:::
+
+------------------------------------------------------------------------
+
+## :chart_with_upwards_trend: Maximum Likelihood Estimation (MLE)
+
+### :book: Definition
+
+Given observed data $x_1,\dots,x_n$, define the **likelihood** function:
+
+$$
+L(\theta_1,\dots,\theta_m) = f(x_1,\dots,x_n;\theta_1,\dots,\theta_m)
+$$
+
+MLEs are the parameter values $\hat{\theta}_1,\dots,\hat{\theta}_m$ that
+**maximize** the likelihood.
+
+------------------------------------------------------------------------
+
+## :pencil2: Let's Visualize: Likelihood with Bernoulli {.smaller}
+
+:abacus: Suppose $X_1,\dots,X_n \sim \text{Bernoulli}(p)$
+
+::: incremental
+-   Write the likelihood: $$
+    L(p) = \prod_{i=1}^n p^{x_i}(1 - p)^{1 - x_i}
+    $$
+-   Try this in [Desmos Graphing
+    Calculator](https://www.desmos.com/calculator):
+    -   Fix a sample (e.g., $x = (1, 0, 1, 1, 0)$)
+    -   Graph the likelihood and estimate the value of $p$ that
+        maximizes $L(p)$
+    -   Do the same for $\log[L(p)]$
+:::
+
+::: fragment
+> **Think-Pair-Share**: Why is the log-likelihood easier to work with?
+:::
+
+------------------------------------------------------------------------
+
+## :abacus: Why Use Log-Likelihood?
+
+> Logarithms turn products into sums!
+
+Instead of maximizing $L(\theta)$, we often maximize:
+
+$$
+\ell(\theta) = \ln L(\theta)
+$$
+
+::: fragment
+:white_check_mark: Easier algebra and numeric stability\
+:white_check_mark: Easier to differentiate\
+:white_check_mark: Same location of maximum
+:::
+
+------------------------------------------------------------------------
+
+## :speech_balloon: Try It! MLE for Bernoulli {.smaller}
+
+Let $X_1,\dots,X_n \sim \text{Bernoulli}(p)$
+
+::: fragment
+-   Likelihood:\
+    $$
+    L(p) = p^{\sum X_i} (1 - p)^{n - \sum X_i}
+    $$
+:::
+
+::: fragment
+-   Log-likelihood:\
+    $$
+    \ell(p) = \sum X_i \ln p + (n - \sum X_i) \ln(1 - p)
+    $$
+:::
+
+::: fragment
+> Differentiate and solve for $p$ that maximizes $\ell(p)$.
+
+:arrow_right: $\hat{p} = \bar{X}$
+:::
+
+------------------------------------------------------------------------
+
+## :abacus: MLE for Normal($\mu$, $\theta$) — Setup {.smaller}
+
+Let $X_1, \dots, X_n \sim \text{Normal}(\mu, \theta)$, where $\mu$ is
+the mean and $\theta$ is the variance.
+
+-   The density is: $$
+    f(x; \mu, \theta) = \frac{1}{\sqrt{2\pi\theta}} \exp\left(-\frac{(x - \mu)^2}{2\theta}\right)
+    $$
+
+-   The log-likelihood: $$
+    \ell(\mu, \theta)=\ln\left[\prod_{i=1}^n f(x_i; \mu, \theta) \right]= \sum_{i=1}^n \ln f(x_i; \mu, \theta)
+    $$
+
+------------------------------------------------------------------------
+
+## :abacus: MLE for Normal($\mu$, $\theta$) — Log-likelihood
+
+$$
+\ell(\mu, \theta) = -\frac{n}{2} \ln(2\pi) - \frac{n}{2} \ln(\theta) - \frac{1}{2\theta} \sum_{i=1}^n (x_i - \mu)^2
+$$
+
+::: fragment
+To find MLEs, differentiate w.r.t. $\mu$ and $\theta$.
+:::
+
+------------------------------------------------------------------------
+
+## :abacus: MLE for $\mu$ (first derivative)
+
+Differentiate $\ell$ w.r.t. $\mu$: $$
+\frac{\partial \ell}{\partial \mu} = \frac{1}{\theta} \sum_{i=1}^n (x_i - \mu)
+$$
+
+::: fragment
+Set derivative to zero: $$
+\sum (x_i - \mu) = 0 \Rightarrow \hat{\mu} = \bar{x}
+$$
+:::
+
+------------------------------------------------------------------------
+
+## :abacus: MLE for $\theta$ (first derivative)
+
+Differentiate $\ell$ w.r.t. $\theta$: $$
+\frac{\partial \ell}{\partial \theta} = -\frac{n}{2\theta} + \frac{1}{2\theta^2} \sum_{i=1}^n (x_i - \mu)^2
+$$
+
+::: fragment
+Set derivative to zero and solve: $$
+\hat{\theta} = \frac{1}{n} \sum (x_i - \bar{x})^2
+$$
+:::
+
+------------------------------------------------------------------------
+
+## :white_check_mark: MLEs for Normal($\mu$, $\sigma^2$ ) {.smaller}
+
+-   MLE for mean: $$
+    \hat{\mu} = \bar{X}
+    $$
+
+-   MLE for variance: $$
+    \hat{\theta} = \hat\sigma^2= \frac{1}{n} \sum (X_i - \bar{X})^2
+    $$
+
+::: callout-tip
+Note: The variance estimator differs from the unbiased sample variance,
+which uses $n - 1$ in the denominator.
+:::
+
+
+------------------------------------------------------------------------
+
+## :speech_balloon: Try It! MLE for Uniform[0,$\theta$] {.smaller}
+
+Let $X_1,\dots,X_n \sim \text{Uniform}[0,\theta]$
+
+::: fragment
+-   Likelihood:\
+    $$
+    L(\theta) = \begin{cases} \theta^{-n} & \text{if } \theta \ge \max x_i \\ 0 & \text{otherwise} \end{cases}
+    $$
+:::
+
+::: fragment
+-   MLE:\
+    $$
+    \hat{\theta}_{\text{MLE}} = \max(x_1,\dots,x_n)
+    $$
+:::
+
+::: fragment
+> :warning: Not equal to MoM!Respects bounds.
+:::
+
+::: notes
+What happens if we have an open interval rather than closed?
+:::
+
+------------------------------------------------------------------------
+
+## :blue_book: Properties of MLEs
+
+### The Invariance Principle
+
+> If $\hat{\theta}$ is the MLE of $\theta$,\
+> then $h(\hat{\theta})$ is the MLE of $h(\theta)$
+
+:brain: Examples:\
+
+-   If $\hat{\lambda}$ is the MLE for exponential rate, then
+    $\hat{\mu} = 1 / \hat{\lambda}$ is MLE for mean
+-   If $s^2$ is the MLE for $\sigma^2$ for a Normal sample, then $s$ is
+    the MLE for $\sigma$.
+
+------------------------------------------------------------------------
+
+## :mag: Large Sample Behavior of MLEs {.smaller}
+
+### :book: Proposition
+
+Under general conditions, as $n \to \infty$, the MLE:
+
+-   Is **consistent**:\
+    $$
+    \hat{\theta} \xrightarrow{P} \theta
+    $$
+-   Is **approximately unbiased**:\
+    $$
+    E(\hat\theta)\approx \theta
+    $$
+-   Is exactly or approximately the Minimum Variance Unbiased Estimator
+    (MVUE)
+
+------------------------------------------------------------------------
+
+## :warning: Caution
+
+::: callout-warning
+-   **Not every parameter has an MLE!**
+
+-   Sometimes the likelihood doesn't have a maximum in the interior.
+
+-   Sometimes it doesn't exist!
+
+-   Check the **form** of the likelihood when possible!
+:::
+
+------------------------------------------------------------------------
+
+## :question: Quick Check-in
+
+Which of the following are **true** about MLEs?
+
+::: incremental
+1.  The MLE always equals the sample mean
+
+2.  The MLE maximizes the probability of observing your data
+
+3.  MLEs are always unbiased
+
+4.  The log-likelihood has the same maximum point as the likelihood
+:::
+
+------------------------------------------------------------------------
+
+### :white_check_mark: Summary: What Did We Learn About Estimation? {.smaller}
+
+-   **MoM** gives us a simple, intuitive way to estimate parameters by
+    aligning the sample with theoretical moments—but it doesn't always
+    yield optimal estimates.
+
+-   **MLE** takes a probabilistic approach: it finds the parameter
+    values that make the observed data most “plausible.” This method
+    uses the full shape of the distribution and becomes more powerful
+    with larger samples.
+
+-   We saw how **MLEs behave in the long run**—becoming more precise,
+    often unbiased, and having useful properties like invariance under
+    transformation.

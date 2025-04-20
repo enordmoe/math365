@@ -1,0 +1,178 @@
+---
+title: "Math 365 Midterm Exam I Review Sheet"
+format: 
+    html: 
+#      fontsize: 11pt
+      toc: true
+      number-depth: 3
+      theme: cosmo
+      embed-resources: true
+---
+
+# Overview
+
+This review sheet outlines key concepts, definitions, and skills covered so far. It includes summaries of core ideas, terminology, and sample problems. Refer back to lesson notes, homework problems, and R output for more examples and visualizations.
+
+## Exam Logistics
+
+-   Date/Time: Friday: April 25, 8 am (you can start before 8:15 if you prefer extra time)\
+-   Allowable resources:
+    -   8.5x11 single-sided notes page
+    -   Calculator
+    -   Computer: You may be asked to use R for probability calculations (e.g., `pnorm()`) but will not be asked to carry out data analysis or simulations.
+
+------------------------------------------------------------------------
+
+# Topics and Concepts
+
+## 1. Populations, Samples, and Statistical Studies
+
+-   **Population**: Group about which we want to make inference.
+-   **Sample**: Subset of the population used for analysis.
+-   **Descriptive statistics**: Graphical and numerical summaries.
+-   **Inferential statistics**: Use probability to draw conclusions about a population.
+-   **Enumerative vs Analytic Studies**:
+    -   *Enumerative*: Study fixed populations.
+    -   *Analytic*: Concerned with future performance (e.g., processes).
+
+## 2. Data Collection and Sampling
+
+-   **Simple Random Sample (SRS)**: Every group of size $n$ equally likely.
+-   **Stratified Sampling**: Sample within homogeneous subgroups.
+-   **Convenience Sampling**: Non-random and often biased.
+-   **Designed Experiments** vs **Observational Studies**: Unlike observational studies, where researchers observe without intervention, designed experiments involve actively assigning treatments to assess causal effects.
+
+## 3. Types and Summaries of Data
+
+-   **Categorical Variables**: Summarized by frequency tables and bar charts.
+-   **Quantitative Variables**:
+    -   *Continuous*: e.g., height, cholesterol level
+    -   *Discrete*: e.g., number of siblings
+
+### Summary Statistics for Quantitative Data
+
+-   **Center**: Mean, median, trimmed mean\
+-   **Spread**: Range, standard deviation, fourth spread\
+-   **Shape**: Symmetry, skewness, modality\
+-   **Outliers**: Flagged using the fourth spread
+    -   values more than $1.5 \times f_s$ beyond the hinges are **mild outliers**
+    -   more than $3 \times f_s$ are **extreme outliers**\
+-   **Visual Tools**: Dotplots (stripcharts), histograms, boxplots
+
+
+------------------------------------------------------------------------
+
+
+## 4. Statistics and Their Distributions
+
+-   **Statistic**: A random variable based on a sample (e.g., $\bar{X}$, $\hat{p}$)
+-   **Sampling Distribution**: The probability distribution of a statistic across all possible samples.
+-   **Central Limit Theorem (CLT)**: $$
+    \bar{X} \dot{\sim} N\left(\mu, \frac{\sigma^2}{n}\right) \quad \text{for large } n
+    $$
+-   **Simulation**: Used to approximate sampling distributions when exact derivation is infeasible.
+
+## 5. Properties of Estimators
+
+-   **Unbiasedness**: $E(\hat{\theta}) = \theta$
+-   **Mean Squared Error (MSE)**: $$
+    \text{MSE}(\hat{\theta}) = \text{Var}(\hat{\theta}) + [\text{Bias}(\hat{\theta})]^2
+    $$
+-   **MVUE**: Minimum variance among all unbiased estimators
+-   **Standard Error (SE)**: $\sqrt{\text{Var}(\hat{\theta})}$
+
+## 6. Bootstrap Methods
+
+-   **Parametric Bootstrap**: Simulate new samples from a fitted model to estimate SE.
+
+## 7. Estimation Techniques
+
+-   **Method of Moments (MoM)**: Match sample and population moments to solve for parameter estimates.
+
+-   **Maximum Likelihood Estimation (MLE)**:
+
+    -   Maximize $L(\theta) = f(x_1, \dots, x_n; \theta)$
+    -   Use log-likelihood: $\ell(\theta) = \log L(\theta)$
+    -   Properties: invariant under transformation, consistent, often MVUE
+
+------------------------------------------------------------------------
+
+# Practice Problems
+
+## Problem 1: Sampling and Inference
+
+Suppose you are studying the amount of sugar in breakfast cereals sold in the U.S. in 2023.
+
+-   Is this an enumerative or analytic study?
+-   Identify the population, sample, and variable.
+-   Suggest a suitable sampling method. Discuss its strengths and weaknesses.
+
+## Problem 2: Distribution of Sample Mean
+
+Let $X$ be the time (in minutes) K students wait for coffee at the Book Club, with $\mu = 4$, $\sigma = 1.5$. Let $\bar{X}$ be the mean of a sample of $n = 36$.
+
+-   Use the CLT to approximate $P(\bar{X} > 4.5)$.
+-   What is the 95th percentile of the sampling distribution of $\bar{X}$?
+
+## Problem 3: Interpreting R Output
+
+You are given the following R commands and output based on the `mtcars` dataset:
+
+``` r
+tapply(mtcars$mpg, mtcars$cyl, mean)
+boxplot(mpg ~ cyl, data = mtcars)
+hist(mtcars$mpg)
+```
+
+-   Explain what each command does and what you would expect the output to show.
+-   What types of conclusions could be drawn from this output?
+-   What features would you examine to assess center, spread, or shape?
+
+## Problem 4: Estimator Properties
+
+Let $\hat{p} = X/n$ be the sample proportion from a binomial distribution with parameter $p$.
+
+-   Show that $E(\hat{p}) = p$.
+-   Compute $\text{Var}(\hat{p})$.
+-   Is $\hat{p}$ the MVUE for $p$?
+
+## Problem 5: MLE for Geometric Distribution
+
+Suppose $X_1, \dots, X_n$ are i.i.d. from the geometric distribution with PMF: $$
+P(X = x) = (1 - p)^{x - 1}p, \quad x = 1, 2, \dots,\ 0 < p < 1
+$$
+
+-   Write the likelihood function $L(p)$ and the log-likelihood $\ell(p)$.
+-   Find the value of $p$ that maximizes the likelihood.
+-   Compare to the method of moments estimator.
+
+------------------------------------------------------------------------
+
+# Useful R Commands
+
+``` r
+# Basic summaries
+summary(x)
+table(x)
+prop.table(table(x))
+mean(x, trim = 0.1)
+sd(x)
+
+# Plots
+barplot(table(x))
+stripchart(x)
+hist(x)
+boxplot(x)
+
+# Group summaries
+tapply(x, group, mean)
+by(x, group, summary)
+aggregate(x ~ group, data, function)
+
+# Simulations
+rnorm(n, mean, sd)
+```
+
+------------------------------------------------------------------------
+
+Make sure you understand how to interpret graphical and numerical summaries, how sampling affects estimation, and how to work with formulas and conceptual reasoning for estimators and sampling distributions.
