@@ -3354,7 +3354,7 @@ window.Quarto = {
 <li><strong>Central Limit Theorem (CLT)</strong>: <span class="math display">\[
 \bar{X} \dot{\sim} N\left(\mu, \frac{\sigma^2}{n}\right) \quad \text{for large } n
 \]</span></li>
-<li><strong>Simulation</strong>: Used to approximate sampling distributions when exact derivation is infeasible.</li>
+<li><strong>Simulation</strong>: Used to approximate sampling distributions when exact derivation is difficult or intractable.</li>
 </ul>
 </section>
 <section id="properties-of-estimators" class="level2">
@@ -3381,8 +3381,9 @@ window.Quarto = {
 <li><p><strong>Maximum Likelihood Estimation (MLE)</strong>:</p>
 <ul>
 <li>Maximize <span class="math inline">\(L(\theta) = f(x_1, \dots, x_n; \theta)\)</span></li>
-<li>Use log-likelihood: <span class="math inline">\(\ell(\theta) = \log L(\theta)\)</span></li>
-<li>Properties: invariant under transformation, consistent, often MVUE</li>
+<li>Diiferentiate log-likelihood: <span class="math inline">\(\ell(\theta) = \ln L(\theta)\)</span> to find <span class="math inline">\(\hat{\theta}_\text{ML}\)</span></li>
+<li>Properties: invariant under transformation, often MVUE</li>
+<li>Complications sometimes arise, e.g., maximum is on the boundary (Uniform[0, <span class="math inline">\(\theta\)</span>])</li>
 </ul></li>
 </ul>
 <hr>
@@ -3425,7 +3426,7 @@ window.Quarto = {
 <ul>
 <li>Show that <span class="math inline">\(E(\hat{p}) = p\)</span>.</li>
 <li>Compute <span class="math inline">\(\text{Var}(\hat{p})\)</span>.</li>
-<li>Is <span class="math inline">\(\hat{p}\)</span> the MVUE for <span class="math inline">\(p\)</span>?</li>
+<li>Why would you expect <span class="math inline">\(\hat p\)</span> to be the MVUE for <span class="math inline">\(p\)</span>?</li>
 </ul>
 </section>
 <section id="problem-5-mle-for-geometric-distribution" class="level2">
@@ -3436,7 +3437,7 @@ P(X = x) = (1 - p)^{x - 1}p, \quad x = 1, 2, \dots,\ 0 &lt; p &lt; 1
 <ul>
 <li>Write the likelihood function <span class="math inline">\(L(p)\)</span> and the log-likelihood <span class="math inline">\(\ell(p)\)</span>.</li>
 <li>Find the value of <span class="math inline">\(p\)</span> that maximizes the likelihood.</li>
-<li>Compare to the method of moments estimator.</li>
+<li>Given <span class="math inline">\(E(x)=1/p\)</span>, compare the MLE to the method of moments estimator.</li>
 </ul>
 <hr>
 </section>

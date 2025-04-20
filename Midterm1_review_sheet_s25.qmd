@@ -70,7 +70,7 @@ This review sheet outlines key concepts, definitions, and skills covered so far.
 -   **Central Limit Theorem (CLT)**: $$
     \bar{X} \dot{\sim} N\left(\mu, \frac{\sigma^2}{n}\right) \quad \text{for large } n
     $$
--   **Simulation**: Used to approximate sampling distributions when exact derivation is infeasible.
+-   **Simulation**: Used to approximate sampling distributions when exact derivation is difficult or intractable.
 
 ## 5. Properties of Estimators
 
@@ -92,8 +92,9 @@ This review sheet outlines key concepts, definitions, and skills covered so far.
 -   **Maximum Likelihood Estimation (MLE)**:
 
     -   Maximize $L(\theta) = f(x_1, \dots, x_n; \theta)$
-    -   Use log-likelihood: $\ell(\theta) = \log L(\theta)$
-    -   Properties: invariant under transformation, consistent, often MVUE
+      - Diiferentiate log-likelihood: $\ell(\theta) = \ln L(\theta)$ to find $\hat{\theta}_\text{ML}$
+    -   Properties: invariant under transformation, often MVUE
+    -   Complications sometimes arise, e.g., maximum is on the boundary (Uniform[0, $\theta$])
 
 ------------------------------------------------------------------------
 
@@ -134,17 +135,18 @@ Let $\hat{p} = X/n$ be the sample proportion from a binomial distribution with p
 
 -   Show that $E(\hat{p}) = p$.
 -   Compute $\text{Var}(\hat{p})$.
--   Is $\hat{p}$ the MVUE for $p$?
+-   Why would you expect $\hat p$ to be the MVUE for $p$?
 
 ## Problem 5: MLE for Geometric Distribution
 
-Suppose $X_1, \dots, X_n$ are i.i.d. from the geometric distribution with PMF: $$
+Suppose $X_1, \dots, X_n$ are i.i.d. from the geometric distribution with PMF: 
+$$
 P(X = x) = (1 - p)^{x - 1}p, \quad x = 1, 2, \dots,\ 0 < p < 1
 $$
 
 -   Write the likelihood function $L(p)$ and the log-likelihood $\ell(p)$.
 -   Find the value of $p$ that maximizes the likelihood.
--   Compare to the method of moments estimator.
+-   Given $E(x)=1/p$, compare the MLE to the method of moments estimator.
 
 ------------------------------------------------------------------------
 
