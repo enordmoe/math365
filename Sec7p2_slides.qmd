@@ -1,5 +1,5 @@
 ---
-title: "Section 7.1: Basic Properties of Confidence Intervals"
+title: "Section 7.2: Large-Sample Confidence Intervals for a Population Mean and Proportion"
 subtitle: "Mathematical Statistics"
 author: "MATH 365"
 format:
