@@ -1,5 +1,7 @@
 ---
 title: "🧪 Investigating Confidence Intervals for a Population Proportion"
+subtitle: "Math 365 – Spring 2025"
+author: "Your Name Here!"
 format: html
 editor: visual
 ---
@@ -8,13 +10,22 @@ editor: visual
 
 When we construct a confidence interval for a proportion $p$, we typically want it to contain the true value of $p$ about 95% of the time. But does that actually happen in practice? 🤔
 
-Today, you'll compare two classic approaches: - **Wald Interval**: $$
-  \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}
-  $$ - **Score (Wilson) Interval**: $$
-  \tilde{p} = \frac{\hat{p} + z^2 / (2n)}{1 + z^2 / n}
-  $$ $$
-  \tilde{p} \pm z_{\alpha/2} \sqrt{ \frac{ \hat{p} \hat{q} / n + z^2 / (4n^2) }{ 1 + z^2 / n } }
-  $$
+In this investigation, you'll compare two classic approaches:
+
+-   **Wald Interval**: $$
+      \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}
+      $$
+
+-   **Score (Wilson) Interval**:
+
+    Defining
+    $$
+      \tilde{p} = \frac{\hat{p} + z^2 / (2n)}{1 + z^2 / n}\quad ,
+      $$ 
+      we obtain
+      $$
+      \tilde{p} \pm z_{\alpha/2} \sqrt{ \frac{ \hat{p} \hat{q} / n + z^2 / (4n^2) }{ 1 + z^2 / n } }
+      $$
 
 where $\hat{q} = 1 - \hat{p}$.
 
@@ -24,7 +35,7 @@ We'll simulate data to estimate the **empirical coverage** of each interval: how
 
 ## 🛠️ Setup: Simulate One Interval
 
-Let’s simulate 1000 samples of size $n = 20$ from a Bernoulli($p = 0.1$) distribution.
+Let’s simulate 1000 samples from a Binomial distribution with sample size $n=20$ and probability $p = 0.1$.
 
 ```{r}
 set.seed(42)
@@ -64,7 +75,6 @@ cat("Score coverage:", round(score_cov, 3), "\n")
 
 ------------------------------------------------------------------------
 
-
 ## 💬 Reflect & Discuss
 
 -   🤔 Which interval came closer to the target 95% coverage?
@@ -77,40 +87,38 @@ Take 3–4 minutes to discuss these with a partner and jot down some thoughts. W
 
 ## 🎲 Lucky vs Unlucky Combinations of $n$ and $p$
 
-Not all combinations of sample size $n$ and true proportion $p$ are created equal when it comes to confidence intervals. 📉
+Perhaps not surpisingly, not all combinations of sample size $n$ and true proportion $p$ are created equal when it comes to confidence intervals. 📉
 
 In fact, researchers have found that the **coverage probability** — the chance that a confidence interval actually contains the true parameter — **oscillates** in surprising ways as $n$ and $p$ vary. Sometimes, intervals *undercover* (fall short of the nominal level), and sometimes they *overcover*.
 
 These effects are particularly noticeable for the **Wald interval**, but can affect other methods too.
 
----
+------------------------------------------------------------------------
 
 ### 🔍 Try These Combinations
 
 Simulate coverage for a few of the following $(n, p)$ pairs. For each, generate many samples, construct confidence intervals, and estimate the proportion that actually cover the true $p$.
 
-| Try This $n$ | Try This $p$ |
-|--------------|---------------|
+| Try This $n$ | Try This $p$              |
+|--------------|---------------------------|
 | 10           | 0.01, 0.05, 0.1, 0.3, 0.5 |
-| 20           | 0.05, 0.15, 0.25, 0.5 |
-| 50           | 0.05, 0.1, 0.3, 0.5 |
-| 100          | 0.01, 0.05, 0.1, 0.5 |
+| 20           | 0.05, 0.15, 0.25, 0.5     |
+| 50           | 0.05, 0.1, 0.3, 0.5       |
+| 100          | 0.01, 0.05, 0.1, 0.5      |
 
 ➡️ These combinations include **extreme p**, **small n**, and more **central p with moderate n**, to help you observe "lucky" and "unlucky" cases.
 
----
+------------------------------------------------------------------------
 
 ### 💬 Reflect & Discuss
 
-- 🔎 Did the actual coverage match the advertised 95%?
-- ⚠️ Were there any surprising failures or overcoverage?
-- ❌ When did the Wald interval break down the most?
-- 🤔 What might explain why some combinations give better coverage than others?
-
+-   🔎 Did the actual coverage match the advertised 95%?
+-   ⚠️ Were there any surprising failures or overcoverage?
+-   ❌ When did the Wald interval break down the most?
+-   🤔 What might explain why some combinations give better coverage than others?
 
 ------------------------------------------------------------------------
 
 ## 🔚 Wrap-Up
 
 Today you saw that **coverage isn’t guaranteed** just because we construct a 95% interval — especially with the Wald method. Simulation lets us *see* what theory might obscure. 📊
-

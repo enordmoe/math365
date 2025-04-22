@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Your Name Here!">
 
 <title>🧪 Investigating Confidence Intervals for a Population Proportion</title>
 <style>
@@ -109,12 +110,19 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">🧪 Investigating Confidence Intervals for a Population Proportion</h1>
+<p class="subtitle lead">Math 365 – Spring 2025</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Your Name Here! </p>
+          </div>
+  </div>
     
   
     
@@ -128,20 +136,25 @@ window.Quarto = {
 <section id="the-big-question" class="level2">
 <h2 class="anchored" data-anchor-id="the-big-question">🧠 The Big Question</h2>
 <p>When we construct a confidence interval for a proportion <span class="math inline">\(p\)</span>, we typically want it to contain the true value of <span class="math inline">\(p\)</span> about 95% of the time. But does that actually happen in practice? 🤔</p>
-<p>Today, you’ll compare two classic approaches: - <strong>Wald Interval</strong>: <span class="math display">\[
+<p>In this investigation, you’ll compare two classic approaches:</p>
+<ul>
+<li><p><strong>Wald Interval</strong>: <span class="math display">\[
   \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1 - \hat{p})}{n}}
-  \]</span> - <strong>Score (Wilson) Interval</strong>: <span class="math display">\[
-  \tilde{p} = \frac{\hat{p} + z^2 / (2n)}{1 + z^2 / n}
-  \]</span> <span class="math display">\[
+  \]</span></p></li>
+<li><p><strong>Score (Wilson) Interval</strong>:</p>
+<p>Defining <span class="math display">\[
+  \tilde{p} = \frac{\hat{p} + z^2 / (2n)}{1 + z^2 / n}\quad ,
+  \]</span> we obtain <span class="math display">\[
   \tilde{p} \pm z_{\alpha/2} \sqrt{ \frac{ \hat{p} \hat{q} / n + z^2 / (4n^2) }{ 1 + z^2 / n } }
-  \]</span></p>
+  \]</span></p></li>
+</ul>
 <p>where <span class="math inline">\(\hat{q} = 1 - \hat{p}\)</span>.</p>
 <p>We’ll simulate data to estimate the <strong>empirical coverage</strong> of each interval: how often it contains the true value of <span class="math inline">\(p\)</span>.</p>
 <hr>
 </section>
 <section id="setup-simulate-one-interval" class="level2">
 <h2 class="anchored" data-anchor-id="setup-simulate-one-interval">🛠️ Setup: Simulate One Interval</h2>
-<p>Let’s simulate 1000 samples of size <span class="math inline">\(n = 20\)</span> from a Bernoulli(<span class="math inline">\(p = 0.1\)</span>) distribution.</p>
+<p>Let’s simulate 1000 samples from a Binomial distribution with sample size <span class="math inline">\(n=20\)</span> and probability <span class="math inline">\(p = 0.1\)</span>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
@@ -197,7 +210,7 @@ window.Quarto = {
 </section>
 <section id="lucky-vs-unlucky-combinations-of-n-and-p" class="level2">
 <h2 class="anchored" data-anchor-id="lucky-vs-unlucky-combinations-of-n-and-p">🎲 Lucky vs Unlucky Combinations of <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span></h2>
-<p>Not all combinations of sample size <span class="math inline">\(n\)</span> and true proportion <span class="math inline">\(p\)</span> are created equal when it comes to confidence intervals. 📉</p>
+<p>Perhaps not surpisingly, not all combinations of sample size <span class="math inline">\(n\)</span> and true proportion <span class="math inline">\(p\)</span> are created equal when it comes to confidence intervals. 📉</p>
 <p>In fact, researchers have found that the <strong>coverage probability</strong> — the chance that a confidence interval actually contains the true parameter — <strong>oscillates</strong> in surprising ways as <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> vary. Sometimes, intervals <em>undercover</em> (fall short of the nominal level), and sometimes they <em>overcover</em>.</p>
 <p>These effects are particularly noticeable for the <strong>Wald interval</strong>, but can affect other methods too.</p>
 <hr>
