@@ -1,0 +1,37 @@
+---
+title: "Your Presentation Title"
+format:
+  revealjs:
+    html-math-method: mathjax
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished presentation. To learn more about Quarto presentations see <https://quarto.org/docs/presentations/>.
+
+## Bullets
+
+When you click the **Render** button a document will be generated that includes:
+
+-   Content authored with markdown
+-   Output from executable code
+
+## Solving a Quadratic Equation
+
+### Using the Quadratic Formula
+
+The quadratic formula is $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$.
+
+Let's solve $2x^2 + 5x + 3 = 0$.
+
+$$ 
+\begin{aligned}
+x &= \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \\
+&= \frac{-5 \pm \sqrt{5^2 - 4 \cdot 2 \cdot 3}}{2 \cdot 2} \\
+&= \frac{-5 \pm \sqrt{25 - 24}}{4} \\
+&= \frac{-5 \pm \sqrt{1}}{4} \\
+&= \frac{-5 \pm 1}{4}
+\end{aligned}
+$$
+
+This gives us $x = -1$ or $x = -\frac{3}{2}$.

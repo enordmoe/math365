@@ -1,0 +1,149 @@
+---
+title: "Math 365 Spring 2025 Project Assignment"
+author: "Mathematical Statistics"
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    theme: cosmo
+    fontsize: 12pt
+    df-print: paged
+---
+
+# Estimating a Parameter
+
+**Proposal Due:** Friday, May 9, 2025  
+**Presentation Due:** Friday, June 6, 2025
+
+## Introduction
+
+In this group project, you will estimate an unknown parameter using real-world data. This project is intended to strengthen your understanding of the process of statistical analysis from conception to presentation, using classical statistical methods supported by empirical investigation via R.
+
+The final output will be a  Quarto **slide presentation** (rendered as HTML) for the project submission, but this assignment description is presented here as a Quarto document.
+
+You will work in groups of **2-3 students** (your choice).
+
+## Project Overview
+
+Expectations:
+
+- Identify an unknown parameter to estimate.
+- Select and justify an estimator using classical techniques we have studied.
+- Gather real-world data through experimental or observational methods (no surveys).
+- Apply R to explore the sampling behavior of your estimator empirically (via simulation or resampling).
+- Analyze your data to obtain your estimate and confidence interval.
+- Create a Quarto slide presentation that communicates your findings clearly and rigorously.
+
+**Focus:** Mastery of estimation theory and clear communication of statistical reasoning.
+
+## Detailed Project Steps
+
+### Choosing the Parameter and Estimator
+
+- Choose a parameter such as:
+  - Mean, variance, or proportion
+  - Difference of means or proportions
+  - Ratio of means or variances
+  - Relative risk
+  - Regression slope
+- Select an appropriate classical estimator (method of moments, MLE, or others).
+
+### Data Collection
+
+- Prefer original experimental or observational data collection.
+- Sample size of at least 50 observations.
+- If using existing web datasets, you must obtain prior approval.
+- No data collection by surveys! It's too difficulty to do a good job of this.
+
+### Empirical Investigation
+
+- Use R to:
+  - Visualize and summarize your collected data.
+  - Simulate the sampling distribution of your estimator (if appropriate).
+  - Use resampling (e.g., bootstrapping) to explore the variability of your estimator, and discuss whether the empirical behavior aligns with theoretical expectations (e.g., approximate normality, standard error formulas).
+
+### Analytical Work
+
+- Derive or explain your chosen estimator analytically.
+- Discuss assumptions and verify them where feasible.
+- Provide full calculations for your point estimate and a confidence interval.
+
+## Components of the Final Presentation
+
+### Background
+- Define the parameter.
+- Provide context for why the parameter and data are of interest.
+
+### Supporting Statistical Theory
+- Clearly state assumptions.
+- Derive or explain your estimator (method of moments, MLE, etc.).
+- Discuss properties: unbiasedness, variance, mean squared error.
+
+### Data Collection
+- Describe how data were collected.
+- Identify the population, sample, and potential biases.
+
+### Results and Exploratory Data Analysis
+- Provide numerical and graphical summaries.
+- Investigate distributional assumptions.
+
+### Calculations
+- Show how the estimator was computed.
+- Construct and interpret a confidence interval.
+
+### Empirical Investigation in R
+- Show how you used R to examine the estimator's properties.
+- Include relevant code and plots.
+
+### Conclusions
+- Interpret your results.
+- Discuss limitations and future directions.
+
+### Appendix
+- Upload your data and any additional materials separately to Moodle.
+
+## Grading
+
+- **Proposal (20 points):** One paragraph describing your plan, due May 9.
+- **Final Project (80 points):** Graded for:
+  - Depth and rigor of analysis
+  - Correctness and clarity
+  - Quality and professionalism of the Quarto slide presentation
+  - Empirical investigation of properties (using R)
+
+
+## Final Note
+
+**Your Quarto slide presentation is a key part of demonstrating your mastery.**
+
+It should:  
+- Be organized, logical, and clear.  
+- Integrate clear mathematical exposition with thoughtful R-based exploration.  
+- Reflect your deep understanding of statistical estimation.  
+
+I will provide a template and Quarto resources to help you!  
+
+## Appendix: Suggested Project Ideas
+
+Here are some ideas for parameters you might estimate:
+
+### Single-Sample Estimates
+- Mean tensile strength of a 3D printed material
+- Variance of reaction times in a computer task
+- Proportion of defective items in a manufacturing process
+
+### Two-Sample Comparisons
+- Difference in mean growth rates of plants under two fertilizers
+- Difference in proportions of success under two treatments
+- Ratio of variances for two measurement devices
+
+### Regression Settings
+- Slope of a simple linear regression (e.g., height vs. wingspan)
+
+### Other Creative Ideas
+- Estimating a rate parameter for a Poisson process (e.g., arrival of buses)
+- Estimating the exponential rate parameter from waiting times (e.g., website (Moodle!) load times)
+- Estimating reliability parameters from real-world engineering data
+
+When in doubt, ask!
