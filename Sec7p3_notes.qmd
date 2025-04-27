@@ -1,0 +1,342 @@
+---
+title: "7.3. Intervals Based on a Normal Population Distribution"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    center: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today :dart:
+
+-   Review: Large Sample Confidence Intervals
+-   The $t$ Distribution: Why and When
+-   Confidence Interval for $\mu$ with Small Samples
+-   Prediction Intervals
+-   Tolerance Intervals (brief intro)
+-   Applications: Reaction times, Fuel efficiency :car:, and more!
+
+## Review: Large Sample Intervals (Section 7.2) {.smaller}
+
+::: callout-note
+## Quick Discussion :speech_balloon:
+
+-   What assumptions underlie the large-sample $z$-based confidence
+    intervals?
+-   Why is the Central Limit Theorem so important?
+-   What is the general formula for large-sample $z$-based confidence
+    intervals?
+-   But what do we do when we have small samples? Then what is the
+    distribution of $$
+    \frac{\bar X-\mu}{S/\sqrt{n}}
+    $$
+:::
+
+# The $t$ Distribution :chart_with_upwards_trend:
+
+## Assumptions
+
+-   $X_1, X_2, \dots, X_n$ are a random sample from a normal population.
+-   Population mean $\mu$ unknown.
+-   Population standard deviation $\sigma$ unknown.
+
+## Theorem :brain:
+
+The statistic
+
+$$
+T = \frac{\bar{X} - \mu}{S/\sqrt{n}}
+$$
+
+follows a $t$ distribution with $n-1$ degrees of freedom ($\nu = n-1$).
+
+------------------------------------------------------------------------
+
+::::::: callout-note
+## How the $t$-Statistic is Built :mag:
+
+The $t$-statistic is constructed as a **ratio** of two key random
+variables:
+
+-   The **numerator** $(\bar{X} - \mu)$ is **normal** because the sample
+    mean of a normal population is itself normally distributed.
+-   The **denominator** $S/\sqrt{n}$ involves the sample standard
+    deviation $S$, where $(n-1)S^2/\sigma^2$ follows a **chi-squared
+    distribution** with $n-1$ degrees of freedom.
+
+::: fragment
+Thus, the $t$-statistic:
+
+$$
+T = \frac{\bar{X} - \mu}{S/\sqrt{n}}
+$$
+:::
+
+::: fragment
+can be viewed as the ratio of a standard normal random variable to the
+square root of an independent scaled chi-squared random variable divided
+by its degrees of freedom:
+
+$$
+T \sim \frac{Z}{\sqrt{W/(n-1)}}
+$$
+:::
+
+::: fragment
+where: - $Z \sim \mathcal{N}(0,1)$ - $W \sim \chi^2(n-1)$ - $Z$ and $W$
+are independent
+:::
+
+::: fragment
+This fundamental structure is why $t$ distributions have **heavier
+tails** than normal distributions — to account for the extra variability
+introduced by estimating $\sigma$.
+:::
+:::::::
+
+## Properties of the $t$ distribution
+
+-   Symmetric, bell-shaped
+-   More spread out than $z$ for small $n$
+-   As $n \to \infty$, $t$ approaches $z$
+
+:::: fragment
+::: callout-tip
+## Reflection :mag_right:
+
+Why does using $S$ (instead of $\sigma$) introduce extra variability?
+:::
+::::
+
+------------------------------------------------------------------------
+
+### Getting Familiar with the $t$-Distribution :dart: {.smaller}
+
+::: callout-note
+## Practice: Basic $t$ Calculations
+
+-   Find $P(T > 2.201)$ for $T \sim t(10)$
+-   Find $P(-1.812 < T < 1.812)$ for $T \sim t(15)$
+-   Find the 97.5th percentile of a $t(5)$ distribution (i.e.,
+    $t_{0.025,5}$)
+
+:memo: *Use R to find probabilities and quantiles.*
+:::
+
+**Helpful R commands:**
+
+``` r
+tail_prob <- 1 - pt(2.201, df=10)
+prob_between <- pt(1.812, df=15) - pt(-1.812, df=15)
+quantile_val <- qt(0.975, df=5)
+```
+
+------------------------------------------------------------------------
+
+### One-Sample $t$ Confidence Interval for $\mu$
+
+If $\bar{x}$ and $s$ are the sample mean and sample standard deviation:
+
+$$
+\bar{x} \pm t_{\alpha/2, n-1} \cdot \frac{s}{\sqrt{n}}
+$$
+
+where $t_{\alpha/2, n-1}$ is the critical $t$ value.
+
+------------------------------------------------------------------------
+
+### Student Reaction Times Data Collection {.smaller}
+
+1.  Complete the reaction times task here:
+    <https://www.mathsisfun.com/games/reaction-time.html>
+
+    ![](images/clipboard-938658618.png){width="150"}
+
+::: fragment
+2.  Submit your times here: <https://forms.office.com/r/UyaDXQKm3K>
+
+![](images/clipboard-4251284472.png){width="150"}
+:::
+
+------------------------------------------------------------------------
+
+### Example: Student Reaction Times :zap: {.smaller}
+
+Reaction times (ms) from students in an 8:15 AM class.
+
+Sample Mean: \_\_\_\_\_\_\_
+
+Sample Standard Deviation: \_\_\_\_\_\_\_
+
+$n =$ \_\_\_\_\_\_
+
+:memo: *Construct a 95% confidence interval for the average reaction
+time.*
+
+------------------------------------------------------------------------
+
+### Example: Fuel Efficiency of 2012 Prius :car: {.smaller}
+
+::::: callout-note
+## Example: Estimating Prius Fuel Efficiency :car:
+
+Reported MPG from a random sample of 14 drivers:
+
+-   Mean = 53.3 MPG
+-   Standard Deviation = 5.2 MPG
+
+::: fragment
+**(a)** Is it reasonable to estimate the average MPG for all 2012 Prius
+drivers based on this sample?
+:::
+
+::: fragment
+**(b)** Construct a 99% confidence interval for the true mean MPG.
+:::
+:::::
+
+## Prediction Interval for a Single Future Observation
+
+The formula below gives a **prediction interval**, estimating a range
+where a *single future observation* from the population is likely to
+fall with high confidence.
+
+$$
+\bar{x} \pm t_{\alpha/2, n-1} \cdot s \sqrt{1 + \frac{1}{n}}
+$$
+
+::: fragment
+:memo: *Use Prius data to construct a 95% prediction interval.*
+:::
+
+::: notes
+Derive $\operatorname{Var}(\bar X-X_f)$ to see where SE formula comes
+from.
+:::
+
+------------------------------------------------------------------------
+
+:::: callout-tip
+## How a Prediction Interval Differs from a Confidence Interval :information_source:
+
+::: incremental
+-   A **confidence interval** estimates a plausible range for the
+    **population mean** ($\mu$).
+-   A **prediction interval** estimates a plausible range for a **single
+    new observation**.
+-   Prediction intervals are **wider** because they account for both
+    sampling variability and individual variability.
+:::
+::::
+
+## Investigation: Robustness of $t$ :bar_chart: {.smaller}
+
+::: callout-tip
+## R Experiment :test_tube:
+
+Investigate $t$-interval robustness under non-normal distributions!
+:::
+
+```{r}
+set.seed(1234)
+
+simulate_t_coverage <- function(n, dist_fn, n_sim = 5000, alpha = 0.05) {
+  coverages <- replicate(n_sim, {
+    sample <- dist_fn(n)
+    ci_lower <- mean(sample) - qt(1 - alpha/2, df=n-1) * sd(sample)/sqrt(n)
+    ci_upper <- mean(sample) + qt(1 - alpha/2, df=n-1) * sd(sample)/sqrt(n)
+    0 >= ci_lower & 0 <= ci_upper
+  })
+  mean(coverages)
+}
+
+simulate_t_coverage(10, function(n) rnorm(n))
+simulate_t_coverage(10, function(n) runif(n))
+simulate_t_coverage(10, function(n) rexp(n) - 1)
+simulate_t_coverage(30, function(n) rexp(n) - 1)
+```
+
+:memo: *Note coverage behavior* for various distributions as $n$
+increases. Try other distributions and other levels of confidence.
+
+------------------------------------------------------------------------
+
+## Tolerance Intervals :books:
+
+A **tolerance interval** aims to capture at least a specified percentage
+$P\%$ of the population with a specified level of confidence.
+
+For a normal population, a two-sided tolerance interval has the form:
+
+$$
+\bar{x} \pm (\text{tolerance critical value}) \times s
+$$
+
+:white_check_mark: Captures individual values, not just the mean.  
+:white_check_mark: Critical value larger than $z$ or $t$ values for CIs.  
+:white_check_mark: Depends on both $P$ (population coverage) and
+confidence level.  
+
+---
+
+### Example: Tolerance Interval for Reaction Times :zap: {.smaller}
+
+:memo: *We want to use our reaction time data to obtain a 95% confidence
+tolerance interval that captures at least 95% of student reaction times
+in a class of 30.*
+
+```{r}
+if (!requireNamespace("tolerance", quietly = TRUE)) install.packages("tolerance")
+library(tolerance)
+
+# get the required multiplier
+K.factor(n = 9, alpha = .05, P = 0.95, side = 2, method = "WBE")
+
+```
+
+:white_check_mark: `n` = sample size
+
+:white_check_mark: `alpha` $\Rightarrow 1 -$`alpha` confidence level 
+
+:white_check_mark: `P = 0.95` desired proportion to cover
+
+:white_check_mark: `side = 2` gives a two-sided interval
+
+:white_check_mark: `method = "WBE"` computational method used by Devore
+
+## Summary Points :white_check_mark: {.smaller}
+
+-   $t$ adjusts for $\sigma$ uncertainty.
+-   Use $t$ for small normal samples.
+-   CI estimates mean; PI predicts new observation.
+-   PI wider than CI.
+-   As $n$ increases, $t \to z$.
+- TI captures a fixed proportion of the population, not just the mean or a single value.
+
+
+## Closing Thought :thought_balloon:
+
+:memo: When is normality a poor assumption?
