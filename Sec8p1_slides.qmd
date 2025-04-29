@@ -1,0 +1,230 @@
+---
+title: "8.1 Hypotheses and Test Procedures"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    center: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Section Overview
+
+-   Hypotheses :brain:
+-   Test procedures :balance_scale:
+-   Type I and II errors :exclamation::question:
+-   Real-world example: Penny Spins 🪙
+
+------------------------------------------------------------------------
+
+## Hypotheses :mag:
+
+> A **statistical hypothesis** is a claim about a population parameter.
+
+-   **Null hypothesis** $H_0$: initial assumption ("status quo")\
+
+-   **Alternative hypothesis** $H_a$: competing claim ("something has
+    changed!", "research hypothesis")
+
+:::{.fragment}
+
+:dart: **We never *accept*** $H_0$!
+
+- Only "reject $H_0$" or "fail to reject $H_0$"
+
+:::
+
+------------------------------------------------------------------------
+
+## Interval vs Hypothesis Testing :chart_with_upwards_trend::chart_with_downwards_trend: {.smaller}
+
+| Interval Estimation                 | Hypothesis Testing                |
+|:------------------------------------|:----------------------------------|
+| Estimate a parameter                | Make a decision about a parameter |
+| Provide a range of plausible values | Decide whether to reject $H_0$    |
+| Focus on uncertainty                | Focus on evidence                 |
+
+**Question:** How might the ideas of sampling variability be relevant to
+a hypothesis test?
+
+------------------------------------------------------------------------
+
+## Example: Spinning a Penny 🪙
+
+> Suppose we spin a penny 20 times. Let $X$ = number of heads.
+
+-   $H_0: p = 0.5$
+-   $H_a: p < 0.5$
+
+:abacus: If we observe 6 heads, how unusual is that?\
+
+-   Compute $p$-value using binomial probabilities.
+
+-   Set up a **rejection region**.
+
+::: notes
+(Work through the calculations together on canvas!)
+:::
+
+------------------------------------------------------------------------
+
+## Test Procedures :hammer_and_wrench:
+
+**Steps:**
+
+1.  Choose a **test statistic** (e.g., number of heads $X$).\
+2.  Specify a **significance level** $\alpha$ (e.g., $0.05$).\
+3.  Determine a **rejection region** based on $\alpha$.\
+4.  Compute the **p-value**.\
+5.  Make a decision.
+
+::: {.callout-important .callout}
+## Important
+
+The null is only rejected if evidence is strong enough.
+:::
+
+------------------------------------------------------------------------
+
+## Visual Overview :framed_picture:
+
+```{r}
+#| code-fold: true
+#| eval: true
+# Parameters
+n <- 20
+p <- 0.5
+
+# Create the data
+x_vals <- 0:n
+probs <- dbinom(x_vals, size = n, prob = p)
+
+# Set up colors: red for rejection region (X <= 6), blue otherwise
+colors <- ifelse(x_vals <= 6, "red", "lightblue")
+
+# Set up basic plot
+barplot(height = probs,
+        names.arg = x_vals,
+        col = colors,
+        space = 0,
+        border = "black",
+        xlab = "Number of Heads",
+        ylab = "Probability",
+        main = "Binomial Distribution, n=20, p=0.5")
+
+# Add "Rejection Region" label
+text(x = 4, y = max(probs)*0.2, labels = "Rejection\nRegion", pos = 3, col = "red")
+
+```
+
+---
+
+### Errors in Hypothesis Testing :warning: {.smaller}
+
+> Two kinds of mistakes can happen:
+
+-   **Type I error**: Reject $H_0$ when it is true (false alarm)
+    -   Probability = $\alpha$
+-   **Type II error**: Fail to reject $H_0$ when $H_a$ is true (missed
+    discovery)
+    -   Probability = $\beta$ 
+-   **Power**: correctly reject $H_0$ when $H_a$ is true 
+    -   Probability = $1-\beta$   
+
+:star2: Trade-off: smaller $\alpha$ often means larger $\beta$.
+
+------------------------------------------------------------------------
+
+## Thought Question :thought_balloon:
+
+> In the penny spinning example, what would a Type I error mean?   
+> What would a Type II error mean?    
+
+:speaking_head: Discuss and share your interpretations!
+
+------------------------------------------------------------------------
+
+## Tradeoff Between $\alpha$ and $\beta$ {.smaller}
+
+> **Proposition:**    
+> Suppose an experiment and sample size are fixed, and a test statistic is chosen.    
+> Then decreasing the size of the rejection region to obtain a smaller value of $\alpha$ results in a larger value of $\beta$ for any particular parameter value consistent with $H_a$.  
+
+
+:::{.fragment}
+
+#### 🧠 Key Ideas:  
+
+- Reducing $\alpha$ ➔ Shrinks rejection region ➔ Harder to reject $H_0$.  
+- This caution **increases** the chance of a **Type II error** (failing to detect a true effect).  
+- There is **no free lunch**: controlling one error rate worsens the other.  
+
+:::
+
+:::{.fragment} 
+
+#### 📈 Practical Meaning:  
+
+- A more "strict" test (small $\alpha$) sacrifices **sensitivity**.  
+- Finding the right balance depends on **context and consequences** of errors.  
+
+:::
+
+
+------------------------------------------------------------------------
+
+## Continuing Example: Penny Spin Test 🪙
+
+* Suppose we set: - $\alpha = 0.05$ $\Rightarrow$ Rejection region: $X \leq 6$  
+
+* If $X \leq 6$, we **reject** $H_0$. Otherwise, we **fail to reject**
+$H_0$.  
+
+:question: What is the actual Type I error probability?
+
+------------------------------------------------------------------------
+
+## Quick Check :white_check_mark:
+
+**Decide if each statement is True or False:**
+
+-   You can "accept" $H_0$.\
+-   A smaller $\alpha$ means a lower chance of a Type I error.\
+-   Type II error means falsely claiming an effect exists.
+
+::: notes
+(Show answers after discussion.)
+:::
+
+------------------------------------------------------------------------
+
+## Summary :scroll:
+
+-   Hypothesis tests evaluate claims about parameters.
+-   Two competing hypotheses: $H_0$ and $H_a$.\
+-   Key errors:
+    -   Type I ($\alpha$): false rejection\
+    -   Type II ($\beta$): false acceptance\
+-   Balance between $\alpha$ and $\beta$ is important!
