@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="Sec8p1_slides_files/libs/clipboard/clipboard.min.js"></script>
-<script src="Sec8p1_slides_files/libs/quarto-html/tabby.min.js"></script>
-<script src="Sec8p1_slides_files/libs/quarto-html/popper.min.js"></script>
-<script src="Sec8p1_slides_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="Sec8p1_slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="Sec8p1_slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="Sec8p1_slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
-<link href="Sec8p1_slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="Sec8p23_slides_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Sec8p23_slides_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Sec8p23_slides_files/libs/quarto-html/popper.min.js"></script>
+<script src="Sec8p23_slides_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Sec8p23_slides_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Sec8p23_slides_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Sec8p23_slides_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Sec8p23_slides_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="MATH 365">
-  <title>8.1 Hypotheses and Test Procedures</title>
+  <title>8.2 and 8.3: Hypothesis Tests for a Means</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="Sec8p1_slides_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="Sec8p1_slides_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="Sec8p23_slides_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Sec8p23_slides_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -29,79 +29,14 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
-  <link rel="stylesheet" href="Sec8p1_slides_files/libs/revealjs/dist/theme/quarto.css">
-  <link href="Sec8p1_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="Sec8p1_slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="Sec8p1_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="Sec8p1_slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="Sec8p1_slides_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="Sec8p1_slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="Sec8p23_slides_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="Sec8p23_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Sec8p23_slides_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Sec8p23_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Sec8p23_slides_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="Sec8p23_slides_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="Sec8p23_slides_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
   .callout {
@@ -393,7 +328,7 @@
     <div class="slides">
 
 <section id="title-slide" data-background-color="#EA6820" class="quarto-title-block center">
-  <h1 class="title">8.1 Hypotheses and Test Procedures</h1>
+  <h1 class="title">8.2 and 8.3: Hypothesis Tests for a Means</h1>
   <p class="subtitle">Mathematical Statistics</p>
 
 <div class="quarto-title-authors">
@@ -408,387 +343,144 @@ MATH 365
 <section id="section-overview" class="slide level2 center">
 <h2>Section Overview</h2>
 <ul>
-<li>Hypotheses <span class="emoji" data-emoji="brain">🧠</span></li>
-<li>P-values</li>
-<li>Test procedures <span class="emoji" data-emoji="balance_scale">⚖️</span></li>
-<li>Type I and II errors <span class="emoji" data-emoji="exclamation">❗</span><span class="emoji" data-emoji="question">❓</span></li>
-<li>Real-world example: Penny Spins 🪙</li>
-</ul>
-</section>
-<section id="basic-terminology" class="slide level2 center">
-<h2>Basic Terminology <span class="emoji" data-emoji="mag">🔍</span></h2>
-<blockquote>
-<p>A <strong>statistical hypothesis</strong> is a claim about a population parameter.</p>
-</blockquote>
-<ul>
-<li><p><strong>Null hypothesis</strong> <span class="math inline">\(H_0\)</span>: initial assumption (“status quo”)<br>
-</p></li>
-<li><p><strong>Alternative hypothesis</strong> <span class="math inline">\(H_a\)</span>: competing claim (“something has changed!”, “research hypothesis”)</p></li>
-<li><p><strong>Test statistic:</strong> a function of the sample data that summarizes the evidence relevant to a specific statistical hypothesis.</p></li>
-</ul>
-</section>
-<section id="example-spinning-a-penny" class="slide level2 center">
-<h2>Example: Spinning a Penny 🪙</h2>
-<blockquote>
-<p>Suppose we spin a penny 20 times. Let <span class="math inline">\(X\)</span> = number of heads.</p>
-</blockquote>
-<ul>
-<li><span class="math inline">\(H_0: p = 0.5\)</span></li>
-<li><span class="math inline">\(H_a: p &lt; 0.5\)</span></li>
-</ul>
-<p><span class="emoji" data-emoji="abacus">🧮</span> If we observe 6 heads, how unusual is that?<br>
-</p>
-<ul>
-<li>Compute <span class="math inline">\(p\)</span>-value using binomial probabilities.</li>
-</ul>
-<aside class="notes">
-<p>(Work through the calculations together on board!)</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="introducing-the-p-value" class="slide level2 center">
-<h2>Introducing the P-value</h2>
-<blockquote>
-<p><strong>Definition:</strong> The P-value is the probability, calculated assuming that <span class="math inline">\(H_0\)</span> is true, of obtaining a value of the test statistic <strong>at least as contradictory</strong> to <span class="math inline">\(H_0\)</span> as what we observed.</p>
-</blockquote>
-<h3 id="key-features">Key features:</h3>
-<ol type="1">
-<li>The P-value is a <strong>probability</strong>.</li>
-<li>It is computed <strong>assuming <span class="math inline">\(H_0\)</span> is true</strong>.</li>
-<li>It measures <strong>evidence against <span class="math inline">\(H_0\)</span></strong>.</li>
-</ol>
-<div class="fragment">
-<p>In plain terms, the P-value tells us how surprising our data would be <strong>if <span class="math inline">\(H_0\)</span> were true</strong>.</p>
-</div>
-</section>
-<section id="visual-overview" class="slide level2 center">
-<h2>Visual Overview <span class="emoji" data-emoji="framed_picture">🖼️</span></h2>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co"># Parameters</span></span>
-<span id="cb1-2"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">20</span></span>
-<span id="cb1-3"><a href=""></a>p <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb1-4"><a href=""></a></span>
-<span id="cb1-5"><a href=""></a><span class="co"># Create the data</span></span>
-<span id="cb1-6"><a href=""></a>x_vals <span class="ot">&lt;-</span> <span class="dv">0</span><span class="sc">:</span>n</span>
-<span id="cb1-7"><a href=""></a>probs <span class="ot">&lt;-</span> <span class="fu">dbinom</span>(x_vals, <span class="at">size =</span> n, <span class="at">prob =</span> p)</span>
-<span id="cb1-8"><a href=""></a></span>
-<span id="cb1-9"><a href=""></a><span class="co"># Set up colors: red for rejection region (X &lt;= 6), blue otherwise</span></span>
-<span id="cb1-10"><a href=""></a>colors <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(x_vals <span class="sc">&lt;=</span> <span class="dv">6</span>, <span class="st">"red"</span>, <span class="st">"lightblue"</span>)</span>
-<span id="cb1-11"><a href=""></a></span>
-<span id="cb1-12"><a href=""></a><span class="co"># Set up basic plot</span></span>
-<span id="cb1-13"><a href=""></a><span class="fu">barplot</span>(<span class="at">height =</span> probs,</span>
-<span id="cb1-14"><a href=""></a>        <span class="at">names.arg =</span> x_vals,</span>
-<span id="cb1-15"><a href=""></a>        <span class="at">col =</span> colors,</span>
-<span id="cb1-16"><a href=""></a>        <span class="at">space =</span> <span class="dv">0</span>,</span>
-<span id="cb1-17"><a href=""></a>        <span class="at">border =</span> <span class="st">"black"</span>,</span>
-<span id="cb1-18"><a href=""></a>        <span class="at">xlab =</span> <span class="st">"Number of Heads"</span>,</span>
-<span id="cb1-19"><a href=""></a>        <span class="at">ylab =</span> <span class="st">"Probability"</span>,</span>
-<span id="cb1-20"><a href=""></a>        <span class="at">main =</span> <span class="st">"Binomial Distribution, n=20, p=0.5"</span>)</span>
-<span id="cb1-21"><a href=""></a></span>
-<span id="cb1-22"><a href=""></a><span class="co"># Add "Rejection Region" label</span></span>
-<span id="cb1-23"><a href=""></a><span class="fu">text</span>(<span class="at">x =</span> <span class="dv">4</span>, <span class="at">y =</span> <span class="fu">max</span>(probs)<span class="sc">*</span><span class="fl">0.2</span>, <span class="at">labels =</span> <span class="st">"Rejection</span><span class="sc">\n</span><span class="st">Region"</span>, <span class="at">pos =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="st">"red"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-
-</div>
-<img data-src="Sec8p1_slides_files/figure-revealjs/unnamed-chunk-1-1.png" width="960" class="r-stretch"></section>
-<section id="interpreting-the-p-value" class="slide level2 center">
-<h2>Interpreting the P-value</h2>
-<blockquote>
-<p>A small P-value means the observed outcome is <strong>unlikely</strong> under <span class="math inline">\(H_0\)</span> and suggests support for <span class="math inline">\(H_a\)</span>.</p>
-</blockquote>
-<blockquote>
-<p>A large P-value means the outcome is <strong>plausible</strong> under <span class="math inline">\(H_0\)</span> — we do not reject.</p>
-</blockquote>
-<p>🧪 It is customary to call data <strong>significant</strong> when <span class="math inline">\(H_0\)</span> is rejected, and <strong>not significant</strong> otherwise.</p>
-</section>
-<section class="slide level2 center">
-
-<h3 id="formalized-hypothesis-testing-procedure">Formalized Hypothesis Testing Procedure <span class="emoji" data-emoji="hammer_and_wrench">🛠️</span></h3>
-<p>A hypothesis test procedure is specified by the following:</p>
-<ol type="1">
-<li>A <strong>test statistic</strong>, a function of the sample data on which the decision (reject <span class="math inline">\(H_0\)</span> or do not reject <span class="math inline">\(H_0\)</span>) is to be based;<br>
-</li>
-<li>A <strong>rejection region</strong>, <span class="math inline">\(\cal R\)</span>, the set of all test statistic values for which <span class="math inline">\(H_0\)</span> will be rejected.</li>
-</ol>
-<div class="callout callout-important callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Important</strong></p>
-</div>
-<div class="callout-content">
-<p>The null hypothesis will then be rejected if and only if the observed or computed test statistic value falls in the rejection region.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="errors-in-hypothesis-testing" class="slide level2 smaller center">
-<h2>Errors in Hypothesis Testing <span class="emoji" data-emoji="warning">⚠️</span></h2>
-<blockquote>
-<p>Two kinds of mistakes can happen:</p>
-</blockquote>
-<ul>
-<li><strong>Type I error</strong>: Reject <span class="math inline">\(H_0\)</span> when it is true (false alarm)
-<ul>
-<li>Probability = <span class="math inline">\(\alpha\)</span></li>
-</ul></li>
-<li><strong>Type II error</strong>: Fail to reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(H_a\)</span> is true (missed discovery)
-<ul>
-<li>Probability = <span class="math inline">\(\beta\)</span></li>
-</ul></li>
-<li><strong>Power</strong>: correctly reject <span class="math inline">\(H_0\)</span> when <span class="math inline">\(H_a\)</span> is true
-<ul>
-<li>Probability = <span class="math inline">\(1-\beta\)</span></li>
-</ul></li>
-</ul>
-<p><span class="emoji" data-emoji="star2">🌟</span> Trade-off: smaller <span class="math inline">\(\alpha\)</span> often means larger <span class="math inline">\(\beta\)</span>.</p>
-</section>
-<section id="type-i-and-type-ii-errors-summary" class="slide level2 center">
-<h2>Type I and Type II Errors Summary</h2>
-<div style="display: flex; justify-content: center;">
-<table style="border-collapse: collapse; font-size: 1.1em;">
-<thead>
-<tr style="background-color: #e2e8f0;">
-<th style="border: 1px solid #ccc; padding: 20px;">
-</th>
-<th style="border: 1px solid #ccc; padding: 20px;">
-Null is <b>True</b>
-</th>
-<th style="border: 1px solid #ccc; padding: 20px;">
-Null is <b>False</b>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th style="border: 1px solid #ccc; padding: 10px;">
-Rejected
-</th>
-<td style="background-color: #f87171; border: 1px solid #ccc; padding: 20px;">
-<b>Type I error</b><br> False positive<br> Probability = <span style="font-family: 'STIXGeneral', 'Cambria Math', serif;">α</span>
-</td>
-<td style="background-color: #5eead4; border: 1px solid #ccc; padding: 20px;">
-<b>Correct decision</b><br> True positive (Power)<br> Probability = 1 − <span style="font-family: 'STIXGeneral', 'Cambria Math', serif;">β<br></span>
-</td>
-</tr>
-<tr>
-<th style="border: 1px solid #ccc; padding: 20px;">
-Not rejected
-</th>
-<td style="background-color: #5eead4; border: 1px solid #ccc; padding: 20px;">
-<b>Correct decision</b><br> True negative<br> Probability = 1 − <span style="font-family: 'STIXGeneral', 'Cambria Math', serif;">α</span>
-</td>
-<td style="background-color: #f87171; border: 1px solid #ccc; padding: 20px;">
-<b>Type II error</b><br> False negative<br> Probability = <span style="font-family: 'STIXGeneral', 'Cambria Math', serif;">β</span>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="thought-question" class="slide level2 center">
-<h2>Thought Question <span class="emoji" data-emoji="thought_balloon">💭</span></h2>
-<blockquote>
-<p>In the penny spinning example, what would a Type I error mean?<br>
-What would a Type II error mean?</p>
-</blockquote>
-<p><span class="emoji" data-emoji="speaking_head">🗣️</span> Discuss and share your interpretations!</p>
-</section>
-<section id="continuing-example-penny-spin-test" class="slide level2 center">
-<h2>Continuing Example: Penny Spin Test 🪙</h2>
-<ul>
-<li><p>Suppose we set: - <span class="math inline">\(\alpha = 0.05\)</span> <span class="math inline">\(\Rightarrow\)</span> Rejection region: <span class="math inline">\(X \leq 6\)</span></p></li>
-<li><p>If <span class="math inline">\(X \leq 6\)</span>, we <strong>reject</strong> <span class="math inline">\(H_0\)</span>. Otherwise, we <strong>fail to reject</strong> <span class="math inline">\(H_0\)</span>.</p></li>
-</ul>
-<p>Question 1: What is the actual Type I error probability? <br> <br></p>
-<div class="fragment">
-<p>Question 2: What is the Type II error probability if actually <span class="math inline">\(p=0.4\)</span>? If <span class="math inline">\(p=0.3\)</span> or <span class="math inline">\(p=.2\)</span></p>
-</div>
-</section>
-<section class="slide level2 center">
-
-<h3 id="type-ii-error-curve-for-penny-spinning-test-with-alpha-.05">Type II Error Curve for Penny Spinning Test with <span class="math inline">\(\alpha = .05\)</span></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">curve</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pbinom</span>(<span class="dv">6</span>, <span class="dv">20</span>, x), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> .<span class="dv">5</span>, <span class="at">xlab =</span> <span class="st">"Values of p'"</span>, </span>
-<span id="cb2-2"><a href=""></a>      <span class="at">ylab =</span> <span class="st">"Type II Error Probability"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="Sec8p1_slides_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><ul>
-<li>Note: This assumes we reject <span class="math inline">\(H_0\)</span> for <span class="math inline">\(X\le 6\)</span>.</li>
+<li>TBD</li>
 </ul>
 </section>
 <section class="slide level2 center">
 
-<h3 id="power-curve-for-penny-spinning-test-with-alpha-.05">Power Curve for Penny Spinning Test with <span class="math inline">\(\alpha = .05\)</span></h3>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">curve</span>(<span class="fu">pbinom</span>(<span class="dv">6</span>, <span class="dv">20</span>, x), <span class="at">from =</span> <span class="dv">0</span>, <span class="at">to =</span> .<span class="dv">5</span>, <span class="at">xlab =</span> <span class="st">"Values of p'"</span>, </span>
-<span id="cb3-2"><a href=""></a>      <span class="at">ylab =</span> <span class="st">"Power (probability)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="Sec8p1_slides_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><ul>
-<li>Note: Power is greater when alternative <span class="math inline">\(p'\)</span> is further away from null <span class="math inline">\(p=0.5\)</span>.</li>
-</ul>
-</section>
-<section id="tradeoff-between-alpha-and-beta" class="slide level2 smaller center">
-<h2>Tradeoff Between <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></h2>
-<blockquote>
-<p><strong>Proposition:</strong><br>
-Suppose an experiment and sample size are fixed, and a test statistic is chosen.<br>
-Then decreasing the size of the rejection region to obtain a smaller value of <span class="math inline">\(\alpha\)</span> results in a larger value of <span class="math inline">\(\beta\)</span> for any particular parameter value consistent with <span class="math inline">\(H_a\)</span>.</p>
-</blockquote>
-<div class="fragment">
-<!-- -->
-<h4 id="key-ideas">🧠 Key Ideas:</h4>
-<div>
+<h3 class="smaller" id="deriving-type-ii-error-beta-for-a-lower-tailed-z-test-with-sigma-known">Deriving Type II Error (<span class="math inline">\(\beta\)</span>) for a Lower-Tailed <span class="math inline">\(z\)</span> Test with <span class="math inline">\(\sigma\)</span> Known</h3>
+<p>Suppose we want to test</p>
 <ul>
-<li class="fragment">Reducing <span class="math inline">\(\alpha\)</span> → Shrinks rejection region → Harder to reject <span class="math inline">\(H_0\)</span>.<br>
-</li>
-<li class="fragment">This caution <strong>increases</strong> the chance of a <strong>Type II error</strong> (failing to detect a true effect).<br>
-</li>
-<li class="fragment">There is <strong>no free lunch</strong>: controlling one error rate worsens the other.<br>
-</li>
+<li><span class="math inline">\(H_0: \mu = \mu_0\)</span> vs <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span></li>
 </ul>
-</div>
+<div class="fragment">
+<ul>
+<li>Assume known <span class="math inline">\(\sigma\)</span> and normally distributed data</li>
+</ul>
 </div>
 <div class="fragment">
-<!-- -->
-<h4 id="practical-meaning">📈 Practical Meaning:</h4>
 <ul>
-<li>A test with <span class="math inline">\(\alpha = \frac{1}{20}\)</span> is more conservative than one with <span class="math inline">\(\alpha = \frac{1}{10}\)</span>.<br>
-</li>
-<li>Smaller <span class="math inline">\(\alpha\)</span> protects against false positives, but at the <strong>cost of lower power</strong>.<br>
-</li>
-<li>Choosing <span class="math inline">\(\alpha\)</span> involves considering the <strong>relative seriousness</strong> of Type I vs Type II errors.</li>
+<li>Significance level: <span class="math inline">\(\alpha\)</span></li>
 </ul>
 </div>
-</section>
-<section id="decision-rule-based-on-p-value" class="slide level2 center">
-<h2>Decision Rule Based on P-value <span class="emoji" data-emoji="triangular_ruler">📐</span></h2>
-<blockquote>
-<p>Select a significance level <span class="math inline">\(\alpha\)</span> (the desired Type I error rate). Then:</p>
-</blockquote>
-<ul>
-<li>Reject <span class="math inline">\(H_0\)</span> if P-value <span class="math inline">\(\leq \alpha\)</span><br>
-</li>
-<li>Do not reject <span class="math inline">\(H_0\)</span> if P-value <span class="math inline">\(&gt; \alpha\)</span></li>
-</ul>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="fragment">
+<p>Then the null hypothesis is rejected when the <strong>P-value</strong> is less than <span class="math inline">\(\alpha\)</span>. The P-value is calculated from the standardized test statistic</p>
 </div>
-<p><strong>Note</strong></p>
+<div class="fragment">
+<p><span class="math display">\[
+z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
+\]</span></p>
 </div>
-<div class="callout-content">
-<p>These rules are equivalent to using a rejection region.</p>
-</div>
-</div>
+<div class="fragment">
+<p>using the standard normal distribution.</p>
 </div>
 </section>
-<section id="proposition-p-value-as-a-threshold" class="slide level2 center">
-<h2>Proposition: P-value as a threshold</h2>
-<blockquote>
-<p>The <strong>P-value is the smallest significance level</strong> <span class="math inline">\(\alpha\)</span> at which <span class="math inline">\(H_0\)</span> can be rejected.</p>
-</blockquote>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="type-ii-error-for-h_a-mu-mu_0" class="slide level2 smaller center">
+<h2>Type II Error for <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span></h2>
+<div class="fragment">
+<p>Let <span class="math inline">\(\mu'\)</span> be a specific value less than <span class="math inline">\(\mu_0\)</span>.</p>
 </div>
-<p><strong>Tip</strong></p>
+<div class="fragment">
+<p>We want: <span class="math display">\[
+\beta(\mu') = P(\text{Fail to reject } H_0 \mid \mu = \mu')
+\]</span></p>
 </div>
-<div class="callout-content">
-<p>Because of this, the P-value is also called the <strong>observed significance level</strong> (OSL) for the data.</p>
+<div class="fragment">
+<p>That is: <span class="math display">\[
+\beta(\mu') = P\left(z \geq -z_\alpha \mid \mu = \mu'\right)
+\]</span></p>
 </div>
-</div>
+<div class="fragment">
+<p>Where: <span class="math display">\[
+z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
+\]</span></p>
 </div>
 </section>
-<section id="quick-check" class="slide level2 center">
-<h2>Quick Check <span class="emoji" data-emoji="white_check_mark">✅</span></h2>
-<p><strong>Decide if each statement is True or False:</strong></p>
-<ul>
-<li>You can “accept” <span class="math inline">\(H_0\)</span>.<br>
-</li>
-<li>A smaller <span class="math inline">\(\alpha\)</span> means a lower chance of a Type I error.<br>
-</li>
-<li>Type II error means falsely claiming an effect exists.</li>
-</ul>
-<aside class="notes">
-<p>(Show answers after discussion.)</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="substitute-and-rearrange" class="slide level2 smaller center">
+<h2>Substitute and Rearrange</h2>
+<div class="fragment">
+<p>Use the expression for <span class="math inline">\(z\)</span>: <span class="math display">\[
+\frac{\bar{X} - \mu_0}{\sigma/\sqrt{n}} \geq -z_\alpha
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Multiply both sides by <span class="math inline">\(\sigma/\sqrt{n}\)</span>: <span class="math display">\[
+\bar{X} - \mu_0 \geq -z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Add <span class="math inline">\(\mu_0\)</span> to both sides: <span class="math display">\[
+\bar{X} \geq \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+\]</span></p>
+</div>
 </section>
-<section id="interval-vs-hypothesis-testing" class="slide level2 smaller center">
-<h2>Interval vs Hypothesis Testing <span class="emoji" data-emoji="chart_with_upwards_trend">📈</span><span class="emoji" data-emoji="chart_with_downwards_trend">📉</span></h2>
-<table class="caption-top">
-<colgroup>
-<col style="width: 51%">
-<col style="width: 48%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Interval Estimation</th>
-<th style="text-align: left;">Hypothesis Testing</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">Estimate a parameter</td>
-<td style="text-align: left;">Make a decision about a parameter</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Provide a range of plausible values</td>
-<td style="text-align: left;">Decide whether to reject <span class="math inline">\(H_0\)</span></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Focus on uncertainty</td>
-<td style="text-align: left;">Focus on evidence</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Question:</strong> How might the ideas of sampling variability be relevant to a hypothesis test?</p>
+<section id="change-distribution-assumption" class="slide level2 smaller center">
+<h2>Change Distribution Assumption</h2>
+<div class="fragment">
+<p>Now assume <span class="math inline">\(\mu = \mu'\)</span> (alternative is true): <span class="math display">\[
+\bar{X} \sim N\left(\mu', \frac{\sigma^2}{n}\right)
+\]</span></p>
+</div>
+<div class="fragment">
+<p>So we standardize: <span class="math display">\[
+\beta(\mu') = P\left( \bar{X} \geq \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} \mid \mu = \mu' \right)
+\]</span></p>
+</div>
 </section>
-<section id="summary" class="slide level2 center">
-<h2>Summary <span class="emoji" data-emoji="scroll">📜</span></h2>
-<ul>
-<li>Hypothesis tests evaluate claims about parameters.</li>
-<li>Two competing hypotheses: <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_a\)</span>.<br>
-</li>
-<li>Key errors:
-<ul>
-<li>Type I (<span class="math inline">\(\alpha\)</span>): false rejection<br>
-</li>
-<li>Type II (<span class="math inline">\(\beta\)</span>): false acceptance<br>
-</li>
-</ul></li>
-<li>Balance between <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> is important!</li>
-<li>P-value provides an alternative but equivalent test decision rule.</li>
-<li>Smaller P-values = stronger evidence against <span class="math inline">\(H_0\)</span>.</li>
-</ul>
+<section id="standardize-under-mu-mu" class="slide level2 smaller center">
+<h2>Standardize Under <span class="math inline">\(\mu = \mu'\)</span></h2>
+<div class="fragment">
+<p>Convert to standard normal: <span class="math display">\[
+\beta(\mu') = P\left( \frac{\bar{X} - \mu'}{\sigma / \sqrt{n}} \geq \frac{\mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} - \mu'}{\sigma / \sqrt{n}} \right)
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Simplify: <span class="math display">\[
+\beta(\mu') = P\left( Z \geq -z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+\]</span></p>
+</div>
+</section>
+<section id="final-expression-for-betamu" class="slide level2 smaller center">
+<h2>Final Expression for <span class="math inline">\(\beta(\mu')\)</span></h2>
+<div class="fragment">
+<p>Now express <span class="math inline">\(\beta(\mu')\)</span> in terms of the standard normal cdf: <span class="math display">\[
+\beta(\mu') = 1 - \Phi\left(-z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Or equivalently: <span class="math display">\[
+\beta(\mu') = \Phi\left(z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+\]</span></p>
+</div>
+</section>
+<section id="solving-for-sample-size-n" class="slide level2 smaller center">
+<h2>Solving for Sample Size <span class="math inline">\(n\)</span></h2>
+<div class="fragment">
+<p>Suppose we specify: - Significance level <span class="math inline">\(\alpha\)</span> - Target power <span class="math inline">\(1 - \beta\)</span> - Alternative value <span class="math inline">\(\mu'\)</span></p>
+</div>
+<div class="fragment">
+<p>We want: <span class="math display">\[
+\Phi\left(z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right) = \beta
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Take the quantile of both sides: <span class="math display">\[
+z_\beta = z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}}
+\]</span></p>
+</div>
+</section>
+<section id="final-sample-size-formula" class="slide level2 smaller center">
+<h2>Final Sample Size Formula</h2>
+<div class="fragment">
+<p>Solve for <span class="math inline">\(n\)</span>: <span class="math display">\[
+\sqrt{n} = \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'}
+\quad \Rightarrow \quad
+n = \left( \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'} \right)^2
+\]</span></p>
+</div>
+<div class="fragment">
+<p>This gives the required sample size to achieve specified <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> for a <strong>lower-tailed</strong> one-sample <span class="math inline">\(z\)</span>-test.</p>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
@@ -799,20 +491,20 @@ Then decreasing the size of the rejection region to obtain a smaller value of <s
   </div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="Sec8p1_slides_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="Sec8p1_slides_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Sec8p23_slides_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
@@ -1007,44 +699,6 @@ Then decreasing the size of the rejection region to obtain a smaller value of <s
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

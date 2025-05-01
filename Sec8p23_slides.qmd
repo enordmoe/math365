@@ -1,0 +1,219 @@
+---
+title: "8.2 and 8.3: Hypothesis Tests for a Means"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    center: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Section Overview
+
+-  TBD
+
+
+------------------------------------------------------------------------
+
+
+### Deriving Type II Error ($\beta$) for a Lower-Tailed $z$ Test with $\sigma$ Known {.smaller}
+
+Suppose we want to test
+
+- $H_0: \mu = \mu_0$ vs $H_a: \mu < \mu_0$
+
+:::{.fragment}
+- Assume known $\sigma$ and normally distributed data
+:::
+
+:::{.fragment}
+- Significance level: $\alpha$
+:::
+
+:::{.fragment}
+Then the null hypothesis is rejected when the **P-value** is less than $\alpha$. The P-value is calculated from the standardized test statistic
+:::
+
+:::{.fragment}
+$$
+z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
+$$
+:::
+
+:::{.fragment}
+using the standard normal distribution.
+:::
+
+---
+
+## Type II Error for $H_a: \mu < \mu_0$ {.smaller}
+
+:::{.fragment}
+Let $\mu'$ be a specific value less than $\mu_0$.
+:::
+
+:::{.fragment}
+We want:
+$$
+\beta(\mu') = P(\text{Fail to reject } H_0 \mid \mu = \mu')
+$$
+:::
+
+:::{.fragment}
+That is:
+$$
+\beta(\mu') = P\left(z \geq -z_\alpha \mid \mu = \mu'\right)
+$$
+:::
+
+:::{.fragment}
+Where:
+$$
+z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
+$$
+:::
+
+---
+
+## Substitute and Rearrange {.smaller}
+
+:::{.fragment}
+Use the expression for $z$:
+$$
+\frac{\bar{X} - \mu_0}{\sigma/\sqrt{n}} \geq -z_\alpha
+$$
+:::
+
+:::{.fragment}
+Multiply both sides by $\sigma/\sqrt{n}$:
+$$
+\bar{X} - \mu_0 \geq -z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+$$
+:::
+
+:::{.fragment}
+Add $\mu_0$ to both sides:
+$$
+\bar{X} \geq \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+$$
+:::
+
+---
+
+## Change Distribution Assumption {.smaller}
+
+:::{.fragment}
+Now assume $\mu = \mu'$ (alternative is true):
+$$
+\bar{X} \sim N\left(\mu', \frac{\sigma^2}{n}\right)
+$$
+:::
+
+:::{.fragment}
+So we standardize:
+$$
+\beta(\mu') = P\left( \bar{X} \geq \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} \mid \mu = \mu' \right)
+$$
+:::
+
+---
+
+## Standardize Under $\mu = \mu'$ {.smaller}
+
+:::{.fragment}
+Convert to standard normal:
+$$
+\beta(\mu') = P\left( \frac{\bar{X} - \mu'}{\sigma / \sqrt{n}} \geq \frac{\mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} - \mu'}{\sigma / \sqrt{n}} \right)
+$$
+:::
+
+:::{.fragment}
+Simplify:
+$$
+\beta(\mu') = P\left( Z \geq -z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+$$
+:::
+
+---
+
+## Final Expression for $\beta(\mu')$ {.smaller}
+
+:::{.fragment}
+Now express $\beta(\mu')$ in terms of the standard normal cdf:
+$$
+\beta(\mu') = 1 - \Phi\left(-z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+$$
+:::
+
+:::{.fragment}
+Or equivalently:
+$$
+\beta(\mu') = \Phi\left(z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+$$
+:::
+
+---
+
+## Solving for Sample Size $n$ {.smaller}
+
+:::{.fragment}
+Suppose we specify:
+- Significance level $\alpha$
+- Target power $1 - \beta$
+- Alternative value $\mu'$
+:::
+
+:::{.fragment}
+We want:
+$$
+\Phi\left(z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right) = \beta
+$$
+:::
+
+:::{.fragment}
+Take the quantile of both sides:
+$$
+z_\beta = z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}}
+$$
+:::
+
+---
+
+## Final Sample Size Formula {.smaller}
+
+:::{.fragment}
+Solve for $n$:
+$$
+\sqrt{n} = \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'}
+\quad \Rightarrow \quad
+n = \left( \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'} \right)^2
+$$
+:::
+
+:::{.fragment}
+This gives the required sample size to achieve specified $\alpha$ and $\beta$ for a **lower-tailed** one-sample $z$-test.
+:::
+
+

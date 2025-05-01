@@ -33,13 +33,14 @@ editor:
 ## Section Overview
 
 -   Hypotheses :brain:
+-   P-values
 -   Test procedures :balance_scale:
 -   Type I and II errors :exclamation::question:
 -   Real-world example: Penny Spins 🪙
 
 ------------------------------------------------------------------------
 
-## Hypotheses :mag:
+## Basic Terminology :mag:
 
 > A **statistical hypothesis** is a claim about a population parameter.
 
@@ -48,28 +49,14 @@ editor:
 -   **Alternative hypothesis** $H_a$: competing claim ("something has
     changed!", "research hypothesis")
 
-:::{.fragment}
 
-:dart: **We never *accept*** $H_0$!
+-   **Test statistic:**  a function of the sample data that summarizes the evidence relevant to a specific statistical hypothesis.  
 
-- Only "reject $H_0$" or "fail to reject $H_0$"
 
-:::
+---  
 
-------------------------------------------------------------------------
 
-## Interval vs Hypothesis Testing :chart_with_upwards_trend::chart_with_downwards_trend: {.smaller}
 
-| Interval Estimation                 | Hypothesis Testing                |
-|:------------------------------------|:----------------------------------|
-| Estimate a parameter                | Make a decision about a parameter |
-| Provide a range of plausible values | Decide whether to reject $H_0$    |
-| Focus on uncertainty                | Focus on evidence                 |
-
-**Question:** How might the ideas of sampling variability be relevant to
-a hypothesis test?
-
-------------------------------------------------------------------------
 
 ## Example: Spinning a Penny 🪙
 
@@ -82,31 +69,32 @@ a hypothesis test?
 
 -   Compute $p$-value using binomial probabilities.
 
--   Set up a **rejection region**.
+::: {.notes}
 
-::: notes
-(Work through the calculations together on canvas!)
+(Work through the calculations together on board!)
+
+:::  
+
+---
+
+## Introducing the P-value
+
+> **Definition:** The P-value is the probability, calculated assuming that $H_0$ is true, of obtaining a value of the test statistic **at least as contradictory** to $H_0$ as what we observed.
+
+### Key features:
+
+1. The P-value is a **probability**.
+2. It is computed **assuming $H_0$ is true**.
+3. It measures **evidence against $H_0$**.
+
+:::{.fragment}
+
+In plain terms, the P-value tells us how surprising our data would be **if $H_0$ were true**.
+
 :::
 
-------------------------------------------------------------------------
 
-## Test Procedures :hammer_and_wrench:
-
-**Steps:**
-
-1.  Choose a **test statistic** (e.g., number of heads $X$).\
-2.  Specify a **significance level** $\alpha$ (e.g., $0.05$).\
-3.  Determine a **rejection region** based on $\alpha$.\
-4.  Compute the **p-value**.\
-5.  Make a decision.
-
-::: {.callout-important .callout}
-## Important
-
-The null is only rejected if evidence is strong enough.
-:::
-
-------------------------------------------------------------------------
+---  
 
 ## Visual Overview :framed_picture:
 
@@ -136,12 +124,47 @@ barplot(height = probs,
 
 # Add "Rejection Region" label
 text(x = 4, y = max(probs)*0.2, labels = "Rejection\nRegion", pos = 3, col = "red")
-
 ```
 
----
 
-### Errors in Hypothesis Testing :warning: {.smaller}
+---  
+
+## Interpreting the P-value
+
+> A small P-value means the observed outcome is **unlikely** under $H_0$ and suggests support for $H_a$.
+
+> A large P-value means the outcome is **plausible** under $H_0$ — we do not reject.
+
+🧪 It is customary to call data **significant** when $H_0$ is rejected, and **not significant** otherwise.
+
+------------------------------------------------------------------------
+
+
+
+### Formalized Hypothesis Testing Procedure :hammer_and_wrench:
+
+A hypothesis test procedure is specified by the following:
+
+1. A **test statistic**, a function of the sample data on which the decision (reject $H_0$ or do not
+reject $H_0$) is to be based;  
+2. A **rejection region**, $\cal R$, the set of all test statistic values for which $H_0$ will be rejected.
+
+
+::: {.callout-important .callout}
+## Important
+
+The null hypothesis will then be rejected if and only if the observed or computed test statistic value
+falls in the rejection region.
+
+:::
+
+
+------------------------------------------------------------------------
+
+
+
+
+## Errors in Hypothesis Testing :warning: {.smaller}
 
 > Two kinds of mistakes can happen:
 
@@ -155,6 +178,52 @@ text(x = 4, y = max(probs)*0.2, labels = "Rejection\nRegion", pos = 3, col = "re
 
 :star2: Trade-off: smaller $\alpha$ often means larger $\beta$.
 
+
+--- 
+
+## Type I and Type II Errors Summary
+
+<div style="display: flex; justify-content: center;">
+  <table style="border-collapse: collapse; font-size: 1.1em;">
+    <thead>
+      <tr style="background-color: #e2e8f0;">
+        <th style="border: 1px solid #ccc; padding: 20px;"></th>
+        <th style="border: 1px solid #ccc; padding: 20px;">Null is <b>True</b></th>
+        <th style="border: 1px solid #ccc; padding: 20px;">Null is <b>False</b></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th style="border: 1px solid #ccc; padding: 10px;">Rejected</th>
+        <td style="background-color: #f87171; border: 1px solid #ccc; padding: 20px;">
+          <b>Type I error</b><br>
+          False positive<br>
+          Probability = <span style="font-family: 'STIXGeneral', 'Cambria Math', serif;">&alpha;</span>
+        </td>
+        <td style="background-color: #5eead4; border: 1px solid #ccc; padding: 20px;">
+          <b>Correct decision</b><br>
+          True positive (Power)<br>
+          Probability = 1 − <span style="font-family: 'STIXGeneral', 'Cambria Math', serif;">&beta;<br></span>
+        </td>
+      </tr>
+      <tr>
+        <th style="border: 1px solid #ccc; padding: 20px;">Not rejected</th>
+        <td style="background-color: #5eead4; border: 1px solid #ccc; padding: 20px;">
+          <b>Correct decision</b><br>
+          True negative<br>
+          Probability = 1 − <span style="font-family: 'STIXGeneral', 'Cambria Math', serif;">&alpha;</span>
+        </td>
+        <td style="background-color: #f87171; border: 1px solid #ccc; padding: 20px;">
+          <b>Type II error</b><br>
+          False negative<br>
+          Probability = <span style="font-family: 'STIXGeneral', 'Cambria Math', serif;">&beta;</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
 ------------------------------------------------------------------------
 
 ## Thought Question :thought_balloon:
@@ -163,34 +232,6 @@ text(x = 4, y = max(probs)*0.2, labels = "Rejection\nRegion", pos = 3, col = "re
 > What would a Type II error mean?    
 
 :speaking_head: Discuss and share your interpretations!
-
-------------------------------------------------------------------------
-
-## Tradeoff Between $\alpha$ and $\beta$ {.smaller}
-
-> **Proposition:**    
-> Suppose an experiment and sample size are fixed, and a test statistic is chosen.    
-> Then decreasing the size of the rejection region to obtain a smaller value of $\alpha$ results in a larger value of $\beta$ for any particular parameter value consistent with $H_a$.  
-
-
-:::{.fragment}
-
-#### 🧠 Key Ideas:  
-
-- Reducing $\alpha$ ➔ Shrinks rejection region ➔ Harder to reject $H_0$.  
-- This caution **increases** the chance of a **Type II error** (failing to detect a true effect).  
-- There is **no free lunch**: controlling one error rate worsens the other.  
-
-:::
-
-:::{.fragment} 
-
-#### 📈 Practical Meaning:  
-
-- A more "strict" test (small $\alpha$) sacrifices **sensitivity**.  
-- Finding the right balance depends on **context and consequences** of errors.  
-
-:::
 
 
 ------------------------------------------------------------------------
@@ -202,7 +243,96 @@ text(x = 4, y = max(probs)*0.2, labels = "Rejection\nRegion", pos = 3, col = "re
 * If $X \leq 6$, we **reject** $H_0$. Otherwise, we **fail to reject**
 $H_0$.  
 
-:question: What is the actual Type I error probability?
+Question 1: What is the actual Type I error probability?
+<br>
+<br>
+
+:::{.fragment}
+
+Question 2: What is the Type II error probability if actually $p=0.4$? If $p=0.3$ or $p=.2$  
+
+:::
+
+--- 
+
+### Type II Error Curve for Penny Spinning Test with $\alpha = .05$ 
+
+```{r}
+#| eval: true
+curve(1-pbinom(6, 20, x), from = 0, to = .5, xlab = "Values of p'", 
+      ylab = "Type II Error Probability")
+```
+
+* Note: This assumes we reject $H_0$ for $X\le 6$.  
+
+---
+
+### Power Curve for Penny Spinning Test with $\alpha = .05$ 
+
+```{r}
+#| eval: true
+curve(pbinom(6, 20, x), from = 0, to = .5, xlab = "Values of p'", 
+      ylab = "Power (probability)")
+```
+
+* Note: Power is greater when alternative $p'$ is further away from null $p=0.5$.  
+
+---
+
+## Tradeoff Between $\alpha$ and $\beta$ {.smaller}
+
+> **Proposition:**    
+> Suppose an experiment and sample size are fixed, and a test statistic is chosen.    
+> Then decreasing the size of the rejection region to obtain a smaller value of $\alpha$ results in a larger value of $\beta$ for any particular parameter value consistent with $H_a$.  
+
+:::{.fragment}
+
+#### 🧠 Key Ideas:  
+
+:::{.incremental}
+- Reducing $\alpha$ → Shrinks rejection region → Harder to reject $H_0$.  
+- This caution **increases** the chance of a **Type II error** (failing to detect a true effect).  
+- There is **no free lunch**: controlling one error rate worsens the other.  
+:::
+:::
+
+:::{.fragment} 
+
+#### 📈 Practical Meaning:  
+
+- A test with $\alpha = \frac{1}{20}$ is more conservative than one with $\alpha = \frac{1}{10}$.  
+- Smaller $\alpha$ protects against false positives, but at the **cost of lower power**.  
+- Choosing $\alpha$ involves considering the **relative seriousness** of Type I vs Type II errors.  
+
+:::
+
+------------------------------------------------------------------------
+
+
+
+## Decision Rule Based on P-value :triangular_ruler:
+
+> Select a significance level $\alpha$ (the desired Type I error rate). Then:
+
+- Reject $H_0$ if P-value $\leq \alpha$  
+- Do not reject $H_0$ if P-value $> \alpha$
+
+:::{.callout-note}
+These rules are equivalent to using a rejection region.
+:::
+
+
+
+------------------------------------------------------------------------
+
+## Proposition: P-value as a threshold
+
+> The **P-value is the smallest significance level** $\alpha$ at which $H_0$ can be rejected.
+
+:::{.callout-tip}
+Because of this, the P-value is also called the **observed significance level** (OSL) for the data.
+:::
+
 
 ------------------------------------------------------------------------
 
@@ -218,6 +348,20 @@ $H_0$.
 (Show answers after discussion.)
 :::
 
+------------------------------------------------------------------------  
+
+
+## Interval vs Hypothesis Testing :chart_with_upwards_trend::chart_with_downwards_trend: {.smaller}
+
+| Interval Estimation                 | Hypothesis Testing                |
+|:------------------------------------|:----------------------------------|
+| Estimate a parameter                | Make a decision about a parameter |
+| Provide a range of plausible values | Decide whether to reject $H_0$    |
+| Focus on uncertainty                | Focus on evidence                 |
+
+**Question:** How might the ideas of sampling variability be relevant to
+a hypothesis test?
+
 ------------------------------------------------------------------------
 
 ## Summary :scroll:
@@ -228,3 +372,7 @@ $H_0$.
     -   Type I ($\alpha$): false rejection\
     -   Type II ($\beta$): false acceptance\
 -   Balance between $\alpha$ and $\beta$ is important!
+-   P-value provides an alternative but equivalent test decision rule.
+-   Smaller P-values = stronger evidence against $H_0$.
+
+
