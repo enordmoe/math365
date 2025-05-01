@@ -30,190 +30,479 @@ editor:
     wrap: 72
 ---
 
-## Section Overview
+### 🎯 Goals
 
--  TBD
+- Understand the three cases for testing means $\mu$  
+  - Known $\sigma$ (Case I)  
+  - Unknown $\sigma$ (Case II)  
+  - Unknown $\sigma$, large $n$ (Case III)  
+- Learn how to compute and interpret P-values   
+- Calculate and interpret Type II error and power  
 
 
 ------------------------------------------------------------------------
 
+## Topics
+
+-   Case I: $z$-test for $\mu$: A Normal Population with Known $\sigma$
+
+-   Case II: $t$-test for $\mu$: A Normal Population with Unknown
+    $\sigma$
+
+-   Case III: Approximate $z$-test for $\mu$: Large sample test with
+    unknown $\sigma$
+
+-   Type II Error and Power Calculations for Case I
+
+------------------------------------------------------------------------
+
+## Do K Students Get Enough Sleep?
+
+-   Collect sleep data
+
+-   Carry out a test about $\mu$, the average hours of sleep per night
+    of K students.
+
+::: fragment
+-   Test $H_0:\mu = 8$ versus $H_a: \mu<8$?
+:::
+
+------------------------------------------------------------------------
+
+# Case I: A Normal Population with Known $\sigma$
+
+------------------------------------------------------------------------
+
+### Case I: A Normal Population with Known $\sigma$ {.smaller}
+
+> :test_tube: Let's start our study of hypothesis testing for $\mu$ with
+> the **simplest scenario**: the population is Normal, and the standard
+> deviation $\sigma$ is known.
+
+-   Null Hypothesis:
+
+$$
+H_0: \mu = \mu_0
+$$
+
+-   Test Statistic:
+
+$$
+Z = \frac{\overline{X} - \mu_0}{\sigma / \sqrt{n}}
+$$
+
+::: callout-note
+Note that $Z$ has a standard normal distribution when $H_0$ is true.
+:::
+
+------------------------------------------------------------------------
+
+## Steps in a Hypothesis Test Procedure {.smaller}
+
+1.  ::: fragment
+    **Identify the parameter of interest** and describe it in the
+    context of the problem situation.
+    :::
+
+2.  ::: fragment
+    **Determine the null value** and state the null hypothesis.
+    :::
+
+3.  ::: fragment
+    **State the appropriate alternative hypothesis.**
+    :::
+
+4.  ::: fragment
+    **Give the general formula** for the test statistic
+    :::
+
+5.  ::: fragment
+    **Compute sample quantities**, substitute into the formula, and
+    compute the test statistic value.
+    :::
+
+6.  ::: fragment
+    **Determine the P-value.**
+    :::
+
+7.  ::: fragment
+    **Compare** the P-value to the significance level $\alpha$\
+    and **state your conclusion** in the context of the problem.
+    :::
+
+------------------------------------------------------------------------
+
+### How to Determine the P-value?
+
+| Alternative Hypothesis | P-Value Determination |
+|------------------------------------|------------------------------------|
+| $H_a: \mu > \mu_0$ | Area under the standard normal curve to the **right** of $z$ |
+| $H_a: \mu < \mu_0$ | Area under the standard normal curve to the **left** of $z$ |
+| $H_a: \mu \ne \mu_0$ | $2 \cdot$ (area under the standard normal curve to the **right** of $|z|$) |
+
+------------------------------------------------------------------------
+
+### Graphically determining the P-value
+
+![](images/output.png){fig-align="center"}
+
+------------------------------------------------------------------------
+
+## :pencil2: Sleep Data Analysis
+
+-   Step 1: Parameter of interest: $\mu$ = \_\_\_\
+
+-   Step 2: $H_0$: \_\_\_\_\_\_\_\_\_\_
+
+-   Step 3: $H_a$: \_\_\_\_\_\_\_\_\_\_
+
+-   Step 4: General formula $$
+    Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} =
+    $$
+
+-   Step 5: Compute the test statistic
+
+-   Step 6: P-value = \_\_\_ (area under $z$ curve)\
+
+-   Step 7: Compare to $\alpha = 0.05$ and state conclusion:
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+------------------------------------------------------------------------
+
+------------------------------------------------------------------------
+
+## Case II: A Normal Population with Unknown $\sigma$
+
+------------------------------------------------------------------------
+
+## Case II: A Normal Population with Unknown $\sigma$ {.smaller}
+
+> :mag: Now we consider the more realistic case where the population is
+> Normal, but the standard deviation $\sigma$ is **not known** and must
+> be estimated using $s$.
+
+------------------------------------------------------------------------
+
+**Null Hypothesis:**
+
+$$
+H_0\!: \mu = \mu_0
+$$
+
+**Test Statistic:**
+
+$$
+T = \frac{\overline{X} - \mu_0}{s / \sqrt{n}}
+$$
+
+::: callout-note
+Note that this statistic follows a $t$ distribution with $n - 1$ degrees
+of freedom.
+:::
+
+------------------------------------------------------------------------
+
+### When to Use the $t$ Test?
+
+::: callout-important
+Use the $t$ distribution when:
+
+-   The population is Normal (or approximately so),
+-   The standard deviation $\sigma$ is **unknown**,
+-   You can estimate $\sigma$ with the sample standard deviation $s$.
+:::
+
+------------------------------------------------------------------------
+
+### How to Determine the P-value?
+
+| Alternative Hypothesis | P-Value Determination |
+|---------------------------------------|---------------------------------|
+| $H_a: \mu > \mu_0$ | Area under the $t$ curve to the right of $t$ |
+| $H_a: \mu < \mu_0$ | Area under the $t$ curve to the left of $t$ |
+| $H_a: \mu \ne \mu_0$ | $2 \cdot$ (area under the $t$ curve to the right of $|t|$) |
+
+------------------------------------------------------------------------
+
+## :pencil2: Sleep Data Analysis Revisited
+
+-   Step 1: Parameter of interest: $\mu$ = \_\_\_\
+
+-   Step 2: $H_0$: \_\_\_\_\_\_\_\_\_\_
+
+-   Step 3: $H_a$: \_\_\_\_\_\_\_\_\_\_
+
+-   Step 4: General formula $$
+    t = \frac{\overline{X} - \mu_0}{s/\sqrt{n}} =
+    $$
+
+-   Step 5: Compute the test statistic
+
+-   Step 6: P-value = \_\_\_ (area under $t_{n-1}$ curve)\
+
+-   Step 7: Compare to $\alpha = 0.05$ and state conclusion:
+    \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+
+
+# Case III: Approximate $z$-Test for $\mu$ (Large $n$, Unknown $\sigma$)
+
+------------------------------------------------------------------------
+
+### Case III: Approximate $z$-Test for $\mu$
+
+**Null Hypothesis:**
+
+$$
+H_0\!: \mu = \mu_0
+$$
+
+**Test Statistic:**
+
+$$
+Z = \frac{\overline{X} - \mu_0}{s / \sqrt{n}}
+$$
+
+::: callout-note
+This statistic is **approximately standard normal** when $n$ is large
+($n \ge 30$ is a common rule of thumb).
+:::
+
+------------------------------------------------------------------------
+
+### When to Use the Approximate $z$ Test?
+
+::: callout-important
+Use this test when:
+
+-   $\sigma$ is **unknown**\
+-   $n$ is **large** (Central Limit Theorem applies)\
+-   No strong skew or outliers in data
+:::
+
+------------------------------------------------------------------------
+
+### How to Determine the P-value?
+
+| Alternative Hypothesis | P-Value Determination |
+|---------------------------------------|---------------------------------|
+| $H_a: \mu > \mu_0$ | Area under the standard normal curve to the **right** of $z$ |
+| $H_a: \mu < \mu_0$ | Area under the standard normal curve to the **left** of $z$ |
+| $H_a: \mu \ne \mu_0$ | $2 \cdot$ (area under the standard normal curve to the **right** of $|z|$) |
+
+------------------------------------------------------------------------
+
+## Practical Tip
+
+::: callout-note
+:bulb: Though the $t$ distribution is technically appropriate, for large
+$n$ the difference between $z$ and $t$ becomes negligible. So we use the
+**standard normal** distribution for simplicity.
+:::
+
+# Type II Error and Power Calculations for Case I
+
+------------------------------------------------------------------------
 
 ### Deriving Type II Error ($\beta$) for a Lower-Tailed $z$ Test with $\sigma$ Known {.smaller}
 
 Suppose we want to test
 
-- $H_0: \mu = \mu_0$ vs $H_a: \mu < \mu_0$
+-   $H_0: \mu = \mu_0$ vs $H_a: \mu < \mu_0$
 
-:::{.fragment}
-- Assume known $\sigma$ and normally distributed data
-:::
+-   Assume known $\sigma$ and normally distributed data
 
-:::{.fragment}
-- Significance level: $\alpha$
-:::
+-   Significance level: $\alpha$
 
-:::{.fragment}
-Then the null hypothesis is rejected when the **P-value** is less than $\alpha$. The P-value is calculated from the standardized test statistic
-:::
+Then the null hypothesis is rejected when the **P-value** is less than
+$\alpha$. The P-value is calculated from the standardized test statistic
 
-:::{.fragment}
 $$
 z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 $$
-:::
 
-:::{.fragment}
 using the standard normal distribution.
-:::
 
----
+------------------------------------------------------------------------
 
 ## Type II Error for $H_a: \mu < \mu_0$ {.smaller}
 
-:::{.fragment}
+::: fragment
 Let $\mu'$ be a specific value less than $\mu_0$.
 :::
 
-:::{.fragment}
-We want:
-$$
+::: fragment
+We want: $$
 \beta(\mu') = P(\text{Fail to reject } H_0 \mid \mu = \mu')
 $$
 :::
 
-:::{.fragment}
-That is:
-$$
-\beta(\mu') = P\left(z \geq -z_\alpha \mid \mu = \mu'\right)
+::: fragment
+That is: $$
+\beta(\mu') = P\left(z > -z_\alpha \mid \mu = \mu'\right)
 $$
 :::
 
-:::{.fragment}
-Where:
-$$
+::: fragment
+Where: $$
 z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 $$
 :::
 
----
+------------------------------------------------------------------------
 
 ## Substitute and Rearrange {.smaller}
 
-:::{.fragment}
-Use the expression for $z$:
-$$
-\frac{\bar{X} - \mu_0}{\sigma/\sqrt{n}} \geq -z_\alpha
-$$
-:::
-
-:::{.fragment}
-Multiply both sides by $\sigma/\sqrt{n}$:
-$$
-\bar{X} - \mu_0 \geq -z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+::: fragment
+Use the expression for $z$: $$
+\frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} > -z_\alpha
 $$
 :::
 
-:::{.fragment}
-Add $\mu_0$ to both sides:
-$$
-\bar{X} \geq \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+::: fragment
+Multiply both sides by $\sigma/\sqrt{n}$: $$
+\overline{X} - \mu_0 > -z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
 $$
 :::
 
----
+::: fragment
+Add $\mu_0$ to both sides: $$
+\overline{X} > \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+$$
+:::
+
+------------------------------------------------------------------------
 
 ## Change Distribution Assumption {.smaller}
 
-:::{.fragment}
-Now assume $\mu = \mu'$ (alternative is true):
-$$
+::: fragment
+Now assume $\mu = \mu'$ (alternative is true): $$
 \bar{X} \sim N\left(\mu', \frac{\sigma^2}{n}\right)
 $$
 :::
 
-:::{.fragment}
-So we standardize:
-$$
-\beta(\mu') = P\left( \bar{X} \geq \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} \mid \mu = \mu' \right)
+::: fragment
+So we standardize: $$
+\beta(\mu') = P\left( \bar{X} > \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} \mid \mu = \mu' \right)
 $$
 :::
 
----
+------------------------------------------------------------------------
 
 ## Standardize Under $\mu = \mu'$ {.smaller}
 
-:::{.fragment}
-Convert to standard normal:
-$$
-\beta(\mu') = P\left( \frac{\bar{X} - \mu'}{\sigma / \sqrt{n}} \geq \frac{\mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} - \mu'}{\sigma / \sqrt{n}} \right)
-$$
-:::
-
-:::{.fragment}
-Simplify:
-$$
-\beta(\mu') = P\left( Z \geq -z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+::: fragment
+Convert to standard normal: $$
+\beta(\mu') = P\left( \frac{\bar{X} - \mu'}{\sigma / \sqrt{n}} > \frac{\mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} - \mu'}{\sigma / \sqrt{n}} \right)
 $$
 :::
 
----
+::: fragment
+Simplify: $$
+\beta(\mu') = P\left( Z > -z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+$$
+:::
+
+------------------------------------------------------------------------
 
 ## Final Expression for $\beta(\mu')$ {.smaller}
 
-:::{.fragment}
-Now express $\beta(\mu')$ in terms of the standard normal cdf:
-$$
+Now express $\beta(\mu')$ in terms of the standard normal cdf: $$
 \beta(\mu') = 1 - \Phi\left(-z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
 $$
+
+
+
+:::: fragment
+
+::: callout-note
+## R Computation
+
+Use `pnorm()` substituting the appropriate values.
 :::
 
-:::{.fragment}
-Or equivalently:
-$$
-\beta(\mu') = \Phi\left(z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
-$$
-:::
+::::
 
----
+------------------------------------------------------------------------
 
 ## Solving for Sample Size $n$ {.smaller}
 
-:::{.fragment}
+::: fragment
 Suppose we specify:
-- Significance level $\alpha$
-- Target power $1 - \beta$
-- Alternative value $\mu'$
+
+-   Significance level $\alpha$
+
+-   Target power $1 - \beta$
+
+-   Alternative value $\mu'$
 :::
 
-:::{.fragment}
-We want:
+::: fragment
+We want: 
 $$
-\Phi\left(z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right) = \beta
-$$
-:::
-
-:::{.fragment}
-Take the quantile of both sides:
-$$
-z_\beta = z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}}
+\beta = 1 - \Phi\left(-z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
 $$
 :::
 
----
+::: fragment
+Take the quantile of both sides: $$
+z_\beta =-z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}}
+$$
+:::
+
+------------------------------------------------------------------------
 
 ## Final Sample Size Formula {.smaller}
 
-:::{.fragment}
-Solve for $n$:
+::: fragment
+Solve for $n$: 
 $$
 \sqrt{n} = \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'}
 \quad \Rightarrow \quad
-n = \left( \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'} \right)^2
+n = \left[ \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'} \right]^2
 $$
 :::
 
-:::{.fragment}
-This gives the required sample size to achieve specified $\alpha$ and $\beta$ for a **lower-tailed** one-sample $z$-test.
+::: fragment
+This gives the required sample size to achieve specified $\alpha$ and
+$\beta$ for a **lower-tailed** one-sample $z$-test.
 :::
 
+------------------------------------------------------------------------
 
+## Similar Calculations for the $t$-tests  
+
+> The calculation of $\beta((\mu') $ for the t test is much less straightforward than for Case I. This is because the distribution of the test statistic is much more complicated when the standard deviation is unknown. Instead, we can the R function `power.t.test()`
+
+* Compute power  
+
+```{r}
+#|eval: true
+power.t.test(n=10, delta = .1, sd = .1, sig.level = .05,
+              type = "one.sample", alternative="one.sided")
+```
+
+* Compute sample the  required $n$ for to obtain $\beta=.05$ to get n$\ge 13$.
+
+```{r}
+#|eval: true
+power.t.test(delta = .1, sd = .1, sig.level = .05, power = 1-.05,
+              type = "one.sample", alternative="one.sided")
+```
+
+---  
+
+## Summary
+
+- There are three main frameworks for testing $H_0: \mu = \mu_0$  
+  - **Case I**: $z$-test (Normal population, known $\sigma$)  
+  - **Case II**: $t$-test (Normal population, unknown $\sigma$)  
+  - **Case III**: Approx. $z$-test (Large $n$, unknown $\sigma$)  
+
+- P-values quantify the evidence against $H_0$  
+
+- Lower-tailed, upper-tailed, and two-tailed tests have distinct P-value formulas  
+
+- Type II error and power depend on effect size ($\mu_0-\mu'$), $\sigma$, $n$, and $\alpha$  
+
+- R can compute power or required sample size using `power.t.test()`  

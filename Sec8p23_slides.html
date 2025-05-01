@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="Sec8p23_slides_files/libs/revealjs/dist/theme/quarto.css">
   <link href="Sec8p23_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -340,40 +405,386 @@ MATH 365
 </div>
 
 </section>
-<section id="section-overview" class="slide level2 center">
-<h2>Section Overview</h2>
+<section class="slide level2 center">
+
+<h3 id="goals">🎯 Goals</h3>
 <ul>
-<li>TBD</li>
+<li>Understand the three cases for testing means <span class="math inline">\(\mu\)</span>
+<ul>
+<li>Known <span class="math inline">\(\sigma\)</span> (Case I)<br>
+</li>
+<li>Unknown <span class="math inline">\(\sigma\)</span> (Case II)<br>
+</li>
+<li>Unknown <span class="math inline">\(\sigma\)</span>, large <span class="math inline">\(n\)</span> (Case III)<br>
+</li>
+</ul></li>
+<li>Learn how to compute and interpret P-values<br>
+</li>
+<li>Calculate and interpret Type II error and power</li>
 </ul>
+</section>
+<section id="topics" class="slide level2 center">
+<h2>Topics</h2>
+<ul>
+<li><p>Case I: <span class="math inline">\(z\)</span>-test for <span class="math inline">\(\mu\)</span>: A Normal Population with Known <span class="math inline">\(\sigma\)</span></p></li>
+<li><p>Case II: <span class="math inline">\(t\)</span>-test for <span class="math inline">\(\mu\)</span>: A Normal Population with Unknown <span class="math inline">\(\sigma\)</span></p></li>
+<li><p>Case III: Approximate <span class="math inline">\(z\)</span>-test for <span class="math inline">\(\mu\)</span>: Large sample test with unknown <span class="math inline">\(\sigma\)</span></p></li>
+<li><p>Type II Error and Power Calculations for Case I</p></li>
+</ul>
+</section>
+<section id="do-k-students-get-enough-sleep" class="slide level2 center">
+<h2>Do K Students Get Enough Sleep?</h2>
+<ul>
+<li><p>Collect sleep data</p></li>
+<li><p>Carry out a test about <span class="math inline">\(\mu\)</span>, the average hours of sleep per night of K students.</p></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Test <span class="math inline">\(H_0:\mu = 8\)</span> versus <span class="math inline">\(H_a: \mu&lt;8\)</span>?</li>
+</ul>
+</div>
+</section>
+<section class="slide level2 center">
+
+</section>
+<section>
+<section id="case-i-a-normal-population-with-known-sigma" class="title-slide slide level1 center">
+<h1>Case I: A Normal Population with Known <span class="math inline">\(\sigma\)</span></h1>
+
+</section>
+<section class="slide level2 center">
+
+<h3 class="smaller" id="case-i-a-normal-population-with-known-sigma-1">Case I: A Normal Population with Known <span class="math inline">\(\sigma\)</span></h3>
+<blockquote>
+<p><span class="emoji" data-emoji="test_tube">🧪</span> Let’s start our study of hypothesis testing for <span class="math inline">\(\mu\)</span> with the <strong>simplest scenario</strong>: the population is Normal, and the standard deviation <span class="math inline">\(\sigma\)</span> is known.</p>
+</blockquote>
+<ul>
+<li>Null Hypothesis:</li>
+</ul>
+<p><span class="math display">\[
+H_0: \mu = \mu_0
+\]</span></p>
+<ul>
+<li>Test Statistic:</li>
+</ul>
+<p><span class="math display">\[
+Z = \frac{\overline{X} - \mu_0}{\sigma / \sqrt{n}}
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Note that <span class="math inline">\(Z\)</span> has a standard normal distribution when <span class="math inline">\(H_0\)</span> is true.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="steps-in-a-hypothesis-test-procedure" class="slide level2 smaller center">
+<h2>Steps in a Hypothesis Test Procedure</h2>
+<ol type="1">
+<li><div class="fragment">
+<p><strong>Identify the parameter of interest</strong> and describe it in the context of the problem situation.</p>
+</div></li>
+<li><div class="fragment">
+<p><strong>Determine the null value</strong> and state the null hypothesis.</p>
+</div></li>
+<li><div class="fragment">
+<p><strong>State the appropriate alternative hypothesis.</strong></p>
+</div></li>
+<li><div class="fragment">
+<p><strong>Give the general formula</strong> for the test statistic</p>
+</div></li>
+<li><div class="fragment">
+<p><strong>Compute sample quantities</strong>, substitute into the formula, and compute the test statistic value.</p>
+</div></li>
+<li><div class="fragment">
+<p><strong>Determine the P-value.</strong></p>
+</div></li>
+<li><div class="fragment">
+<p><strong>Compare</strong> the P-value to the significance level <span class="math inline">\(\alpha\)</span><br>
+and <strong>state your conclusion</strong> in the context of the problem.</p>
+</div></li>
+</ol>
+</section>
+<section class="slide level2 center">
+
+<h3 id="how-to-determine-the-p-value">How to Determine the P-value?</h3>
+<table class="caption-top">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Alternative Hypothesis</th>
+<th>P-Value Determination</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(H_a: \mu &gt; \mu_0\)</span></td>
+<td>Area under the standard normal curve to the <strong>right</strong> of <span class="math inline">\(z\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(H_a: \mu &lt; \mu_0\)</span></td>
+<td>Area under the standard normal curve to the <strong>left</strong> of <span class="math inline">\(z\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(H_a: \mu \ne \mu_0\)</span></td>
+<td><span class="math inline">\(2 \cdot\)</span> (area under the standard normal curve to the <strong>right</strong> of <span class="math inline">\(|z|\)</span>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level2 center">
+
+<h3 id="graphically-determining-the-p-value">Graphically determining the P-value</h3>
+
+<img data-src="images/output.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="sleep-data-analysis" class="slide level2 center">
+<h2><span class="emoji" data-emoji="pencil2">✏️</span> Sleep Data Analysis</h2>
+<ul>
+<li><p>Step 1: Parameter of interest: <span class="math inline">\(\mu\)</span> = ___<br>
+</p></li>
+<li><p>Step 2: <span class="math inline">\(H_0\)</span>: __________</p></li>
+<li><p>Step 3: <span class="math inline">\(H_a\)</span>: __________</p></li>
+<li><p>Step 4: General formula <span class="math display">\[
+Z = \frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} =
+\]</span></p></li>
+<li><p>Step 5: Compute the test statistic</p></li>
+<li><p>Step 6: P-value = ___ (area under <span class="math inline">\(z\)</span> curve)<br>
+</p></li>
+<li><p>Step 7: Compare to <span class="math inline">\(\alpha = 0.05\)</span> and state conclusion: _______________</p></li>
+</ul>
+</section>
+<section class="slide level2 center">
+
+</section>
+<section id="case-ii-a-normal-population-with-unknown-sigma" class="slide level2 center">
+<h2>Case II: A Normal Population with Unknown <span class="math inline">\(\sigma\)</span></h2>
+</section>
+<section id="case-ii-a-normal-population-with-unknown-sigma-1" class="slide level2 smaller center">
+<h2>Case II: A Normal Population with Unknown <span class="math inline">\(\sigma\)</span></h2>
+<blockquote>
+<p><span class="emoji" data-emoji="mag">🔍</span> Now we consider the more realistic case where the population is Normal, but the standard deviation <span class="math inline">\(\sigma\)</span> is <strong>not known</strong> and must be estimated using <span class="math inline">\(s\)</span>.</p>
+</blockquote>
+</section>
+<section class="slide level2 center">
+
+<p><strong>Null Hypothesis:</strong></p>
+<p><span class="math display">\[
+H_0\!: \mu = \mu_0
+\]</span></p>
+<p><strong>Test Statistic:</strong></p>
+<p><span class="math display">\[
+T = \frac{\overline{X} - \mu_0}{s / \sqrt{n}}
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>Note that this statistic follows a <span class="math inline">\(t\)</span> distribution with <span class="math inline">\(n - 1\)</span> degrees of freedom.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 center">
+
+<h3 id="when-to-use-the-t-test">When to Use the <span class="math inline">\(t\)</span> Test?</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>Use the <span class="math inline">\(t\)</span> distribution when:</p>
+<ul>
+<li>The population is Normal (or approximately so),</li>
+<li>The standard deviation <span class="math inline">\(\sigma\)</span> is <strong>unknown</strong>,</li>
+<li>You can estimate <span class="math inline">\(\sigma\)</span> with the sample standard deviation <span class="math inline">\(s\)</span>.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 center">
+
+<h3 id="how-to-determine-the-p-value-1">How to Determine the P-value?</h3>
+<table class="caption-top">
+<colgroup>
+<col style="width: 54%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Alternative Hypothesis</th>
+<th>P-Value Determination</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(H_a: \mu &gt; \mu_0\)</span></td>
+<td>Area under the <span class="math inline">\(t\)</span> curve to the right of <span class="math inline">\(t\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(H_a: \mu &lt; \mu_0\)</span></td>
+<td>Area under the <span class="math inline">\(t\)</span> curve to the left of <span class="math inline">\(t\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(H_a: \mu \ne \mu_0\)</span></td>
+<td><span class="math inline">\(2 \cdot\)</span> (area under the <span class="math inline">\(t\)</span> curve to the right of <span class="math inline">\(|t|\)</span>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="sleep-data-analysis-revisited" class="slide level2 center">
+<h2><span class="emoji" data-emoji="pencil2">✏️</span> Sleep Data Analysis Revisited</h2>
+<ul>
+<li><p>Step 1: Parameter of interest: <span class="math inline">\(\mu\)</span> = ___<br>
+</p></li>
+<li><p>Step 2: <span class="math inline">\(H_0\)</span>: __________</p></li>
+<li><p>Step 3: <span class="math inline">\(H_a\)</span>: __________</p></li>
+<li><p>Step 4: General formula <span class="math display">\[
+t = \frac{\overline{X} - \mu_0}{s/\sqrt{n}} =
+\]</span></p></li>
+<li><p>Step 5: Compute the test statistic</p></li>
+<li><p>Step 6: P-value = ___ (area under <span class="math inline">\(t_{n-1}\)</span> curve)<br>
+</p></li>
+<li><p>Step 7: Compare to <span class="math inline">\(\alpha = 0.05\)</span> and state conclusion: _______________</p></li>
+</ul>
+</section></section>
+<section>
+<section id="case-iii-approximate-z-test-for-mu-large-n-unknown-sigma" class="title-slide slide level1 center">
+<h1>Case III: Approximate <span class="math inline">\(z\)</span>-Test for <span class="math inline">\(\mu\)</span> (Large <span class="math inline">\(n\)</span>, Unknown <span class="math inline">\(\sigma\)</span>)</h1>
+
+</section>
+<section class="slide level2 center">
+
+<h3 id="case-iii-approximate-z-test-for-mu">Case III: Approximate <span class="math inline">\(z\)</span>-Test for <span class="math inline">\(\mu\)</span></h3>
+<p><strong>Null Hypothesis:</strong></p>
+<p><span class="math display">\[
+H_0\!: \mu = \mu_0
+\]</span></p>
+<p><strong>Test Statistic:</strong></p>
+<p><span class="math display">\[
+Z = \frac{\overline{X} - \mu_0}{s / \sqrt{n}}
+\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>This statistic is <strong>approximately standard normal</strong> when <span class="math inline">\(n\)</span> is large (<span class="math inline">\(n \ge 30\)</span> is a common rule of thumb).</p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 center">
+
+<h3 id="when-to-use-the-approximate-z-test">When to Use the Approximate <span class="math inline">\(z\)</span> Test?</h3>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>Use this test when:</p>
+<ul>
+<li><span class="math inline">\(\sigma\)</span> is <strong>unknown</strong><br>
+</li>
+<li><span class="math inline">\(n\)</span> is <strong>large</strong> (Central Limit Theorem applies)<br>
+</li>
+<li>No strong skew or outliers in data</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2 center">
+
+<h3 id="how-to-determine-the-p-value-2">How to Determine the P-value?</h3>
+<table class="caption-top">
+<colgroup>
+<col style="width: 54%">
+<col style="width: 45%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Alternative Hypothesis</th>
+<th>P-Value Determination</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(H_a: \mu &gt; \mu_0\)</span></td>
+<td>Area under the standard normal curve to the <strong>right</strong> of <span class="math inline">\(z\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(H_a: \mu &lt; \mu_0\)</span></td>
+<td>Area under the standard normal curve to the <strong>left</strong> of <span class="math inline">\(z\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(H_a: \mu \ne \mu_0\)</span></td>
+<td><span class="math inline">\(2 \cdot\)</span> (area under the standard normal curve to the <strong>right</strong> of <span class="math inline">\(|z|\)</span>)</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="practical-tip" class="slide level2 center">
+<h2>Practical Tip</h2>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><span class="emoji" data-emoji="bulb">💡</span> Though the <span class="math inline">\(t\)</span> distribution is technically appropriate, for large <span class="math inline">\(n\)</span> the difference between <span class="math inline">\(z\)</span> and <span class="math inline">\(t\)</span> becomes negligible. So we use the <strong>standard normal</strong> distribution for simplicity.</p>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="type-ii-error-and-power-calculations-for-case-i" class="title-slide slide level1 center">
+<h1>Type II Error and Power Calculations for Case I</h1>
+
 </section>
 <section class="slide level2 center">
 
 <h3 class="smaller" id="deriving-type-ii-error-beta-for-a-lower-tailed-z-test-with-sigma-known">Deriving Type II Error (<span class="math inline">\(\beta\)</span>) for a Lower-Tailed <span class="math inline">\(z\)</span> Test with <span class="math inline">\(\sigma\)</span> Known</h3>
 <p>Suppose we want to test</p>
 <ul>
-<li><span class="math inline">\(H_0: \mu = \mu_0\)</span> vs <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span></li>
+<li><p><span class="math inline">\(H_0: \mu = \mu_0\)</span> vs <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span></p></li>
+<li><p>Assume known <span class="math inline">\(\sigma\)</span> and normally distributed data</p></li>
+<li><p>Significance level: <span class="math inline">\(\alpha\)</span></p></li>
 </ul>
-<div class="fragment">
-<ul>
-<li>Assume known <span class="math inline">\(\sigma\)</span> and normally distributed data</li>
-</ul>
-</div>
-<div class="fragment">
-<ul>
-<li>Significance level: <span class="math inline">\(\alpha\)</span></li>
-</ul>
-</div>
-<div class="fragment">
 <p>Then the null hypothesis is rejected when the <strong>P-value</strong> is less than <span class="math inline">\(\alpha\)</span>. The P-value is calculated from the standardized test statistic</p>
-</div>
-<div class="fragment">
 <p><span class="math display">\[
 z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 \]</span></p>
-</div>
-<div class="fragment">
 <p>using the standard normal distribution.</p>
-</div>
 </section>
 <section id="type-ii-error-for-h_a-mu-mu_0" class="slide level2 smaller center">
 <h2>Type II Error for <span class="math inline">\(H_a: \mu &lt; \mu_0\)</span></h2>
@@ -387,7 +798,7 @@ z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 </div>
 <div class="fragment">
 <p>That is: <span class="math display">\[
-\beta(\mu') = P\left(z \geq -z_\alpha \mid \mu = \mu'\right)
+\beta(\mu') = P\left(z &gt; -z_\alpha \mid \mu = \mu'\right)
 \]</span></p>
 </div>
 <div class="fragment">
@@ -400,17 +811,17 @@ z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 <h2>Substitute and Rearrange</h2>
 <div class="fragment">
 <p>Use the expression for <span class="math inline">\(z\)</span>: <span class="math display">\[
-\frac{\bar{X} - \mu_0}{\sigma/\sqrt{n}} \geq -z_\alpha
+\frac{\overline{X} - \mu_0}{\sigma/\sqrt{n}} &gt; -z_\alpha
 \]</span></p>
 </div>
 <div class="fragment">
 <p>Multiply both sides by <span class="math inline">\(\sigma/\sqrt{n}\)</span>: <span class="math display">\[
-\bar{X} - \mu_0 \geq -z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+\overline{X} - \mu_0 &gt; -z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
 \]</span></p>
 </div>
 <div class="fragment">
 <p>Add <span class="math inline">\(\mu_0\)</span> to both sides: <span class="math display">\[
-\bar{X} \geq \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
+\overline{X} &gt; \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}}
 \]</span></p>
 </div>
 </section>
@@ -423,7 +834,7 @@ z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 </div>
 <div class="fragment">
 <p>So we standardize: <span class="math display">\[
-\beta(\mu') = P\left( \bar{X} \geq \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} \mid \mu = \mu' \right)
+\beta(\mu') = P\left( \bar{X} &gt; \mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} \mid \mu = \mu' \right)
 \]</span></p>
 </div>
 </section>
@@ -431,41 +842,54 @@ z = \frac{\bar{X} - \mu_0}{\sigma / \sqrt{n}}
 <h2>Standardize Under <span class="math inline">\(\mu = \mu'\)</span></h2>
 <div class="fragment">
 <p>Convert to standard normal: <span class="math display">\[
-\beta(\mu') = P\left( \frac{\bar{X} - \mu'}{\sigma / \sqrt{n}} \geq \frac{\mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} - \mu'}{\sigma / \sqrt{n}} \right)
+\beta(\mu') = P\left( \frac{\bar{X} - \mu'}{\sigma / \sqrt{n}} &gt; \frac{\mu_0 - z_\alpha \cdot \frac{\sigma}{\sqrt{n}} - \mu'}{\sigma / \sqrt{n}} \right)
 \]</span></p>
 </div>
 <div class="fragment">
 <p>Simplify: <span class="math display">\[
-\beta(\mu') = P\left( Z \geq -z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
+\beta(\mu') = P\left( Z &gt; -z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
 \]</span></p>
 </div>
 </section>
 <section id="final-expression-for-betamu" class="slide level2 smaller center">
 <h2>Final Expression for <span class="math inline">\(\beta(\mu')\)</span></h2>
-<div class="fragment">
 <p>Now express <span class="math inline">\(\beta(\mu')\)</span> in terms of the standard normal cdf: <span class="math display">\[
 \beta(\mu') = 1 - \Phi\left(-z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
 \]</span></p>
-</div>
 <div class="fragment">
-<p>Or equivalently: <span class="math display">\[
-\beta(\mu') = \Phi\left(z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
-\]</span></p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>R Computation</strong></p>
+</div>
+<div class="callout-content">
+<p>Use <code>pnorm()</code> substituting the appropriate values.</p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="solving-for-sample-size-n" class="slide level2 smaller center">
 <h2>Solving for Sample Size <span class="math inline">\(n\)</span></h2>
 <div class="fragment">
-<p>Suppose we specify: - Significance level <span class="math inline">\(\alpha\)</span> - Target power <span class="math inline">\(1 - \beta\)</span> - Alternative value <span class="math inline">\(\mu'\)</span></p>
+<p>Suppose we specify:</p>
+<ul>
+<li><p>Significance level <span class="math inline">\(\alpha\)</span></p></li>
+<li><p>Target power <span class="math inline">\(1 - \beta\)</span></p></li>
+<li><p>Alternative value <span class="math inline">\(\mu'\)</span></p></li>
+</ul>
 </div>
 <div class="fragment">
 <p>We want: <span class="math display">\[
-\Phi\left(z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right) = \beta
+\beta = 1 - \Phi\left(-z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}} \right)
 \]</span></p>
 </div>
 <div class="fragment">
 <p>Take the quantile of both sides: <span class="math display">\[
-z_\beta = z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}}
+z_\beta =-z_\alpha + \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}}
 \]</span></p>
 </div>
 </section>
@@ -475,18 +899,57 @@ z_\beta = z_\alpha - \frac{\mu_0 - \mu'}{\sigma / \sqrt{n}}
 <p>Solve for <span class="math inline">\(n\)</span>: <span class="math display">\[
 \sqrt{n} = \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'}
 \quad \Rightarrow \quad
-n = \left( \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'} \right)^2
+n = \left[ \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'} \right]^2
 \]</span></p>
 </div>
 <div class="fragment">
 <p>This gives the required sample size to achieve specified <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> for a <strong>lower-tailed</strong> one-sample <span class="math inline">\(z\)</span>-test.</p>
 </div>
+</section>
+<section id="similar-calculations-for-the-t-tests" class="slide level2 center">
+<h2>Similar Calculations for the <span class="math inline">\(t\)</span>-tests</h2>
+<blockquote>
+<p>The calculation of $((’) $ for the t test is much less straightforward than for Case I. This is because the distribution of the test statistic is much more complicated when the standard deviation is unknown. Instead, we can the R function <code>power.t.test()</code></p>
+</blockquote>
+<ul>
+<li>Compute power</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co">#|eval: true</span></span>
+<span id="cb1-2"><a href=""></a><span class="fu">power.t.test</span>(<span class="at">n=</span><span class="dv">10</span>, <span class="at">delta =</span> .<span class="dv">1</span>, <span class="at">sd =</span> .<span class="dv">1</span>, <span class="at">sig.level =</span> .<span class="dv">05</span>,</span>
+<span id="cb1-3"><a href=""></a>              <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative=</span><span class="st">"one.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>Compute sample the required <span class="math inline">\(n\)</span> for to obtain <span class="math inline">\(\beta=.05\)</span> to get n<span class="math inline">\(\ge 13\)</span>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co">#|eval: true</span></span>
+<span id="cb2-2"><a href=""></a><span class="fu">power.t.test</span>(<span class="at">delta =</span> .<span class="dv">1</span>, <span class="at">sd =</span> .<span class="dv">1</span>, <span class="at">sig.level =</span> .<span class="dv">05</span>, <span class="at">power =</span> <span class="dv">1</span><span class="fl">-.05</span>,</span>
+<span id="cb2-3"><a href=""></a>              <span class="at">type =</span> <span class="st">"one.sample"</span>, <span class="at">alternative=</span><span class="st">"one.sided"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="summary" class="slide level2 center">
+<h2>Summary</h2>
+<ul>
+<li><p>There are three main frameworks for testing <span class="math inline">\(H_0: \mu = \mu_0\)</span></p>
+<ul>
+<li><strong>Case I</strong>: <span class="math inline">\(z\)</span>-test (Normal population, known <span class="math inline">\(\sigma\)</span>)<br>
+</li>
+<li><strong>Case II</strong>: <span class="math inline">\(t\)</span>-test (Normal population, unknown <span class="math inline">\(\sigma\)</span>)<br>
+</li>
+<li><strong>Case III</strong>: Approx. <span class="math inline">\(z\)</span>-test (Large <span class="math inline">\(n\)</span>, unknown <span class="math inline">\(\sigma\)</span>)</li>
+</ul></li>
+<li><p>P-values quantify the evidence against <span class="math inline">\(H_0\)</span></p></li>
+<li><p>Lower-tailed, upper-tailed, and two-tailed tests have distinct P-value formulas</p></li>
+<li><p>Type II error and power depend on effect size (<span class="math inline">\(\mu_0-\mu'\)</span>), <span class="math inline">\(\sigma\)</span>, <span class="math inline">\(n\)</span>, and <span class="math inline">\(\alpha\)</span></p></li>
+<li><p>R can compute power or required sample size using <code>power.t.test()</code></p></li>
+</ul>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -699,6 +1162,44 @@ n = \left( \frac{\sigma (z_\alpha - z_\beta)}{\mu_0 - \mu'} \right)^2
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
