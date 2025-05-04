@@ -1,0 +1,288 @@
+---
+title: "8.4 Tests Concerning a Population Proportion"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    center: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Overview
+
+-   What does it mean to test a **proportion**? :test_tube:
+-   How do large and small sample methods differ?
+-   What role does the **binomial distribution** play?
+-   Applications using real data :bar_chart:
+
+------------------------------------------------------------------------
+
+## Testing Proportions: The Big Idea
+
+Let $p$ denote the proportion of individuals or objects in a population
+with a specified property.
+
+We consider random samples of size $n$ and distinguish two cases:
+
+-   **Case I**: Large-sample tests (approximate normality via CLT)
+-   **Case II**: Small-sample tests (exact binomial methods)
+
+# Case I: Large-Sample $z$ Test
+
+## :bar_chart: Example — College Affordability (Large Sample)
+
+> Among a sample of 331 American adults without a 4-year degree, 42%
+> said they didn't go to college because they couldn't afford it.
+
+::: fragment
+**Claim**: Fewer than half of these adults cite cost as the main reason.
+:::
+
+::: fragment
+-   $n = 331$
+-   $\hat{p} = 0.42$
+:::
+
+::: fragment
+-   Test $H_0: p = 0.5$ vs $H_a: p < 0.5$
+
+:question: Is 0.42 statistically significantly less than 0.5?
+:::
+
+------------------------------------------------------------------------
+
+## Case I: Large-Sample $z$ Test {.smaller}
+
+### Hypotheses
+
+$$
+H_0: p = p_0
+$$
+
+### Test Statistic
+
+$$
+z = \frac{\hat{p} - p_0}{\sqrt{p_0(1 - p_0)/n}}
+$$
+
+:::: fragment
+::: callout-important
+This $z$ is approximately standard normal under $H_0$ when $np_0 \ge 10$
+and $n(1-p_0) \ge 10$.
+:::
+::::
+
+------------------------------------------------------------------------
+
+## P-Value Determination :mag: {.smaller}
+
+| Alternative Hypothesis | P-Value Determination                     |
+|------------------------|-------------------------------------------|
+| $H_a: p > p_0$         | Area to the **right** of $z$              |
+| $H_a: p < p_0$         | Area to the **left** of $z$               |
+| $H_a: p \ne p_0$       | $2 \times$ area to the **right** of $|z|$ |
+
+: white_check_mark: Valid only if $np_0 \ge 10$ and $n(1-p_0) \ge 10$
+
+------------------------------------------------------------------------
+
+## Step-by-Step Recap {.smaller}
+
+1.  Define the parameter of interest $p$
+2.  State the null hypothesis\
+3.  State the alternative hypothesis\
+4.  Check conditions for the normal approximation
+5.  Compute test statistic:
+
+$$
+z = \frac{0.42 - 0.5}{\sqrt{0.5(1 - 0.5)/331}} = \dots
+$$
+
+6.  Find the P-value
+7.  Compare to $\alpha$ and make a conclusion in context
+
+------------------------------------------------------------------------
+
+## Power and Sample Size for Proportions {.smaller}
+
+To compute $\beta(p')$ under an alternative value $p'$, use:
+
+$$
+\beta(p') =1 - \Phi\left(
+\frac{p_0 - p' - z_\alpha \sqrt{p_0(1 - p_0)/n}}{\sqrt{p'(1 - p')/n}}
+\right)
+$$
+
+(For $H_a: p < p_0$)
+
+::: callout-note
+Adjust formula depending on direction of alternative.
+:::
+
+------------------------------------------------------------------------
+
+### :bar_chart: Example — College Affordability (continued)
+
+Find the Type II error probability $\beta$ for $p'=0.48$ and $p'=0.45$
+with $\alpha=.05$.
+
+------------------------------------------------------------------------
+
+## Solving for Sample Size $n$ {.smaller}
+
+The sample size that gives both $\alpha$ and power $1 - \beta$ is:
+
+$$
+n = \left(\frac{z_\alpha \sqrt{p_0(1 - p_0)} + z_\beta \sqrt{p'(1 - p')}}{p' - p_0}\right)^2
+$$
+
+::: callout-important
+This formula assumes a **one-sided** alternative.
+:::
+
+------------------------------------------------------------------------
+
+### :bar_chart: Example — College Affordability (continued)
+
+Find the sample size required to ensure a Type II error probability no
+more than $0.10$ when $\alpha=.05$ and $p'=0.45$.
+
+------------------------------------------------------------------------
+
+## Case II: Small-Sample Binomial Test {.smaller}
+
+Use when the sample size is small and normal approximation is invalid.
+
+-   Use the binomial distribution directly
+-   $X \sim \text{Binom}(n, p_0)$ under $H_0$
+
+::: fragment
+### P-value:
+
+$$
+P(X \ge x \mid H_0) = 1 - P(X \le x - 1 \mid \text{Binom}(n, p_0))
+$$
+
+Use `pbinom()` for calculations.
+:::
+
+------------------------------------------------------------------------
+
+### :mag_right: Small-Sample Example — Sustainability
+
+A professor surveyed 10 students and found 8 of them bring reusable
+water bottles.
+
+Assuming a random sample, is there evidence that **more than 50%** of K
+students bring reusable bottles?
+
+-   $n = 10$, $x = 8$, $H_0: p = 0.5$, $H_a: p > 0.5$
+
+::: fragment
+Compute exact P-value using R:
+
+$$
+P(X \ge 8 \mid H_0) = \dots
+$$
+:::
+
+::: fragment
+Use R:
+
+``` r
+1 - pbinom(7, 10, 0.5)
+```
+:::
+
+------------------------------------------------------------------------
+
+## Type II Error with Binomial Test {.smaller}
+
+Let $p'$ be an alternative value such that $p' > p_0$. Then:
+
+$$
+\begin{align*}
+\beta(p') &= P(\text{Type II error} \mid p = p') \\
+&= P(X\le c_{\alpha}-1\mid p = p') \\
+&= \text{Binom}(c_\alpha - 1; n, p') 
+\end{align*}
+$$
+
+**Note**: $c_\alpha$ is the smallest $x$ such that
+$P(X \ge x \mid H_0) \le \alpha$.
+
+------------------------------------------------------------------------
+
+### :bar_chart: Example — Sustainability (continued)
+
+Find the Type II error probability $\beta$ for $p'=0.7$, $p'=.8$ and
+$p'=0.9$ with $\alpha=.05$.
+
+------------------------------------------------------------------------
+
+### Sample Size Selection in Small-Sample Tests {.smaller}
+
+#### :mag: Can we compute sample size for small $n$ tests?
+
+:white_check_mark: **Yes — in theory**: You can find $n$ such that\
+- Type I error under $p_0$ is $\leq \alpha$\
+- Type II error under $p'$ is $\leq \beta$
+
+<br>
+
+::: fragment
+### :abacus: How?
+
+Use exact binomial probabilities:\
+- Compute $P(\text{reject } H_0 \mid p_0)$\
+- Compute $P(\text{fail to reject } H_0 \mid p')$\
+- Iterative search for smallest $n$ that meets both criteria using the
+binomial CDF
+:::
+
+------------------------------------------------------------------------
+
+## Summary: Small vs Large Sample Planning
+
+| Approach | Feasible? | Method | Typical Use? |
+|--------------------|-----------------|------------------|-----------------|
+| **Normal approximation** | :white_check_mark: | Closed-form solution for $n$ | Widely used |
+| **Exact binomial** | :white_check_mark: | Brute-force over $n$ using binomial probabilities | Rare but accurate |
+
+
+:::{.callout-tip}  
+* Use normal approximation for **planning** or **large** $n$.    
+* Use exact binomial for **small** $n$ or when precision is critical. 
+:::
+
+## Summary :brain:
+
+-   Two frameworks for testing population proportions:
+    -   **Large-sample z test** (normal approx)
+    -   **Small-sample binomial test** (exact)
+-   Check conditions before using the $z$ test
+-   Power and sample size formulas depend on $p_0$, $p'$, and $H_a$  
+     - Many special cases
+
