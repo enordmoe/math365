@@ -1,0 +1,249 @@
+---
+title: "8.5 Further Aspects of Hypothesis Testing"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    center: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+---
+title: "Section 8.5: Further Aspects of Hypothesis Testing"
+format: revealjs
+editor: visual
+---
+
+## Topics for Today
+
+-   :brain: Statistical vs practical significance\
+-   :repeat: Confidence intervals & hypothesis tests\
+-   :test_tube: Simultaneous testing & multiple comparisons\
+-   :chart_with_downwards_trend: Sidak & Bonferroni corrections
+
+------------------------------------------------------------------------
+
+### A Significant Improvement in Pain Relief? {.smaller}
+
+A new pain reliever is tested on **10,000** patients.
+
+[**Observed results:**\
+- Sample mean: $\bar{x} = 5.05$\
+- Population norm: $\mu_0 = 5.00$\
+- Known SD: $\sigma = 1$]{.fragment}
+
+[**Hypothesis test:**\
+- $H_0: \mu = 5.00$\
+- $H_a: \mu \ne 5.00$\
+- Standard error: $SE = \frac{1}{\sqrt{10,000}} = 0.01$\
+- Test statistic: $z = \frac{5.05 - 5.00}{0.01} = 5$\
+- $p$-value $< 0.00001$ :fire: → reject $H_0$]{.fragment}
+
+------------------------------------------------------------------------
+
+### A Significant Improvement in Pain Relief? (continued)
+
+**Interpretation:**
+
+::: incremental
+-   :question: Is a **0.05** point increase meaningful for patients?\
+-   :brain: <strong>Statistical</strong> significance
+    :white_check_mark:\
+-   :speech_balloon: <strong>Practical</strong> significance
+    :question::shrug:\
+-   :dollar: At what cost?
+:::
+
+------------------------------------------------------------------------
+
+## Statistical vs Practical Significance
+
+::: incremental
+-   A result can be **statistically significant** but **not practically
+    meaningful**.\
+-   With large $n$, even tiny differences can yield small $p$-values.\
+-   Always ask: **Does this result matter in context?** :thinking:
+:::
+
+::: fragment
+> *"Statistically significant" does not mean "important".*
+:::
+
+------------------------------------------------------------------------
+
+## How Tests Can Mislead {.smaller}
+
+-   A $p$-value near 0.05 may not be compelling.
+-   Arbitrariness of $\alpha = 0.05$
+-   Temptation to accept $H_0$ when test is inconclusive :x:
+-   **Watch out** for:
+    -   Snooping
+    -   Dredging
+    -   $p$-hacking :bomb:
+
+> “If you torture the data long enough, it will confess.” – Ronald Coase
+
+------------------------------------------------------------------------
+
+## Confidence Intervals & Hypothesis Tests
+
+If $({\hat\theta}_L, {\hat\theta}_U)$ is a CI for $\theta$ at level
+$100(1-\alpha)\%$:
+
+::: fragment
+-   A test of $H_0:\theta = \theta_0$ vs $H_a: \theta \ne \theta_0$ at
+    level $\alpha$:
+    -   **Reject** $H_0$ if $\theta_0$ is **not** in the CI
+    -   **Fail to reject** $H_0$ if $\theta_0$ **is** in the CI
+:::
+
+------------------------------------------------------------------------
+
+## Applet: Confidence Interval & $z$ Test
+
+[CI and Hypothesis Test for Normal
+Case](https://www.rossmanchance.com/applets/index2021.html)
+
+:::{.notes}
+
+Use the sleep data results with $\sigma$ known to illustrate here $n=8$.  
+
+:::
+
+
+------------------------------------------------------------------------
+
+## Table: Confidence Intervals vs Hypothesis Tests
+
+| Feature | Confidence Interval | Hypothesis Test |
+|------------------|--------------------------|----------------------------|
+| Output | Range of plausible values | Decision (reject or not reject) |
+| Based on | Pivotal Quantity | Test statistic |
+| Criterion | Conf level ($1-\alpha$) | Sig level ($\alpha$) |
+| Interpretation | Parameter likely lies in CI | Data unlikely under $H_0$ |
+| Decision method | See if $\theta_0 \in$ CI | Compare $|z|$ to critical value |
+
+------------------------------------------------------------------------
+
+## Multiple Testing Problem :warning:
+
+-   When testing **many** hypotheses, chance of **false positives
+    increases**!
+-   E.g., with 20 tests at $\alpha = 0.05$, expect 1 false positive by
+    chance alone! :open_mouth:
+
+:question: Probability of at least one Type I error with $k$ independent tests?  
+
+------------------------------------------------------------------------
+
+## Adjusting for Multiple Comparisons {.smaller}
+
+**Sidak Correction**\
+$$\alpha^* = 1 - (1 - \alpha)^{1/k}$$\
+Use $\alpha^*$ per test when doing $k$ tests.  
+:point_right:  Assumes independent tests
+
+<br>
+
+:::{.fragment}
+
+**Bonferroni Correction**\
+$$\alpha^* = \frac{\alpha}{k}$$\
+Easier to compute. More conservative.
+
+:::
+
+--- 
+
+### Deriving Bonferroni Correction {.smaller}
+
+Suppose we test $k$ hypotheses: $H_{01}, \dots, H_{0k}$  
+We want:  
+$$
+P(\text{at least one false positive}) \le \alpha
+$$
+
+<span class="fragment">
+Let $A_i$ = event that $H_{0i}$ is falsely rejected  
+Then:
+$$
+P\left( \bigcup_{i=1}^k A_i \right) \le \sum_{i=1}^k P(A_i) \quad \text{(union bound)}
+$$
+</span>
+
+
+--- 
+
+### Deriving Bonferroni Correction (cont'd) {.smaller}
+
+<span class="fragment">
+If each test is performed at level $\alpha^*$, then:
+$$
+P(A_i) = \alpha^* \quad \Rightarrow \quad \sum_{i=1}^k \alpha^* = k \alpha^*
+$$
+</span>  
+
+
+
+
+
+<span class="fragment">
+To ensure $P(\text{any false positive}) \le \alpha$, set:
+$$
+k \alpha^* \le \alpha \quad \Rightarrow \quad \alpha^* = \frac{\alpha}{k}
+$$
+</span>
+
+<span class="fragment">
+<div class="callout callout-tip callout-style-default">
+<strong>Bonferroni is conservative:</strong>  
+It controls the **family-wise error rate**, even when tests are dependent.
+</div>
+</span>
+
+------------------------------------------------------------------------
+
+## Example: Multiple Testing 
+
+
+:question: What should $\alpha^*$ be if we wish to carry out $k=5$ tests with overall $\alpha=0.05$?
+
+------------------------------------------------------------------------
+
+## Discussion Question :question:
+
+> If none of your individual $p$-values are under 0.01, but
+> $\alpha^* = 0.01$, what do you conclude?
+
+
+------------------------------------------------------------------------
+
+## Summary
+
+:white_check_mark: Statistical significance ≠ practical significance\
+:link: CI and hypothesis tests give consistent conclusions\
+:chart_with_upwards_trend: Multiple testing inflates Type I error\
+:wrench: Sidak & Bonferroni corrections help control this risk
+
