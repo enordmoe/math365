@@ -405,7 +405,7 @@ MATH 365
 </div>
 
 </section>
-<section class="slide level2 center">
+<section class="slide level2">
 
 <h3 id="topics-for-today">Topics for Today <span class="emoji" data-emoji="dart">🎯</span></h3>
 <ul>
@@ -417,7 +417,7 @@ MATH 365
 <li>Confidence intervals for <span class="math inline">\(\mu_1 - \mu_2\)</span></li>
 </ul>
 </section>
-<section id="review-from-last-time" class="slide level2 center">
+<section id="review-from-last-time" class="slide level2">
 <h2>Review from Last Time <span class="emoji" data-emoji="monocle_face">🧐</span></h2>
 <p><strong>Recall:</strong></p>
 <ul>
@@ -425,7 +425,7 @@ MATH 365
 <li>What concerns arise with multiple testing?</li>
 </ul>
 </section>
-<section class="slide level2 center">
+<section class="slide level2">
 
 <h3 id="do-stats-students-with-early-classes-get-less-sleep-than-those-with-later-classes">Do stats students with early classes get less sleep than those with later classes?</h3>
 <p>The data:</p>
@@ -437,7 +437,7 @@ MATH 365
 <p><span class="emoji" data-emoji="memo">📝</span> Plot the data and get summary statistics</p>
 </div>
 </section>
-<section id="sampling-distribution-of-barx---bary" class="slide level2 center">
+<section id="sampling-distribution-of-barx---bary" class="slide level2">
 <h2>Sampling Distribution of <span class="math inline">\(\bar{X} - \bar{Y}\)</span></h2>
 <p><strong>Conditions:</strong></p>
 <div>
@@ -455,7 +455,7 @@ Z =
 <p><span class="emoji" data-emoji="brain">🧠</span> <strong>Question:</strong> Why do we assume independence between samples?</p>
 </div>
 </section>
-<section class="slide level2 center">
+<section class="slide level2">
 
 <h3 class="smaller" id="z-test-procedures-with-known-variances"><span class="math inline">\(z\)</span>-Test Procedures with Known Variances</h3>
 <p><strong>Hypotheses:</strong></p>
@@ -481,9 +481,10 @@ z = \frac{\bar{x} - \bar{y} - \Delta_0}{\sqrt{\frac{\sigma_1^2}{m} + \frac{\sigm
 <p><span class="emoji" data-emoji="hammer_and_wrench">🛠️</span> Use <code>pnorm()</code> to compute <span class="math inline">\(p\)</span>-values as before</p>
 </div>
 </section>
-<section id="example-medical-academics-vs-practitioners" class="slide level2 center">
-<h2>Example: Medical Academics vs Practitioners</h2>
-<p><span class="emoji" data-emoji="test_tube">🧪</span> A published study reports number of year from graduation to death of 215 male physicians (why only male?) :</p>
+<section class="slide level2">
+
+<h3 class="smaller" id="example-medical-academics-vs-practitioners">Example: Medical Academics vs Practitioners</h3>
+<p><span class="emoji" data-emoji="test_tube">🧪</span> A published study reports number of years from graduation to death of 215 male physicians (why only males?) :</p>
 <ul>
 <li><p>Full-time practice MDs : <span class="math inline">\(\bar{x}_1 = 48.9\)</span>, <span class="math inline">\(n_1 = 125\)</span>, <span class="math inline">\(\sigma_1 = 14.6\)</span></p></li>
 <li><p>Academic MDs: <span class="math inline">\(\bar{x}_2 = 43.2\)</span>, <span class="math inline">\(n_2 = 90\)</span>, <span class="math inline">\(\sigma_2 = 14.4\)</span></p></li>
@@ -508,7 +509,7 @@ z = \frac{48.9 - 43.2}{\sqrt{\frac{14.6^2}{125} + \frac{14.4^2}{90}}}
 </blockquote>
 </div>
 </section>
-<section id="publish-and-perish" class="slide level2 center">
+<section id="publish-and-perish" class="slide level2">
 <h2>Publish <strong>and</strong> Perish? <span class="emoji" data-emoji="exploding_head">🤯</span></h2>
 <div class="fragment">
 <p><span class="emoji" data-emoji="mag">🔍</span> <strong>Causality Considerations:</strong></p>
@@ -522,7 +523,7 @@ z = \frac{48.9 - 43.2}{\sqrt{\frac{14.6^2}{125} + \frac{14.4^2}{90}}}
 <p><span class="emoji" data-emoji="point_right">👉</span> Retrospective study: use caution in interpretation</p>
 </div>
 </section>
-<section id="power-and-type-ii-error-beta" class="slide level2 smaller center">
+<section id="power-and-type-ii-error-beta" class="slide level2 smaller">
 <h2>Power and Type II Error: <span class="math inline">\(\beta\)</span></h2>
 <p><strong>Definitions:</strong></p>
 <ul>
@@ -536,7 +537,7 @@ z = \frac{48.9 - 43.2}{\sqrt{\frac{14.6^2}{125} + \frac{14.4^2}{90}}}
 </ul>
 </div>
 </section>
-<section id="sample-size-for-desired-alpha-and-beta" class="slide level2 center">
+<section id="sample-size-for-desired-alpha-and-beta" class="slide level2">
 <h2><span class="emoji" data-emoji="bulb">💡</span> Sample Size for Desired <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span></h2>
 <p><strong>One-sided test with equal sample sizes:</strong></p>
 <p><span class="math display">\[
@@ -546,14 +547,14 @@ m = n = \frac{(\sigma_1^2 + \sigma_2^2)(z_\alpha + z_\beta)^2}{(\Delta' - \Delta
 <p>Replace <span class="math inline">\(\alpha\)</span> by <span class="math inline">\(\alpha/2\)</span> for a two-tailed test.</p>
 </div>
 </section>
-<section id="find-sample-sizes-for-sleep-data-comparison" class="slide level2 center">
+<section id="find-sample-sizes-for-sleep-data-comparison" class="slide level2">
 <h2>Find sample sizes for sleep data comparison</h2>
 <p>Assume <span class="math inline">\(\sigma_1=\sigma_2=1.5\)</span> and <span class="math inline">\(\alpha=.05\)</span> and <span class="math inline">\(\beta = 0.20\)</span>. For a two-tailed test:</p>
 <p><span class="math display">\[
 m = n = \frac{(\sigma_1^2 + \sigma_2^2)(z_{\alpha/2} + z_\beta)^2}{(\Delta' - \Delta_0)^2}
 \]</span></p>
 </section>
-<section id="large-sample-z-tests" class="slide level2 smaller center">
+<section id="large-sample-z-tests" class="slide level2 smaller">
 <h2>Large Sample <span class="math inline">\(z\)</span> Tests</h2>
 <p>When <span class="math inline">\(m,n\)</span> large (<span class="math inline">\(\ge 40\)</span>), CLT implies normality:</p>
 <p><span class="math display">\[
@@ -562,7 +563,7 @@ Z =
 \]</span></p>
 <p><span class="emoji" data-emoji="white_check_mark">✅</span> Use even when population distributions are not normal</p>
 </section>
-<section id="large-sample-confidence-intervals" class="slide level2 smaller center">
+<section id="large-sample-confidence-intervals" class="slide level2 smaller">
 <h2>Large-Sample Confidence Intervals</h2>
 <p>When <span class="math inline">\(m,n\)</span> are large:</p>
 <p><span class="math display">\[
@@ -576,61 +577,94 @@ Z =
 <li><p>Confidence level</p></li>
 </ul>
 </section>
-<section id="ci-coverage-type-i-error-investigation" class="slide level2 center">
-<h2>CI Coverage &amp; Type I Error Investigation</h2>
+<section id="flight-delays-ua-vs-aa" class="slide level2 smaller">
+<h2><span class="emoji" data-emoji="airplane">✈️</span> Flight Delays: UA vs AA</h2>
+<p>The <code>FlightDelays</code> dataset from the <code>resampledata3</code> package contains flight delay info for American and United Airlines.</p>
+<p>Explore delay times for two airlines: UA (United) and AA (American) using this code chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Install the package if necessary</span></span>
+<span id="cb2-2"><a href=""></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">requireNamespace</span>(<span class="st">"resampledata3"</span>, <span class="at">quietly =</span> <span class="cn">TRUE</span>)) {</span>
+<span id="cb2-3"><a href=""></a>  <span class="fu">install.packages</span>(<span class="st">"resampledata3"</span>)</span>
+<span id="cb2-4"><a href=""></a>}</span>
+<span id="cb2-5"><a href=""></a><span class="fu">library</span>(resampledata3)</span>
+<span id="cb2-6"><a href=""></a></span>
+<span id="cb2-7"><a href=""></a><span class="co"># Summary statistics</span></span>
+<span id="cb2-8"><a href=""></a><span class="fu">aggregate</span>(Delay <span class="sc">~</span> Carrier, <span class="at">data =</span> FlightDelays, <span class="cf">function</span>(x) <span class="fu">c</span>(<span class="at">mean =</span> <span class="fu">mean</span>(x), <span class="at">sd =</span> <span class="fu">sd</span>(x), <span class="at">n=</span><span class="fu">length</span>(x)))</span>
+<span id="cb2-9"><a href=""></a><span class="co"># Boxplot</span></span>
+<span id="cb2-10"><a href=""></a><span class="fu">boxplot</span>(Delay <span class="sc">~</span> Carrier, <span class="at">data =</span> FlightDelays, <span class="at">horizontal =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb2-11"><a href=""></a>        <span class="at">main =</span> <span class="st">"Delays: UA vs AA"</span>, <span class="at">ylab =</span> <span class="st">"Delay (min)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="flight-delays-carry-out-z-hypothesis-test-and-confidence-interval-procedures" class="slide level2">
+<h2><span class="emoji" data-emoji="airplane">✈️</span> Flight Delays Carry out <span class="math inline">\(Z\)</span> hypothesis test and confidence interval procedures</h2>
+</section>
+<section>
+<section id="investigating-properties-of-two-sample-normal-tests" class="title-slide slide level1 center">
+<h1>Investigating Properties of Two-Sample Normal Tests</h1>
+
+</section>
+<section class="slide level2">
+
+<h3 id="how-well-do-these-procedures-actually-work">How well do these procedures actually work?</h3>
+<div>
 <ul>
-<li>How often does a 95% CI for <span class="math inline">\(\mu_1 - \mu_2\)</span> contain the true difference?</li>
-<li>What proportion of <span class="math inline">\(\alpha\)</span>-level tests reject <span class="math inline">\(H_0\)</span> when it’s true?</li>
+<li class="fragment"><strong>Confidence interval:</strong> How often does a 95% CI for <span class="math inline">\(\mu_1 - \mu_2\)</span> contain the true difference?</li>
+<li class="fragment"><strong>Hypothesis Test:</strong> What proportion of <span class="math inline">\(\alpha\)</span>-level tests reject <span class="math inline">\(H_0\)</span> when it’s true?</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a>sim_diff_means <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mu1 =</span> <span class="dv">5</span>, <span class="at">mu2 =</span> <span class="dv">5</span>, <span class="at">sigma1 =</span> <span class="dv">1</span>, <span class="at">sigma2 =</span> <span class="dv">1</span>, <span class="at">reps =</span> <span class="dv">10000</span>) {</span>
-<span id="cb2-2"><a href=""></a>  count_in_ci <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb2-3"><a href=""></a>  type1_errors <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb2-4"><a href=""></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
-<span id="cb2-5"><a href=""></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu1, sigma1)</span>
-<span id="cb2-6"><a href=""></a>    y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu2, sigma2)</span>
-<span id="cb2-7"><a href=""></a>    est <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="sc">-</span> <span class="fu">mean</span>(y)</span>
-<span id="cb2-8"><a href=""></a>    se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">var</span>(x)<span class="sc">/</span>n <span class="sc">+</span> <span class="fu">var</span>(y)<span class="sc">/</span>n)</span>
-<span id="cb2-9"><a href=""></a>    ci <span class="ot">&lt;-</span> est <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>se</span>
-<span id="cb2-10"><a href=""></a>    <span class="cf">if</span> (ci[<span class="dv">1</span>] <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> ci[<span class="dv">2</span>] <span class="sc">&gt;=</span> <span class="dv">0</span>) count_in_ci <span class="ot">&lt;-</span> count_in_ci <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb2-11"><a href=""></a>    z <span class="ot">&lt;-</span> est <span class="sc">/</span> se</span>
-<span id="cb2-12"><a href=""></a>    pval <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z)))</span>
-<span id="cb2-13"><a href=""></a>    <span class="cf">if</span> (pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) type1_errors <span class="ot">&lt;-</span> type1_errors <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb2-14"><a href=""></a>  }</span>
-<span id="cb2-15"><a href=""></a>  <span class="fu">list</span>(<span class="at">CI_coverage =</span> count_in_ci <span class="sc">/</span> reps, <span class="at">Type1_error =</span> type1_errors <span class="sc">/</span> reps)</span>
-<span id="cb2-16"><a href=""></a>}</span>
-<span id="cb2-17"><a href=""></a><span class="fu">sim_diff_means</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="example-using-t.test-in-r" class="slide level2 center">
-<h2>Example Using <code>t.test()</code> in R</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Sleep study example</span></span>
-<span id="cb3-2"><a href=""></a><span class="fu">data</span>(sleep)</span>
-<span id="cb3-3"><a href=""></a><span class="fu">t.test</span>(extra <span class="sc">~</span> group, <span class="at">data =</span> sleep, <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><span class="emoji" data-emoji="speech_balloon">💬</span> Check assumptions: Normality, equal variances</p>
-<blockquote>
-<p>How would your interpretation change if the <span class="math inline">\(p\)</span>-value was 0.08?</p>
-</blockquote>
+<section id="ci-coverage-type-i-error-investigation" class="slide level2">
+<h2>CI Coverage &amp; Type I Error Investigation</h2>
+<p>Use the following R function to investigate properties assuming the normality condition holds.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a>sim_diff_means <span class="ot">&lt;-</span> <span class="cf">function</span>(<span class="at">n =</span> <span class="dv">30</span>, <span class="at">mu1 =</span> <span class="dv">5</span>, <span class="at">mu2 =</span> <span class="dv">5</span>, <span class="at">sigma1 =</span> <span class="dv">1</span>, <span class="at">sigma2 =</span> <span class="dv">1</span>, <span class="at">reps =</span> <span class="dv">10000</span>) {</span>
+<span id="cb3-2"><a href=""></a>  count_in_ci <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-3"><a href=""></a>  type1_errors <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb3-4"><a href=""></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>reps) {</span>
+<span id="cb3-5"><a href=""></a>    x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu1, sigma1)</span>
+<span id="cb3-6"><a href=""></a>    y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, mu2, sigma2)</span>
+<span id="cb3-7"><a href=""></a>    est <span class="ot">&lt;-</span> <span class="fu">mean</span>(x) <span class="sc">-</span> <span class="fu">mean</span>(y)</span>
+<span id="cb3-8"><a href=""></a>    se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">var</span>(x)<span class="sc">/</span>n <span class="sc">+</span> <span class="fu">var</span>(y)<span class="sc">/</span>n)</span>
+<span id="cb3-9"><a href=""></a>    ci <span class="ot">&lt;-</span> est <span class="sc">+</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)<span class="sc">*</span><span class="fu">qnorm</span>(<span class="fl">0.975</span>)<span class="sc">*</span>se</span>
+<span id="cb3-10"><a href=""></a>    <span class="cf">if</span> (ci[<span class="dv">1</span>] <span class="sc">&lt;=</span> <span class="dv">0</span> <span class="sc">&amp;&amp;</span> ci[<span class="dv">2</span>] <span class="sc">&gt;=</span> <span class="dv">0</span>) count_in_ci <span class="ot">&lt;-</span> count_in_ci <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-11"><a href=""></a>    z <span class="ot">&lt;-</span> est <span class="sc">/</span> se</span>
+<span id="cb3-12"><a href=""></a>    pval <span class="ot">&lt;-</span> <span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z)))</span>
+<span id="cb3-13"><a href=""></a>    <span class="cf">if</span> (pval <span class="sc">&lt;</span> <span class="fl">0.05</span>) type1_errors <span class="ot">&lt;-</span> type1_errors <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb3-14"><a href=""></a>  }</span>
+<span id="cb3-15"><a href=""></a>  <span class="fu">list</span>(<span class="at">CI_coverage =</span> count_in_ci <span class="sc">/</span> reps, <span class="at">Type1_error =</span> type1_errors <span class="sc">/</span> reps)</span>
+<span id="cb3-16"><a href=""></a>}</span>
+<span id="cb3-17"><a href=""></a><span class="fu">sim_diff_means</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>This function could also be used in modified form to investigate properties of large sample <span class="math inline">\(z\)</span> procedures or (later) <span class="math inline">\(t\)</span>-procedures.</p>
+</div>
+</div>
+</div>
 </section>
-<section id="example-practice" class="slide level2 center">
-<h2>Example: Practice <span class="emoji" data-emoji="clipboard">📋</span></h2>
-<p>Two independent samples: - Group A: <span class="math inline">\(n_1 = 50\)</span>, <span class="math inline">\(\bar{x}_1 = 105\)</span>, <span class="math inline">\(s_1 = 15\)</span> - Group B: <span class="math inline">\(n_2 = 40\)</span>, <span class="math inline">\(\bar{x}_2 = 100\)</span>, <span class="math inline">\(s_2 = 20\)</span></p>
-<p><strong>Question:</strong> 1. Compute a 95% CI for <span class="math inline">\(\mu_1 - \mu_2\)</span> 2. Test <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span> vs <span class="math inline">\(H_a: \mu_1 - \mu_2 \ne 0\)</span></p>
-</section>
-<section id="summary-section-9.1" class="slide level2 center">
+<section id="summary-section-9.1" class="slide level2">
 <h2>Summary: Section 9.1 <span class="emoji" data-emoji="white_check_mark">✅</span></h2>
 <ul>
 <li><span class="math inline">\(z\)</span> tests apply with known variances or large <span class="math inline">\(n\)</span></li>
 <li>Hypothesis tests and CIs require conditions: independence, normality (or large <span class="math inline">\(n\)</span>)</li>
-<li>Causality ≠ statistical significance</li>
+<li>Causality <span class="math inline">\(\neq\)</span> statistical significance</li>
 <li>Power and Type II error depend on <span class="math inline">\(\Delta\)</span> and <span class="math inline">\(\sigma\)</span></li>
-<li>Simulation in R can confirm theory!</li>
+<li>Simulation in R confirms the theory!</li>
 </ul>
-<p><span class="emoji" data-emoji="star2">🌟</span> Next: small-sample inference with unknown variances (the <span class="math inline">\(t\)</span> test!)</p>
+<p><span class="emoji" data-emoji="star2">🌟</span> Next: inference for Normal data with unknown variances (back to the <span class="math inline">\(t\)</span>!)</p>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -713,7 +747,7 @@ Z =
         disableLayout: false,
 
         // Vertical centering of slides
-        center: true,
+        center: false,
 
         // Enables touch navigation on devices with touch input
         touch: true,

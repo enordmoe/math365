@@ -8,7 +8,6 @@ format:
     incremental: false
     transition: fade
     chalkboard: true
-    center: true
     smaller: true
     pdf-export: true
     toc: false
@@ -116,10 +115,10 @@ $$
 
 ------------------------------------------------------------------------
 
-## Example: Medical Academics vs Practitioners
+### Example: Medical Academics vs Practitioners {.smaller}
 
-:test_tube: A published study reports number of year from graduation to
-death of 215 male physicians (why only male?) :
+:test_tube: A published study reports number of years from graduation to
+death of 215 male physicians (why only males?) :
 
 -   Full-time practice MDs : $\bar{x}_1 = 48.9$, $n_1 = 125$,
     $\sigma_1 = 14.6$
@@ -240,13 +239,55 @@ $$
 
 ------------------------------------------------------------------------
 
-## CI Coverage & Type I Error Investigation
+## :airplane: Flight Delays: UA vs AA {.smaller}
 
--   How often does a 95% CI for $\mu_1 - \mu_2$ contain the true
+The `FlightDelays` dataset from the `resampledata3` package contains
+flight delay info for American and United Airlines.
+
+Explore delay times for two airlines: UA (United) and AA (American)
+using this code chunk:
+
+```{r}
+# Install the package if necessary
+if (!requireNamespace("resampledata3", quietly = TRUE)) {
+  install.packages("resampledata3")
+}
+library(resampledata3)
+
+# Summary statistics
+aggregate(Delay ~ Carrier, data = FlightDelays, function(x) c(mean = mean(x), sd = sd(x), n=length(x)))
+# Boxplot
+boxplot(Delay ~ Carrier, data = FlightDelays, horizontal = TRUE,
+        main = "Delays: UA vs AA", ylab = "Delay (min)")
+```
+
+------------------------------------------------------------------------
+
+## :airplane: Flight Delays Carry out $Z$ hypothesis test and confidence interval procedures
+
+
+
+# Investigating Properties of Two-Sample Normal Tests
+
+------------------------------------------------------------------------
+
+### How well do these procedures actually work?  
+
+:::{.incremental}  
+
+-   **Confidence interval:** How often does a 95% CI for $\mu_1 - \mu_2$ contain the true
     difference?
--   What proportion of $\alpha$-level tests reject $H_0$ when it's true?
+-   **Hypothesis Test:**  What proportion of $\alpha$-level tests reject $H_0$ when it's true?
 
-``` r
+:::  
+
+
+## CI Coverage & Type I Error Investigation  
+
+Use the following R function to investigate properties assuming the normality condition holds.
+
+
+```{r}
 sim_diff_means <- function(n = 30, mu1 = 5, mu2 = 5, sigma1 = 1, sigma2 = 1, reps = 10000) {
   count_in_ci <- 0
   type1_errors <- 0
@@ -266,40 +307,22 @@ sim_diff_means <- function(n = 30, mu1 = 5, mu2 = 5, sigma1 = 1, sigma2 = 1, rep
 sim_diff_means()
 ```
 
-------------------------------------------------------------------------
-
-## Example Using `t.test()` in R
-
-``` r
-# Sleep study example
-data(sleep)
-t.test(extra ~ group, data = sleep, var.equal = TRUE)
-```
-
-:speech_balloon: Check assumptions: Normality, equal variances
-
-> How would your interpretation change if the $p$-value was 0.08?
+::: callout-tip
+This function could also be used in  modified form to investigate properties of large sample
+$z$ procedures or (later) $t$-procedures.
+:::
 
 ------------------------------------------------------------------------
 
-## Example: Practice :clipboard:
 
-Two independent samples: - Group A: $n_1 = 50$, $\bar{x}_1 = 105$,
-$s_1 = 15$ - Group B: $n_2 = 40$, $\bar{x}_2 = 100$, $s_2 = 20$
-
-**Question:** 1. Compute a 95% CI for $\mu_1 - \mu_2$ 2. Test
-$H_0: \mu_1 - \mu_2 = 0$ vs $H_a: \mu_1 - \mu_2 \ne 0$
-
-------------------------------------------------------------------------
 
 ## Summary: Section 9.1 :white_check_mark:
 
 -   $z$ tests apply with known variances or large $n$
 -   Hypothesis tests and CIs require conditions: independence, normality
     (or large $n$)
--   Causality ≠ statistical significance
+-   Causality $\neq$ statistical significance
 -   Power and Type II error depend on $\Delta$ and $\sigma$
--   Simulation in R can confirm theory!
+-   Simulation in R confirms the theory!
 
-:star2: Next: small-sample inference with unknown variances (the $t$
-test!)
+:star2: Next: inference for Normal data with unknown variances (back to the $t$!)
