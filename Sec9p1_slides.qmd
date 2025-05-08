@@ -1,0 +1,305 @@
+---
+title: "9.1 $z$ Tests and Confidence Intervals for a Difference Between Two Population Means"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    center: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+### Topics for Today :dart:
+
+-   Sampling distribution of differences in means
+-   $z$-Test procedures for known population variances
+-   Causality vs association: an example
+-   Type II error and power ($\beta$)
+-   Large-sample methods
+-   Confidence intervals for $\mu_1 - \mu_2$
+
+------------------------------------------------------------------------
+
+## Review from Last Time :monocle_face:
+
+**Recall:**
+
+-   How do we distinguish practical vs. statistical significance?
+-   What concerns arise with multiple testing?
+
+------------------------------------------------------------------------
+
+### Do stats students with early classes get less sleep than those with later classes?
+
+The data:
+
+```{r}
+sleepdata <- read.csv(file = "http://people.kzoo.edu/enordmoe/math365/data/sleepdata2samp.csv")
+```
+
+<br>
+
+::: fragment
+:memo: Plot the data and get summary statistics
+:::
+
+------------------------------------------------------------------------
+
+## Sampling Distribution of $\bar{X} - \bar{Y}$
+
+**Conditions:**
+
+::: incremental
+-   Independent random samples
+-   Known $\sigma_1^2$, $\sigma_2^2$
+-   Normal populations
+:::
+
+::: fragment
+$$
+Z =
+\frac{\bar{X} - \bar{Y} - (\mu_1 - \mu_2)}{\sqrt{\frac{\sigma_1^2}{m} + \frac{\sigma_2^2}{n}}}
+$$
+
+:brain: **Question:** Why do we assume independence between samples?
+:::
+
+------------------------------------------------------------------------
+
+### $z$-Test Procedures with Known Variances {.smaller}
+
+**Hypotheses:**
+
+-   $H_0: \mu_1 - \mu_2 = \Delta_0$
+-   $H_a$: one-sided or two-sided depending on context
+
+::: fragment
+**Test Statistic:**
+
+$$
+z = \frac{\bar{x} - \bar{y} - \Delta_0}{\sqrt{\frac{\sigma_1^2}{m} + \frac{\sigma_2^2}{n}}}
+$$
+:::
+
+::: fragment
+**P-values:**
+
+-   Upper-tailed: $P(Z \ge z)$
+-   Lower-tailed: $P(Z \le z)$
+-   Two-tailed: $2 P(Z \ge |z|)$
+:::
+
+::: fragment
+:hammer_and_wrench: Use `pnorm()` to compute $p$-values as before
+:::
+
+------------------------------------------------------------------------
+
+## Example: Medical Academics vs Practitioners
+
+:test_tube: A published study reports number of year from graduation to
+death of 215 male physicians (why only male?) :
+
+-   Full-time practice MDs : $\bar{x}_1 = 48.9$, $n_1 = 125$,
+    $\sigma_1 = 14.6$
+
+-   Academic MDs: $\bar{x}_2 = 43.2$, $n_2 = 90$, $\sigma_2 = 14.4$
+
+Is the difference statistically discernible?
+
+::: fragment
+Test $H_0: \mu_1-\mu_2=0$ versus $H_a:\mu_1-\mu_2\neq 0$.
+:::
+
+::: fragment
+Compute the $z$-test statistic:
+
+$$
+z = \frac{48.9 - 43.2}{\sqrt{\frac{14.6^2}{125} + \frac{14.4^2}{90}}}
+\approx 2.85
+$$
+:::
+
+::: fragment
+$p=2 P(Z\ge 2.85)= .0044$ so we have strong evidence of a difference.
+:::
+
+::: fragment
+> Does this imply causation?
+:::
+
+------------------------------------------------------------------------
+
+## Publish **and** Perish? :exploding_head:
+
+::: fragment
+:mag: **Causality Considerations:**
+
+-   Observational data $\neq$ random assignment
+
+-   Possible confounding: career path, health history, stress levels
+
+-   Reverse causation?
+:::
+
+::: fragment
+:point_right: Retrospective study: use caution in interpretation
+:::
+
+------------------------------------------------------------------------
+
+## Power and Type II Error: $\beta$ {.smaller}
+
+**Definitions:**
+
+-   Type II error: failing to reject $H_0$ when $H_a$ is true
+
+![](images/beta_2samp.png){fig-align="center"}
+
+::: fragment
+-   Power: $1 - \beta$\
+:::
+
+------------------------------------------------------------------------
+
+## :bulb: Sample Size for Desired $\alpha$ and $\beta$
+
+**One-sided test with equal sample sizes:**
+
+$$
+m = n = \frac{(\sigma_1^2 + \sigma_2^2)(z_\alpha + z_\beta)^2}{(\Delta' - \Delta_0)^2}
+$$
+
+::: fragment
+Replace $\alpha$ by $\alpha/2$ for a two-tailed test.
+:::
+
+------------------------------------------------------------------------
+
+## Find sample sizes for sleep data comparison
+
+Assume $\sigma_1=\sigma_2=1.5$ and $\alpha=.05$ and $\beta = 0.20$. For
+a two-tailed test:
+
+$$
+m = n = \frac{(\sigma_1^2 + \sigma_2^2)(z_{\alpha/2} + z_\beta)^2}{(\Delta' - \Delta_0)^2}
+$$
+
+------------------------------------------------------------------------
+
+## Large Sample $z$ Tests {.smaller}
+
+When $m,n$ large ($\ge 40$), CLT implies normality:
+
+$$
+Z =
+\frac{\bar{X} - \bar{Y} - \Delta_0}{\sqrt{\frac{S_1^2}{m} + \frac{S_2^2}{n}}}
+$$
+
+:white_check_mark: Use even when population distributions are not normal
+
+------------------------------------------------------------------------
+
+## Large-Sample Confidence Intervals {.smaller}
+
+When $m,n$ are large:
+
+$$
+(\bar{X} - \bar{Y}) \pm z_{\alpha/2}
+\sqrt{\frac{S_1^2}{m} + \frac{S_2^2}{n}} 
+$$
+
+:mag: Width of interval depends on:
+
+-   Sample sizes
+
+-   Variability ($S^2$ values)
+
+-   Confidence level
+
+------------------------------------------------------------------------
+
+## CI Coverage & Type I Error Investigation
+
+-   How often does a 95% CI for $\mu_1 - \mu_2$ contain the true
+    difference?
+-   What proportion of $\alpha$-level tests reject $H_0$ when it's true?
+
+``` r
+sim_diff_means <- function(n = 30, mu1 = 5, mu2 = 5, sigma1 = 1, sigma2 = 1, reps = 10000) {
+  count_in_ci <- 0
+  type1_errors <- 0
+  for (i in 1:reps) {
+    x <- rnorm(n, mu1, sigma1)
+    y <- rnorm(n, mu2, sigma2)
+    est <- mean(x) - mean(y)
+    se <- sqrt(var(x)/n + var(y)/n)
+    ci <- est + c(-1,1)*qnorm(0.975)*se
+    if (ci[1] <= 0 && ci[2] >= 0) count_in_ci <- count_in_ci + 1
+    z <- est / se
+    pval <- 2*(1 - pnorm(abs(z)))
+    if (pval < 0.05) type1_errors <- type1_errors + 1
+  }
+  list(CI_coverage = count_in_ci / reps, Type1_error = type1_errors / reps)
+}
+sim_diff_means()
+```
+
+------------------------------------------------------------------------
+
+## Example Using `t.test()` in R
+
+``` r
+# Sleep study example
+data(sleep)
+t.test(extra ~ group, data = sleep, var.equal = TRUE)
+```
+
+:speech_balloon: Check assumptions: Normality, equal variances
+
+> How would your interpretation change if the $p$-value was 0.08?
+
+------------------------------------------------------------------------
+
+## Example: Practice :clipboard:
+
+Two independent samples: - Group A: $n_1 = 50$, $\bar{x}_1 = 105$,
+$s_1 = 15$ - Group B: $n_2 = 40$, $\bar{x}_2 = 100$, $s_2 = 20$
+
+**Question:** 1. Compute a 95% CI for $\mu_1 - \mu_2$ 2. Test
+$H_0: \mu_1 - \mu_2 = 0$ vs $H_a: \mu_1 - \mu_2 \ne 0$
+
+------------------------------------------------------------------------
+
+## Summary: Section 9.1 :white_check_mark:
+
+-   $z$ tests apply with known variances or large $n$
+-   Hypothesis tests and CIs require conditions: independence, normality
+    (or large $n$)
+-   Causality ≠ statistical significance
+-   Power and Type II error depend on $\Delta$ and $\sigma$
+-   Simulation in R can confirm theory!
+
+:star2: Next: small-sample inference with unknown variances (the $t$
+test!)
