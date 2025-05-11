@@ -1,0 +1,278 @@
+---
+title: "9.2 and 9.3: <br> $t$ Procedures for Two Sample and Matched Pairs Data"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Overview and Motivation :dart:
+
+-   Two-Sample $t$-Test with Unknown Variances
+-   Two-Sample $t$ Confidence Intervals
+-   Two-Sample Type II Error Probabilities
+-   Why NOT Pooled $t$ Procedures :x:
+-   Paired $t$-Test and Confidence Intervals
+-   Comparing Two-Sample vs Matched Pairs
+-   $t$ Procedures for in R
+
+
+---  
+
+::: callout-note
+### Motivating Question :thought_balloon:
+
+> How can we compare two groups when we can't assume known variances?  
+:::
+
+---
+
+## From Known Variances to Unknown 🌎
+
+- Previous sections: we assumed population variances were known
+- Reality: Variances are **unknown** 📈  
+- Need to estimate using sample variances  
+
+:::{.callout-important}
+The $t$-procedures allow us to account for variability in estimating population parameters!
+:::
+
+---
+
+## Assumptions for Two-Sample $t$ Procedures
+
+-   Two independent random samples
+-   Both populations approximately **normal**
+-   Independence between samples
+
+::: callout-note
+No requirement for **equal sample sizes** :white_check_mark:   
+Methods are appropriate even for **small samples**.
+:::
+
+---
+
+## Two-Sample $t$ Statistic
+
+When assumptions are met, the standardized variable:
+
+$$
+T = \frac{\overline{X} - \overline{Y} - (\mu_1 - \mu_2)}{\sqrt{\frac{S_1^2}{m} + \frac{S_2^2}{n}}}
+$$
+
+**approximately** follows a $t$ distribution with degrees of freedom $\nu$:
+
+$$
+\nu = \frac{\left(\frac{S_1^2}{m} + \frac{S_2^2}{n}\right)^2}{\frac{(S_1^2/m)^2}{m-1} + \frac{(S_2^2/n)^2}{n-1}}
+$$
+
+:::{.notes}
+Show what this looks like if we substitute se for the standard errors.
+:::
+
+---  
+
+
+## Confidence Interval for $\mu_1 - \mu_2$
+
+$$
+(\overline{X} - \overline{Y}) \pm t_{\alpha/2, \nu} \sqrt{\frac{S_1^2}{m} + \frac{S_2^2}{n}}
+$$
+
+-   Same formula structure as the test statistic
+-   Use estimated $\nu$ degrees of freedom
+
+---
+
+## Example: Sleep Hours 🌙🛏️
+
+Comparing mean sleep hours between **early classes** and **later classes**.
+
+- Group 1: 8:15 AM class  
+- Group 2: 10:30 AM class  
+
+The data:
+
+``` r
+sleepdata <- read.csv(file = "http://people.kzoo.edu/enordmoe/math365/data/sleepdata2samp.csv")
+```
+
+
+::: callout-tip
+Work out:   
+- Hypotheses  
+- $t$ statistic  
+- $P$-value  
+- Confidence interval  
+:::
+
+---  
+
+## Example: Sleep Hours Calculations  
+
+
+
+
+---
+
+## Using `t.test()` in R :desktop_computer:
+
+```r
+# Sleep variable: `hours`
+# Grouping variable: `section`
+# Independent samples
+
+t.test(hours ~ section, var.equal = FALSE, data = sleepdata)
+```
+
+::: callout-note
+
+-   Set `var.equal = FALSE` (default)  
+-   Welch's approximate degrees of freedom used    
+
+:::
+
+---
+
+## Why NOT Pooled $t$? 🚫
+
+::: callout-important
+- Pooled $t$ assumes $\sigma_1^2 = \sigma_2^2$
+- **Risky**: very sensitive to violations
+- When variances are unequal ➔ invalid conclusions!
+:::
+
+✅ Welch’s method (separate variances) is more **robust** even if sample sizes differ.
+
+---
+
+## Paired Data vs. Two-Sample Procedures
+
+-   **Paired:** same subject measured twice
+-   **Two-sample:** independent groups
+
+::: callout-warning
+Misidentifying paired vs two-sample design can lead to **wrong
+analysis**!
+:::
+
+---
+
+## Examples: Paired vs Two-Sample 🧠
+
+::: callout-note
+### Decide: Paired or Two-Sample?
+:::
+
+:::{.incremental}
+- Compare final exam scores between two different sections  
+- Measure pre- and post-test scores for the same students  
+- Compare sleep hours between first-years and seniors   
+- Compare effectiveness of drug A and B on same patients
+:::
+
+:::{.fragment}
+::: callout-tip
+Hint: Are the observations naturally linked **one-to-one**?
+:::
+:::
+
+---
+
+
+## Assumptions for Paired Data
+
+- Random sample of **pairs** $(X_i, Y_i)$
+- Differences $D_i = X_i - Y_i$ are normally distributed
+
+
+---
+
+## The Paired $t$ Test
+
+
+$$
+T = \frac{\overline{D} - \Delta_0}{S_D/\sqrt{n}}
+$$
+
+-   $\overline{D}$ is average difference  
+-   $s_D$ is sample standard deviation of differences  
+-   $n-1$ degrees of freedom
+
+
+:::{.fragment}
+::: callout-tip  
+* One sample $t$ test on differences  
+* Typical test: $H_0: \mu_D = 0$ (no mean difference)  
+:::
+:::
+
+---
+
+## Confidence Interval for $\mu_D$
+
+$$
+\overline{D} \pm t_{\alpha/2, n-1} \frac{S_D}{\sqrt{n}}
+$$
+
+- Same as one-sample $t$ CI applied to differences  
+
+---
+
+## Example: Gosset's Data :bar_chart:
+
+Using R’s built-in Gosset **sleep** data: increase in sleep for two different drugs
+
+``` r
+# Create Gosset sleep data in wide format
+gosset_data <- data.frame(
+  ID = 1:10,
+  drugA = c(0.7, -1.6, -0.2, -1.2, -0.1, 3.4, 3.7, 0.8, 0.0, 2.0),
+  drugB = c(1.9, 0.8, 1.1, 0.1, -0.1, 4.4, 5.5, 1.6, 4.6, 3.4)
+)
+# t.test procedures: Equivalent approaches
+t.test(gosset_data$drugA, gosset_data$drugB, paired = TRUE)
+
+# or 
+gosset_data$diff <- gosset_data$drugA - gosset_data$drugB
+t.test(gosset_data$diff)
+```
+
+::: callout-note
+R  carries out a one-sample $t$ test on the differences!
+:::
+
+---  
+
+## Summary :memo:
+
+-   Two-Sample $t$ and Paired $t$ address unknown variances
+-   Prefer Welch’s $t$ (no pooling!)
+-   Identify if data are paired vs independent
+-   Best to report both $P$-values and CIs
+-   Use correct `t.test()`
+
+
