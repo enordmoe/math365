@@ -410,8 +410,8 @@ MATH 365
 <ul>
 <li>Two-Sample <span class="math inline">\(t\)</span>-Test with Unknown Variances</li>
 <li>Two-Sample <span class="math inline">\(t\)</span> Confidence Intervals</li>
-<li>Two-Sample Type II Error Probabilities</li>
 <li>Why NOT Pooled <span class="math inline">\(t\)</span> Procedures <span class="emoji" data-emoji="x">❌</span></li>
+<li>Two-Sample Type II Error Probabilities</li>
 <li>Paired <span class="math inline">\(t\)</span>-Test and Confidence Intervals</li>
 <li>Comparing Two-Sample vs Matched Pairs</li>
 <li><span class="math inline">\(t\)</span> Procedures for in R</li>
@@ -590,8 +590,85 @@ T = \frac{\overline{X} - \overline{Y} - (\mu_1 - \mu_2)}{\sqrt{\frac{S_1^2}{m} +
 </div>
 <p>✅ Welch’s method (separate variances) is more <strong>robust</strong> even if sample sizes differ.</p>
 </section>
-<section id="paired-data-vs.-two-sample-procedures" class="slide level2">
-<h2>Paired Data vs.&nbsp;Two-Sample Procedures</h2>
+<section id="two-sample-type-ii-error-probabilities-for-the-sleepdata" class="slide level2">
+<h2>Two-Sample Type II Error Probabilities for the <strong>sleepdata</strong></h2>
+<p>Suppose sample size <span class="math inline">\(n\)</span> is fixed: find <span class="math inline">\(\beta\)</span> and power!</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Sample sizes</span></span>
+<span id="cb3-2"><a href=""></a>group_ns    <span class="ot">&lt;-</span> <span class="fu">tapply</span>(sleepdata<span class="sc">$</span>hours, sleepdata<span class="sc">$</span>section, length)</span>
+<span id="cb3-3"><a href=""></a>n1 <span class="ot">&lt;-</span> group_ns[<span class="st">"early"</span>]</span>
+<span id="cb3-4"><a href=""></a>n2 <span class="ot">&lt;-</span> group_ns[<span class="st">"late"</span>]</span>
+<span id="cb3-5"><a href=""></a>n_small   <span class="ot">&lt;-</span> <span class="fu">min</span>(group_ns)</span>
+<span id="cb3-6"><a href=""></a></span>
+<span id="cb3-7"><a href=""></a><span class="co"># Variances</span></span>
+<span id="cb3-8"><a href=""></a>group_vars  <span class="ot">&lt;-</span> <span class="fu">tapply</span>(sleepdata<span class="sc">$</span>hours, sleepdata<span class="sc">$</span>section, var)  </span>
+<span id="cb3-9"><a href=""></a>s1sq <span class="ot">&lt;-</span> group_vars[<span class="st">"early"</span>]</span>
+<span id="cb3-10"><a href=""></a>s2sq <span class="ot">&lt;-</span> group_vars[<span class="st">"late"</span>]</span>
+<span id="cb3-11"><a href=""></a></span>
+<span id="cb3-12"><a href=""></a><span class="co"># pooled sd </span></span>
+<span id="cb3-13"><a href=""></a>pooled_var <span class="ot">&lt;-</span> ((n1 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s1sq <span class="sc">+</span> (n2 <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> s2sq) <span class="sc">/</span> (n1 <span class="sc">+</span> n2 <span class="sc">-</span> <span class="dv">2</span>)</span>
+<span id="cb3-14"><a href=""></a>pooled_sd <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(pooled_var)</span>
+<span id="cb3-15"><a href=""></a></span>
+<span id="cb3-16"><a href=""></a><span class="co"># Solve for power (and thus beta)</span></span>
+<span id="cb3-17"><a href=""></a>result <span class="ot">&lt;-</span> <span class="fu">power.t.test</span>(</span>
+<span id="cb3-18"><a href=""></a>  <span class="at">n =</span> n_small,</span>
+<span id="cb3-19"><a href=""></a>  <span class="at">delta =</span> <span class="fl">0.5</span>, <span class="co"># Difference we want to detect</span></span>
+<span id="cb3-20"><a href=""></a>  <span class="at">sd =</span> pooled_sd,</span>
+<span id="cb3-21"><a href=""></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-22"><a href=""></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>,</span>
+<span id="cb3-23"><a href=""></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
+<span id="cb3-24"><a href=""></a>)</span>
+<span id="cb3-25"><a href=""></a></span>
+<span id="cb3-26"><a href=""></a>result<span class="sc">$</span>power    <span class="co"># Power</span></span>
+<span id="cb3-27"><a href=""></a><span class="dv">1</span> <span class="sc">-</span> result<span class="sc">$</span>power  <span class="co"># Beta</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section class="slide level2">
+
+<h3 id="solve-for-n-given-desired-power">🎯 Solve for <span class="math inline">\(n\)</span> (given desired power)**</h3>
+<p>Suppose we want 90% power. Find sample sizes</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Use same mean_diff to detect a half hour difference</span></span>
+<span id="cb4-2"><a href=""></a></span>
+<span id="cb4-3"><a href=""></a><span class="fu">power.t.test</span>(</span>
+<span id="cb4-4"><a href=""></a>  <span class="at">power =</span> <span class="fl">0.90</span>,</span>
+<span id="cb4-5"><a href=""></a>  <span class="at">delta =</span> <span class="fl">0.5</span>,</span>
+<span id="cb4-6"><a href=""></a>  <span class="at">sd =</span> pooled_sd,</span>
+<span id="cb4-7"><a href=""></a>  <span class="at">sig.level =</span> <span class="fl">0.05</span>,</span>
+<span id="cb4-8"><a href=""></a>  <span class="at">type =</span> <span class="st">"two.sample"</span>,</span>
+<span id="cb4-9"><a href=""></a>  <span class="at">alternative =</span> <span class="st">"two.sided"</span></span>
+<span id="cb4-10"><a href=""></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>✅ Result gives <strong>required per-group sample size</strong> (round UP!).</p>
+</section>
+<section class="slide level2">
+
+<h3 id="caution-about-assumptions">Caution About Assumptions 🚨</h3>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Caution:</strong><br>
+<code>power.t.test()</code> assumes <strong>equal variances</strong> (pooled two-sample <span class="math inline">\(t\)</span> test).<br>
+In real studies, if population variances are <strong>very unequal</strong>, the actual power may differ.</p>
+<blockquote>
+<p>Practical advice:<br>
+✅ Small/moderate differences in variances ➔ fine.<br>
+⚠️ Large differences ➔ consider simulations for accuracy!</p>
+</blockquote>
+</div>
+</div>
+</div>
+</section>
+<section>
+<section id="paired-data-vs.-two-sample-procedures" class="title-slide slide level1 center">
+<h1>Paired Data vs.&nbsp;Two-Sample Procedures</h1>
+
+</section>
+<section class="slide level2">
+
+<h3 id="paired-data-vs.-two-sample-procedures-1">Paired Data vs.&nbsp;Two-Sample Procedures</h3>
 <ul>
 <li><strong>Paired:</strong> same subject measured twice</li>
 <li><strong>Two-sample:</strong> independent groups</li>
@@ -704,18 +781,18 @@ T = \frac{\overline{D} - \Delta_0}{S_D/\sqrt{n}}
 <section id="example-gossets-data" class="slide level2">
 <h2>Example: Gosset’s Data <span class="emoji" data-emoji="bar_chart">📊</span></h2>
 <p>Using R’s built-in Gosset <strong>sleep</strong> data: increase in sleep for two different drugs</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Create Gosset sleep data in wide format</span></span>
-<span id="cb3-2"><a href=""></a>gosset_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb3-3"><a href=""></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
-<span id="cb3-4"><a href=""></a>  <span class="at">drugA =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">1.6</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">1.2</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">3.4</span>, <span class="fl">3.7</span>, <span class="fl">0.8</span>, <span class="fl">0.0</span>, <span class="fl">2.0</span>),</span>
-<span id="cb3-5"><a href=""></a>  <span class="at">drugB =</span> <span class="fu">c</span>(<span class="fl">1.9</span>, <span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">4.4</span>, <span class="fl">5.5</span>, <span class="fl">1.6</span>, <span class="fl">4.6</span>, <span class="fl">3.4</span>)</span>
-<span id="cb3-6"><a href=""></a>)</span>
-<span id="cb3-7"><a href=""></a><span class="co"># t.test procedures: Equivalent approaches</span></span>
-<span id="cb3-8"><a href=""></a><span class="fu">t.test</span>(gosset_data<span class="sc">$</span>drugA, gosset_data<span class="sc">$</span>drugB, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-9"><a href=""></a></span>
-<span id="cb3-10"><a href=""></a><span class="co"># or </span></span>
-<span id="cb3-11"><a href=""></a>gosset_data<span class="sc">$</span>diff <span class="ot">&lt;-</span> gosset_data<span class="sc">$</span>drugA <span class="sc">-</span> gosset_data<span class="sc">$</span>drugB</span>
-<span id="cb3-12"><a href=""></a><span class="fu">t.test</span>(gosset_data<span class="sc">$</span>diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Create Gosset sleep data in wide format</span></span>
+<span id="cb5-2"><a href=""></a>gosset_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb5-3"><a href=""></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb5-4"><a href=""></a>  <span class="at">drugA =</span> <span class="fu">c</span>(<span class="fl">0.7</span>, <span class="sc">-</span><span class="fl">1.6</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="sc">-</span><span class="fl">1.2</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">3.4</span>, <span class="fl">3.7</span>, <span class="fl">0.8</span>, <span class="fl">0.0</span>, <span class="fl">2.0</span>),</span>
+<span id="cb5-5"><a href=""></a>  <span class="at">drugB =</span> <span class="fu">c</span>(<span class="fl">1.9</span>, <span class="fl">0.8</span>, <span class="fl">1.1</span>, <span class="fl">0.1</span>, <span class="sc">-</span><span class="fl">0.1</span>, <span class="fl">4.4</span>, <span class="fl">5.5</span>, <span class="fl">1.6</span>, <span class="fl">4.6</span>, <span class="fl">3.4</span>)</span>
+<span id="cb5-6"><a href=""></a>)</span>
+<span id="cb5-7"><a href=""></a><span class="co"># t.test procedures: Equivalent approaches</span></span>
+<span id="cb5-8"><a href=""></a><span class="fu">t.test</span>(gosset_data<span class="sc">$</span>drugA, gosset_data<span class="sc">$</span>drugB, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-9"><a href=""></a></span>
+<span id="cb5-10"><a href=""></a><span class="co"># or </span></span>
+<span id="cb5-11"><a href=""></a>gosset_data<span class="sc">$</span>diff <span class="ot">&lt;-</span> gosset_data<span class="sc">$</span>drugA <span class="sc">-</span> gosset_data<span class="sc">$</span>drugB</span>
+<span id="cb5-12"><a href=""></a><span class="fu">t.test</span>(gosset_data<span class="sc">$</span>diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -733,9 +810,9 @@ T = \frac{\overline{D} - \Delta_0}{S_D/\sqrt{n}}
 <section id="summary" class="slide level2">
 <h2>Summary <span class="emoji" data-emoji="memo">📝</span></h2>
 <ul>
-<li>Two-Sample <span class="math inline">\(t\)</span> and Paired <span class="math inline">\(t\)</span> address unknown variances</li>
-<li>Prefer Welch’s <span class="math inline">\(t\)</span> (no pooling!)</li>
-<li>Identify if data are paired vs independent</li>
+<li>Welch’s Two-Sample <span class="math inline">\(t\)</span> and Paired <span class="math inline">\(t\)</span> address unknown variances</li>
+<li>Avoid the pooled <span class="math inline">\(t\)</span> test</li>
+<li>Carefully identify whether data are paired or independent samples</li>
 <li>Best to report both <span class="math inline">\(P\)</span>-values and CIs</li>
 <li>Use correct <code>t.test()</code></li>
 </ul>
@@ -744,7 +821,7 @@ T = \frac{\overline{D} - \Delta_0}{S_D/\sqrt{n}}
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

@@ -33,8 +33,8 @@ editor:
 
 -   Two-Sample $t$-Test with Unknown Variances
 -   Two-Sample $t$ Confidence Intervals
--   Two-Sample Type II Error Probabilities
 -   Why NOT Pooled $t$ Procedures :x:
+-   Two-Sample Type II Error Probabilities
 -   Paired $t$-Test and Confidence Intervals
 -   Comparing Two-Sample vs Matched Pairs
 -   $t$ Procedures for in R
@@ -169,7 +169,84 @@ t.test(hours ~ section, var.equal = FALSE, data = sleepdata)
 
 ---
 
-## Paired Data vs. Two-Sample Procedures
+## Two-Sample Type II Error Probabilities for the **sleepdata**
+
+Suppose sample size $n$ is fixed: find $\beta$ and power!
+
+```r
+# Sample sizes
+group_ns    <- tapply(sleepdata$hours, sleepdata$section, length)
+n1 <- group_ns["early"]
+n2 <- group_ns["late"]
+n_small   <- min(group_ns)
+
+# Variances
+group_vars  <- tapply(sleepdata$hours, sleepdata$section, var)  
+s1sq <- group_vars["early"]
+s2sq <- group_vars["late"]
+
+# pooled sd 
+pooled_var <- ((n1 - 1) * s1sq + (n2 - 1) * s2sq) / (n1 + n2 - 2)
+pooled_sd <- sqrt(pooled_var)
+
+# Solve for power (and thus beta)
+result <- power.t.test(
+  n = n_small,
+  delta = 0.5, # Difference we want to detect
+  sd = pooled_sd,
+  sig.level = 0.05,
+  type = "two.sample",
+  alternative = "two.sided"
+)
+
+result$power    # Power
+1 - result$power  # Beta
+```
+
+---
+
+### 🎯 Solve for $n$ (given desired power)**
+
+Suppose we want 90% power. Find sample sizes
+
+```r
+# Use same mean_diff to detect a half hour difference
+
+power.t.test(
+  power = 0.90,
+  delta = 0.5,
+  sd = pooled_sd,
+  sig.level = 0.05,
+  type = "two.sample",
+  alternative = "two.sided"
+)
+```
+
+✅ Result gives **required per-group sample size** (round UP!).
+
+
+
+---
+
+### Caution About Assumptions 🚨
+
+
+::: callout-warning
+**Caution:**  
+`power.t.test()` assumes **equal variances** (pooled two-sample $t$ test).  
+In real studies, if population variances are **very unequal**, the actual power may differ.
+
+> Practical advice:  
+✅ Small/moderate differences in variances ➔ fine.  
+⚠️ Large differences ➔ consider simulations for accuracy!
+:::
+
+
+# Paired Data vs. Two-Sample Procedures
+
+---  
+
+### Paired Data vs. Two-Sample Procedures
 
 -   **Paired:** same subject measured twice
 -   **Two-sample:** independent groups
@@ -269,9 +346,9 @@ R  carries out a one-sample $t$ test on the differences!
 
 ## Summary :memo:
 
--   Two-Sample $t$ and Paired $t$ address unknown variances
--   Prefer Welch’s $t$ (no pooling!)
--   Identify if data are paired vs independent
+-   Welch's Two-Sample $t$ and Paired $t$ address unknown variances
+-   Avoid the pooled $t$ test
+-   Carefully identify whether data are paired or independent samples
 -   Best to report both $P$-values and CIs
 -   Use correct `t.test()`
 
