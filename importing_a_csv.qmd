@@ -1,0 +1,49 @@
+---
+title: "Importing CSV Data into RStudio"
+format:
+  html:
+    toc: true
+    number-depth: 2
+    theme: cosmo
+---
+
+## Importing Data from Google Sheets into RStudio
+
+After you have recorded your funnel experiment data in a Google Sheet, follow these steps to export it as a `.csv` file and load it into RStudio using the graphical interface.
+
+### Step 1: Export as `.csv` from Google Sheets
+
+1.  In your Google Sheet, go to the menu bar.
+2.  Click **File ➝ Download ➝ Comma-separated values (.csv, current sheet)**.
+3.  This will download a file named something like `funneldata.csv` to your Downloads folder.
+
+### Step 2: Open RStudio and Import the CSV File
+
+1.  In RStudio, locate the **Environment** tab (top-right panel by default).
+2.  Click on **Import Dataset ➝ From Text (base)...**
+3.  In the pop-up:
+    -   Click **Browse** and navigate to the location where you saved the `.csv` file.
+    -   Make sure **Heading = Yes** (if your Google Sheet has column headers).
+    -   Preview the data and make sure it looks correct.
+4.  Click **Import**.
+
+RStudio will:
+
+-   Load your data into a data frame (usually named `funneldata` by default),
+-   And display the R command it used to do so in the Console.
+
+The command on the Console will look something like this:
+
+``` r
+funneldata <- read.csv("path/to/your/funneldata.csv")
+```
+
+### Step 3: Copy the Import Command into Your Quarto Document
+
+To ensure your analysis is fully reproducible, copy the `read.csv()` line that appeared in the Console into your Quarto document, usually in the first code chunk after setup:
+
+``` r
+funneldata <- read.csv("funneldata.csv")
+```
+
+> Tip: You may want to move the `.csv` file into the same folder as your `.qmd` file to simplify the file path.
