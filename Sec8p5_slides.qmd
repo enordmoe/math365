@@ -30,11 +30,6 @@ editor:
     wrap: 72
 ---
 
----
-title: "Section 8.5: Further Aspects of Hypothesis Testing"
-format: revealjs
-editor: visual
----
 
 ## Topics for Today
 

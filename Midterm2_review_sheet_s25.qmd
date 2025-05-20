@@ -1,0 +1,61 @@
+---
+title: "Math 365 Midterm Exam II Review Sheet"
+format: 
+  html:
+    toc: true
+    number-depth: 3
+    theme: cosmo
+    embed-resources: true
+---
+
+# Overview
+
+This review sheet summarizes the key concepts and methods introduced in Chapters 7 through 9, with particular attention to confidence intervals, hypothesis testing, and two-sample inference. These topics build upon earlier material related to sampling distributions and estimation. Use your notes, homework, and R output to guide practice and understanding.
+
+## Exam Logistics
+
+-   Date/Time: Thursday, May 22, 8:30 am - 5:30 pm in MPC/Math Lounge
+    -   Pick up exam from me or Kristen in OU 203
+    -   Should be completed in one sitting
+-   Allowed resources:
+    -   Notes
+    -   Calculator
+    -   Computer: R but neither Google searches nor AI assistance
+    -   Honor system applies
+
+------------------------------------------------------------------------
+
+## Core Skills for Midterm II
+
+| Conceptual Understanding | Technical & Computational Skills |
+|------------------------------------|-----------------------------------------|
+| **Work with pivotal quantities** to derive confidence intervals: <br>• Identify a pivotal quantity such as $\frac{\bar{X} - \mu}{\sigma/\sqrt{n}}$ <br>• Use a probability statement to derive the CI <br>• Explain why the distribution of the pivotal quantity does not depend on the unknown parameter | **Construct CIs for:** <br>• A population mean ($\sigma$ known/unknown) <br>• A population proportion (Wald, Score) <br>• A difference in means (independent & paired) <br>• A difference in proportions |
+| **Understand and apply test statistics**: <br>• Recognize structure of test statistics under $H_0$ <br>• Justify choice of $z$, $t$, or binomial test <br>• Explain P-values and rejection regions | **Calculate test statistics and P-values for:** <br>• One- and two-sample mean tests <br>• One- and two-proportion tests <br>• Paired vs independent designs <br>• Use `t.test()`, `prop.test()` effectively |
+| **Distinguish between CIs and tests** conceptually: <br>• Interpret both in context <br>• Relate CI inclusion to test decisions | **Choose the right method for the context:** <br>• Match method to known/unknown $\sigma$, sample size <br>• Check assumptions for normal approximation or pooling |
+| **Explain and compute error rates and power**: <br>• Interpret Type I and II errors in context <br>• Describe impact of $\alpha$, $\beta$, and effect size | **Compute power and sample size**: <br>• Use `power.t.test()` <br>• Solve for $n$ using power formulas |
+| **Evaluate robustness and choose appropriate inference procedures:** <br>• Discuss pros/cons of Wald vs Score CIs <br>• Understand robustness of $t$ procedures | **Read and interpret simulations:** <br>• Estimation of coverage, power, or Type I error <br>• Understand use of `sample()`, `rnorm()`, or resampling in R |
+
+
+# Useful R Commands
+
+``` r
+# Confidence intervals and t-tests
+mean(x)
+sd(x)
+t.test(x)                      # One-sample
+prop.test(x, n, correct=FALSE) # One proportion (score CI)
+t.test(x1, x2)                # Two-sample Welch's test
+t.test(x1, x2, paired = TRUE) # Paired samples (or use one-sample for differences)
+
+# Power and sample size
+power.t.test(...)             # Power or sample size for t-tests
+
+# Proportion tests
+prop.test(c(x1, x2), c(n1, n2), correct=FALSE)  # Two-prop test
+
+# Graphical tools
+qqnorm(x)
+qqline(x)
+hist(x)
+boxplot(x ~ group)
+```
