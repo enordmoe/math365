@@ -1,0 +1,228 @@
+---
+title: "12.1 and 12.2: <br> The Simple Linear Model and Parameter Estimation"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: false
+editor:
+  markdown:
+    wrap: 72
+---
+
+## Topics for Today
+
+- 📊 Simple Linear Regression Model
+- 🔢 Least Squares Estimation of Parameters
+- 🧮 Estimating Variance and $R^2$
+- 📈 Visualizing and interpreting output
+- 💻 Regression in R with `lm()`, `summary()`, and `anova()`
+
+> **Motivating Question:** How do we model the relationship between two variables and make predictions using observed data?
+
+---
+
+## The Key Idea of Regression {.smaller}
+
+::: callout-note
+**DB:** “The key idea in developing a probabilistic relationship between a **dependent** or **response** variable $y$ and an **independent**, **explanatory**, or **predictor** variable $x$ is to realize that once the value of $x$ has been fixed, there is still uncertainty in what the resulting $y$ value will be.”
+:::
+
+We seek to characterize the distribution of the random variable $Y$ given $x$.
+
+**Model:**
+
+$$
+Y = f(x) + \epsilon
+$$
+
+---
+
+## The Simple Linear Model
+
+We focus on linear models of the form:
+
+$$
+Y = \beta_0 + \beta_1 x + \epsilon
+$$
+
+::: callout-important
+Where:
+- $\epsilon \sim N(0, \sigma^2)$
+- $\epsilon$'s are independent
+- Each $(x_i, y_i)$ pair is a realization from this model
+:::
+
+We aim to estimate $\beta_0$, $\beta_1$, and $\sigma^2$ from the data.
+
+---
+
+## A Linear Probabilistic Model
+
+Instead of a deterministic relationship, we assume:
+
+> The **expected value** of $Y$ is a linear function of $x$:
+
+$$
+E(Y | x) = \beta_0 + \beta_1 x
+$$
+
+And the observed $Y$ deviates from this expected value due to random error $\epsilon$.
+
+---
+
+## Estimating Model Parameters
+
+We use the **method of least squares**:
+
+$$
+\hat{\beta}_0, \hat{\beta}_1 = \arg\min_{b_0, b_1} \sum_{i=1}^n (y_i - b_0 - b_1 x_i)^2
+$$
+
+This gives us the **estimated regression line**:
+
+$$
+\hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x
+$$
+
+---
+
+## Least Squares Estimates
+
+::: callout-note
+**Formulas:**
+
+$$
+\hat{\beta}_1 = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2} = \frac{S_{xy}}{S_{xx}}, \quad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x}
+$$
+:::
+
+Under the assumption $\epsilon \sim N(0, \sigma^2)$, these are also **maximum likelihood estimates**.
+
+---
+
+## Example: Swirling Time vs Distance
+
+🧪 From the student funnel lab: use `distance` to predict `time`.
+
+**Variables:**
+- $x$ = distance up the channel (cm)
+- $y$ = swirling time (sec)
+
+Leave space to compute estimates on canvas.
+
+```r
+lm_fit <- lm(time ~ distance, data = funnel_data)
+summary(lm_fit)
+plot(time ~ distance, data = funnel_data)
+abline(lm_fit)
+```
+
+---
+
+## Interpreting Output in R
+
+```r
+summary(lm_fit)
+```
+
+Includes:
+- Estimates $\hat{\beta}_0$, $\hat{\beta}_1$
+- Standard errors
+- t-values and p-values
+- $R^2$
+
+```r
+anova(lm_fit)
+```
+
+Used to test overall model fit (F-test).
+
+---
+
+## Example: Purrfect Prediction? 🐾
+
+🐱 Predict `weight` of cats based on `height` using `MASS::cats`
+
+```r
+library(MASS)
+lm_cats <- lm(Bwt ~ Hwt, data = cats)
+summary(lm_cats)
+plot(Bwt ~ Hwt, data = cats)
+abline(lm_cats)
+```
+
+What does \$\hat\{\beta\}_1\$ tell us about how height affects weight?
+
+---
+
+## Estimating $\sigma^2$ and $\sigma$
+
+**Error sum of squares (SSE):**
+
+$$
+\text{SSE} = \sum (y_i - \hat{y}_i)^2
+$$
+
+**Estimate of variance:**
+
+$$
+\hat{\sigma}^2 = \frac{\text{SSE}}{n - 2}
+$$
+
+Used for inference and standard errors of slope/intercept.
+
+---
+
+## Coefficient of Determination $R^2$
+
+> Measures proportion of variance in $y$ explained by $x$.
+
+$$
+R^2 = 1 - \frac{\text{SSE}}{\text{SST}}, \quad \text{SST} = \sum (y_i - \bar{y})^2
+$$
+
+::: callout-warning
+Beware! A high $R^2$ does **not** imply causation or even a good model fit beyond the range of data.
+:::
+
+---
+
+## Regression Cautions
+
+- 📉 **Plot the data** before fitting the model.
+- 🚧 **Extrapolation is risky** — don't predict far outside the data range.
+- 🎯 Model assumptions: Linearity, constant variance, independence, normality.
+
+---
+
+## Summary
+
+- Simple linear regression models $E(Y|x) = \beta_0 + \beta_1 x$
+- Parameters estimated via **least squares**
+- Variability estimated via residual sum of squares (SSE)
+- $R^2$ quantifies model fit
+- Use `lm()`, `summary()`, and `anova()` in R to implement
+
+➡️ Next time: Inference for regression parameters and prediction intervals
+
+
