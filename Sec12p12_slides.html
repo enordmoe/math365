@@ -209,15 +209,57 @@ MATH 365
 <section id="topics-for-today" class="slide level2">
 <h2>Topics for Today</h2>
 <ul>
-<li>📊 Simple Linear Regression Model</li>
-<li>🔢 Least Squares Estimation of Parameters</li>
-<li>🧮 Estimating Variance and <span class="math inline">\(R^2\)</span></li>
-<li>📈 Visualizing and interpreting output</li>
-<li>💻 Regression in R with <code>lm()</code>, <code>summary()</code>, and <code>anova()</code></li>
+<li><span class="emoji" data-emoji="bar_chart">📊</span> Simple Linear Regression Model</li>
+<li><span class="emoji" data-emoji="1234">🔢</span> Least Squares Estimation of Parameters</li>
+<li><span class="emoji" data-emoji="abacus">🧮</span> Estimating Variance and <span class="math inline">\(R^2\)</span></li>
+<li><span class="emoji" data-emoji="chart_with_upwards_trend">📈</span> Visualizing data and interpreting output</li>
+<li><span class="emoji" data-emoji="computer">💻</span> Regression in R with <code>lm()</code>, <code>summary()</code>, and <code>anova()</code></li>
 </ul>
 <blockquote>
 <p><strong>Motivating Question:</strong> How do we model the relationship between two variables and make predictions using observed data?</p>
 </blockquote>
+</section>
+<section id="modeling-the-effect-of-advertising-on-sales" class="slide level2">
+<h2>Modeling the Effect of Advertising on Sales</h2>
+<blockquote>
+<p><span class="emoji" data-emoji="bulb">💡</span> A classic question in business and economics:</p>
+</blockquote>
+<blockquote>
+<p><strong>“Did the advertising campaign increase sales?”</strong></p>
+</blockquote>
+<p>Firms invest heavily in advertising. They want evidence that their spending leads to measurable gains.</p>
+</section>
+<section id="so-how-do-you-answer-that" class="slide level2">
+<h2>So How Do You Answer That?</h2>
+<ul>
+<li>You have <strong>data</strong>: weekly ad spending, sales revenue, market conditions.</li>
+<li>You suspect: more advertising → higher sales.</li>
+<li>But: sales fluctuate due to many factors — holidays, pricing, competitors, random noise…</li>
+</ul>
+<div class="fragment">
+<blockquote>
+<p><span class="emoji" data-emoji="question">❓</span> <strong>How do we isolate the effect of advertising from everything else?</strong></p>
+</blockquote>
+</div>
+<div class="fragment">
+<ul>
+<li>Can we <strong>quantify</strong> the average change in sales per $1000 spent?</li>
+<li>Can we separate <strong>signal from noise</strong>?</li>
+<li>Can we <strong>predict</strong> sales based on ad spending?</li>
+</ul>
+</div>
+</section>
+<section id="the-role-of-a-statistical-model" class="slide level2">
+<h2>The Role of a Statistical Model</h2>
+<blockquote>
+<p>A <strong>statistical model</strong> gives us a way to describe and estimate relationships between variables.</p>
+</blockquote>
+<p>We assume: <span class="math display">\[
+\text{Sales} = f(\text{Ad Spending}) + \varepsilon
+\]</span></p>
+<p>Where:<br>
+- <span class="math inline">\(f(\cdot)\)</span> is the <strong>systematic trend</strong> we want to estimate<br>
+- <span class="math inline">\(\varepsilon\)</span> is the <strong>random variation</strong> due to unmeasured or uncontrollable factors</p>
 </section>
 <section id="the-key-idea-of-regression" class="slide level2 smaller">
 <h2>The Key Idea of Regression</h2>
@@ -230,11 +272,11 @@ MATH 365
 <p><strong>Note</strong></p>
 </div>
 <div class="callout-content">
-<p><strong>DB:</strong> “The key idea in developing a probabilistic relationship between a <strong>dependent</strong> or <strong>response</strong> variable <span class="math inline">\(y\)</span> and an <strong>independent</strong>, <strong>explanatory</strong>, or <strong>predictor</strong> variable <span class="math inline">\(x\)</span> is to realize that once the value of <span class="math inline">\(x\)</span> has been fixed, there is still uncertainty in what the resulting <span class="math inline">\(y\)</span> value will be.”</p>
+<p>“The key idea in developing a probabilistic relationship between a <strong>dependent</strong> or <strong>response</strong> variable <span class="math inline">\(y\)</span> and an <strong>independent</strong>, <strong>explanatory</strong>, or <strong>predictor</strong> variable <span class="math inline">\(x\)</span> is to realize that once the value of <span class="math inline">\(x\)</span> has been fixed, there is <em>still</em> uncertainty in what the resulting <span class="math inline">\(y\)</span> value will be.” (Devore &amp; Berk, 2012)</p>
 </div>
 </div>
 </div>
-<p>We seek to characterize the distribution of the random variable <span class="math inline">\(Y\)</span> given <span class="math inline">\(x\)</span>.</p>
+<p>We seek to characterize the <em>stochastic dependence</em> of the random variable <span class="math inline">\(Y\)</span> given <span class="math inline">\(x\)</span>.</p>
 <p><strong>Model:</strong></p>
 <p><span class="math display">\[
 Y = f(x) + \epsilon
@@ -242,7 +284,7 @@ Y = f(x) + \epsilon
 </section>
 <section id="the-simple-linear-model" class="slide level2">
 <h2>The Simple Linear Model</h2>
-<p>We focus on linear models of the form:</p>
+<p>We focus on <strong>linear models</strong> of the form:</p>
 <p><span class="math display">\[
 Y = \beta_0 + \beta_1 x + \epsilon
 \]</span></p>
@@ -255,7 +297,10 @@ Y = \beta_0 + \beta_1 x + \epsilon
 <p><strong>Important</strong></p>
 </div>
 <div class="callout-content">
-<p>Where: - <span class="math inline">\(\epsilon \sim N(0, \sigma^2)\)</span> - <span class="math inline">\(\epsilon\)</span>’s are independent - Each <span class="math inline">\((x_i, y_i)\)</span> pair is a realization from this model</p>
+<p>Where:<br>
+- <span class="math inline">\(\epsilon \sim N(0, \sigma^2)\)</span><br>
+- <span class="math inline">\(\epsilon\)</span>’s are independent<br>
+- Each <span class="math inline">\((x_i, y_i)\)</span> pair is a realization from this model</p>
 </div>
 </div>
 </div>
@@ -272,13 +317,17 @@ E(Y | x) = \beta_0 + \beta_1 x
 \]</span></p>
 <p>And the observed <span class="math inline">\(Y\)</span> deviates from this expected value due to random error <span class="math inline">\(\epsilon\)</span>.</p>
 </section>
+<section id="visualizing-the-simple-linear-regression-model" class="slide level2">
+<h2>Visualizing the Simple Linear Regression Model</h2>
+
+<img data-src="images/regr_true_plot.png" alt="scatterplot of true model" class="r-stretch quarto-figure-center"><p class="caption">Devore Fig 12.3</p></section>
 <section id="estimating-model-parameters" class="slide level2">
 <h2>Estimating Model Parameters</h2>
-<p>We use the <strong>method of least squares</strong>:</p>
+<p>Use the <strong>method of least squares</strong> to find the coefficients <span class="math inline">\(\widehat\beta_0\)</span> and <span class="math inline">\(\widehat\beta_1\)</span> that minimize the sum of squared errors:</p>
 <p><span class="math display">\[
-\hat{\beta}_0, \hat{\beta}_1 = \arg\min_{b_0, b_1} \sum_{i=1}^n (y_i - b_0 - b_1 x_i)^2
+f(b_0, b_1)= \sum_{i=1}^n (y_i - b_0 - b_1 x_i)^2
 \]</span></p>
-<p>This gives us the <strong>estimated regression line</strong>:</p>
+<p>This yields the <strong>estimated regression line</strong>:</p>
 <p><span class="math display">\[
 \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x
 \]</span></p>
@@ -301,34 +350,81 @@ E(Y | x) = \beta_0 + \beta_1 x
 </div>
 </div>
 </div>
+<p><br></p>
 <p>Under the assumption <span class="math inline">\(\epsilon \sim N(0, \sigma^2)\)</span>, these are also <strong>maximum likelihood estimates</strong>.</p>
 </section>
 <section id="example-swirling-time-vs-distance" class="slide level2">
 <h2>Example: Swirling Time vs Distance</h2>
-<p>🧪 From the student funnel lab: use <code>distance</code> to predict <code>time</code>.</p>
-<p><strong>Variables:</strong> - <span class="math inline">\(x\)</span> = distance up the channel (cm) - <span class="math inline">\(y\)</span> = swirling time (sec)</p>
-<p>Leave space to compute estimates on canvas.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(time <span class="sc">~</span> distance, <span class="at">data =</span> funnel_data)</span>
-<span id="cb1-2"><a href=""></a><span class="fu">summary</span>(lm_fit)</span>
-<span id="cb1-3"><a href=""></a><span class="fu">plot</span>(time <span class="sc">~</span> distance, <span class="at">data =</span> funnel_data)</span>
-<span id="cb1-4"><a href=""></a><span class="fu">abline</span>(lm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="emoji" data-emoji="test_tube">🧪</span> From the student funnel lab: use <code>distance</code> to predict <code>tswirl</code>.</p>
+<p><strong>Variables:</strong><br>
+- <span class="math inline">\(x\)</span> = distance up the channel (cm)<br>
+- <span class="math inline">\(y\)</span> = swirling time (sec)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a>funneldata <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"http://people.kzoo.edu/enordmoe/math365/data/funneldata.csv"</span>)</span>
+<span id="cb1-2"><a href=""></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(tswirl <span class="sc">~</span> distance, <span class="at">data =</span> funneldata)</span>
+<span id="cb1-3"><a href=""></a><span class="fu">summary</span>(lm_fit)</span>
+<span id="cb1-4"><a href=""></a><span class="fu">plot</span>(tswirl <span class="sc">~</span> distance, <span class="at">data =</span> funneldata)</span>
+<span id="cb1-5"><a href=""></a><span class="fu">abline</span>(lm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="interpreting-output-in-r" class="slide level2">
 <h2>Interpreting Output in R</h2>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">summary</span>(lm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Includes: - Estimates <span class="math inline">\(\hat{\beta}_0\)</span>, <span class="math inline">\(\hat{\beta}_1\)</span> - Standard errors - t-values and p-values - <span class="math inline">\(R^2\)</span></p>
+<p>Includes:<br>
+- Estimates <span class="math inline">\(\hat{\beta}_0\)</span>, <span class="math inline">\(\hat{\beta}_1\)</span><br>
+- Standard errors<br>
+- t-values and p-values<br>
+- <span class="math inline">\(R^2\)</span></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="fu">anova</span>(lm_fit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Used to test overall model fit (F-test).</p>
 </section>
+<section class="slide level2">
+
+<h3 class="smaller" id="r-regression-output-example">R Regression Output Example</h3>
+<p><code>summary()</code> output:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = tswirl ~ distance, data = funneldata)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-4.1444 -0.8728 -0.0528  1.4839  3.5364 
+
+Coefficients:
+            Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) -0.45722    1.54724  -0.296    0.771    
+distance     0.43306    0.06135   7.059  2.7e-06 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.016 on 16 degrees of freedom
+Multiple R-squared:  0.7569,    Adjusted R-squared:  0.7417 
+F-statistic: 49.82 on 1 and 16 DF,  p-value: 2.704e-06</code></pre>
+</div>
+</div>
+<p><code>anova()</code> output:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: tswirl
+          Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+distance   1 202.540 202.540  49.823 2.704e-06 ***
+Residuals 16  65.043   4.065                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
 <section id="example-purrfect-prediction" class="slide level2">
-<h2>Example: Purrfect Prediction? 🐾</h2>
-<p>🐱 Predict <code>weight</code> of cats based on <code>height</code> using <code>MASS::cats</code></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="fu">library</span>(MASS)</span>
-<span id="cb4-2"><a href=""></a>lm_cats <span class="ot">&lt;-</span> <span class="fu">lm</span>(Bwt <span class="sc">~</span> Hwt, <span class="at">data =</span> cats)</span>
-<span id="cb4-3"><a href=""></a><span class="fu">summary</span>(lm_cats)</span>
-<span id="cb4-4"><a href=""></a><span class="fu">plot</span>(Bwt <span class="sc">~</span> Hwt, <span class="at">data =</span> cats)</span>
-<span id="cb4-5"><a href=""></a><span class="fu">abline</span>(lm_cats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>What does ${}_1$ tell us about how height affects weight?</p>
+<h2>Example: Purrfect Prediction? <span class="emoji" data-emoji="feet">🐾</span></h2>
+<p><span class="emoji" data-emoji="cat">🐱</span> Predict <code>weight</code> of cats based on <code>height</code> using <code>MASS::cats</code></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a><span class="fu">library</span>(MASS)</span>
+<span id="cb6-2"><a href=""></a>lm_cats <span class="ot">&lt;-</span> <span class="fu">lm</span>(Bwt <span class="sc">~</span> Hwt, <span class="at">data =</span> cats)</span>
+<span id="cb6-3"><a href=""></a><span class="fu">summary</span>(lm_cats)</span>
+<span id="cb6-4"><a href=""></a><span class="fu">plot</span>(Bwt <span class="sc">~</span> Hwt, <span class="at">data =</span> cats)</span>
+<span id="cb6-5"><a href=""></a><span class="fu">abline</span>(lm_cats)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>What does <span class="math inline">\(\hat{\beta}_1\)</span> tell us about how height affects weight?</p>
 </section>
 <section id="estimating-sigma2-and-sigma" class="slide level2">
 <h2>Estimating <span class="math inline">\(\sigma^2\)</span> and <span class="math inline">\(\sigma\)</span></h2>
@@ -364,14 +460,6 @@ R^2 = 1 - \frac{\text{SSE}}{\text{SST}}, \quad \text{SST} = \sum (y_i - \bar{y})
 </div>
 </div>
 </section>
-<section id="regression-cautions" class="slide level2">
-<h2>Regression Cautions</h2>
-<ul>
-<li>📉 <strong>Plot the data</strong> before fitting the model.</li>
-<li>🚧 <strong>Extrapolation is risky</strong> — don’t predict far outside the data range.</li>
-<li>🎯 Model assumptions: Linearity, constant variance, independence, normality.</li>
-</ul>
-</section>
 <section id="summary" class="slide level2">
 <h2>Summary</h2>
 <ul>
@@ -381,7 +469,7 @@ R^2 = 1 - \frac{\text{SSE}}{\text{SST}}, \quad \text{SST} = \sum (y_i - \bar{y})
 <li><span class="math inline">\(R^2\)</span> quantifies model fit</li>
 <li>Use <code>lm()</code>, <code>summary()</code>, and <code>anova()</code> in R to implement</li>
 </ul>
-<p>➡️ Next time: Inference for regression parameters and prediction intervals</p>
+<p><span class="emoji" data-emoji="arrow_right">➡️</span> Next time: Inference for regression parameters and prediction intervals</p>
 
 </section>
     </div>
@@ -601,6 +689,44 @@ R^2 = 1 - \frac{\text{SSE}}{\text{SST}}, \quad \text{SST} = \sum (y_i - \bar{y})
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

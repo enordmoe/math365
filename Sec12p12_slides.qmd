@@ -23,7 +23,7 @@ from: markdown+emoji
 execute:
   echo: true
   cache: false
-  eval: false
+  eval: true
 editor:
   markdown:
     wrap: 72
@@ -31,23 +31,77 @@ editor:
 
 ## Topics for Today
 
-- 📊 Simple Linear Regression Model
-- 🔢 Least Squares Estimation of Parameters
-- 🧮 Estimating Variance and $R^2$
-- 📈 Visualizing and interpreting output
-- 💻 Regression in R with `lm()`, `summary()`, and `anova()`
+-   :bar_chart: Simple Linear Regression Model
+-   :1234: Least Squares Estimation of Parameters
+-   :abacus: Estimating Variance and $R^2$
+-   :chart_with_upwards_trend: Visualizing data and interpreting output
+-   :computer: Regression in R with `lm()`, `summary()`, and `anova()`
 
-> **Motivating Question:** How do we model the relationship between two variables and make predictions using observed data?
+> **Motivating Question:** How do we model the relationship between two
+> variables and make predictions using observed data?
 
----
+------------------------------------------------------------------------
+
+## Modeling the Effect of Advertising on Sales
+
+> :bulb: A classic question in business and economics:
+
+> **"Did the advertising campaign increase sales?"**
+
+Firms invest heavily in advertising. They want evidence that their
+spending leads to measurable gains.
+
+------------------------------------------------------------------------
+
+## So How Do You Answer That?
+
+-   You have **data**: weekly ad spending, sales revenue, market
+    conditions.
+-   You suspect: more advertising → higher sales.
+-   But: sales fluctuate due to many factors — holidays, pricing,
+    competitors, random noise...
+
+. . .
+
+> :question: **How do we isolate the effect of advertising from
+> everything else?**
+
+. . .
+
+-   Can we **quantify** the average change in sales per \$1000 spent?
+-   Can we separate **signal from noise**?
+-   Can we **predict** sales based on ad spending?
+
+------------------------------------------------------------------------
+
+## The Role of a Statistical Model
+
+> A **statistical model** gives us a way to describe and estimate
+> relationships between variables.
+
+We assume: $$
+\text{Sales} = f(\text{Ad Spending}) + \varepsilon
+$$
+
+Where:\
+- $f(\cdot)$ is the **systematic trend** we want to estimate\
+- $\varepsilon$ is the **random variation** due to unmeasured or
+uncontrollable factors
+
+------------------------------------------------------------------------
 
 ## The Key Idea of Regression {.smaller}
 
 ::: callout-note
-**DB:** “The key idea in developing a probabilistic relationship between a **dependent** or **response** variable $y$ and an **independent**, **explanatory**, or **predictor** variable $x$ is to realize that once the value of $x$ has been fixed, there is still uncertainty in what the resulting $y$ value will be.”
+"The key idea in developing a probabilistic relationship between a
+**dependent** or **response** variable $y$ and an **independent**,
+**explanatory**, or **predictor** variable $x$ is to realize that once
+the value of $x$ has been fixed, there is *still* uncertainty in what
+the resulting $y$ value will be.” (Devore & Berk, 2012)
 :::
 
-We seek to characterize the distribution of the random variable $Y$ given $x$.
+We seek to characterize the *stochastic dependence* of the random
+variable $Y$ given $x$.
 
 **Model:**
 
@@ -55,26 +109,26 @@ $$
 Y = f(x) + \epsilon
 $$
 
----
+------------------------------------------------------------------------
 
 ## The Simple Linear Model
 
-We focus on linear models of the form:
+We focus on **linear models** of the form:
 
 $$
 Y = \beta_0 + \beta_1 x + \epsilon
 $$
 
 ::: callout-important
-Where:
-- $\epsilon \sim N(0, \sigma^2)$
-- $\epsilon$'s are independent
+Where:\
+- $\epsilon \sim N(0, \sigma^2)$\
+- $\epsilon$'s are independent\
 - Each $(x_i, y_i)$ pair is a realization from this model
 :::
 
 We aim to estimate $\beta_0$, $\beta_1$, and $\sigma^2$ from the data.
 
----
+------------------------------------------------------------------------
 
 ## A Linear Probabilistic Model
 
@@ -86,19 +140,28 @@ $$
 E(Y | x) = \beta_0 + \beta_1 x
 $$
 
-And the observed $Y$ deviates from this expected value due to random error $\epsilon$.
+And the observed $Y$ deviates from this expected value due to random
+error $\epsilon$.
 
----
+------------------------------------------------------------------------
+
+## Visualizing the Simple Linear Regression Model
+
+![Devore Fig
+12.3](images/regr_true_plot.png){fig-alt="scatterplot of true model"
+fig-align="center"}
+
+------------------------------------------------------------------------
 
 ## Estimating Model Parameters
 
-We use the **method of least squares**:
+Use the **method of least squares** to find the coefficients $\widehat\beta_0$ and $\widehat\beta_1$ that minimize the sum of squared errors:
 
 $$
-\hat{\beta}_0, \hat{\beta}_1 = \arg\min_{b_0, b_1} \sum_{i=1}^n (y_i - b_0 - b_1 x_i)^2
+f(b_0, b_1)= \sum_{i=1}^n (y_i - b_0 - b_1 x_i)^2
 $$
 
-This gives us the **estimated regression line**:
+This yields the **estimated regression line**:
 
 $$
 \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x
@@ -116,54 +179,79 @@ $$
 $$
 :::
 
-Under the assumption $\epsilon \sim N(0, \sigma^2)$, these are also **maximum likelihood estimates**.
+<br>
+
+Under the assumption $\epsilon \sim N(0, \sigma^2)$, these are also
+**maximum likelihood estimates**.
 
 ---
 
 ## Example: Swirling Time vs Distance
 
-🧪 From the student funnel lab: use `distance` to predict `time`.
+:test_tube: From the student funnel lab: use `distance` to predict
+`tswirl`.
 
-**Variables:**
-- $x$ = distance up the channel (cm)
-- $y$ = swirling time (sec)
-
-Leave space to compute estimates on canvas.
+**Variables:**   
+- $x$ = distance up the channel (cm)   
+- $y$ = swirling time (sec)    
+  
 
 ```r
-lm_fit <- lm(time ~ distance, data = funnel_data)
+funneldata <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/funneldata.csv")
+lm_fit <- lm(tswirl ~ distance, data = funneldata)
 summary(lm_fit)
-plot(time ~ distance, data = funnel_data)
+plot(tswirl ~ distance, data = funneldata)
 abline(lm_fit)
 ```
 
----
+------------------------------------------------------------------------
 
 ## Interpreting Output in R
 
-```r
+``` r
 summary(lm_fit)
 ```
 
-Includes:
-- Estimates $\hat{\beta}_0$, $\hat{\beta}_1$
-- Standard errors
-- t-values and p-values
+Includes:  
+- Estimates $\hat{\beta}_0$, $\hat{\beta}_1$   
+- Standard errors  
+- t-values and p-values   
 - $R^2$
 
-```r
+``` r
 anova(lm_fit)
 ```
 
 Used to test overall model fit (F-test).
 
----
+---  
 
-## Example: Purrfect Prediction? 🐾
+### R Regression Output Example {.smaller}
 
-🐱 Predict `weight` of cats based on `height` using `MASS::cats`
+`summary()` output:  
 
-```r
+```{r}
+#| echo: false
+funneldata <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/funneldata.csv")
+lm_fit <- lm(tswirl ~ distance, data = funneldata)
+summary(lm_fit)
+```
+`anova()` output:  
+
+```{r}
+#| echo: false
+anova(lm_fit)
+```
+
+
+
+------------------------------------------------------------------------
+
+## Example: Purrfect Prediction? :feet:
+
+:cat: Predict `weight` of cats based on `height` using `MASS::cats`
+
+``` r
 library(MASS)
 lm_cats <- lm(Bwt ~ Hwt, data = cats)
 summary(lm_cats)
@@ -171,9 +259,9 @@ plot(Bwt ~ Hwt, data = cats)
 abline(lm_cats)
 ```
 
-What does \$\hat\{\beta\}_1\$ tell us about how height affects weight?
+What does $\hat{\beta}_1$ tell us about how height affects weight?
 
----
+------------------------------------------------------------------------
 
 ## Estimating $\sigma^2$ and $\sigma$
 
@@ -191,7 +279,7 @@ $$
 
 Used for inference and standard errors of slope/intercept.
 
----
+------------------------------------------------------------------------
 
 ## Coefficient of Determination $R^2$
 
@@ -202,27 +290,20 @@ R^2 = 1 - \frac{\text{SSE}}{\text{SST}}, \quad \text{SST} = \sum (y_i - \bar{y})
 $$
 
 ::: callout-warning
-Beware! A high $R^2$ does **not** imply causation or even a good model fit beyond the range of data.
+Beware! A high $R^2$ does **not** imply causation or even a good model
+fit beyond the range of data.
 :::
 
----
 
-## Regression Cautions
-
-- 📉 **Plot the data** before fitting the model.
-- 🚧 **Extrapolation is risky** — don't predict far outside the data range.
-- 🎯 Model assumptions: Linearity, constant variance, independence, normality.
-
----
+------------------------------------------------------------------------
 
 ## Summary
 
-- Simple linear regression models $E(Y|x) = \beta_0 + \beta_1 x$
-- Parameters estimated via **least squares**
-- Variability estimated via residual sum of squares (SSE)
-- $R^2$ quantifies model fit
-- Use `lm()`, `summary()`, and `anova()` in R to implement
+-   Simple linear regression models $E(Y|x) = \beta_0 + \beta_1 x$
+-   Parameters estimated via **least squares**
+-   Variability estimated via residual sum of squares (SSE)
+-   $R^2$ quantifies model fit
+-   Use `lm()`, `summary()`, and `anova()` in R to implement
 
-➡️ Next time: Inference for regression parameters and prediction intervals
-
-
+:arrow_right: Next time: Inference for regression parameters and
+prediction intervals
