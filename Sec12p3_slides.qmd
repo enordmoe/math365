@@ -90,10 +90,10 @@ $$
 $$
 :::
 
-Example: Cats data 🐱   
-  — Predicting heart weight from body weight.  
 
----
+---  
+
+
 
 ## Hypothesis Testing for $\beta_1$
 
@@ -115,9 +115,11 @@ $$
 :::
 
 
----
 
-## Example: Funnel Lab 🧪
+
+---  
+
+## Example: Funnel Lab Data 2.0 🧪
 
 Use regression to predict $y$ (displacement or time?) from $x$ (height).
 
@@ -127,27 +129,53 @@ Use regression to predict $y$ (displacement or time?) from $x$ (height).
 - Test $H_0: \beta_1 = 0$
 
 
----
+---  
 
-## Simulation of Sampling Distribution 🌀
+## Example: Swirling Time vs Distance
+
+:test_tube: From the student funnel lab: use `distance` to predict
+`tswirl`.
+
+**Variables:**   
+- $x$ = distance up the channel (cm)   
+- $y$ = swirling time (sec)    
+  
+
+```r
+funneldata <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/funneldata.csv")
+lm_fit <- lm(tswirl ~ distance, data = funneldata)
+summary(lm_fit)
+plot(tswirl ~ distance, data = funneldata)
+abline(lm_fit)
+```
+
+------------------------------------------------------------------------
+
+
+
+### Simulation of Sampling Distribution 🌀 {.smaller}
 
 Script for simulating regression line slopes:
 
 ```r
 set.seed(123)
-beta1 <- 1.75
-n <- 25
-x <- seq(100, 400, length.out = n)
+# Set values of beta0 and beta1 to simulate funnel data
+beta0 <- 15
+beta1 <- 0.4
+n <- 18
+# generate funnel-type data distances
+values <- seq(12, 36, by = 3)
+x <- rep(values, each = 2)
 Sxx <- sum((x - mean(x))^2)
-sigma <- 20
+sigma <- 1
 B <- 20
 
 slopes <- numeric(B)
-plot(NULL, xlim=range(x), ylim=c(100,700), xlab="X", ylab="Y")
-abline(a=100, b=beta1, lwd=2, col="black") # true line
+plot(NULL, xlim=range(x), ylim=extendrange(y), xlab="X", ylab="Y")
+abline(a = beta0, b = beta1, lwd=2, col="black") # true line
 
 for (i in 1:B) {
-  y <- 100 + beta1 * x + rnorm(n, 0, sigma)
+  y <- beta0 + beta1 * x + rnorm(n, 0, sigma)
   fit <- lm(y ~ x)
   abline(fit, col=rgb(0.1, 0.4, 1, 0.4))
   slopes[i] <- coef(fit)[2]
@@ -170,21 +198,21 @@ ANOVA table for regression:
 
 | Source     | df    | SS     | MS           | F                                |
 |------------|-------|--------|--------------|----------------------------------|
-| Regression | 1     | SSR    | SSR          | $\frac{SSR}{SSE / (n - 2)}$       |
-| Error      | $n-2$ | SSE    | $\frac{SSE}{n - 2}$ |                                  |
+| Regression | 1     | SSR    | MSR          | $\frac{MSR}{MSE}$       |
+| Error      | $n-2$ | SSE    | MSE=$\frac{SSE}{n - 2}$ |                                  |
 | Total      | $n-1$ | SST    |              |                                  |
 
-Relation: $t^2 = F$ when testing $\beta_1 = 0$.
+Relation: $t^2 = F$ when testing $\beta_1 = 0$ for a simple linear regression.
 
 ---
 
 ## Example: Cats 🐾
 
-Model: `lm(hwt ~ bwt, data = MASS::cats)`
+Fit regression model: `lm(hwt ~ bwt, data = MASS::cats)`
 
 - Find $\hat{\beta}_1$, CI, $p$-value
-- Also view ANOVA output
 - Interpret slope and significance
+- Also view ANOVA output
 
 _Hint: What assumptions are needed?_
 
@@ -194,7 +222,7 @@ _Hint: What assumptions are needed?_
 
 - Inference for $\beta_1$ uses $t$-distribution with $n-2$ df
 - CI: $\hat{\beta}_1 \pm t \cdot s_{\hat{\beta}_1}$
-- $p$-values easier to interpret than rejection regions
+- $p$-values mean the same as before
 - Simulations help visualize variability of estimates
 - ANOVA and regression inference are deeply linked
 
@@ -202,8 +230,6 @@ _Hint: What assumptions are needed?_
 
 ## 🤔 Reflection
 
-> When would you prefer an ANOVA summary over regression output?
-
 > How does $S_{xx}$ affect your ability to detect a relationship?
 
----
+> When would you prefer an ANOVA summary over regression output?
