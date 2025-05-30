@@ -158,7 +158,7 @@ abline(lm_fit)
 Script for simulating regression line slopes:
 
 ```r
-set.seed(123)
+# set.seed(123)
 # Set values of beta0 and beta1 to simulate funnel data
 beta0 <- 15
 beta1 <- 0.4
@@ -171,8 +171,10 @@ sigma <- 1
 B <- 20
 
 slopes <- numeric(B)
-plot(NULL, xlim=range(x), ylim=extendrange(y), xlab="X", ylab="Y")
+
+plot(NULL, xlim=range(x), ylim=extendrange(beta0+beta1*x), xlab="X", ylab="Y")
 abline(a = beta0, b = beta1, lwd=2, col="black") # true line
+
 
 for (i in 1:B) {
   y <- beta0 + beta1 * x + rnorm(n, 0, sigma)
@@ -180,6 +182,7 @@ for (i in 1:B) {
   abline(fit, col=rgb(0.1, 0.4, 1, 0.4))
   slopes[i] <- coef(fit)[2]
 }
+
 
 hist(slopes,
      main = expression("Sampling Distribution of " * hat(beta)[1]),

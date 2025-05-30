@@ -349,7 +349,7 @@ t = \frac{\hat{\beta}_1 - \beta_{10}}{s_{\hat{\beta}_1}}
 
 <h3 class="smaller" id="simulation-of-sampling-distribution">Simulation of Sampling Distribution 🌀</h3>
 <p>Script for simulating regression line slopes:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># set.seed(123)</span></span>
 <span id="cb2-2"><a href=""></a><span class="co"># Set values of beta0 and beta1 to simulate funnel data</span></span>
 <span id="cb2-3"><a href=""></a>beta0 <span class="ot">&lt;-</span> <span class="dv">15</span></span>
 <span id="cb2-4"><a href=""></a>beta1 <span class="ot">&lt;-</span> <span class="fl">0.4</span></span>
@@ -362,19 +362,22 @@ t = \frac{\hat{\beta}_1 - \beta_{10}}{s_{\hat{\beta}_1}}
 <span id="cb2-11"><a href=""></a>B <span class="ot">&lt;-</span> <span class="dv">20</span></span>
 <span id="cb2-12"><a href=""></a></span>
 <span id="cb2-13"><a href=""></a>slopes <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb2-14"><a href=""></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim=</span><span class="fu">range</span>(x), <span class="at">ylim=</span><span class="fu">extendrange</span>(y), <span class="at">xlab=</span><span class="st">"X"</span>, <span class="at">ylab=</span><span class="st">"Y"</span>)</span>
-<span id="cb2-15"><a href=""></a><span class="fu">abline</span>(<span class="at">a =</span> beta0, <span class="at">b =</span> beta1, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"black"</span>) <span class="co"># true line</span></span>
-<span id="cb2-16"><a href=""></a></span>
-<span id="cb2-17"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb2-18"><a href=""></a>  y <span class="ot">&lt;-</span> beta0 <span class="sc">+</span> beta1 <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, sigma)</span>
-<span id="cb2-19"><a href=""></a>  fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
-<span id="cb2-20"><a href=""></a>  <span class="fu">abline</span>(fit, <span class="at">col=</span><span class="fu">rgb</span>(<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="dv">1</span>, <span class="fl">0.4</span>))</span>
-<span id="cb2-21"><a href=""></a>  slopes[i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit)[<span class="dv">2</span>]</span>
-<span id="cb2-22"><a href=""></a>}</span>
-<span id="cb2-23"><a href=""></a></span>
-<span id="cb2-24"><a href=""></a><span class="fu">hist</span>(slopes,</span>
-<span id="cb2-25"><a href=""></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Sampling Distribution of "</span> <span class="sc">*</span> <span class="fu">hat</span>(beta)[<span class="dv">1</span>]),</span>
-<span id="cb2-26"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Slope"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-14"><a href=""></a></span>
+<span id="cb2-15"><a href=""></a><span class="fu">plot</span>(<span class="cn">NULL</span>, <span class="at">xlim=</span><span class="fu">range</span>(x), <span class="at">ylim=</span><span class="fu">extendrange</span>(beta0<span class="sc">+</span>beta1<span class="sc">*</span>x), <span class="at">xlab=</span><span class="st">"X"</span>, <span class="at">ylab=</span><span class="st">"Y"</span>)</span>
+<span id="cb2-16"><a href=""></a><span class="fu">abline</span>(<span class="at">a =</span> beta0, <span class="at">b =</span> beta1, <span class="at">lwd=</span><span class="dv">2</span>, <span class="at">col=</span><span class="st">"black"</span>) <span class="co"># true line</span></span>
+<span id="cb2-17"><a href=""></a></span>
+<span id="cb2-18"><a href=""></a></span>
+<span id="cb2-19"><a href=""></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
+<span id="cb2-20"><a href=""></a>  y <span class="ot">&lt;-</span> beta0 <span class="sc">+</span> beta1 <span class="sc">*</span> x <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, sigma)</span>
+<span id="cb2-21"><a href=""></a>  fit <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x)</span>
+<span id="cb2-22"><a href=""></a>  <span class="fu">abline</span>(fit, <span class="at">col=</span><span class="fu">rgb</span>(<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="dv">1</span>, <span class="fl">0.4</span>))</span>
+<span id="cb2-23"><a href=""></a>  slopes[i] <span class="ot">&lt;-</span> <span class="fu">coef</span>(fit)[<span class="dv">2</span>]</span>
+<span id="cb2-24"><a href=""></a>}</span>
+<span id="cb2-25"><a href=""></a></span>
+<span id="cb2-26"><a href=""></a></span>
+<span id="cb2-27"><a href=""></a><span class="fu">hist</span>(slopes,</span>
+<span id="cb2-28"><a href=""></a>     <span class="at">main =</span> <span class="fu">expression</span>(<span class="st">"Sampling Distribution of "</span> <span class="sc">*</span> <span class="fu">hat</span>(beta)[<span class="dv">1</span>]),</span>
+<span id="cb2-29"><a href=""></a>     <span class="at">xlab =</span> <span class="st">"Slope"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="regression-and-anova" class="slide level2">
 <h2>Regression and ANOVA 🔄</h2>
