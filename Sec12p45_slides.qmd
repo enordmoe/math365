@@ -1,0 +1,230 @@
+---
+title: "Sections 12.4: Inferences Concerning Estimation of Means and Prediction of Individual Values"
+subtitle: "Mathematical Statistics"
+author: "MATH 365"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    incremental: false
+    transition: fade
+    chalkboard: true
+    smaller: true
+    pdf-export: true
+    toc: false
+    toc-depth: 1
+    reveal-options:
+      slideNumber: true
+    html-math-method: mathjax
+    preview-links: auto
+    notes: true
+title-slide-attributes:
+  data-background-color: "#EA6820"
+from: markdown+emoji
+execute:
+  echo: true
+  cache: false
+  eval: true
+editor:
+  markdown:
+    wrap: 72
+---
+
+
+## Topics for Today 
+
+- Estimating mean response at $x^*$: $\mu_{Y|x^*}$
+- Predicting a future $Y$ at $x^*$
+- Confidence Intervals (CI) vs Prediction Intervals (PI)
+- R examples: `cats` and `funnel` datasets revisited
+- 🤔  When and why are predictions less precise?
+
+
+
+---
+
+### Estimating $\mu_{Y|x^*}$
+
+Given estimates $\hat\beta_0$, $\hat\beta_1$, we can estimate the expected value of $Y$ given and a particular value $x^*$:
+$$
+\widehat{Y} = \hat\beta_0 + \hat\beta_1 x^*
+$$
+
+This is a **point estimate** for the mean of $Y$ given $x^*$.
+
+But how **precise** is this estimate?
+
+::: callout-note
+$\Longrightarrow$  Construct a **CI** for $\mu_{Y\cdot x^*}$ using the sampling distribution of $\hat\beta_0 + \hat\beta_1 x^*$.
+:::
+
+---
+
+### Sampling Distribution of $\widehat{Y} = \hat\beta_0 + \hat\beta_1 x^*$
+
+Let $x^*$ be a fixed value:
+
+- Mean of $\widehat{Y}$:
+$$
+E(\widehat{Y}) = \beta_0 + \beta_1 x^*
+$$
+
+- Variance of $\widehat{Y}$:
+$$
+\mathrm{Var}(\widehat{Y}) = \sigma^2 \left[\frac{1}{n} + \frac{(x^* - \bar{x})^2}{S_{xx}}\right]
+$$
+
+:::{.fragment}
+::: callout-note
+## Question???
+For what value of $x^*$ is the variance smallest?
+:::
+:::
+---
+
+### Confidence Interval for $\mu_{Y\cdot x^*}$
+
+Given data and a fitted regression, use the sample variance of the residuals $s^2$ to estimate $\sigma^2$.  
+
+:::{.fragment}
+
+We use a $t$ distribution with $n-2$ degrees of freedom to obtain the interval:
+
+$$
+\widehat{Y} \pm t_{\alpha/2, n-2} \cdot s_{\widehat{Y}}
+$$
+where
+$$
+s_{\widehat{Y}} = s \cdot \sqrt{\frac{1}{n} + \frac{(x^* - \bar{x})^2}{S_{xx}}}
+$$
+
+:::
+
+---
+
+## Example: Funnel Lab
+
+Fit the least squares regression:
+
+```r
+funneldata <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/funneldata.csv")
+plot(tswirl ~ distance, data = funneldata)
+lm_fit <- lm(tswirl ~ distance, data = funneldata)
+abline(lm_fit)
+summary(lm_fit)
+```
+
+<br>
+
+
+Use `predict()` to obtain $\widehat{Y}$ and the corresponding confidence interval for the expected swirling time at 20 inches:
+```r
+predict(lm_fit, newdata = data.frame(tswirl = 20), interval = "confidence")
+```
+
+---
+
+## Predicting a Future Value $Y$
+
+Let’s examine the **variance of the prediction error** for a **new** observation at $x^*$.
+
+Define:
+$$
+e = Y - \hat{Y}
+$$
+
+Then the variance of the prediction error is:
+
+$$
+\mathrm{Var}(e) = \mathrm{Var}(Y) + \mathrm{Var}(\hat{Y}) = \sigma^2 + \sigma^2 \left[\frac{1}{n} + \frac{(x^* - \bar{x})^2}{S_{xx}}\right]
+$$
+
+which simplifies to:
+
+$$
+\mathrm{Var}(e) = \sigma^2 \left[1 + \frac{1}{n} + \frac{(x^* - \bar{x})^2}{S_{xx}}\right]
+$$
+
+::: callout-tip
+The **extra 1** in the expression means prediction intervals will be (much) wider than confidence intervals.
+:::
+
+---
+
+## Prediction Interval for Future $Y$
+
+Substituting the standard deviation of the residuals $s$ for $\sigma$ and using the corresponding $t_{n-1}$ distribution yield the **prediction interval** formula:
+
+$$
+(\hat\beta_0 + \hat\beta_1 x^*) \pm t_{\alpha/2, n-2} \cdot s \sqrt{1 + \frac{1}{n} + \frac{(x^* - \bar{x})^2}{S_{xx}}}
+$$
+
+<br>
+
+:::{.fragment}
+
+:::{.callout-important}
+## Notes
+The PI is wider than the CI because of **individual-level variability**
+:::
+:::
+
+
+
+## Example: Funnel Lab: Prediction Interval
+
+Use `predict()` to obtain $\widehat{Y}$ and the corresponding **prediction interval** for a future individual swirling time at 20 inches:
+```r
+predict(lm_fit, newdata = data.frame(tswirl = 20), interval = "prediction")
+```
+
+---
+
+## Example: Predicting Heart Weight 🐱
+
+Predict the heart weight in grams of an individual cat that weights 3.2 kg. 
+
+* Use  `cats` dataset from the MASS library:
+
+
+```r
+library(MASS)
+plot(cats$Bwt, cats$Hwt)
+fit_cats <- lm(Hwt ~ Bwt, data = cats)
+abline(fit_cats, col="red")
+predict(fit_cats, newdata = data.frame(Bwt = 3.2), interval = "prediction")
+
+# Save and plot predicted point and interval (green)
+pred <- predict(fit_cats, newdata = data.frame(Bwt = 3.2), interval = "prediction")
+arrows(3.2, pred[1, "lwr"], 3.2, pred[1, "upr"], col = "darkgreen", lwd = 2, code = 3)
+points(3.2, pred[1, "fit"], col = "darkgreen", pch = 19)
+```
+
+
+---
+
+## Hypothesis Test for $\mu_{Y|x^*}$
+
+Suppose $H_0: \mu_{Y|x^*} = \mu_0$.
+
+Then test statistic is:
+$$
+t = \frac{\widehat{Y} - \mu_0}{s_{\widehat{Y}}} \sim t_{n-2}
+$$
+
+Compute **p-value** based on the direction of $H_a$:
+
+- $H_a: \mu_{Y|x^*} > \mu_0$ ⟶ p-value = $P(T > t)$
+- $H_a: \mu_{Y|x^*} < \mu_0$ ⟶ p-value = $P(T < t)$
+- $H_a: \mu_{Y|x^*} \ne \mu_0$ ⟶ p-value = $2P(T > |t|)$
+
+---
+
+## Summary 🎯
+
+- $\hat{\beta}_0 + \hat{\beta}_1 x^*$ estimates $\mu_{Y| x^*}$
+- CI gives plausible values for the **mean** response
+- PI gives plausible values for a **future** individual response
+- Both intervals widen as $x^*$ moves away from $\bar{x}$
+- Use `predict()` in R with `interval = "confidence"` or `"prediction"`
+
+
