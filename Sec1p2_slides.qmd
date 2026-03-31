@@ -14,7 +14,7 @@ format:
     incremental: false
     transition: fade
     preview-links: auto
-    show-notes: true
+    show-notes: false
 title-slide-attributes:
   data-background-color: "#EA6820"
 from: markdown+emoji
