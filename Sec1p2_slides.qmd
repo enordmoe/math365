@@ -14,7 +14,7 @@ format:
     incremental: false
     transition: fade
     preview-links: auto
-    notes: true
+    show-notes: true
 title-slide-attributes:
   data-background-color: "#EA6820"
 from: markdown+emoji
@@ -26,50 +26,70 @@ editor:
     wrap: 72
 ---
 
-## Topics for Today
+## Opening Question
 
-::: incremental
--   Summarizing Data
--   Summarizing Categorical Data
--   Summarizing Quantitative Data
--   Practice exercises
+::: {.callout-note icon="false"}
+## Be the statistical consultant
+
+You recorded how long 50 customers waited at a coffee shop. How do you
+turn that list of numbers into something a manager could actually use?
 :::
 
-
-
-## Summarizing Data
-
-::: incremental
--   Describe the distribution or pattern of variability of a variable
--   Data cleaning/editing
--   Uncover patterns and/or anomalies
--   Compare two or more distributions
+::: notes
+Give 30 seconds of quiet thinking. Take 2--3 responses. Goal: surface
+the intuition that variable *type* constrains your choices. Don't define
+anything yet --- just let students articulate what they already sense.
 :::
 
-# Categorical Data {background-color="#FAD9C7"}
+## The GSS2018 Dataset {.smaller}
 
-## Data Set: General Social Survey 2018
+-   The **General Social Survey (GSS)**, begun in 1972, is a
+    long-running longitudinal survey on the attitudes, behaviors, and
+    demographics of US adults.
 
--   Begun in 1972, the **General Social Survey (GSS)** is a long-running
-    longitudinal survey conducted annually that gathers data on the
-    attitudes, behaviors, and demographics of US adults.
+-   Conducted by NORC at the University of Chicago; tracks politics,
+    religion, work, and social life.
 
--   The surveys are conducted by NORC at the University of Chicago and
-    track a wide range of topics including politics, religion, work, and
-    social life.
-
--   The dataset **GSS2018** from the R package **resampledata3**
-    contains a subset of the data from 2018.
-
-## The GSS2018 Dataset
-
-![](images/clipboard-1844474087.png){width="250"}
+-   **GSS2018** from the R package **resampledata3** contains a subset
+    of the 2018 data.
 
 ```{r}
-#install.packages("resampledata3")
 library(resampledata3)
 names(GSS2018)
 ```
+
+::: notes
+Ask: "Scan the variable names. Which ones are categorical? Which are
+quantitative? How can you tell?" Give pairs 60 seconds to sort a few
+variable names before moving on.
+:::
+
+## General Social Survey 2018: A Closer Look
+
+Use the `head()` and `View()` commands in R to get a closer look at the
+GSS data.
+
+::: notes
+Ask: Now what do you think about the variable types. Mostly categorical.
+:::
+
+## Describing Data Tasks
+
+:::{.incremental}
+-   Data cleaning/editing
+-   Describe the distribution or pattern of variability of a variable
+-   Uncover patterns and/or anomalies
+-   Compare two or more distributions  
+:::
+
+:::{.fragment}
+
+::: callout-note
+The methods for describing data depend on the **type** of variable (e.g., categorical vs quantitative).
+:::
+:::
+
+# Categorical Data {background-color="#FAD9C7"}
 
 ## Visualizing Categorical Data
 
@@ -86,12 +106,26 @@ Most common methods:
 -   Avoid pie charts- hard to estimate values
 :::
 
-## Describing the GSS2018 Data {.smaller}
 
-### Frequency Table
+## What Do You Expect?
+
+Look at the variable `GenderNow` in GSS2018.
+
+**Before we look at the data**:
+
+1.  How many response categories do you expect?  
+2.  Roughly what proportion would you guess for each?  
+
+::: notes
+Give 30--60 seconds. Discuss predictions.
+:::
+
+
+## Describing the GSS2018 Data   {style="font-size: 60%"}
+### Frequency Table  {.smaller}
 
 ```{r}
-summary(GSS2018$GenderNow) # first few values
+summary(GSS2018$GenderNow) # first few distinct values
 table(GSS2018$GenderNow)  # Frequency table (but not too pretty)
 ```
 
@@ -102,8 +136,11 @@ Note that the default `table()` command does not show NA values but
 `summary()` does.
 :::
 
-## Describing the GSS2018 Data {.smaller}
+::: notes
+Return to board predictions. Why do you think so many NAs? Why might proportions not be 50/50?
+:::
 
+## Describing the GSS2018 Data {style="font-size: 60%;"}
 ### Relative Frequency Table and Adding Totals
 
 ```{r}
@@ -116,6 +153,14 @@ addmargins(table(GSS2018$GenderNow))
 addmargins(prop.table(table(GSS2018$GenderNow)))
 
 ```
+
+:::{.fragment}
+::: {.callout-question}
+Why might we prefer proportions over counts when comparing 
+surveys?
+:::
+:::
+
 
 ## Gender Identity Bar Charts
 
@@ -139,12 +184,21 @@ barplot(100*prop.table(table(GSS2018$GenderNow)), ylab = "Percent")
 ```
 :::
 
+
+::: notes
+Before clicking through tabs, ask: "What changes between these three plots? What stays the same? Which would you use in a written report, and
+why?" 
+:::
+
 ## Extensions
 
 -   Colors
 -   Titles
 -   Axis Labels
--   Dealing with NAs
+
+::: notes
+Live coding moment: you add a title and color to the bar chart with them watching.  Then try demo("colors")
+:::
 
 # Quantitative data {background-color="#FAD9C7"}
 
@@ -178,6 +232,20 @@ Note that some of these vary across a wide range and are treated as
 continuous in practice.
 :::
 
+## A built-in R dataset
+
+**mtcars** contains Motor Trend published data on 32 automobiles
+(1973-74 models).
+
+```{r}
+mtcars
+```
+
+
+::: notes
+Nice to have some built in data to try things out.
+:::
+
 ## Summarizing Quantitative Data
 
 Visual displays of quantitative data depict
@@ -192,14 +260,6 @@ Visual displays of quantitative data depict
 
 -   Outliers
 
-## A built-in R dataset
-
-**mtcars** contains Motor Trend published data on 32 automobiles
-(1973-74 models).
-
-```{r}
-mtcars
-```
 
 ## Dotplots
 
@@ -218,6 +278,10 @@ stripchart(mtcars$mpg, method = "stack", xlab = "Mileage")
 ```
 :::
 
+::: notes
+What's different about these variables? Use `pch = 20` if you really want dots instead of squares. Or try `cex =.25` for larger samples. 
+:::
+
 ## Dotplots Summary
 
 ::: incremental
@@ -225,8 +289,7 @@ stripchart(mtcars$mpg, method = "stack", xlab = "Mileage")
 
 -   Good, summary for small datasets with discrete data
 
--   Continuous data results in overlapping points and/or grouping of
-    observations
+-   Continuous data results in overlapping points and/or grouping of observations
 
 -   Many ways to do this in R but none are great
 :::
@@ -254,19 +317,46 @@ hist(mtcars$mpg, xlab = "Mileage")
 ```
 :::
 
-## Histograms Using Density
+::: notes
+Show use of `breaks=` for histogram
+:::
 
--   Technically, histograms are carefully designed to represent relative
-    frequency by area plotting density on the vertical scale so that the
-    total area in the rectangles sums to 1.
--   Define:
+
+## {.smaller}
+### Why Density? The Core Idea 
+
+::: {.callout-warning}
+When class widths are **unequal**, plotting frequency in a histogram is misleading.
+:::
+
+Instead:
 
 $$
-\text{Rectangle Height}=\frac{\text{Relative frequency}}{\text{Class width}}
+\text{Rectangle Height} = \frac{\text{Relative frequency}}{\text{Class width}}
 $$
 
--   This avoids misrepresenting the shape of the distribution,
-    especially when using unequal widths.
+This ensures: **area = relative frequency** for every rectangle.
+
+## {.smaller}
+### Density: Worked Example
+
+**Worked example:** Suppose 7 of 32 cars fall in the 24--35 mpg bin
+(width = 9).
+
+$$
+\mbox{Density} =\frac{\mbox{Relative Frequency}}{\mbox{Class width}} = \frac{7/32}{9} = \frac{0.21875}{9} = 0.024
+$$
+
+So the  rectangle over 24--35 with width 9 and height 0.024 has area 0.21875 representing the relative frequency for this interval.
+
+::: notes
+Walk through this before showing R output. Then ask: "What
+would happen to the height if we doubled the bin width but kept the same 9 cars?" Height halves, area stays the same --- that is the key insight.
+Make sure students see why this matters before seeing the plots.
+:::
+
+
+
 
 ## Histograms: Density as Height {.smaller}
 
@@ -296,7 +386,31 @@ hist(mtcars$mpg, xlab = "Mileage", breaks = c(10, 12, 14, 16, 18, 20, 22, 24, 35
 
 Shapes to look out for when working with distributions of quantitative
 variables:\
-![](images/clipboard-2640103481.png)\
+![](images/clipboard-2640103481.png)
+
+## 
+### A Surprising Shape
+
+```{r}
+hist(faithful$waiting, xlab = "Waiting Time (min)",
+     main = "Old Faithful: Time Between Eruptions")
+```
+
+:::fragment
+
+:::{.callout-question}
+What shape is this? What might explain it?
+:::
+
+:::
+
+::: notes
+Bimodal! Ask students to speculate about the mechanism before
+explaining. Answer: two types of eruptions (short and long cycles)
+produce two clusters of waiting times. The result is more memorable
+if students have wrestled with it. 
+:::
+
 
 ## Summary {.smaller}
 
@@ -309,10 +423,8 @@ variables:\
     insights, but careful choices in formatting and scaling are
     essential for accurate interpretation.
 
-::: aside
-Note: While **stem-and-leaf plots** can show detailed distributional shape,
-they are rarely used in practice and often misunderstood — we'll focus
-on more accessible and widely-used visualizations.
+::: notes
+Exit question: "What's the one thing from today you'd want a classmate who missed class to know?" Quick informal close that doubles as a comprehension check.
 :::
 
 # Practice Exercises {background-color="#FAD9C7"}
@@ -338,14 +450,11 @@ on more accessible and widely-used visualizations.
 
 ## More practice: **faithful** {.smaller}
 
-1.  Type **?faithful** at the console to learn about the built-in
+1.  Type **?faithful** at the console to learn more about the built-in
     **faithful** datset
-2.  Use the graphs from this section to explore the varibles *eruptions*
-    and *waiting*.
+2.  Use the graphs from this section to explore the variable *eruptions* and *waiting*.
 3.  How would you describe the shapes of the distributions?
 4.  Which graphs are most useful for this data?
-5.  You can get a smoothed version of a histogram called a density plot
-    using the basic command `plot(density(df$var))` where `df`
+5.  You can get a smoothed version of a histogram called a density plot  using the basic command `plot(density(df$var))` where `df`
     represents the data frame name and `var` is the variable. Try this
-    with either variable. (Try changing `adjust` if you're
-    adventurous.)
+    with either variable. (Try changing `adjust` if you're adventurous.)

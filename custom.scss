@@ -44,3 +44,13 @@
   font-family: var(--bs-body-font-family, sans-serif) !important;
 }
 
+.callout-question {
+  border-left: 5px solid #6c757d;
+  background-color: #f8f9fa;
+  padding: 1em;
+}
+.callout-question::before {
+  content: "❓ Question";
+  font-weight: bold;
+  display: block;
+}
