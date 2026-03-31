@@ -392,6 +392,7 @@ variables:\
 ### A Surprising Shape
 
 ```{r}
+#| eval: false
 hist(faithful$waiting, xlab = "Waiting Time (min)",
      main = "Old Faithful: Time Between Eruptions")
 ```
