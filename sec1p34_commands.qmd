@@ -78,7 +78,12 @@ f <- fivenum(x)
 f
 ```
 
-This returns: - $f_1$ = minimum - $f_2$ = lower hinge (approx. 1st quartile) - $f_3$ = median - $f_4$ = upper hinge (approx. 3rd quartile) - $f_5$ = maximum
+This returns: 
+- $f_1$ = minimum   
+- $f_2$ = lower hinge (approx. 1st quartile)   
+- $f_3$ = median   
+- $f_4$ = upper hinge (approx. 3rd quartile)  
+- $f_5$ = maximum
 
 ### Hinges and Fourth Spread
 
