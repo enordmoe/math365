@@ -16,71 +16,73 @@ format:
 
 These base R functions provide quick ways to summarize numeric data. We'll use `mtcars$mpg` (miles per gallon) as our example:
 
-```r
+``` r
 x <- mtcars$mpg
 ```
 
 ### `mean()` – Arithmetic Average
-```r
+
+``` r
 mean(x)  # Average value
 ```
 
 ### `sd()` – Standard Deviation
-```r
+
+``` r
 sd(x)    # Measure of typical distance from the mean
 ```
 
 ### `range()` – Minimum and Maximum
-```r
+
+``` r
 range(x)           # Returns a vector: c(min, max)
 diff(range(x))     # Computes the range as a single number
 ```
 
 ### `summary()` – Five-Number Summary + Mean
-```r
+
+``` r
 summary(x)  # Min, 1st Qu., Median, Mean, 3rd Qu., Max
 ```
 
 ### `fivenum()` – Tukey's Five-Number Summary
-```r
+
+``` r
 fivenum(x)  # Min, Lower Hinge, Median, Upper Hinge, Max
 ```
 
 ### `mean(..., trim = ...)` – Trimmed Mean
-```r
+
+``` r
 mean(x, trim = 0.1)  # Trimmed mean after removing 10% from each end
 ```
-- Useful when you want a **robust average** that’s less affected by outliers
-- Common choices: 5%, 10%, or 20% trimming depending on context
+
+-   Useful when you want a **robust average** that’s less affected by outliers
+-   Common choices: 5%, 10%, or 20% trimming depending on context
 
 ## Visual Summary: `boxplot()`
 
-```r
+``` r
 boxplot(x, main = "Boxplot of mtcars$mpg")
 ```
 
-- The box shows the **hinges** (Tukey's lower and upper fourths) and the **median**.
-- Whiskers extend to min and max (or only to non-outliers, depending on method).
+-   The box shows the **hinges** (Tukey's lower and upper fourths) and the **median**.
+-   Whiskers extend to min and max (or only to non-outliers, depending on method).
 
 ## Computing the Hinges and Fourth Spread
 
 The output from `fivenum()` gives:
 
-```r
+``` r
 f <- fivenum(x)
 f
 ```
 
-This returns:
-- $f_1$ = minimum
-- $f_2$ = lower hinge (approx. 1st quartile)
-- $f_3$ = median
-- $f_4$ = upper hinge (approx. 3rd quartile)
-- $f_5$ = maximum
+This returns: - $f_1$ = minimum - $f_2$ = lower hinge (approx. 1st quartile) - $f_3$ = median - $f_4$ = upper hinge (approx. 3rd quartile) - $f_5$ = maximum
 
 ### Hinges and Fourth Spread
 
-```r
+``` r
 lower_hinge <- f[2]  # Lower fourth / hinge
 upper_hinge <- f[4]  # Upper fourth / hinge
 
@@ -90,11 +92,93 @@ fourth_spread
 
 This value represents the **spread of the middle half** of the data and is robust to outliers.
 
----
 
-## Try It Yourself 👉
+------------------------------------------------------------------------
 
-- Replace `x` with another variable like `mtcars$hp`.
-- Compare `fivenum()` vs. `summary()` — how do the hinges differ from quartiles?
-- Try a trimmed mean: `mean(x, trim = 0.1)`.
-- Compute `1.5 * fourth_spread` to identify mild outliers using the **Tukey rule**.
+
+## Comparing Groups
+
+These tools summarize or display a numeric variable broken down by a
+categorical grouping variable. We'll use the cereal dataset with
+`Sodium` as the numeric variable and `Cereal` (values `"G"`,
+`"K"`, `"P"`) as the grouping variable.
+
+``` r
+cereal_data <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-21.csv")
+```
+
+### `tapply()` – One Statistic per Group
+
+``` r
+tapply(cereal_data$Sodium, cereal_data$Cereal, mean)
+tapply(cereal_data$Sodium, cereal_data$Cereal, sd)
+tapply(cereal_data$Sodium, cereal_data$Cereal, median)
+```
+
+-   Returns a compact named vector — one value per group
+-   Works with any function: `mean`, `sd`, `median`, `fivenum`, etc.
+
+### `by()` – Full Summary per Group
+
+``` r
+by(cereal_data$Sodium, cereal_data$Cereal, summary)
+```
+
+-   Prints a readable six-number summary for each group separately
+-   Good for a quick look at all groups at once
+
+### `aggregate()` – Summary Table as a Data Frame
+
+``` r
+aggregate(Sodium ~ Cereal, data = cereal_data,
+          FUN = function(x) c(mean = mean(x), sd = sd(x)))
+```
+
+-   Returns results as a  data frame;  easy to read and export
+-   Use the formula interface `y ~ group` to specify response and
+    grouping variable
+
+### Side-by-Side Boxplots
+
+``` r
+boxplot(Sodium ~ Cereal, data = cereal_data,
+        main = "Sodium Content by Manufacturer",
+        xlab = "Manufacturer", ylab = "Sodium (mg)",
+        names = c("General Mills", "Kellogg", "Post"),
+        col = c("skyblue", "forestgreen", "tomato"))
+```
+
+-   The formula `Sodium ~ Cereal` tells R to plot `Sodium` separately
+    for each level of `Cereal`
+-   `names` overrides the axis labels so `"G"`, `"K"`, `"P"` display
+    as full manufacturer names
+
+### Side-by-Side Histograms
+
+``` r
+op <- par(no.readonly = TRUE)
+par(mfrow = c(3, 1), mar = c(4, 4, 2, 1))
+
+# Find the overall range of the Sodium variable
+xlims <- range(cereal_data$Sodium)
+
+hist(cereal_data$Sodium[cereal_data$Cereal == "G"],
+     main = "General Mills", xlab = "Sodium (mg)",
+     xlim = xlims, col = "skyblue")
+hist(cereal_data$Sodium[cereal_data$Cereal == "K"],
+     main = "Kellogg", xlab = "Sodium (mg)",
+     xlim = xlims, col = "forestgreen")
+hist(cereal_data$Sodium[cereal_data$Cereal == "P"],
+     main = "Post", xlab = "Sodium (mg)",
+     xlim = xlims, col = "tomato")
+
+par(op)
+```
+
+-   `mfrow = c(3, 1)` stacks three plots vertically
+-   Using a common `xlims` makes the three panels directly comparable
+-   `par(op)` restores the original graphics settings afterward
+
+
+
+
