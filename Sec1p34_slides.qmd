@@ -65,8 +65,7 @@ $$
 - **The Challenge**: Stand on one foot, eyes closed — no hopping or pecking!
 - **Measurement**: Time (in seconds, to the nearest tenth) each student
   was able to balance.
-- **Purpose**: Use our own class data to explore measures of center,
-  spread, and distributional shape.
+- **Purpose**: Use our own class data to explore measures of center, spread, and shape.
 
 ::: notes
 Students collected this data just before class via a Google Form. This
@@ -74,6 +73,43 @@ gives them immediate ownership of the dataset and makes summary
 statistics feel concrete and personal.
 :::
 
+## Importing the Standing Time Data {.smaller}
+
+Use R to read the data into a dataset called **standing_times**.
+```{r}
+standing_times <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/standing_times.csv")
+```
+
+## R Functions for Today {style="font-size: 50%"}
+
+These are the key functions we'll use. Syntax details and examples are
+on Moodle and [here](https://enordmoe.github.io/math365/sec1p34_commands).
+
+| Function | What it does |
+|---|---|
+| `mean(x)` | Arithmetic mean |
+| `mean(x, trim = 0.1)` | Trimmed mean (10% each end) |
+| `median(x)` | Median |
+| `sd(x)` | Standard deviation |
+| `diff(range(x))` | Range as a single number |
+| `summary(x)` | Six-number summary including mean for all variables or a single variable |
+| `fivenum(x)` | Tukey's five-number summary: min, **lower hinge**, median, **upper hinge**, max |
+| `boxplot(x)` | Boxplot (whiskers and outliers based on hinges) |
+| `tapply(y, grp, mean)` | Statistic by group |
+| `by(y, grp, summary)` | Full summary by group |
+| `boxplot(y ~ grp)` | Side-by-side boxplots |
+
+::: {.callout-note}
+`fivenum()` uses Tukey's **hinges** — what Devore calls the lower and
+upper fourths. These may differ slightly from the quartiles reported by
+`summary()`.
+:::
+
+::: notes
+Worth pausing here briefly: students often assume summary() and fivenum()
+give the same middle values. The callout primes them to notice the
+difference when they run both on the standing time data.
+:::
 
 ## Data Analysis Tasks
 
@@ -144,7 +180,7 @@ The **trimmed mean** removes a fixed proportion of the smallest and
 largest values from the data, then computes the mean of the remaining
 values.
 
--   For example, the 10% trimmed mean discards the lowest 10% and
+-   For example, the 10% trimmed mean discards **both** the lowest 10% and
     highest 10% of observations before averaging.
 :::
 
@@ -169,6 +205,9 @@ $$\text{Range} = \max(x_i) - \min(x_i)$$
 
 ## Standard Deviation
 
+The standard deviation $s$ measures the ** *typical distance* ** from the mean.
+
+::: fragment
 ::: {.callout-note title="Definition"}
 The **standard deviation** $s$ of the $n$ values $x_1, x_2, \ldots, x_n$
 is given by: 
@@ -178,17 +217,27 @@ $$
 
 The **sample variance** is $s^2$.
 :::
+:::
 
-## Properties of the Standard Deviation $s$
+
+
+## Properties of the Standard Deviation $s$ {.smaller}
 
 ::: incremental
--   Measures *typical distance* from the mean
 -   Like $\bar{x}$, not resistant to outliers
 -   SD is 0 if all values are equal
 -   Units match those of the original data
 -   Denominator is $n-1$ rather than $n$ to obtain a better estimate of
     the population value $\sigma^2$.
 -   The standard deviation is most useful when working with Normal data.
+:::
+
+::: fragment
+::: {.callout-tip icon="👉"}
+**Try this:** Use the [Rossman-Chance
+applet](https://www.rossmanchance.com/applets/2021/descstats/Dotplot.htm)
+to explore the properties of $s$.
+:::
 :::
 
 ## Hinges and Fourths
@@ -230,7 +279,7 @@ The fourth spread $f_s$ is:
     -   Vertical line at the median $\tilde{x}$
     -   Whiskers extending to min and max
 
-## The Modified Boxplot
+## The Modified Boxplot 
 
 -   Whiskers extend only to the **most extreme non-outliers**
 -   **Outliers** are plotted separately
@@ -240,6 +289,38 @@ The fourth spread $f_s$ is:
     -   **Extreme outliers** (more than $3f_s$ away from the nearest
         hinge)
 
+## {.smaller}
+### The Modified Boxplot
+
+-   Whiskers extend only to the **most extreme non-outliers**
+-   **Outliers** are plotted separately as individual points
+
+#### Outlier fences
+
+| | Lower fence | Upper fence |
+|---|---|---|
+| **Mild** | $h_l - 1.5f_s$ | $h_u + 1.5f_s$ |
+| **Extreme** | $h_l - 3f_s$ | $h_u + 3f_s$ |
+
+-   **Mild outlier**: falls outside the $1.5f_s$ fences but inside the
+    $3f_s$ fences
+-   **Extreme outlier**: falls outside the $3f_s$ fences
+-   Note: Unlike some software, Base R flags both mild and extreme outliers the same.
+    
+
+## Exploring Standing Times {.smaller}
+
+Work through these together in R:
+
+1. Start with `summary()` and `fivenum()`. What do you notice?
+2. Use R to create a boxplot of times. Are there any outliers flagged?
+3. How does the mean compare to the median? What does that suggest about the shape?
+4. Compute `1.5 * fourth_spread`. Which observations, if any, fall outside the fences?
+
+::: {.callout-tip}
+**Hint:** `f <- fivenum(standing_times$Time)` then `fourth_spread <- f[4] - f[2]`
+:::
+   
 # More Options for Subgroup Analysis {background-color="#FAD9C7"}
 
 ## Data Set: Breakfast Cereal Sodium {.smaller}
@@ -255,13 +336,12 @@ The fourth spread $f_s$ is:
   [nutritionresource.com](https://www.nutritionresource.com/nutrition-facts/)
 
 ::: notes
-This is a natural dataset for comparing groups: three manufacturers give
-us three subgroups to summarize side by side. We'll use it to motivate overall analysis and then with 
-both measures of center/spread and tools like side-by-side boxplots.
+Transition: now that we have tools for summarizing a single distribution,
+we can ask how those tools extend to comparing groups.
 :::
 
 
-## Importing the Data
+## Importing the Cereal  Data {.smaller}
 
 Use R to read the data into a dataset called **cereal_data**.
 
@@ -270,22 +350,19 @@ cereal_data <- read.csv("http://people.kzoo.edu/enordmoe/math365/data/exp01-21.c
 ```
 
 
-## Options for Comparing Statistical Summaries by Subgroup in Base R {.smaller}
+## Comparing Sodium Summaries by Manufacturer {.smaller}
 
-#### Summarizing `mpg` by `cyl` in `mtcars`
-
--   Base R offers several concise tools to compute and compare summary
-    statistics across groups
+-   Base R offers provides several ways to compute and compare summary statistics across groups defined by an explanatory variable:  
 
 ```{r, eval = FALSE}
-# Means by cylinder group
-tapply(mtcars$mpg, mtcars$cyl, mean)
+# Mean sodium by manufacturer
+tapply(cereal_data$Sodium, cereal_data$Cereal, mean)
 
-# Five-number summaries by group
-by(mtcars$mpg, mtcars$cyl, summary)
+# Five-number summaries by manufacturer
+by(cereal_data$Sodium, cereal_data$Cereal, summary)
 
-# Mean and SD per group as a data frame
-aggregate(mpg ~ cyl, mtcars, function(x) c(mean = mean(x), sd = sd(x)))
+# Mean and SD per manufacturer as a data frame
+aggregate(Sodium ~ Cereal, cereal_data, function(x) c(mean = mean(x), sd = sd(x)))
 ```
 
 ::: fragment
@@ -296,57 +373,77 @@ aggregate(mpg ~ cyl, mtcars, function(x) c(mean = mean(x), sd = sd(x)))
     displaying multiple summaries together
 :::
 
-## Side-by-side histograms: MPG by Cylinder {.smaller}
+## Side-by-Side Boxplots: Sodium by Manufacturer {.smaller}
 
 ::: panel-tabset
 ### Plot
-
 ```{r, echo = FALSE}
-# Save original graphical parameters
-op <- par(no.readonly = TRUE)
+boxplot(Sodium ~ Cereal, data = cereal_data,
+        main = "Sodium Content by Manufacturer",
+        xlab = "Manufacturer", ylab = "Sodium (mg)",
+        names = c("General Mills", "Kellogg", "Post"),
+        col = c("skyblue", "forestgreen", "tomato"),
+        horizontal = TRUE)
+```
 
-# Layout: 3 rows, 1 column
+### Code
+``` r
+boxplot(Sodium ~ Cereal, data = cereal_data,
+        main = "Sodium Content by Manufacturer",
+        xlab = "Manufacturer", ylab = "Sodium (mg)",
+        names = c("General Mills", "Kellogg", "Post"),
+        col = c("skyblue", "forestgreen", "tomato"),
+        horizontal = TRUE)
+```
+:::
+
+## Side-by-Side Histograms: Sodium by Manufacturer {.smaller}
+
+::: panel-tabset
+### Plot
+```{r, echo = FALSE}
+op <- par(no.readonly = TRUE)
 par(mfrow = c(3, 1), mar = c(4, 4, 2, 1))
 
-# Common x-axis limits
-xlims <- range(mtcars$mpg)
+xlims <- range(cereal_data$Sodium)
 
-# Histograms for each cylinder group
-hist(mtcars$mpg[mtcars$cyl == 4], main = "4 cyl", xlab = "MPG", 
+hist(cereal_data$Sodium[cereal_data$Cereal == "G"],
+     main = "General Mills", xlab = "Sodium (mg)",
      xlim = xlims, col = "skyblue")
-hist(mtcars$mpg[mtcars$cyl == 6], main = "6 cyl", xlab = "MPG", 
+hist(cereal_data$Sodium[cereal_data$Cereal == "K"],
+     main = "Kellogg", xlab = "Sodium (mg)",
      xlim = xlims, col = "forestgreen")
-hist(mtcars$mpg[mtcars$cyl == 8], main = "8 cyl", xlab = "MPG", 
+hist(cereal_data$Sodium[cereal_data$Cereal == "P"],
+     main = "Post", xlab = "Sodium (mg)",
      xlim = xlims, col = "tomato")
 
-# Restore original settings
 par(op)
 ```
 
 ### Code
-
 ``` r
-# Save original graphical parameters
 op <- par(no.readonly = TRUE)
-
-# Layout: 3 rows, 1 column
 par(mfrow = c(3, 1), mar = c(4, 4, 2, 1))
 
-# Common x-axis limits
-xlims <- range(mtcars$mpg)
+xlims <- range(cereal_data$Sodium)
 
-# Histograms for each cylinder group
-hist(mtcars$mpg[mtcars$cyl == 4], main = "4 cyl", xlab = "MPG", 
+hist(cereal_data$Sodium[cereal_data$Cereal == "G"],
+     main = "General Mills", xlab = "Sodium (mg)",
      xlim = xlims, col = "skyblue")
-hist(mtcars$mpg[mtcars$cyl == 6], main = "6 cyl", xlab = "MPG", 
+hist(cereal_data$Sodium[cereal_data$Cereal == "K"],
+     main = "Kellogg", xlab = "Sodium (mg)",
      xlim = xlims, col = "forestgreen")
-hist(mtcars$mpg[mtcars$cyl == 8], main = "8 cyl", xlab = "MPG", 
+hist(cereal_data$Sodium[cereal_data$Cereal == "P"],
+     main = "Post", xlab = "Sodium (mg)",
      xlim = xlims, col = "tomato")
 
-# Restore original settings
 par(op)
+
 ```
 :::
+
+
+
 
 # Practice Exercises {background-color="#E3F2FD"}
 
