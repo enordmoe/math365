@@ -205,7 +205,7 @@ $$\text{Range} = \max(x_i) - \min(x_i)$$
 
 ## Standard Deviation
 
-The standard deviation $s$ measures the ** *typical distance* ** from the mean.
+The standard deviation $s$ measures the "*typical distance*" from the mean.
 
 ::: fragment
 ::: {.callout-note title="Definition"}
