@@ -65,8 +65,8 @@ statistic varies across all possible samples.
 Suppose we're interested in estimating the **average number of years**
 faculty have served in the **Math Department** at Kalamazoo College.
 
--   Think about how to describe how a **statistic** (like the sample
-    mean) varies across different samples\
+-   Think about how to describe the way a **statistic** (like the sample
+    mean) varies across different samples.
 
 ------------------------------------------------------------------------
 
@@ -95,6 +95,24 @@ Let:
     coffee weekly?
 :::
 
+##  {.smaller}
+### K Coffee Habits: Tabular Sampling Distribution
+
+```{r}
+x <- 0:10
+data.frame(x = x, p_hat = x/10, prob = dbinom(x, 10, 0.30))
+```  
+
+##  {.smaller}
+### K Coffee Habits: Graphical Sampling Distribution  
+
+```{r}
+barplot(dbinom(x, 10, 0.30), names.arg = x/10, col = "orange")
+```
+
+
+
+
 ## 🎲 Simulation and Sampling Distributions
 
 *  When a derivation via probability rules is very difficult or even impossible,  we can use **simulation** to approximate the **sampling distribution** of a statistic.  
@@ -105,15 +123,16 @@ Let:
 # Simulation Investigation: Grubbs' Test for Outliers
 
 
-## 📝 Summary: Statistics and Their Distributions {.smaller}
+## {.smaller}
+### 📝 Summary: Statistics and Their Distributions
 
 - A **statistic** is a quantity computed from sample data — it is a random variable  
 - The **sampling distribution** describes how a statistic varies across all possible samples
 
 - We can explore sampling distributions:
-  - 🔢 By enumeration (all possible samples)
-  - 🧮 Analytically (using probability)
-  - 🎲 Through simulation (approximating variability empirically)
+  - By enumeration (all possible samples)
+  - Analytically (using probability)
+  - Through simulation (approximating variability empirically)
 
 
 > Understanding how statistics behave across samples is **fundamental to inference.**
