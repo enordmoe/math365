@@ -26,14 +26,20 @@ editor:
     wrap: 72
 ---
 
-## Topics for Today
+## :thinking: Warm-Up: What Would You Expect?
+
+A college tracks students' daily step counts for a fitness study. The distribution of steps is **right-skewed** with $\mu = 8{,}000$ steps and $\sigma = 3{,}000$. 
 
 ::: incremental
--   Properties of the Sample Mean
--   Exact distributions when data are normal
--   Approximate distributions using the CLT
--   Examples and applications :pencil2:
+- **You sample $n = 5$ students.** Sketch the shape you'd expect for $\overline{X}$.
+- **You sample $n = 50$ students.** Does your answer change?
+- What if the original distribution were symmetric?
 :::
+
+::: notes
+Give students 30 seconds to commit to an answer before revealing the next bullet. The goal is to surface the intuition that sample size matters for the shape of the sampling distribution — even before the CLT is stated. Revisit these predictions after the CLT slide.
+:::
+
 
 ## Patterns in Randomness
 
@@ -95,9 +101,8 @@ If the $X_i$ are i.i.d. from a normal distribution, then for any $n$:
 -   We can compute **exact** probabilities for $\overline{X}$ or $T_0$
 -   Even **small samples** have exact normal sampling distributions
 
-------------------------------------------------------------------------
 
-## :tulip: Example: Hours Spent Outside
+## :tulip: Example: Hours Spent Outside  {.smaller}
 
 Now that it’s spring, suppose the number of hours K students spend
 outside per day is normally distributed with:
@@ -106,11 +111,20 @@ outside per day is normally distributed with:
 
 A random sample of $n = 16$ students is selected
 
-::: incremental
 -   What is the probability the sample mean exceeds 3 hours?
 
 -   Only 1 percent of samples would produce a mean $\bar X$ exceeding
     what value?
+
+::: {.callout-tip title="R Refresher: Computing Normal Probabilities"}
+To find $P(X \leq x)$ when $X \sim N(\mu, \sigma)$:
+```r
+pnorm(x, mean = mu, sd = sigma)          # P(X ≤ x)
+1 - pnorm(x, mean = mu, sd = sigma)      # P(X > x)
+qnorm(p, mean = mu, sd = sigma)          # x such that P(X ≤ x) = p
+```
+
+For $\overline{X} \sim N\!\left(\mu,\, \sigma/\sqrt{n}\right)$, plug in `sd = sigma/sqrt(n)`.
 :::
 
 ::: notes
