@@ -102,21 +102,19 @@ If not, the bias is: $\text{Bias}(\hat{\theta}) =E(\hat{\theta}-\theta)$
 
 ## :trophy: Hall of Fame of Unbiased Estimators
 
--   Sample mean $\bar{X}$ is an unbiased estimator of $\mu$ from a
+-   The sample mean $\bar{X}$ is an unbiased estimator of $\mu$ from a
     normal distribution.
 
--   $\hat{p} = X/n$ is an unbiased estimator of a binomial probability
+-   The sample proportion $\hat{p} = X/n$ is an unbiased estimator of a binomial probability
     $p$.
 
--   
-
-    ## Sample variance $S^2$ is an unbiased estimator of $\sigma^2$.
+-   The sample variance $S^2$ is an unbiased estimator of $\sigma^2$.
 
 ##  {.smaller}
-
 ### Sample Variance: A Setup for Unbiasedness :abacus:
 
-We define the **sample variance** as: $$
+We define the **sample variance** as: 
+$$
 S^2 = \frac{1}{n - 1} \sum_{i=1}^n (X_i - \bar{X})^2
 $$
 
@@ -124,7 +122,8 @@ $$
 -   The denominator is $n - 1$ instead of $n$ (Why? we'll find out)
 
 ::: fragment
-We’ll show that: $$
+We’ll show that: 
+$$
 E(S^2) = \sigma^2
 $$ So $S^2$ is an **unbiased estimator** of population variance!
 
