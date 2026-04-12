@@ -28,72 +28,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    html { -webkit-text-size-adjust: 100%; }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="Sec6p1_slides_files/libs/revealjs/dist/theme/quarto-1403a35a716101f0f742c54983e598c9.css">
   <link href="Sec6p1_slides_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -214,7 +148,7 @@ MATH 365
 <li>Mean Squared Error (MSE) <span class="emoji" data-emoji="bulb">💡</span></li>
 <li>Unbiasedness</li>
 <li>MVUEs</li>
-<li>Standard errors and bootstrap standard errors</li>
+<li>Standard errors</li>
 </ul>
 </section>
 <section id="point-estimators" class="slide level2">
@@ -246,36 +180,8 @@ MATH 365
 <aside><div>
 <p>Source:<a href="https://manoa.hawaii.edu/exploringourfluidearth/physical/world-ocean/map-distortion/practices-science-precision-vs-accuracy#:~:text=Accuracy%20refers%20to%20how%20close,Precision%20is%20independent%20of%20accuracy">https://manoa.hawaii.edu/exploringourfluidearth/</a>.</p>
 </div></aside></section>
-<section id="mean-squared-error-mse" class="slide level2 smaller">
-<h2>Mean Squared Error (MSE)</h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p><strong>Definition.</strong> The <strong>Mean Squared Error</strong> of an estimator <span class="math inline">\(\hat{\theta}\)</span> is:<br>
-<span class="math display">\[  
-\text{MSE}(\hat{\theta}) = E[(\hat{\theta} - \theta)^2]  
-\]</span></p>
-</div>
-</div>
-</div>
-<div class="fragment">
-<p>We can decompose the MSE:</p>
-<p><span class="math display">\[
-\text{MSE} = \underbrace{\text{Var}(\hat{\theta})}_{\text{spread}} + \underbrace{[\text{Bias}(\hat{\theta})]^2}_{\text{squared error of bias}}
-\]</span></p>
-</div>
-<div class="fragment">
-<p><span class="emoji" data-emoji="speech_balloon">💬</span> <em>Why does this decomposition matter when comparing estimators?</em></p>
-</div>
-</section>
-<section id="unbiased-estimators" class="slide level2">
-<h2>Unbiased Estimators <span class="emoji" data-emoji="dart">🎯</span></h2>
+<section id="bias-and-unbiased-estimators" class="slide level2">
+<h2>Bias and Unbiased Estimators <span class="emoji" data-emoji="dart">🎯</span></h2>
 <div class="callout callout-important callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -303,7 +209,49 @@ E(\hat{\theta}) = \theta
 <li><p>The sample variance <span class="math inline">\(S^2\)</span> is an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>.</p></li>
 </ul>
 </section>
-<section id="section" class="slide level2 smaller">
+<section id="section" class="slide level2" style="font-size: 50%">
+<h2></h2>
+<h3 id="mean-squared-error-mse">Mean Squared Error (MSE)</h3>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Definition.</strong> The <strong>Mean Squared Error</strong> of an estimator <span class="math inline">\(\hat{\theta}\)</span> is: <span class="math display">\[
+\text{MSE}(\hat{\theta}) = E[(\hat{\theta} - \theta)^2]
+\]</span></p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Add and subtract <span class="math inline">\(E(\hat{\theta})\)</span> inside the square: <span class="math display">\[
+(\hat{\theta} - \theta)^2 = \bigl[(\hat{\theta} - E(\hat{\theta})) + (E(\hat{\theta}) - \theta)\bigr]^2
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Expand: <span class="math display">\[
+= (\hat{\theta} - E(\hat{\theta}))^2 + 2(\hat{\theta} - E(\hat{\theta}))(E(\hat{\theta}) - \theta) + (E(\hat{\theta}) - \theta)^2
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Take expectations. The cross term vanishes since <span class="math inline">\(E[\hat{\theta} - E(\hat{\theta})] = 0\)</span>: <span class="math display">\[
+\text{MSE}(\hat{\theta}) = E\bigl[(\hat{\theta} - E(\hat{\theta}))^2\bigr] + (E(\hat{\theta}) - \theta)^2
+\]</span></p>
+</div>
+<div class="fragment">
+<p>Recognize the pieces: <span class="math display">\[
+\text{MSE}(\hat{\theta}) = \text{Var}(\hat{\theta}) + [\text{Bias}(\hat{\theta})]^2
+\]</span></p>
+</div>
+<div class="fragment">
+<p>So a <strong>biased</strong> estimator can have <em>lower</em> MSE than an <strong>unbiased</strong> one — if its variance is small enough.</p>
+</div>
+</section>
+<section id="section-1" class="slide level2 smaller">
 <h2></h2>
 <h3 id="sample-variance-a-setup-for-unbiasedness">Sample Variance: A Setup for Unbiasedness <span class="emoji" data-emoji="abacus">🧮</span></h3>
 <p>We define the <strong>sample variance</strong> as: <span class="math display">\[
@@ -338,9 +286,9 @@ An unbiased estimator with the <strong>lowest variance</strong> among all unbias
 </div>
 </section>
 <section id="theorem-mvue-for-the-mean" class="slide level2">
-<h2>Theorem (<span class="emoji" data-emoji="gem">💎</span> MVUE for the Mean)</h2>
-<p>Let <span class="math inline">\(X_1, \dots, X_n \sim \text{iid}(\mu, \sigma^2)\)</span>.<br>
-Then <span class="math inline">\(\hat{\theta} = \bar{X}\)</span> is the <strong>MVUE</strong> of <span class="math inline">\(\mu\)</span>.</p>
+<h2>Theorem (MVUE for the Mean)</h2>
+<p>Let <span class="math inline">\(X_1, \dots, X_n \stackrel{\text{iid}}{\sim} N(\mu, \sigma^2)\)</span>.&nbsp;</p>
+<p>Then <span class="math inline">\(\hat{\theta} = \bar{X}\)</span> is the <strong>MVUE</strong> of <span class="math inline">\(\mu\)</span>.</p>
 <div class="fragment">
 <p><span class="emoji" data-emoji="eight_spoked_asterisk">✳️</span> <em>Minimum variance estimators do more with less!</em></p>
 </div>
@@ -369,120 +317,6 @@ Then <span class="math inline">\(\hat{\theta} = \bar{X}\)</span> is the <strong>
 <p><span class="emoji" data-emoji="hammer_and_wrench">🛠️</span> Used to construct confidence intervals and assess estimator precision.</p>
 </div>
 </section>
-<section id="parametric-bootstrap" class="slide level2">
-<h2>Parametric Bootstrap <span class="emoji" data-emoji="repeat">🔁</span></h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p><strong>Motivation.</strong><br>
-What if we want to estimate the standard error of an estimator, but:</p>
-<ul>
-<li>There’s no closed-form formula for the variance?</li>
-<li>The sampling distribution is too complex to handle analytically?</li>
-</ul>
-<div class="fragment">
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> <strong>Enter the Bootstrap!</strong> It uses the <strong>plug-in principle</strong>:</p>
-<ul>
-<li><em>Our sample data informs a model for the population, from which we simulate new samples.</em></li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="what-is-the-parametric-bootstrap" class="slide level2">
-<h2>What is the Parametric Bootstrap? <span class="emoji" data-emoji="repeat">🔁</span></h2>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Instead of resampling from the data directly, we:</p>
-<ol type="1">
-<li class="fragment">Choose a <strong>parametric model</strong> for the data (e.g., Normal).</li>
-<li class="fragment"><strong>Estimate parameters</strong> from the observed data.</li>
-<li class="fragment"><strong>Generate simulated samples</strong> from the model using the estimated parameters.</li>
-<li class="fragment"><strong>Recalculate</strong> the estimator on each sample to approximate the sampling distribution.</li>
-</ol>
-</div>
-</div>
-</div>
-</section>
-<section id="visualizing-the-bootstrap" class="slide level2">
-<h2>Visualizing the Bootstrap</h2>
-<p><img data-src="images/bsdiagram.jpg" style="width:75.0%"></p>
-
-<aside><div>
-<p>This is a <strong>parametric bootstrap</strong> if we simulate from a model<br>
-(e.g., <span class="math inline">\(\mathcal{N}(\hat{\mu}, \hat{\sigma}^2)\)</span>), and a <strong>nonparametric bootstrap</strong> if we resample the observed data.</p>
-</div></aside></section>
-<section id="parametric-bootstrap-step-by-step" class="slide level2 smaller">
-<h2>Parametric Bootstrap: Step-by-Step</h2>
-<p>Suppose we want to estimate the variability of <span class="math inline">\(\hat{\theta}\)</span>,<br>
-but don’t have a closed-form for <span class="math inline">\(\operatorname{Var}(\hat{\theta})\)</span>.</p>
-<p><span class="emoji" data-emoji="arrow_right">➡️</span> We simulate its sampling distribution.</p>
-<ol type="1">
-<li class="fragment">Estimate parameter(s) <span class="math inline">\(\hat{\theta}\)</span> from original data.</li>
-<li class="fragment">Generate <span class="math inline">\(B\)</span> samples from the estimated distribution.</li>
-<li class="fragment">Compute a bootstrap estimate <span class="math inline">\(\hat{\theta}_b^*\)</span> for each.</li>
-<li class="fragment">Use the <strong>spread</strong> of the <span class="math inline">\(\hat{\theta}_b^*\)</span> to approximate the SE: <span class="math display">\[
-S_{\hat{\theta}} = \sqrt{ \frac{1}{B - 1} \sum_{b=1}^B \left( \hat{\theta}_b^* - \bar{\theta}^* \right)^2 }
-\]</span></li>
-</ol>
-<div class="fragment">
-<p>Where <span class="math inline">\(\bar{\theta}^* = \frac{1}{B} \sum_{b=1}^B \hat{\theta}_b^*\)</span>.</p>
-</div>
-</section>
-<section id="simulating-bootstrap-standard-error" class="slide level2 smaller">
-<h2>Simulating Bootstrap Standard Error</h2>
-<p>Estimate the SE of the sample mean using a <strong>parametric bootstrap</strong>:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="fu">set.seed</span>(<span class="dv">365</span>)</span>
-<span id="cb1-2"><a href=""></a>n <span class="ot">&lt;-</span> <span class="dv">30</span></span>
-<span id="cb1-3"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> <span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>)  <span class="co"># Original sample (population unknown)</span></span>
-<span id="cb1-4"><a href=""></a></span>
-<span id="cb1-5"><a href=""></a><span class="co"># Step 1: Estimate parameters from the data</span></span>
-<span id="cb1-6"><a href=""></a>mu_hat <span class="ot">&lt;-</span> <span class="fu">mean</span>(x)</span>
-<span id="cb1-7"><a href=""></a>sigma_hat <span class="ot">&lt;-</span> <span class="fu">sd</span>(x)</span>
-<span id="cb1-8"><a href=""></a></span>
-<span id="cb1-9"><a href=""></a><span class="co"># Step 2: Generate B bootstrap samples from N(mu_hat, sigma_hat)</span></span>
-<span id="cb1-10"><a href=""></a>B <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb1-11"><a href=""></a>boot_means <span class="ot">&lt;-</span> <span class="fu">numeric</span>(B)</span>
-<span id="cb1-12"><a href=""></a></span>
-<span id="cb1-13"><a href=""></a><span class="cf">for</span> (b <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>B) {</span>
-<span id="cb1-14"><a href=""></a>  x_star <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="at">mean =</span> mu_hat, <span class="at">sd =</span> sigma_hat)</span>
-<span id="cb1-15"><a href=""></a>  boot_means[b] <span class="ot">&lt;-</span> <span class="fu">mean</span>(x_star)</span>
-<span id="cb1-16"><a href=""></a>}</span>
-<span id="cb1-17"><a href=""></a></span>
-<span id="cb1-18"><a href=""></a><span class="co"># Step 3: Estimate the bootstrap SE</span></span>
-<span id="cb1-19"><a href=""></a>boot_se <span class="ot">&lt;-</span> <span class="fu">sd</span>(boot_means)</span>
-<span id="cb1-20"><a href=""></a></span>
-<span id="cb1-21"><a href=""></a><span class="fu">cat</span>(<span class="st">"Parametric Bootstrap SE for sample mean:"</span>, <span class="fu">round</span>(boot_se, <span class="dv">3</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Parametric Bootstrap SE for sample mean: 0.35 </code></pre>
-</div>
-</div>
-</section>
-<section id="key-takeaways" class="slide level2">
-<h2>Key Takeaways</h2>
-<ul>
-<li>Parametric bootstrap assumes a model for the population.</li>
-<li>We simulate samples using parameter estimates from data.</li>
-<li>Bootstrap SE reflects the sampling variability of the estimator under that model.</li>
-<li>Validity depends on how well the model fits the real data!</li>
-<li>When in doubt about the model, use the non-parametric bootstrap.</li>
-</ul>
-</section>
 <section id="summary" class="slide level2">
 <h2>Summary <span class="emoji" data-emoji="star2">🌟</span></h2>
 <ul>
@@ -491,7 +325,6 @@ S_{\hat{\theta}} = \sqrt{ \frac{1}{B - 1} \sum_{b=1}^B \left( \hat{\theta}_b^* -
 <li><strong>Unbiased</strong> estimators have <span class="math inline">\(E(\hat{\theta}) = \theta\)</span></li>
 <li><strong>MVUE</strong>: most efficient among unbiased estimators</li>
 <li><strong>Standard error</strong> quantifies estimator variability</li>
-<li><strong>Bootstrap</strong> provides a flexible, simulation-based alternative</li>
 </ul>
 
 </section>
@@ -712,44 +545,6 @@ S_{\hat{\theta}} = \sqrt{ \frac{1}{B - 1} \sum_{b=1}^B \left( \hat{\theta}_b^* -
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
       window.document.addEventListener("DOMContentLoaded", function (event) {
         const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
