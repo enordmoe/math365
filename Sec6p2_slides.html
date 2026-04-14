@@ -223,15 +223,28 @@ L(\theta_1,\dots,\theta_m) = f(x_1,\dots,x_n;\theta_1,\dots,\theta_m)
 \]</span></p>
 <p>MLEs are the parameter values <span class="math inline">\(\hat{\theta}_1,\dots,\hat{\theta}_m\)</span> that <strong>maximize</strong> the likelihood.</p>
 </section>
-<section id="lets-visualize-likelihood-with-bernoulli" class="slide level2 smaller">
-<h2><span class="emoji" data-emoji="pencil2">✏️</span> Let’s Visualize: Likelihood with Bernoulli</h2>
-<p><span class="emoji" data-emoji="abacus">🧮</span> Suppose <span class="math inline">\(X_1,\dots,X_n \sim \text{Bernoulli}(p)\)</span></p>
+<section id="section" class="slide level2 smaller">
+<h2></h2>
+<h3 id="lets-visualize-likelihood-with-bernoulli">✏️ Let’s Visualize: Likelihood with Bernoulli</h3>
 <ul>
-<li class="fragment">Write the likelihood: <span class="math display">\[
-L(p) = \prod_{i=1}^n p^{x_i}(1 - p)^{1 - x_i}
-\]</span></li>
-<li class="fragment">Try this in <a href="applets/bernoulli_likelihood.html">the web applet</a>:</li>
+<li><p>Suppose <span class="math inline">\(X_1, \ldots, X_n \stackrel{iid}{\sim} \text{Bernoulli}(p)\)</span> with observed data <span class="math inline">\(x_1, \ldots, x_n\)</span> equal to 0 or 1.</p></li>
+<li><p>The <strong>likelihood function</strong> treats the data as fixed and <span class="math inline">\(p\)</span> as varying:</p></li>
 </ul>
+<p><span class="math display">\[L(p) = \prod_{i=1}^n p^{x_i}(1-p)^{1-x_i}\]</span></p>
+<div class="fragment">
+<p>Sum exponents to get:</p>
+<p><span class="math display">\[
+L(p) = p^{\sum x_i}(1-p)^{n-\sum x_i}
+\]</span></p>
+<ul>
+<li><span class="math inline">\(\sum x_i\)</span> = number of 1s (successes), <span class="math inline">\(\quad n - \sum x_i\)</span> = number of 0s (failures)</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Try this in <a href="applets/bernoulli_likelihood.html">the web applet</a>:</li>
+</ul>
+</div>
 </section>
 <section id="why-use-log-likelihood" class="slide level2">
 <h2><span class="emoji" data-emoji="abacus">🧮</span> Why Use Log-Likelihood?</h2>

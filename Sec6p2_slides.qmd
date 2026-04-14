@@ -121,17 +121,39 @@ MLEs are the parameter values $\hat{\theta}_1,\dots,\hat{\theta}_m$ that
 
 ------------------------------------------------------------------------
 
-## :pencil2: Let's Visualize: Likelihood with Bernoulli {.smaller}
+## {.smaller}
+### ✏️ Let's Visualize: Likelihood with Bernoulli 
 
-:abacus: Suppose $X_1,\dots,X_n \sim \text{Bernoulli}(p)$
 
-::: incremental
--   Write the likelihood: $$
-    L(p) = \prod_{i=1}^n p^{x_i}(1 - p)^{1 - x_i}
-    $$
+* Suppose $X_1, \ldots, X_n \stackrel{iid}{\sim} \text{Bernoulli}(p)$ with observed data $x_1, \ldots, x_n$ equal to 0 or 1.
+
+- The **likelihood function** treats the data as fixed and $p$ as varying:
+
+$$L(p) = \prod_{i=1}^n p^{x_i}(1-p)^{1-x_i}$$
+
+::: {.fragment}
+
+
+Sum exponents to get:
+
+$$
+L(p) = p^{\sum x_i}(1-p)^{n-\sum x_i}
+$$
+
+
+
+
+- $\sum x_i$ = number of 1s (successes), $\quad n - \sum x_i$ = number of 0s (failures)
+
+:::
+
+::: {.fragment}
+
+
 -   Try this in [the web applet](applets/bernoulli_likelihood.html  ):
 
 :::
+
 
 ------------------------------------------------------------------------
 
