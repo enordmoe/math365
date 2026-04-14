@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bernoulli Likelihood Visualizer</title>
+<style>
+  :root {
+    --orange: #C8501A;
+    --orange-light: #f0845a;
+    --yellow: #b07800;
+    --bg: #f7f5f2;
+    --surface: #ffffff;
+    --border: #d0ccc6;
+    --text: #1a1a1a;
+    --text-dim: #666;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+  }
+
+  header { text-align: center; margin-bottom: 1.8rem; }
+
+  header h1 { font-size: 1.55rem; font-weight: bold; color: var(--text); }
+  header h1 span { color: var(--orange); }
+
+  header p {
+    font-style: italic;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-top: 0.3rem;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.6rem 2rem;
+    width: 100%;
+    max-width: 680px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem 2.5rem;
+    margin-bottom: 1.4rem;
+  }
+
+  .control-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    margin-bottom: 0.3rem;
+    font-style: italic;
+  }
+
+  .control-group .value-display {
+    font-family: 'Courier New', monospace;
+    font-size: 1.35rem;
+    color: var(--orange);
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+  }
+
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    background: var(--border);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--orange);
+    cursor: pointer;
+    border: 2px solid white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  .formula-bar {
+    background: #fdf6ee;
+    border: 1.5px solid #e8d5be;
+    border-radius: 6px;
+    padding: 0.7rem 1.2rem;
+    margin-bottom: 1.2rem;
+    text-align: center;
+  }
+
+  .formula-bar .formula-label {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    display: block;
+    margin-bottom: 0.25rem;
+    font-family: 'Courier New', monospace;
+  }
+
+  .formula-bar .formula-text {
+    font-family: 'Courier New', monospace;
+    font-size: 1.15rem;
+    color: var(--text);
+    font-weight: bold;
+  }
+
+  .canvas-wrap {
+    width: 100%;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  canvas { display: block; width: 100%; }
+
+  .legend {
+    display: flex;
+    gap: 1.8rem;
+    margin-top: 0.7rem;
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    justify-content: center;
+    font-style: italic;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 0.45rem; }
+
+  .stats-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1.2rem;
+    padding-top: 1.1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat { text-align: center; }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    display: block;
+    margin-bottom: 0.15rem;
+    font-style: italic;
+  }
+
+  .stat-value {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+  }
+
+  .stat-value.orange { color: var(--orange); }
+  .stat-value.yellow { color: var(--yellow); }
+
+  .predict-panel {
+    margin-top: 1.2rem;
+    padding: 1rem 1.2rem;
+    background: #fff8f0;
+    border: 1.5px solid #e8d5be;
+    border-radius: 6px;
+  }
+
+  .predict-panel p {
+    font-style: italic;
+    font-size: 0.88rem;
+    color: var(--text-dim);
+    margin-bottom: 0.6rem;
+  }
+
+  .predict-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-wrap: wrap;
+  }
+
+  .predict-row input[type=number] {
+    background: white;
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    border-radius: 4px;
+    padding: 0.4rem 0.6rem;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    width: 90px;
+  }
+
+  button {
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.45rem 1rem;
+    font-size: 0.88rem;
+    cursor: pointer;
+    font-family: Georgia, serif;
+  }
+
+  button:hover { background: var(--orange-light); }
+
+  #reset-btn {
+    background: white;
+    color: var(--text-dim);
+    border: 1px solid var(--border);
+  }
+
+  #reset-btn:hover { background: var(--bg); }
+
+  #predict-feedback {
+    font-size: 0.88rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Bernoulli <span>Likelihood</span> Visualizer</h1>
+  <p>X<sub>1</sub>, …, X<sub>n</sub> ~ Bernoulli(<i>p</i>) &nbsp;·&nbsp;
+     L(<i>p</i>) = <i>p</i><sup>Σx<sub>i</sub></sup>(1−<i>p</i>)<sup>n−Σx<sub>i</sub></sup></p>
+</header>
+
+<div class="card">
+  <div class="controls">
+    <div class="control-group">
+      <label>Sample size <i>n</i></label>
+      <div class="value-display" id="n-display">10</div>
+      <input type="range" id="n-slider" min="2" max="50" value="10">
+    </div>
+    <div class="control-group">
+      <label>Number of successes Σx<sub>i</sub></label>
+      <div class="value-display" id="k-display">7</div>
+      <input type="range" id="k-slider" min="0" max="10" value="7">
+    </div>
+  </div>
+
+  <div class="formula-bar">
+    <span class="formula-label">Likelihood function</span>
+    <span class="formula-text" id="formula-text">L(p) = p^7 · (1−p)^3</span>
+  </div>
+
+  <div class="canvas-wrap">
+    <canvas id="chart" height="280"></canvas>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item">
+      <svg width="28" height="6"><rect width="28" height="4" y="1" rx="2" fill="#C8501A"/></svg>
+      L(p) — likelihood curve
+    </div>
+    <div class="legend-item">
+      <svg width="4" height="16"><rect width="4" height="16" rx="1" fill="#b07800"/></svg>
+      p̂ — MLE
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <span class="stat-label">Successes</span>
+      <span class="stat-value orange" id="stat-k">7</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">Failures</span>
+      <span class="stat-value orange" id="stat-f">3</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">MLE &nbsp; p̂ = Σx<sub>i</sub>/n</span>
+      <span class="stat-value yellow" id="stat-mle">0.700</span>
+    </div>
+    <div class="stat">
+      <span class="stat-label">L(p̂)</span>
+      <span class="stat-value yellow" id="stat-lmax">—</span>
+    </div>
+  </div>
+
+  <div class="predict-panel">
+    <p>Before revealing the MLE — where do you think the peak of L(p) falls?</p>
+    <div class="predict-row">
+      <input type="number" id="predict-input" min="0" max="1" step="0.01" placeholder="e.g. 0.65">
+      <button id="reveal-btn">Reveal MLE</button>
+      <button id="reset-btn">Reset</button>
+    </div>
+    <div id="predict-feedback"></div>
+  </div>
+</div>
+
+<script>
+const canvas = document.getElementById('chart');
+const ctx = canvas.getContext('2d');
+const nSlider = document.getElementById('n-slider');
+const kSlider = document.getElementById('k-slider');
+
+let n = 10, k = 7, showMLE = false;
+
+function setupCanvas() {
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.parentElement.clientWidth;
+  canvas.width = w * dpr;
+  canvas.height = 280 * dpr;
+  canvas.style.width = w + 'px';
+  canvas.style.height = '280px';
+  ctx.scale(dpr, dpr);
+}
+
+function likelihood(p) {
+  if (p <= 0 || p >= 1) return 0;
+  return Math.pow(p, k) * Math.pow(1 - p, n - k);
+}
+
+function draw() {
+  const W = canvas.width / (window.devicePixelRatio || 1);
+  const H = 280;
+  const pad = { top: 24, right: 24, bottom: 44, left: 58 };
+  const plotW = W - pad.left - pad.right;
+  const plotH = H - pad.top - pad.bottom;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, W, H);
+
+  const pts = 500;
+  const Lvals = Array.from({length: pts + 1}, (_, i) => likelihood(i / pts));
+  const Lmax = Math.max(...Lvals) || 1;
+
+  // Grid lines + y-axis labels
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.top + (i / 4) * plotH;
+    ctx.beginPath();
+    ctx.moveTo(pad.left, y);
+    ctx.lineTo(pad.left + plotW, y);
+    ctx.strokeStyle = '#e5e2de';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.fillStyle = '#777';
+    ctx.font = '11px "Courier New", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText((1 - i / 4).toFixed(2), pad.left - 8, y + 4);
+  }
+
+  // x-axis labels
+  for (let i = 0; i <= 10; i++) {
+    const x = pad.left + (i / 10) * plotW;
+    ctx.beginPath();
+    ctx.moveTo(x, pad.top + plotH);
+    ctx.lineTo(x, pad.top + plotH + 5);
+    ctx.strokeStyle = '#bbb';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    if (i % 2 === 0) {
+      ctx.fillStyle = '#777';
+      ctx.font = '11px "Courier New", monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText((i / 10).toFixed(1), x, pad.top + plotH + 18);
+    }
+  }
+
+  // Axis labels
+  ctx.fillStyle = '#555';
+  ctx.font = 'italic 13px Georgia, serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('p', pad.left + plotW / 2, H - 4);
+  ctx.save();
+  ctx.translate(14, pad.top + plotH / 2);
+  ctx.rotate(-Math.PI / 2);
+  ctx.fillText('L(p)  [normalized]', 0, 0);
+  ctx.restore();
+
+  // Filled area
+  ctx.beginPath();
+  ctx.moveTo(pad.left, pad.top + plotH);
+  for (let i = 0; i <= pts; i++) {
+    ctx.lineTo(pad.left + (i / pts) * plotW, pad.top + plotH - (Lvals[i] / Lmax) * plotH);
+  }
+  ctx.lineTo(pad.left + plotW, pad.top + plotH);
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(200, 80, 26, 0.10)';
+  ctx.fill();
+
+  // Curve
+  ctx.beginPath();
+  for (let i = 0; i <= pts; i++) {
+    const x = pad.left + (i / pts) * plotW;
+    const y = pad.top + plotH - (Lvals[i] / Lmax) * plotH;
+    i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+  ctx.strokeStyle = '#C8501A';
+  ctx.lineWidth = 2.8;
+  ctx.lineJoin = 'round';
+  ctx.stroke();
+
+  // MLE
+  if (showMLE && n > 0) {
+    const mle = k / n;
+    const x = pad.left + mle * plotW;
+    ctx.beginPath();
+    ctx.setLineDash([5, 4]);
+    ctx.moveTo(x, pad.top);
+    ctx.lineTo(x, pad.top + plotH);
+    ctx.strokeStyle = '#b07800';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    ctx.beginPath();
+    ctx.arc(x, pad.top, 6, 0, Math.PI * 2);
+    ctx.fillStyle = '#b07800';
+    ctx.fill();
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    const onRight = x < pad.left + plotW * 0.65;
+    ctx.fillStyle = '#7a5200';
+    ctx.font = 'bold 12px "Courier New", monospace';
+    ctx.textAlign = onRight ? 'left' : 'right';
+    ctx.fillText('p̂ = ' + mle.toFixed(3), x + (onRight ? 10 : -10), pad.top + 22);
+  }
+
+  // Axes
+  ctx.strokeStyle = '#999';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  ctx.moveTo(pad.left, pad.top);
+  ctx.lineTo(pad.left, pad.top + plotH);
+  ctx.lineTo(pad.left + plotW, pad.top + plotH);
+  ctx.stroke();
+}
+
+function update() {
+  n = parseInt(nSlider.value);
+  kSlider.max = n;
+  k = Math.min(parseInt(kSlider.value), n);
+  kSlider.value = k;
+
+  document.getElementById('n-display').textContent = n;
+  document.getElementById('k-display').textContent = k;
+  document.getElementById('formula-text').textContent = `L(p) = p^${k} · (1−p)^${n - k}`;
+  document.getElementById('stat-k').textContent = k;
+  document.getElementById('stat-f').textContent = n - k;
+
+  const mle = n > 0 ? k / n : 0;
+  document.getElementById('stat-mle').textContent = mle.toFixed(3);
+
+  const lmax = likelihood(mle);
+  document.getElementById('stat-lmax').textContent =
+    lmax === 0 ? '0' : lmax < 1e-4 ? lmax.toExponential(3) : lmax.toFixed(5);
+
+  draw();
+}
+
+function resetAll() {
+  showMLE = false;
+  document.getElementById('predict-input').value = '';
+  document.getElementById('predict-feedback').textContent = '';
+  document.getElementById('reveal-btn').textContent = 'Reveal MLE';
+  draw();
+}
+
+nSlider.addEventListener('input', update);
+kSlider.addEventListener('input', update);
+
+document.getElementById('reveal-btn').addEventListener('click', function () {
+  if (showMLE) {
+    showMLE = false;
+    this.textContent = 'Reveal MLE';
+    draw();
+    return;
+  }
+  const guess = parseFloat(document.getElementById('predict-input').value);
+  const mle = k / n;
+  showMLE = true;
+  this.textContent = 'Hide MLE';
+  draw();
+
+  const fb = document.getElementById('predict-feedback');
+  if (isNaN(guess)) {
+    fb.style.color = '#555';
+    fb.textContent = `MLE: p̂ = ${mle.toFixed(3)}`;
+  } else {
+    const err = Math.abs(guess - mle);
+    if (err < 0.01) {
+      fb.style.color = '#2a7a2a';
+      fb.textContent = `Excellent! Your guess ${guess.toFixed(3)} matches p̂ = ${mle.toFixed(3)}.`;
+    } else if (err < 0.06) {
+      fb.style.color = '#b07800';
+      fb.textContent = `Close! You guessed ${guess.toFixed(3)}, MLE is p̂ = ${mle.toFixed(3)}.`;
+    } else {
+      fb.style.color = '#C8501A';
+      fb.textContent = `You guessed ${guess.toFixed(3)}, MLE is p̂ = ${mle.toFixed(3)} — off by ${err.toFixed(3)}.`;
+    }
+  }
+});
+
+document.getElementById('reset-btn').addEventListener('click', resetAll);
+window.addEventListener('resize', () => { setupCanvas(); draw(); });
+
+setupCanvas();
+update();
+</script>
+</body>
+</html>

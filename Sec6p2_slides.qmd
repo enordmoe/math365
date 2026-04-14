@@ -42,9 +42,14 @@ editor:
 
 -   Given a sample $X_1,\dots,X_n \sim f(x;\theta_1,\dots,\theta_m)$,
     how do we estimate the parameters?
+    
+::: {.fragment}
+
 -   Two classic techniques:
     -   Method of Moments
     -   Maximum Likelihood Estimation
+
+:::
 
 ------------------------------------------------------------------------
 
@@ -76,9 +81,15 @@ We have $X_1,\dots,X_n \sim \text{Exponential}(\lambda)$, and we know:
 
 -   Population mean: $E(X) = \frac{1}{\lambda}$
 
-Moment equation: $$
+::: {.fragment}
+
+
+Moment equation:
+$$
 \frac{1}{n} \sum X_i = \frac{1}{\lambda} \quad \Rightarrow \quad \hat{\lambda}_{\text{MoM}} = \frac{1}{\bar{X}}
 $$
+
+:::
 
 ------------------------------------------------------------------------
 
@@ -118,16 +129,8 @@ MLEs are the parameter values $\hat{\theta}_1,\dots,\hat{\theta}_m$ that
 -   Write the likelihood: $$
     L(p) = \prod_{i=1}^n p^{x_i}(1 - p)^{1 - x_i}
     $$
--   Try this in [Desmos Graphing
-    Calculator](https://www.desmos.com/calculator):
-    -   Fix a sample (e.g., $x = (1, 0, 1, 1, 0)$)
-    -   Graph the likelihood and estimate the value of $p$ that
-        maximizes $L(p)$
-    -   Do the same for $\log[L(p)]$
-:::
+-   Try this in [the web applet](applets/bernoulli_likelihood.html  ):
 
-::: fragment
-> **Think-Pair-Share**: Why is the log-likelihood easier to work with?
 :::
 
 ------------------------------------------------------------------------
@@ -143,9 +146,11 @@ $$
 $$
 
 ::: fragment
-:white_check_mark: Easier algebra and numeric stability\
-:white_check_mark: Easier to differentiate\
-:white_check_mark: Same location of maximum
+
+:white_check_mark: Same location of maximum\
+:white_check_mark: Easier to differentiate\ 
+:white_check_mark: Easier algebra and numeric stability  
+
 :::
 
 ------------------------------------------------------------------------
