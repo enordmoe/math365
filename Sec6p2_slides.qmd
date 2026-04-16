@@ -154,28 +154,34 @@ $$
 
 :::
 
-
 ------------------------------------------------------------------------
 
-## :abacus: Why Use Log-Likelihood?
+## :clipboard: MLE: A Four-Step Template {.smaller}
 
-> Logarithms turn products into sums!
+| Step | Action |
+|------|--------|
+| 1 | Write the likelihood: $L(\theta) = \prod_{i=1}^n f(x_i;\,\theta)$ |
+| 2 | Take the log-likelihood: $\ell(\theta) = \ln L(\theta)$; simplify |
+| 3 | Differentiate $\ell(\theta)$; set equal to zero |
+| 4 | Solve for $\hat{\theta}$; verify it is a maximum |
 
-Instead of maximizing $L(\theta)$, we often maximize:
+: {tbl-colwidths="[15,85]"}
 
-$$
-\ell(\theta) = \ln L(\theta)
-$$
+::: {.fragment}
 
-::: fragment
+<br>
+<br>
 
-:white_check_mark: Same location of maximum\
-:white_check_mark: Easier to differentiate\ 
-:white_check_mark: Easier algebra and numeric stability  
+::: {.callout-tip}
+Steps 3 and 4 assume the maximum occurs in the **interior** of the
+parameter space. We'll see a case soon where that isn't true.
+:::
 
 :::
 
 ------------------------------------------------------------------------
+
+
 
 ## :speech_balloon: Try It! MLE for Bernoulli {.smaller}
 
@@ -191,7 +197,7 @@ Let $X_1,\dots,X_n \sim \text{Bernoulli}(p)$
 ::: fragment
 -   Log-likelihood:\
     $$
-    \ell(p) = \sum X_i \ln p + (n - \sum X_i) \ln(1 - p)
+    \ell(p) = \sum X_i \ln p + \left(n - \sum X_i \right) \cdot \ln(1 - p)
     $$
 :::
 
@@ -200,6 +206,29 @@ Let $X_1,\dots,X_n \sim \text{Bernoulli}(p)$
 
 :arrow_right: $\hat{p} = \bar{X}$
 :::
+
+------------------------------------------------------------------------
+
+
+## :abacus: Why Use Log-Likelihood?
+
+> Logarithms turn products into sums!
+
+Instead of maximizing $L(\theta)$, we often maximize:
+
+$$
+\ell(\theta) = \ln L(\theta)
+$$
+
+::: fragment
+
+:white_check_mark: Same location of maximum\
+:white_check_mark: Easier to differentiate\   
+:white_check_mark: Easier algebra and numeric stability  
+
+:::
+
+
 
 ------------------------------------------------------------------------
 

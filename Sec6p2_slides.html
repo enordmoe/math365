@@ -246,18 +246,53 @@ L(p) = p^{\sum x_i}(1-p)^{n-\sum x_i}
 </ul>
 </div>
 </section>
-<section id="why-use-log-likelihood" class="slide level2">
-<h2><span class="emoji" data-emoji="abacus">🧮</span> Why Use Log-Likelihood?</h2>
-<blockquote>
-<p>Logarithms turn products into sums!</p>
-</blockquote>
-<p>Instead of maximizing <span class="math inline">\(L(\theta)\)</span>, we often maximize:</p>
-<p><span class="math display">\[
-\ell(\theta) = \ln L(\theta)
-\]</span></p>
+<section id="mle-a-four-step-template" class="slide level2 smaller">
+<h2><span class="emoji" data-emoji="clipboard">📋</span> MLE: A Four-Step Template</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 85%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Write the likelihood: <span class="math inline">\(L(\theta) = \prod_{i=1}^n f(x_i;\,\theta)\)</span></td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Take the log-likelihood: <span class="math inline">\(\ell(\theta) = \ln L(\theta)\)</span>; simplify</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Differentiate <span class="math inline">\(\ell(\theta)\)</span>; set equal to zero</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Solve for <span class="math inline">\(\hat{\theta}\)</span>; verify it is a maximum</td>
+</tr>
+</tbody>
+</table>
 <div class="fragment">
-<p><span class="emoji" data-emoji="white_check_mark">✅</span> Same location of maximum<br>
-<span class="emoji" data-emoji="white_check_mark">✅</span> Easier to differentiate&nbsp; <span class="emoji" data-emoji="white_check_mark">✅</span> Easier algebra and numeric stability</p>
+<p><br> <br></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Steps 3 and 4 assume the maximum occurs in the <strong>interior</strong> of the parameter space. We’ll see a case soon where that isn’t true.</p>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="try-it-mle-for-bernoulli" class="slide level2 smaller">
@@ -275,7 +310,7 @@ L(p) = p^{\sum X_i} (1 - p)^{n - \sum X_i}
 <ul>
 <li>Log-likelihood:<br>
 <span class="math display">\[
-\ell(p) = \sum X_i \ln p + (n - \sum X_i) \ln(1 - p)
+\ell(p) = \sum X_i \ln p + \left(n - \sum X_i \right) \cdot \ln(1 - p)
 \]</span></li>
 </ul>
 </div>
@@ -284,6 +319,21 @@ L(p) = p^{\sum X_i} (1 - p)^{n - \sum X_i}
 <p>Differentiate and solve for <span class="math inline">\(p\)</span> that maximizes <span class="math inline">\(\ell(p)\)</span>.</p>
 </blockquote>
 <p><span class="emoji" data-emoji="arrow_right">➡️</span> <span class="math inline">\(\hat{p} = \bar{X}\)</span></p>
+</div>
+</section>
+<section id="why-use-log-likelihood" class="slide level2">
+<h2><span class="emoji" data-emoji="abacus">🧮</span> Why Use Log-Likelihood?</h2>
+<blockquote>
+<p>Logarithms turn products into sums!</p>
+</blockquote>
+<p>Instead of maximizing <span class="math inline">\(L(\theta)\)</span>, we often maximize:</p>
+<p><span class="math display">\[
+\ell(\theta) = \ln L(\theta)
+\]</span></p>
+<div class="fragment">
+<p><span class="emoji" data-emoji="white_check_mark">✅</span> Same location of maximum<br>
+<span class="emoji" data-emoji="white_check_mark">✅</span> Easier to differentiate&nbsp;<br>
+<span class="emoji" data-emoji="white_check_mark">✅</span> Easier algebra and numeric stability</p>
 </div>
 </section>
 <section id="mle-for-normalmu-theta-setup" class="slide level2 smaller">
