@@ -36,7 +36,7 @@ editor:
     when $\sigma$ is known
 -   :control_knobs: Choosing sample size for desired precision
 -   :repeat: Pivotal quantities: the idea behind the method
--   :link: Interactive simulation with Moore’s applet
+-   :link: Interactive simulation with  applet
 :::
 
 ------------------------------------------------------------------------
@@ -190,7 +190,7 @@ so the claim that $\mu=300$ is plausible for our population.
 
 ------------------------------------------------------------------------
 
-## :link: Interactive App: Moore’s Confidence Interval Simulator
+## :link: Interactive App: Confidence Interval Simulator
 
 Try this app:\
 [**rossmanchance.com/applets/2021/confsim/ConfSim.html**](https://www.rossmanchance.com/applets/2021/confsim/ConfSim.html)
