@@ -19,7 +19,7 @@ This review sheet outlines key concepts, definitions, and skills covered so far.
 -   Allowable resources:
     -   8.5x11 single-sided notes page
     -   Calculator
-    -   Computer: You may be asked to use R for probability calculations (e.g., `pnorm()`) but will not be asked to carry out data analysis or simulations.
+ 
 
 ------------------------------------------------------------------------
 
