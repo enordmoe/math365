@@ -81,11 +81,11 @@ This review sheet outlines key concepts, definitions, and skills covered so far.
 -   **MVUE**: Minimum variance among all unbiased estimators
 -   **Standard Error (SE)**: $\sqrt{\text{Var}(\hat{\theta})}$
 
-## 6. Bootstrap Methods
+<!-- ## 6. Bootstrap Methods -->
 
--   **Parametric Bootstrap**: Simulate new samples from a fitted model to estimate SE.
+<!-- -   **Parametric Bootstrap**: Simulate new samples from a fitted model to estimate SE. -->
 
-## 7. Estimation Techniques
+## 6. Estimation Techniques
 
 -   **Method of Moments (MoM)**: Match sample and population moments to solve for parameter estimates.
 
