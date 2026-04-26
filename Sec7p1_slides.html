@@ -316,12 +316,12 @@ P\left(-z_{\alpha/2} &lt; \frac{\overline{X} - \mu}{\sigma/\sqrt{n}} &lt; z_{\al
 <section id="margin-of-error-and-sample-size" class="slide level2">
 <h2>Margin of Error and Sample Size <span class="emoji" data-emoji="1234">🔢</span></h2>
 <ul>
-<li>The <strong>margin of error</strong> is: <span class="math inline">\(z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\)</span></li>
-<li>To ensure the <strong>margin of error</strong> is at most <span class="math inline">\(w\)</span>, solve for <span class="math inline">\(n\)</span>:</li>
+<li>The <strong>margin of error</strong> is: <span class="math inline">\(ME=z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\)</span></li>
+<li>To ensure the <strong>margin of error</strong> is at most <span class="math inline">\(ME\)</span>, solve for <span class="math inline">\(n\)</span>:</li>
 </ul>
 <div class="fragment">
 <p><span class="math display">\[
-n = \left(\frac{z_{\alpha/2} \cdot \sigma}{w}\right)^2
+n = \left(\frac{z_{\alpha/2} \cdot \sigma}{ME}\right)^2
 \]</span></p>
 </div>
 </section>
@@ -330,7 +330,7 @@ n = \left(\frac{z_{\alpha/2} \cdot \sigma}{w}\right)^2
 <ul>
 <li>The game developers want to estimate average reaction time <strong>more precisely</strong>.<br>
 </li>
-<li>They’d like the <strong>margin of error</strong> to be no more than <span class="math inline">\(w = 5\)</span> ms with 95% confidence.<br>
+<li>They’d like the <strong>margin of error</strong> to be no more than <span class="math inline">\(ME = 5\)</span> ms with 95% confidence.<br>
 </li>
 <li>Recall:
 <ul>
@@ -342,7 +342,7 @@ n = \left(\frac{z_{\alpha/2} \cdot \sigma}{w}\right)^2
 <div class="fragment">
 <p>We use the formula from the previous slide to find <span class="math inline">\(n\)</span>:</p>
 <p><span class="math display">\[
-n = \left(\frac{z_{\alpha/2} \cdot \sigma}{w}\right)^2 = \left(\frac{1.96 \cdot 40}{5}\right)^2 = 245.86
+n = \left(\frac{z_{\alpha/2} \cdot \sigma}{ME}\right)^2 = \left(\frac{1.96 \cdot 40}{5}\right)^2 = 245.86
 \]</span></p>
 </div>
 <div class="fragment">
