@@ -170,15 +170,13 @@ where $t_{\alpha/2, n-1}$ is the critical $t$ value.
 
 ### Student Reaction Times Data Collection {.smaller}
 
-1.  Complete the reaction times task here:
-    <https://www.mathsisfun.com/games/reaction-time.html>
-
-    ![](images/clipboard-938658618.png){width="150"}
+1.  Complete the Reaction Test Applet task in the applets section on
+    Moodle:
 
 ::: fragment
 2.  Submit your times here: <https://forms.office.com/r/UyaDXQKm3K>
 
-![](images/clipboard-4251284472.png){width="150"}
+![](images/clipboard-2644788912.png){width="400"}
 :::
 
 ------------------------------------------------------------------------
@@ -295,12 +293,13 @@ $$
 \bar{x} \pm (\text{tolerance critical value}) \times s
 $$
 
-:white_check_mark: Captures individual values, not just the mean.  
-:white_check_mark: Critical value larger than $z$ or $t$ values for CIs.  
+:white_check_mark: Captures individual values, not just the mean.\
+:white_check_mark: Critical value larger than $z$ or $t$ values for
+CIs.\
 :white_check_mark: Depends on both $P$ (population coverage) and
-confidence level.  
+confidence level.
 
----
+------------------------------------------------------------------------
 
 ### Example: Tolerance Interval for Reaction Times :zap: {.smaller}
 
@@ -319,7 +318,7 @@ K.factor(n = 9, alpha = .05, P = 0.95, side = 2, method = "WBE")
 
 :white_check_mark: `n` = sample size
 
-:white_check_mark: `alpha` $\Rightarrow 1 -$`alpha` confidence level 
+:white_check_mark: `alpha` $\Rightarrow 1 -$`alpha` confidence level
 
 :white_check_mark: `P = 0.95` desired proportion to cover
 
@@ -334,8 +333,8 @@ K.factor(n = 9, alpha = .05, P = 0.95, side = 2, method = "WBE")
 -   CI estimates mean; PI predicts new observation.
 -   PI wider than CI.
 -   As $n$ increases, $t \to z$.
-- TI captures a fixed proportion of the population, not just the mean or a single value.
-
+-   TI captures a fixed proportion of the population, not just the mean
+    or a single value.
 
 ## Closing Thought :thought_balloon:
 
