@@ -54,7 +54,7 @@ editor:
 
 ------------------------------------------------------------------------
 
-## Example: Spinning a Penny  ![](https://www.usmint.gov/learn/coins-and-medals/circulating-coins/penny/_jcr_content/root/container_1426747781/imagegallerypdp/item_1740691270883.coreimg.jpeg/1765643036176/semiq-penny-obverse-unc-p.jpeg){width="27"}
+## Example: Spinning a Penny ![](https://www.usmint.gov/learn/coins-and-medals/circulating-coins/penny/_jcr_content/root/container_1426747781/imagegallerypdp/item_1740691270883.coreimg.jpeg/1765643036176/semiq-penny-obverse-unc-p.jpeg){width="27"}
 
 > Suppose we spin a penny 20 times. Let $X$ = number of heads.
 
@@ -153,6 +153,28 @@ computed test statistic value falls in the rejection region.
 
 ------------------------------------------------------------------------
 
+## Type I and Type II Errors
+
+::: {style="display: flex; justify-content: center;"}
++---------------+---------------------+----------------------+
+|               | Null is **True**    | Null is **False**    |
++===============+=====================+======================+
+| Rejected      | **Type I error**\   | **Correct            |
+|               | False positive\     | decision**\          |
+|               | Probability = α     | True positive        |
+|               |                     | (Power)\             |
+|               |                     | Probability = 1 − β\ |
++---------------+---------------------+----------------------+
+| Not rejected  | **Correct           | **Type II error**\   |
+|               | decision**\         | False negative\      |
+|               | True negative\      | Probability = β      |
+|               | Probability = 1 − α |                      |
++---------------+---------------------+----------------------+
+:::
+
+------------------------------------------------------------------------
+
+
 ## Errors in Hypothesis Testing :warning: {.smaller}
 
 > Two kinds of mistakes can happen:
@@ -166,24 +188,6 @@ computed test statistic value falls in the rejection region.
     -   Probability = $1-\beta$
 
 :star2: Trade-off: smaller $\alpha$ often means larger $\beta$.
-
-------------------------------------------------------------------------
-
-## Type I and Type II Errors Summary
-
-::: {style="display: flex; justify-content: center;"}
-+--------------+-----------------------+------------------------+
-|              | Null is **True**      | Null is **False**      |
-+==============+=======================+========================+
-| Rejected     | **Type I error**\     | **Correct decision**\  |
-|              | False positive\       | True positive (Power)\ |
-|              | Probability = α       | Probability = 1 − β\   |
-+--------------+-----------------------+------------------------+
-| Not rejected | **Correct decision**\ | **Type II error**\     |
-|              | True negative\        | False negative\        |
-|              | Probability = 1 − α   | Probability = β        |
-+--------------+-----------------------+------------------------+
-:::
 
 ------------------------------------------------------------------------
 
@@ -315,17 +319,17 @@ level** (OSL) for the data.
 
 ## Interval vs Hypothesis Testing :chart_with_upwards_trend::chart_with_downwards_trend: {.smaller}
 
-+-----------------------------------+---------------------------------+
-| Interval Estimation               | Hypothesis Testing              |
-+:==================================+:================================+
-| Estimate a parameter              | Make a decision about a         |
-|                                   | parameter                       |
-+-----------------------------------+---------------------------------+
-| Provide a range of plausible      | Decide whether to reject $H_0$  |
-| values                            |                                 |
-+-----------------------------------+---------------------------------+
-| Focus on uncertainty              | Focus on evidence               |
-+-----------------------------------+---------------------------------+
++-----------------------------------+--------------------------------+
+| Interval Estimation               | Hypothesis Testing             |
++:==================================+:===============================+
+| Estimate a parameter              | Make a decision about a        |
+|                                   | parameter                      |
++-----------------------------------+--------------------------------+
+| Provide a range of plausible      | Decide whether to reject $H_0$ |
+| values                            |                                |
++-----------------------------------+--------------------------------+
+| Focus on uncertainty              | Focus on evidence              |
++-----------------------------------+--------------------------------+
 
 **Question:** How might the ideas of sampling variability be relevant to
 a hypothesis test?
