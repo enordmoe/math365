@@ -290,19 +290,19 @@ Use the following R function to investigate properties assuming the normality co
 ```{r}
 sim_diff_means <- function(n = 30, mu1 = 5, mu2 = 5, sigma1 = 1, sigma2 = 1, reps = 10000) {
   count_in_ci <- 0
-  type1_errors <- 0
+  rejections <- 0
   for (i in 1:reps) {
     x <- rnorm(n, mu1, sigma1)
     y <- rnorm(n, mu2, sigma2)
     est <- mean(x) - mean(y)
     se <- sqrt(var(x)/n + var(y)/n)
     ci <- est + c(-1,1)*qnorm(0.975)*se
-    if (ci[1] <= 0 && ci[2] >= 0) count_in_ci <- count_in_ci + 1
+    if (ci[1] <= mu1 - mu2 && ci[2] >= mu1 - mu2) count_in_ci <- count_in_ci + 1
     z <- est / se
     pval <- 2*(1 - pnorm(abs(z)))
-    if (pval < 0.05) type1_errors <- type1_errors + 1
+    if (pval < 0.05) rejections <- rejections + 1
   }
-  list(CI_coverage = count_in_ci / reps, Type1_error = type1_errors / reps)
+  list(CI_coverage = count_in_ci / reps, Rejection_rate = rejections / reps)
 }
 sim_diff_means()
 ```
