@@ -1,0 +1,61 @@
+\subsection*{Least Squares Estimators as MLEs under Normal Errors}
+
+\textbf{Setup.}
+Assume the simple linear regression model
+\[
+  Y_i = \beta_0 + \beta_1 x_i + \epsilon_i, \qquad i = 1, \ldots, n,
+\]
+where $\epsilon_1, \ldots, \epsilon_n \stackrel{\text{iid}}{\sim} N(0,\sigma^2)$.
+Then each $Y_i$ is independent with
+\[
+  Y_i \sim N(\beta_0 + \beta_1 x_i,\; \sigma^2).
+\]
+
+\textbf{Likelihood.}
+The joint density of the observed data $y_1, \ldots, y_n$ is the product of the individual normal densities:
+\[
+  L(\beta_0, \beta_1, \sigma^2)
+  = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}}
+    \exp\!\left(-\frac{(y_i - \beta_0 - \beta_1 x_i)^2}{2\sigma^2}\right).
+\]
+
+\textbf{Log-likelihood.}
+Taking the natural log:
+\[
+  \ell(\beta_0, \beta_1, \sigma^2)
+  = -\frac{n}{2}\ln(2\pi)
+    - \frac{n}{2}\ln(\sigma^2)
+    - \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)^2.
+\]
+
+\textbf{Maximizing over $\beta_0$ and $\beta_1$.}
+For any fixed $\sigma^2 > 0$, the term $-\frac{1}{2\sigma^2}$ is a negative constant, so maximizing $\ell$ with respect to $\beta_0$ and $\beta_1$ is equivalent to \emph{minimizing}
+\[
+  \sum_{i=1}^n (y_i - \beta_0 - \beta_1 x_i)^2.
+\]
+This is precisely the \textbf{least squares criterion}.  Therefore the MLEs $\hat{\beta}_0^{\,\text{MLE}}$ and $\hat{\beta}_1^{\,\text{MLE}}$ coincide with the least squares estimators:
+\[
+  \hat{\beta}_1 = \frac{S_{xy}}{S_{xx}}, \qquad
+  \hat{\beta}_0 = \bar{y} - \hat{\beta}_1\,\bar{x}.
+\]
+
+\textbf{Maximizing over $\sigma^2$.}
+With $\beta_0$ and $\beta_1$ replaced by their MLEs, differentiate $\ell$ with respect to $\sigma^2$ and set equal to zero:
+\[
+  \frac{\partial \ell}{\partial \sigma^2}
+  = -\frac{n}{2\sigma^2}
+    + \frac{1}{2(\sigma^2)^2}\sum_{i=1}^n (y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i)^2
+  = 0.
+\]
+Solving gives
+\[
+  \hat{\sigma}^2_{\text{MLE}} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2
+  = \frac{\text{SSE}}{n}.
+\]
+
+\medskip
+\textbf{Note.} The MLE of $\sigma^2$ divides by $n$, not $n-2$.  The unbiased estimator used in practice is
+\[
+  \hat{\sigma}^2 = \frac{\text{SSE}}{n-2} = s^2,
+\]
+which is preferred for inference.

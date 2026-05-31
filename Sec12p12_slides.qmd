@@ -31,14 +31,19 @@ editor:
 
 ## Topics for Today
 
--   :bar_chart: Simple Linear Regression Model
--   :1234: Least Squares Estimation of Parameters
--   :abacus: Estimating Variance and $R^2$
--   :chart_with_upwards_trend: Visualizing data and interpreting output
--   :computer: Regression in R with `lm()`, `summary()`, and `anova()`
-
 > **Motivating Question:** How do we model the relationship between two
 > variables and make predictions using observed data?
+
+::: {.fragment}
+
+-   Simple Linear Regression Model
+-    Least Squares Estimation of Parameters
+-    Estimating Variance and $R^2$
+-    Visualizing data and interpreting output
+-   Regression in R with `lm()`, `summary()`, and `anova()`
+
+
+:::
 
 ------------------------------------------------------------------------
 
@@ -58,7 +63,7 @@ spending leads to measurable gains.
 -   You have **data**: weekly ad spending, sales revenue, market
     conditions.
 -   You suspect: more advertising → higher sales.
--   But: sales fluctuate due to many factors — holidays, pricing,
+-   But: sales fluctuate due to many factors: seasons, pricing,
     competitors, random noise...
 
 . . .
@@ -249,7 +254,7 @@ anova(lm_fit)
 
 ## Example: Purrfect Prediction? :feet:
 
-:cat: Predict `weight` of cats based on `height` using `MASS::cats`
+:cat: Predict  ` weight` of cats based on `height` using `MASS::cats`
 
 ``` r
 library(MASS)
