@@ -83,7 +83,8 @@ spending leads to measurable gains.
 > A **statistical model** gives us a way to describe and estimate
 > relationships between variables.
 
-We assume: $$
+We assume: 
+$$
 \text{Sales} = f(\text{Ad Spending}) + \varepsilon
 $$
 
@@ -124,8 +125,8 @@ Y = \beta_0 + \beta_1 x + \epsilon
 $$
 
 ::: callout-important
-Where:\
-- $\epsilon \sim N(0, \sigma^2)$\
+Where:\ 
+- $\epsilon \sim N(0, \sigma^2)$\ $\Rightarrow$ Constant variance  
 - $\epsilon$'s are independent\
 - Each $(x_i, y_i)$ pair is a realization from this model
 :::
